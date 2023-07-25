@@ -1,0 +1,13 @@
+.navbar {
+  display: flex;
+  flex-direction: row;
+}
+.navbar * {
+  align-self: center;
+}
+.contact {
+  position: relative;
+}
+.contact:hover :last-child {
+  opacity: 1;
+}

@@ -1,0 +1,5 @@
+@use "index" as p;
+
+.App {
+  color: p.$primaryColor;
+}

@@ -1,0 +1,47 @@
+@use "../../index.scss" as index;
+.product {
+  padding: 1rem;
+  text-align: center;
+  width: 14rem;
+  position: relative;
+  padding: 1rem;
+}
+.image {
+  max-width: 12rem;
+  max-height: 14rem;
+}
+.imgBox {
+  height: 14rem;
+  @include index.flexCenter("column");
+}
+.product:hover {
+  border-radius: 12px;
+  box-shadow: 1px 1px 4px 0px rgba(85, 86, 99, 0.513);
+  cursor: pointer;
+}
+.product:hover .addToCart {
+  opacity: 1;
+}
+.addToCart {
+  padding: 1rem;
+  opacity: 0;
+  font-size: 1.5rem;
+}
+.addToCart:hover {
+  color: rgb(76, 213, 74);
+}
+.price {
+  text-align: left;
+  font-size: 1.2rem;
+}
+.title {
+  font-weight: 600;
+  text-align: left;
+  font-size: 1.1rem;
+  height: 2.2rem;
+}
+.cartPrice {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

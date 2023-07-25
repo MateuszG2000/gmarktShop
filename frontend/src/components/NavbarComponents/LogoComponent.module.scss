@@ -1,0 +1,33 @@
+@use "../../index" as index;
+@mixin logo {
+  cursor: pointer;
+  color: black;
+  letter-spacing: 0.3rem;
+  line-height: 1rem;
+  &:hover {
+    @include index.hover;
+  }
+  span {
+    color: index.$primaryColor;
+    font-weight: 700;
+    font-style: italic;
+    text-shadow: 1px -1px 4px rgba(13, 118, 255, 1);
+  }
+}
+.flexcenter {
+  @include index.flexCenter("row");
+}
+.logoNavbar {
+  @include logo;
+  font-size: 2rem;
+}
+.logoNavbar span {
+  font-size: 4.8rem;
+}
+.logoSmall {
+  @include logo;
+  font-size: 1.4rem;
+}
+.logoSmall span {
+  font-size: 3rem;
+}

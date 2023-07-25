@@ -1,0 +1,18 @@
+@use "../../index.scss" as index;
+.icon {
+  font-size: 2rem;
+  width: 5rem;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  line-height: 0rem;
+  cursor: pointer;
+  margin-right: 1rem;
+}
+.icon p {
+  font-size: 1rem;
+}
+
+.icon:hover {
+  @include index.hover;
+}

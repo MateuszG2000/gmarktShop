@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700;800&display=swap");
+$primaryColor: #0d76ff;
+$primaryColorLight: #bad8ff;
+$primaryColorDark: #0950ac;
+$font: "Nunito", sans-serif;
+body {
+  margin: 1rem;
+  font-family: "Nunito", sans-serif;
+  font-size: 16px;
+}
+@mixin flexCenter($direction) {
+  flex-direction: $direction;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@mixin hover {
+  opacity: 0.7;
+  transition-timing-function: ease-out;
+  transition-duration: 300ms;
+  color: $primaryColor;
+}

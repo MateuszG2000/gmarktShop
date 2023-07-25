@@ -1,0 +1,42 @@
+@use "../index.scss" as index;
+.socialIcons {
+  font-size: 3rem;
+  margin: 1.5rem 0;
+}
+.socialIcons * {
+  margin-right: 1rem;
+}
+.FooterSection {
+  flex-flow: wrap;
+  display: flex;
+  gap: 4rem;
+  justify-content: space-between;
+  margin: 0 2rem;
+}
+
+.list {
+  list-style-type: none;
+  padding: 0;
+  color: black;
+  background-color: white;
+  min-width: 1rem;
+}
+
+.list * {
+  list-style-type: none;
+  display: flex;
+  justify-content: flex-start;
+  line-height: 1.4rem;
+  gap: 1rem;
+}
+.list li :first-child {
+  font-size: 1.5rem;
+  align-self: center;
+}
+.payments {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  font-size: 3rem;
+  gap: 0.5rem;
+}

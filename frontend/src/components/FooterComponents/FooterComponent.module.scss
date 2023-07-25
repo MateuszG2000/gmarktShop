@@ -1,0 +1,12 @@
+.FooterComponent {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.2rem;
+  min-width: 12rem;
+  align-self: flex-start;
+  max-width: 20rem;
+}
+
+.title {
+  font-size: 2rem;
+}

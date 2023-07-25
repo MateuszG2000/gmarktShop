@@ -1,0 +1,29 @@
+.list {
+  padding: 0;
+  color: black;
+  font-size: 1rem;
+  top: 4rem;
+  left: 0;
+  position: absolute;
+  z-index: 1;
+  border-radius: 12px;
+  background-color: white;
+  box-shadow: 1px 1px 7px -1px rgba(13, 118, 255, 1);
+  transition: 0.3s;
+  min-width: 12rem;
+  padding: 1rem 2rem;
+  margin: 0;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.list * {
+  list-style-type: none;
+  display: flex;
+  justify-content: flex-start;
+  line-height: 1.4rem;
+  gap: 2rem;
+}
+.list li :first-child {
+  font-size: 1.5rem;
+}
