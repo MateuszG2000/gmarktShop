@@ -1,0 +1,46 @@
+@use "../../index.scss" as index;
+.product {
+  width: 70%;
+  max-width: 1300px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2rem;
+}
+.productImage {
+  margin-top: 2rem;
+  width: fit-content;
+}
+.title {
+  font-size: 1.8rem;
+}
+.productOption {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+}
+
+.productContainer {
+  display: flex;
+  gap: 5rem;
+}
+.priceButtonContainer {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-right: 6rem;
+  align-items: center;
+}
+.price {
+  font-size: 2.5rem;
+  font-weight: 500;
+}
+.descriptionTitle {
+  font-size: 2rem;
+  font-weight: 500;
+}
+.description {
+  margin-top: 4rem;
+  font-size: 1.2rem;
+  margin-bottom: 5rem;
+}

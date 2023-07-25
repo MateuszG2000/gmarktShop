@@ -1,0 +1,38 @@
+import React from "react";
+import css from "./ProductComponent.module.scss";
+import monitor from "../../Photos/i-xiaomi-mi-curved-gaming-34-bhr4269gl.jpg.webp";
+import AmountComponent from "../CommonComponents/AmountComponent";
+function ProductComponent() {
+  return (
+    <>
+      <div className={css.product}>
+        <div className={css.productContainer}>
+          <img className={css.productImage} src={monitor} alt="abc" />
+          <div className={css.productOption}>
+            <p className={css.title}>Xiaomi Mi Curved Gaming s</p>
+            <div className={css.price}>1699,00 zł</div>
+            <div className={css.priceButtonContainer}>
+              <div className={css.amount}>
+                <AmountComponent />
+              </div>
+              <div>
+                <button>Dodaj do koszyka</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className={css.description}>
+          <p className={css.descriptionTitle}>Opis</p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
+            voluptatum, sapiente necessitatibus, illo labore suscipit facere
+            asperiores, commodi consequuntur vel explicabo culpa fugit dolore
+            ad. Odit quas consequuntur ex nulla!
+          </p>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default ProductComponent;
