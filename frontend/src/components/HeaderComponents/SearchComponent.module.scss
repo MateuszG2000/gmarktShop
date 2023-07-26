@@ -1,0 +1,62 @@
+@use "../../index.scss" as index;
+.search {
+  flex-grow: 1;
+  min-width: 250px;
+  text-align: center;
+  position: relative;
+}
+.search form input[type="text"],
+.result {
+  margin-left: auto;
+  margin-right: auto;
+  height: 1.5rem;
+  padding: 1rem;
+  width: 50%;
+  border: none;
+  font-size: 1.4rem;
+  -webkit-box-shadow: 1px 1px 7px -1px rgba(66, 68, 90, 1);
+  -moz-box-shadow: 1px 1px 7px -1px rgba(66, 68, 90, 1);
+  box-shadow: 1px 1px 7px -1px rgba(66, 68, 90, 1);
+}
+
+.search form input[type="text"]:focus {
+  -webkit-box-shadow: 1px 1px 7px -13px index.$primaryColor;
+  -moz-box-shadow: 1px 1px 7px -1px index.$primaryColor;
+  box-shadow: 1px 1px 7px -1px index.$primaryColor;
+  color: index.$primaryColor;
+  outline: none;
+}
+.first:focus + .result {
+  display: block;
+}
+.result {
+  display: flex;
+  width: 50%;
+  cursor: pointer;
+  background-color: white;
+}
+.first:hover + .result {
+  display: inherit;
+}
+.img {
+  width: 3rem;
+  padding-left: 1rem;
+  padding-right: 3rem;
+}
+.result:hover {
+  color: index.$primaryColor;
+}
+.last {
+  border-radius: 0 0 1rem 1rem;
+}
+.first {
+  border-radius: 1rem 1rem 0 0;
+}
+.default {
+  border-radius: 2rem;
+}
+.resultContainer {
+  position: absolute;
+  width: 100%;
+  z-index: 3;
+}

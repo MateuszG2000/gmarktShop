@@ -1,6 +1,6 @@
 import React from "react";
 import FooterComponent from "../components/FooterComponents/FooterComponent";
-import LogoComponent from "../components/NavbarComponents/LogoComponent";
+import LogoComponent from "../components/HeaderComponents/LogoComponent";
 import {
   AiOutlineInstagram,
   AiOutlineFacebook,

@@ -1,14 +1,14 @@
 import React from "react";
-import LogoComponent from "../components/NavbarComponents/LogoComponent";
-import SearchComponent from "../components/NavbarComponents/SearchComponent";
-import IconComponent from "../components/NavbarComponents/IconComponent";
+import LogoComponent from "../components/HeaderComponents/LogoComponent";
+import SearchComponent from "../components/HeaderComponents/SearchComponent";
+import IconComponent from "../components/HeaderComponents/IconComponent";
 import { LuContact } from "react-icons/lu";
 import { AiOutlineShoppingCart, AiOutlineUser } from "react-icons/ai";
 import css from "./HeaderSection.module.scss";
-import ContactFromIconComponent from "../components/NavbarComponents/ContactFromIconComponent";
+import ContactFromIconComponent from "../components/HeaderComponents/ContactFromIconComponent";
 function HeaderSection() {
   return (
-    <div className={css.navbar}>
+    <div className={css.header}>
       <LogoComponent type="logoNavbar" />
       <SearchComponent />
       <div className={css.contact}>

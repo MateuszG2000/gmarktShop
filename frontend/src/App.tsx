@@ -1,15 +1,52 @@
 import FooterSection from "./sections/FooterSection";
 import HomeSection from "./sections/HomeSection";
 import HeaderSection from "./sections/HeaderSection";
-import ProductSection from "./sections/ProductSection";
-
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import NavbarComponent from "./components/HeaderComponents/NavbarComponent";
+import ProductComponent from "./components/ProductComponents/ProductComponent";
+import CartSection from "./sections/CartSection";
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: (
+      <>
+        {" "}
+        <HeaderSection />
+        <NavbarComponent />
+        {/* <HomeSection /> */}
+        <FooterSection />
+      </>
+    ),
+  },
+  {
+    path: "/x",
+    element: (
+      <>
+        {" "}
+        <HeaderSection />
+        {/* <HomeSection /> */}
+        <NavbarComponent />
+        <ProductComponent />
+        <FooterSection />
+      </>
+    ),
+  },
+  {
+    path: "/cart",
+    element: (
+      <>
+        {" "}
+        <HeaderSection />
+        <CartSection />
+        <FooterSection />
+      </>
+    ),
+  },
+]);
 function App() {
   return (
     <>
-      <HeaderSection />
-      {/* <HomeSection /> */}
-      <ProductSection />
-      <FooterSection />
+      <RouterProvider router={router} />
     </>
   );
 }

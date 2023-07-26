@@ -17,7 +17,6 @@ function AmountComponent() {
         <span className={css.counter}>{amount}</span>
         <button
           className={css.btn}
-          name="increment"
           onClick={() => {
             setAmount(amount + 1);
           }}
