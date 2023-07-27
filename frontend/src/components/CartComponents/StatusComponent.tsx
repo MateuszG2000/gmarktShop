@@ -2,7 +2,7 @@ import React from "react";
 import css from "./StatusComponent.module.scss";
 import { ImCheckmark } from "react-icons/im";
 function StatusComponent() {
-  let step = 3;
+  let step = 1;
   return (
     <div className={css.summary}>
       <div className={css.step}>

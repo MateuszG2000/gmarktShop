@@ -21,3 +21,7 @@ body {
   transition-duration: 300ms;
   color: $primaryColor;
 }
+@mixin boxShadow {
+  border-radius: 0.2rem;
+  box-shadow: 3px 3px 13px -4px rgba(66, 68, 90, 1);
+}

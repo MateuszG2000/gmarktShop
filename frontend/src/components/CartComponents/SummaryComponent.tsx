@@ -3,6 +3,10 @@ import css from "./SummaryComponent.module.scss";
 function SummaryComponent() {
   return (
     <div className={css.summary}>
+      <span className={`${css.title} ${css.col_1}`}>
+        Podsumowanie zamówienia
+      </span>
+
       <span className={css.col_1}>Suma zamówienia</span>
       <span className={css.col_2}>200 zl</span>
 
@@ -11,8 +15,8 @@ function SummaryComponent() {
 
       <span className={css.col_1}>Koszt dostawy</span>
       <span className={css.col_2}>20 zl</span>
-      <span className={css.col_1}>Do zapłaty</span>
-      <span className={css.col_2}>260 zł</span>
+      <span className={`${css.endPrice} ${css.col_1}`}>Do zapłaty</span>
+      <span className={`${css.endPrice} ${css.col_2}`}>260 zł</span>
     </div>
   );
 }
