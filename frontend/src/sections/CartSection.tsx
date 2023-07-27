@@ -3,16 +3,18 @@ import DeliveryMethodComponent from "../components/CartComponents/DeliveryMethod
 import ProductListComponent from "../components/CartComponents/ProductListComponent";
 import StatusComponent from "../components/CartComponents/StatusComponent";
 import SummaryComponent from "../components/CartComponents/SummaryComponent";
-
+import css from "./CartSection.module.scss";
 function CartSection() {
   return (
-    <>
+    <div className={css.cart}>
       <StatusComponent />
       <ProductListComponent />
       <ProductListComponent />
-      <DeliveryMethodComponent />
-      <SummaryComponent />
-    </>
+      <div className={css.summaryDeliveryContainer}>
+        <SummaryComponent />
+        <DeliveryMethodComponent />
+      </div>
+    </div>
   );
 }
 
