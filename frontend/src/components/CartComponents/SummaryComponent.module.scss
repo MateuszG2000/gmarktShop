@@ -10,6 +10,8 @@
   white-space: nowrap;
   padding: 1rem;
   @include index.boxShadow;
+  max-height: 18rem;
+  min-height: 14rem;
 }
 .col_2 {
   text-align: right;
