@@ -7,9 +7,10 @@ import SummaryComponent from "../components/CartComponents/SummaryComponent";
 function CartSection() {
   return (
     <>
-      <DeliveryMethodComponent />
-      <ProductListComponent />
       <StatusComponent />
+      <ProductListComponent />
+      <ProductListComponent />
+      <DeliveryMethodComponent />
       <SummaryComponent />
     </>
   );

@@ -8,25 +8,27 @@ function AmountComponent() {
     setAmount(amount - 1);
   }
   return (
-    <div className={css.amountComponent}>
-      <span className={css.amountInfo}>Liczba sztuk:</span>
-      <div className={css.amount}>
-        <button className={css.btn} onClick={decrementHandler}>
-          <AiOutlineMinus />
-        </button>
-        <span className={css.counter}>{amount}</span>
-        <button
-          className={css.btn}
-          onClick={() => {
-            setAmount(amount + 1);
-          }}
-        >
-          <AiOutlinePlus />
-        </button>
-      </div>
-      <div className={css.amountLeft}>Z 10 sztuk</div>
+    // <div className={css.amountComponent}>
+    //   <span className={css.amountInfo}>Liczba sztuk:</span>
+    <div className={css.amount}>
+      <button className={css.btn} onClick={decrementHandler}>
+        <AiOutlineMinus />
+      </button>
+      <span className={css.counter}>{amount}</span>
+      <button
+        className={css.btn}
+        onClick={() => {
+          setAmount(amount + 1);
+        }}
+      >
+        <AiOutlinePlus />
+      </button>
     </div>
   );
+}
+{
+  /* <div className={css.amountLeft}>Z 10 sztuk</div>
+</div> */
 }
 
 export default AmountComponent;

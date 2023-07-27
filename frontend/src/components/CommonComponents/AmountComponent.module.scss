@@ -5,11 +5,12 @@
   display: flex;
   border: 1px solid black;
   align-items: center;
+  height: 3rem;
 }
 
 .btn {
   background-color: white;
-  height: 3.5rem;
+  height: 3rem;
   width: 3rem;
   border: none;
   font-size: 2rem;
@@ -19,7 +20,7 @@
   color: index.$primaryColor;
 }
 .amount span {
-  width: 6rem;
+  width: 5rem;
   text-align: center;
 }
 .btn:first-of-type {

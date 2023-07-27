@@ -1,0 +1,12 @@
+@use "../../index.scss" as index;
+.summary {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 20rem;
+  row-gap: 0.3rem;
+  font-family: index.$font2;
+  font-size: 0.9rem;
+}
+.col_2 {
+  text-align: right;
+}
