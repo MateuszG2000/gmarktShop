@@ -8,6 +8,7 @@ import AuthSection from "./sections/AuthSection";
 import CartSecondStepSection from "./sections/CartSecondStepSection";
 import CartFirstStepSection from "./sections/CartFirstStepSection";
 import CartThirdStepSection from "./sections/CartThirdStepSection";
+import CategorySection from "./sections/CategorySection";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -16,7 +17,7 @@ const router = createBrowserRouter([
         {" "}
         <HeaderSection />
         <NavbarComponent />
-        {/* <HomeSection /> */}
+        <HomeSection />
         <FooterSection />
       </>
     ),
@@ -72,6 +73,17 @@ const router = createBrowserRouter([
       <>
         <HeaderSection />
         <CartThirdStepSection />
+        <FooterSection />
+      </>
+    ),
+  },
+  {
+    path: "/monitory",
+    element: (
+      <>
+        <HeaderSection />
+        <NavbarComponent />
+        <CategorySection />
         <FooterSection />
       </>
     ),

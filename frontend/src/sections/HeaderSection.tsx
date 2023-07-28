@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import LogoComponent from "../components/HeaderComponents/LogoComponent";
 import SearchComponent from "../components/HeaderComponents/SearchComponent";
 import IconComponent from "../components/HeaderComponents/IconComponent";
@@ -7,6 +7,7 @@ import { AiOutlineShoppingCart, AiOutlineUser } from "react-icons/ai";
 import css from "./HeaderSection.module.scss";
 import ContactFromIconComponent from "../components/HeaderComponents/ContactFromIconComponent";
 function HeaderSection() {
+  let quantity = 1;
   return (
     <div className={css.header}>
       <LogoComponent type="logoNavbar" />
@@ -21,6 +22,7 @@ function HeaderSection() {
         <AiOutlineUser />
       </IconComponent>
       <IconComponent text="Koszyk">
+        {quantity === 0 ? "" : <p className={css.circle}>{quantity}</p>}
         <AiOutlineShoppingCart />
       </IconComponent>
     </div>

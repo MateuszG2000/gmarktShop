@@ -25,7 +25,7 @@ function NavbarComponent() {
         className={({ isActive }) =>
           isActive ? css.navLinkActive : css.navLink
         }
-        to="/xx"
+        to="/monitory"
       >
         Monitory
       </NavLink>
