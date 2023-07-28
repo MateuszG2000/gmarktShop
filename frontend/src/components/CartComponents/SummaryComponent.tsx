@@ -1,7 +1,6 @@
 import React from "react";
 import css from "./SummaryComponent.module.scss";
 import Button from "../CommonComponents/Button";
-import { MdArrowForwardIos } from "react-icons/md";
 import { Link } from "react-router-dom";
 
 function SummaryComponent({

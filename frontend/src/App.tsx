@@ -7,6 +7,7 @@ import ProductComponent from "./components/ProductComponents/ProductComponent";
 import AuthSection from "./sections/AuthSection";
 import CartSecondStepSection from "./sections/CartSecondStepSection";
 import CartFirstStepSection from "./sections/CartFirstStepSection";
+import CartThirdStepSection from "./sections/CartThirdStepSection";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -61,6 +62,16 @@ const router = createBrowserRouter([
       <>
         <HeaderSection />
         <CartSecondStepSection />
+        <FooterSection />
+      </>
+    ),
+  },
+  {
+    path: "/cart/summary",
+    element: (
+      <>
+        <HeaderSection />
+        <CartThirdStepSection />
         <FooterSection />
       </>
     ),

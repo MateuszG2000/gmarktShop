@@ -10,8 +10,8 @@ function CartFirstStepSection() {
   return (
     <div className={css.cart}>
       <StatusComponent step={1} />
-      <ProductListComponent />
-      <ProductListComponent />
+      <ProductListComponent moreData={true} />
+      <ProductListComponent moreData={true} />
       <div className={css.summaryDeliveryContainer}>
         <DeliveryMethodComponent />
         <SummaryComponent
