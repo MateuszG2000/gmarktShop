@@ -1,9 +1,16 @@
 import React from "react";
 import css from "./SummaryComponent.module.scss";
-import Button from "../AuthComponents/Button";
+import Button from "../CommonComponents/Button";
 import { MdArrowForwardIos } from "react-icons/md";
+import { Link } from "react-router-dom";
 
-function SummaryComponent() {
+function SummaryComponent({
+  buttonPath,
+  buttonText,
+}: {
+  buttonPath: string;
+  buttonText: React.ReactNode;
+}) {
   return (
     <div className={css.summary}>
       <span className={`${css.title} ${css.col_1}`}>
@@ -21,9 +28,9 @@ function SummaryComponent() {
       <span className={`${css.endPrice} ${css.col_1}`}>Do zapłaty</span>
       <span className={`${css.endPrice} ${css.col_2}`}>260 zł</span>
       <div className={css.btn}>
-        <Button disabled={false}>
-          Dalej <MdArrowForwardIos />{" "}
-        </Button>
+        <Link to={buttonPath}>
+          <Button disabled={false}>{buttonText}</Button>
+        </Link>
       </div>
     </div>
   );

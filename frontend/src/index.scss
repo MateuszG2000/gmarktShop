@@ -9,6 +9,10 @@ body {
   font-family: "Nunito", sans-serif;
   font-size: 16px;
 }
+a {
+  text-decoration: none;
+  color: black;
+}
 @mixin flexCenter($direction) {
   flex-direction: $direction;
   display: flex;

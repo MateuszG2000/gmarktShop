@@ -1,6 +1,6 @@
 import React from "react";
 import css from "./SignUp.module.scss";
-import Button from "./Button";
+import Button from "../CommonComponents/Button";
 import * as validator from "../../utils/validators";
 import useInput from "../../utils/use-input";
 import Input from "./Input";

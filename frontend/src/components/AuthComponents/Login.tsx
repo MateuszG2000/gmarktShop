@@ -1,7 +1,7 @@
 import React, { BaseSyntheticEvent } from "react";
 import * as validator from "../../utils/validators";
 import css from "./Login.module.scss";
-import Button from "./Button";
+import Button from "../CommonComponents/Button";
 import Input from "./Input";
 import useInput from "../../utils/use-input";
 import jwt from "jwt-decode";

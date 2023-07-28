@@ -4,8 +4,9 @@ import HeaderSection from "./sections/HeaderSection";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import NavbarComponent from "./components/HeaderComponents/NavbarComponent";
 import ProductComponent from "./components/ProductComponents/ProductComponent";
-import CartSection from "./sections/CartSection";
 import AuthSection from "./sections/AuthSection";
+import CartSecondStepSection from "./sections/CartSecondStepSection";
+import CartFirstStepSection from "./sections/CartFirstStepSection";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -38,7 +39,7 @@ const router = createBrowserRouter([
       <>
         {" "}
         <HeaderSection />
-        <CartSection />
+        <CartFirstStepSection />
         <FooterSection />
       </>
     ),
@@ -50,6 +51,16 @@ const router = createBrowserRouter([
         {" "}
         <HeaderSection />
         <AuthSection />
+        <FooterSection />
+      </>
+    ),
+  },
+  {
+    path: "/cart/data",
+    element: (
+      <>
+        <HeaderSection />
+        <CartSecondStepSection />
         <FooterSection />
       </>
     ),
