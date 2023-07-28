@@ -1,6 +1,6 @@
 import React from "react";
 import css from "./SignUp.module.scss";
-import Button from "../CommonComponents/Button";
+import ButtonComponent from "../CommonComponents/ButtonComponent";
 import * as validator from "../../utils/validators";
 import useInput from "../../utils/use-input";
 import Input from "./Input";
@@ -64,9 +64,11 @@ function SignUp() {
           <input type="checkbox" id="regulamin" name="regulamin"></input>
           <label htmlFor="regulamin">Akceptuję Regulamin</label>
         </p>
-        <Button disabled={!(enteredEmailIsValid && enteredPasswordIsValid)}>
+        <ButtonComponent
+          disabled={!(enteredEmailIsValid && enteredPasswordIsValid)}
+        >
           Zarejestruj się
-        </Button>
+        </ButtonComponent>
       </form>
     </div>
   );

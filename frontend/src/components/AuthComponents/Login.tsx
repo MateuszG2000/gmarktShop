@@ -1,7 +1,7 @@
 import React, { BaseSyntheticEvent } from "react";
 import * as validator from "../../utils/validators";
 import css from "./Login.module.scss";
-import Button from "../CommonComponents/Button";
+import ButtonComponent from "../CommonComponents/ButtonComponent";
 import Input from "./Input";
 import useInput from "../../utils/use-input";
 import jwt from "jwt-decode";
@@ -89,9 +89,11 @@ function Login() {
           onChange={passwordChangeHandler}
         ></Input>
 
-        <Button disabled={!(enteredEmailIsValid && enteredPasswordIsValid)}>
+        <ButtonComponent
+          disabled={!(enteredEmailIsValid && enteredPasswordIsValid)}
+        >
           Zaloguj
-        </Button>
+        </ButtonComponent>
       </form>
     </div>
   );

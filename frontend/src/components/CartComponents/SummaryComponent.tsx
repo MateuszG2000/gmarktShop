@@ -1,6 +1,6 @@
 import React from "react";
 import css from "./SummaryComponent.module.scss";
-import Button from "../CommonComponents/Button";
+import ButtonComponent from "../CommonComponents/ButtonComponent";
 import { Link } from "react-router-dom";
 
 function SummaryComponent({
@@ -28,7 +28,7 @@ function SummaryComponent({
       <span className={`${css.endPrice} ${css.col_2}`}>260 zł</span>
       <div className={css.btn}>
         <Link to={buttonPath}>
-          <Button disabled={false}>{buttonText}</Button>
+          <ButtonComponent disabled={false}>{buttonText}</ButtonComponent>
         </Link>
       </div>
     </div>

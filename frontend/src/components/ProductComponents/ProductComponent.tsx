@@ -2,7 +2,12 @@ import React from "react";
 import css from "./ProductComponent.module.scss";
 import monitor from "../../Photos/i-xiaomi-mi-curved-gaming-34-bhr4269gl.jpg.webp";
 import AmountComponent from "../CommonComponents/AmountComponent";
+import ButtonComponent from "../CommonComponents/ButtonComponent";
+import { LiaCartArrowDownSolid } from "react-icons/lia";
 function ProductComponent() {
+  function addToCartHandler() {
+    console.log("Dodaje do koszyka");
+  }
   return (
     <>
       <div className={css.product}>
@@ -16,7 +21,12 @@ function ProductComponent() {
                 <AmountComponent />
               </div>
               <div>
-                <button>Dodaj do koszyka</button>
+                <ButtonComponent disabled={false} onClick={addToCartHandler}>
+                  <span className={css.btnIcon}>
+                    <LiaCartArrowDownSolid />
+                  </span>
+                  <span className={css.btnTitle}>Dodaj do koszyka</span>
+                </ButtonComponent>
               </div>
             </div>
           </div>
