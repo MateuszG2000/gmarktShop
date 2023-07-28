@@ -1,0 +1,28 @@
+@use "../../index" as p;
+.loginPanel {
+  @include p.flexCenter(row);
+}
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  label {
+    color: gray;
+    font-size: 0.8rem;
+    font-family: p.$font;
+    font-weight: 700;
+    letter-spacing: 0.01rem;
+    line-height: 1rem;
+    cursor: pointer;
+  }
+}
+.input {
+  padding: 0.4rem;
+  width: 15rem;
+  border-radius: 0.3rem;
+  border: 2px solid rgb(186, 186, 186);
+  margin-bottom: 1rem;
+  &:focus {
+    outline: none;
+    border: 2px solid p.$primaryColorLight;
+  }
+}

@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import NavbarComponent from "./components/HeaderComponents/NavbarComponent";
 import ProductComponent from "./components/ProductComponents/ProductComponent";
 import CartSection from "./sections/CartSection";
+import AuthSection from "./sections/AuthSection";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -38,6 +39,17 @@ const router = createBrowserRouter([
         {" "}
         <HeaderSection />
         <CartSection />
+        <FooterSection />
+      </>
+    ),
+  },
+  {
+    path: "/log",
+    element: (
+      <>
+        {" "}
+        <HeaderSection />
+        <AuthSection />
         <FooterSection />
       </>
     ),

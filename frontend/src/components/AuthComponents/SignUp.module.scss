@@ -1,0 +1,12 @@
+@use "../../index.scss" as p;
+@import "partialLogin";
+
+input[type="checkbox"] {
+  margin-right: 0.8rem;
+  transform: translateY(15%);
+  background-color: p.$primaryColor;
+  cursor: pointer;
+}
+.loginForm {
+  @extend .loginForm;
+}

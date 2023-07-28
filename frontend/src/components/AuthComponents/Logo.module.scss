@@ -1,0 +1,27 @@
+@use "../../index.scss" as p;
+.logo {
+  cursor: pointer;
+  color: black;
+  font-size: 2.6rem;
+  letter-spacing: 0.3rem;
+  line-height: 1rem;
+  &:hover {
+    opacity: 0.7;
+    filter: alpha(opacity=70);
+    transform: scale(1.02, 1.02);
+    transition-timing-function: ease-out;
+    transition-duration: 300ms;
+    color: #0d76ff;
+  }
+  span {
+    color: p.$primaryColor;
+    font-size: 6rem;
+    font-weight: 700;
+    font-style: italic;
+    text-shadow: 1px -1px 4px rgba(13, 118, 255, 1);
+    line-height: 6rem;
+  }
+}
+.flexcenter {
+  @include p.flexCenter("row");
+}

@@ -41,9 +41,9 @@ function NavbarComponent() {
         className={({ isActive }) =>
           isActive ? css.navLinkActive : css.navLink
         }
-        to="/xx"
+        to="/log"
       >
-        Monitory
+        Zaloguj
       </NavLink>
       <NavLink
         className={({ isActive }) =>
