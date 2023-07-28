@@ -1,5 +1,8 @@
 import React from "react";
 import css from "./SummaryComponent.module.scss";
+import Button from "../AuthComponents/Button";
+import { MdArrowForwardIos } from "react-icons/md";
+
 function SummaryComponent() {
   return (
     <div className={css.summary}>
@@ -17,6 +20,11 @@ function SummaryComponent() {
       <span className={css.col_2}>20 zl</span>
       <span className={`${css.endPrice} ${css.col_1}`}>Do zapłaty</span>
       <span className={`${css.endPrice} ${css.col_2}`}>260 zł</span>
+      <div className={css.btn}>
+        <Button disabled={false}>
+          Dalej <MdArrowForwardIos />{" "}
+        </Button>
+      </div>
     </div>
   );
 }

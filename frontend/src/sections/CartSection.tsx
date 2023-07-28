@@ -4,6 +4,8 @@ import ProductListComponent from "../components/CartComponents/ProductListCompon
 import StatusComponent from "../components/CartComponents/StatusComponent";
 import SummaryComponent from "../components/CartComponents/SummaryComponent";
 import css from "./CartSection.module.scss";
+import Button from "../components/AuthComponents/Button";
+import { MdArrowForwardIos } from "react-icons/md";
 function CartSection() {
   return (
     <div className={css.cart}>
