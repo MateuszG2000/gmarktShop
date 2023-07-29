@@ -9,7 +9,7 @@ function NavbarComponent() {
         className={({ isActive }) =>
           isActive ? css.navLinkActive : css.navLink
         }
-        to="/"
+        to="/laptops"
       >
         Laptopy
       </NavLink>
@@ -17,7 +17,7 @@ function NavbarComponent() {
         className={({ isActive }) =>
           isActive ? css.navLinkActive : css.navLink
         }
-        to="/x"
+        to="/pcs"
       >
         Komputery stacjonarne
       </NavLink>
@@ -25,33 +25,9 @@ function NavbarComponent() {
         className={({ isActive }) =>
           isActive ? css.navLinkActive : css.navLink
         }
-        to="/monitory"
+        to="/monitors"
       >
         Monitory
-      </NavLink>
-      <NavLink
-        className={({ isActive }) =>
-          isActive ? css.navLinkActive : css.navLink
-        }
-        to="/xx"
-      >
-        Monitory
-      </NavLink>
-      <NavLink
-        className={({ isActive }) =>
-          isActive ? css.navLinkActive : css.navLink
-        }
-        to="/log"
-      >
-        Zaloguj
-      </NavLink>
-      <NavLink
-        className={({ isActive }) =>
-          isActive ? css.navLinkActive : css.navLink
-        }
-        to="/cart"
-      >
-        Cart
       </NavLink>
     </nav>
   );
