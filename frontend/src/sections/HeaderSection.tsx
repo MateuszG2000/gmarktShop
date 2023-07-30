@@ -35,5 +35,4 @@ function HeaderSection() {
     </div>
   );
 }
-
 export default HeaderSection;
