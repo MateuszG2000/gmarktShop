@@ -15,3 +15,15 @@ interface onSave {
 interface authResponse extends express.Response {
   userID: string;
 }
+interface ExpressFunction {
+  (
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ): Promise<void>;
+}
+interface ExpressProps {
+  req: express.Request;
+  res: express.Response;
+  next: express.NextFunction;
+}

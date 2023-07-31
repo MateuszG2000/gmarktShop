@@ -6,10 +6,24 @@ const orderModel = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    products: [{ productId: String, quantity: Number, price: Number }],
+    products: [
+      {
+        productId: {
+          type: mongoose.Schema.ObjectId,
+          ref: "Product",
+          required: [true, "Order must have a products"],
+        },
+        quantity: Number,
+      },
+    ],
     userId: {
-      type: String,
-      required: true,
+      type: mongoose.Schema.ObjectId,
+      ref: "User",
+      required: [true, "Order must have a client"],
+    },
+    paid: {
+      type: Boolean,
+      default: false,
     },
   },
   { timestamps: true }

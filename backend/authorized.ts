@@ -3,11 +3,7 @@ import express from "express";
 
 const jwt = require("jsonwebtoken");
 
-const isAuth = function (
-  req: express.Request,
-  res: authResponse,
-  next: NextFunction
-) {
+const isAuth: ExpressFunction = async function (req, res, next) {
   const authHeader = req.cookies.Authorization;
   if (!authHeader) {
     const error: Error = new Error("Not authorizated.");

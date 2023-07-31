@@ -6,8 +6,11 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    user: {
-      email: { type: String },
+    userType: {
+      type: String,
+      required: true,
+    },
+    userData: {
       firstName: { type: String },
       lastName: { type: String },
       street: { type: String },
@@ -22,6 +25,7 @@ const userSchema = new mongoose.Schema(
     },
     status: {
       type: String,
+      default: "Active",
     },
   },
   { timestamps: true }
