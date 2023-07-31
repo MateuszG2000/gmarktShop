@@ -5,7 +5,7 @@ import * as authController from "../controllers/authController";
 const User = require("../models/userModel");
 const isAuth = require("../authorized");
 
-router.put(
+router.post(
   "/signup",
   [
     body("email")

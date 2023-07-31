@@ -1,16 +1,15 @@
-import { timeStamp } from "console";
 import mongoose from "mongoose";
 
 const orderModel = new mongoose.Schema(
   {
     orderNumber: {
       type: Number,
-      require: true,
+      required: true,
     },
     products: [{ productId: String, quantity: Number, price: Number }],
     userId: {
       type: String,
-      require: true,
+      required: true,
     },
   },
   { timestamps: true }

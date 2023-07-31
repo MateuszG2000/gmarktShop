@@ -4,25 +4,24 @@ const userSchema = new mongoose.Schema(
   {
     email: {
       type: String,
-      require: true,
+      required: true,
     },
     user: {
-      email: { type: String, require: true },
-      firstName: { type: String, require: true },
-      lastName: { type: String, require: true },
-      street: { type: String, require: true },
-      houseNumber: { type: String, require: true },
-      zipCode: { type: Number, require: true },
-      city: { type: String, require: true },
-      phoneNumber: { type: Number, require: true },
+      email: { type: String },
+      firstName: { type: String },
+      lastName: { type: String },
+      street: { type: String },
+      houseNumber: { type: String },
+      zipCode: { type: Number },
+      city: { type: String },
+      phoneNumber: { type: Number },
     },
     password: {
-      type: { type: String, require: true },
+      type: String,
       require: true,
     },
     status: {
       type: String,
-      require: true,
     },
   },
   { timestamps: true }
