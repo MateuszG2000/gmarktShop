@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema(
   {
@@ -22,14 +22,15 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       require: true,
+      select: false,
     },
     status: {
       type: String,
-      default: "Active",
+      default: 'active',
     },
   },
   { timestamps: true }
 );
 
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model('User', userSchema);
 module.exports = User;
