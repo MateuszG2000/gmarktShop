@@ -5,6 +5,7 @@ const userSchema = new mongoose.Schema(
     email: {
       type: String,
       required: true,
+      unique: true,
     },
     userType: {
       type: String,
@@ -27,6 +28,10 @@ const userSchema = new mongoose.Schema(
     status: {
       type: String,
       default: 'active',
+      enum: {
+        values: ['active', 'inactive'],
+        message: 'Status can be only active or inactive',
+      },
     },
   },
   { timestamps: true }

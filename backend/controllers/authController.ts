@@ -1,8 +1,10 @@
 const { validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
+const catchError = require('../utils/catchError');
 import express from 'express';
 const User = require('../models/userModel');
 const jwt = require('jsonwebtoken');
+
 export function signup(
   req: express.Request,
   res: express.Response,
@@ -10,29 +12,18 @@ export function signup(
 ) {
   const error = validationResult(req);
   if (!error.isEmpty()) {
-    const err: Error = new Error('This is not an email');
+    const err: Error = new Error('Error');
     err.statusCode = 422;
     err.data = error.mapped();
     throw err;
   }
 
-  const password: string = req.body.password;
+  const { password, passwordConfirm, ...userData } = req.body;
   bcrypt
     .hash(password, 12)
     .then((hashedPassword: string) => {
-      const user: User = new User({
-        email: req.body.email,
-        password: hashedPassword,
-        userType: req.body.userType,
-        userData: {
-          firstName: req.body.userData.firstName,
-          lastName: req.body.userData.lastName,
-          street: req.body.userData.street,
-          houseNumber: req.body.userData.houseNumber,
-          zipCode: req.body.userData.zipCode,
-          phoneNumber: req.body.userData.phoneNumber,
-        },
-      });
+      userData.password = hashedPassword;
+      const user: User = new User(userData);
       return user.save();
     })
     .then((result: onSave) => {
@@ -45,7 +36,7 @@ export function signup(
       throw err;
     });
 }
-export function login(
+export const login = catchError(async function (
   req: express.Request,
   res: express.Response,
   next: express.NextFunction
@@ -53,50 +44,45 @@ export function login(
   const login = req.body.email;
   const password = req.body.password;
   let currentUser: User;
-  User.findOne({ email: login })
-    .then((user: User) => {
-      if (!user) {
-        const error = new Error('Incorrect login or password.');
-        error.statusCode = 401;
-        throw error;
-      }
-      currentUser = user;
-      return bcrypt.compare(password, user.password);
-    })
-    .then((result: boolean) => {
-      if (!result) {
-        const error = new Error('Incorrect login or password.');
-        error.statusCode = 401;
-        throw error;
-      }
-      if (req.cookies.Authorization) {
-        res.status(200).json({
-          message: 'You are already logged in',
-          token: req.cookies.Authorization,
-        });
-      }
-      const token = jwt.sign(
-        { email: currentUser.email, userId: currentUser._id.toString() },
-        process.env.PRIVATE_KEY,
-        { expiresIn: '1h' }
-      );
-      res
-        .cookie('Authorization', token, {
-          httpOnly: true,
-          maxAge: 1000 * 60 * 60,
-        })
-        .status(200)
-        .json({
-          message: 'success',
-          token: token,
-        });
-    })
+  let user: User = await User.findOne({ email: login }).select('+password');
 
-    .catch((err: any) => {
-      next(err);
+  if (!user) {
+    const error = new Error('Incorrect login or password.');
+    error.statusCode = 401;
+    throw error;
+  }
+  currentUser = user;
+  const passwordResult = await bcrypt.compare(password, user.password);
+
+  if (!passwordResult) {
+    const error = new Error('Incorrect login or password.');
+    error.statusCode = 401;
+    throw error;
+  }
+  if (req.cookies.Authorization) {
+    return res.status(200).json({
+      message: 'You are already logged in',
+      token: req.cookies.Authorization,
     });
-}
-export function gets(
+  }
+  const token = jwt.sign(
+    { email: currentUser.email, userId: currentUser._id.toString() },
+    process.env.PRIVATE_KEY,
+    { expiresIn: '1h' }
+  );
+  res
+    .cookie('Authorization', token, {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60,
+    })
+    .status(200)
+    .json({
+      message: 'success',
+      token: token,
+    });
+});
+
+export function getUsers(
   req: express.Request,
   res: express.Response,
   next: express.NextFunction
@@ -104,7 +90,7 @@ export function gets(
   User.find().then((user: any) => {
     res.status(200).json({
       status: 'success',
-      message: 'success fetch',
+      results: user.length,
       user: user,
     });
   });
