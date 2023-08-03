@@ -1,12 +1,13 @@
 interface Error {
   statusCode: number;
   data: string;
+  message?: string;
 }
 interface User {
   _id: string;
   email: string;
   name?: string;
-  password: string;
+  password?: string;
   save(): Promise;
 }
 interface onSave {

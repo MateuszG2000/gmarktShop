@@ -43,7 +43,6 @@ export const login = catchError(async function (
 ) {
   const login = req.body.email;
   const password = req.body.password;
-  let currentUser: User;
   let user: User = await User.findOne({ email: login }).select('+password');
 
   if (!user) {
@@ -51,7 +50,6 @@ export const login = catchError(async function (
     error.statusCode = 401;
     throw error;
   }
-  currentUser = user;
   const passwordResult = await bcrypt.compare(password, user.password);
 
   if (!passwordResult) {
@@ -59,26 +57,30 @@ export const login = catchError(async function (
     error.statusCode = 401;
     throw error;
   }
+
   if (req.cookies.Authorization) {
     return res.status(200).json({
       message: 'You are already logged in',
       token: req.cookies.Authorization,
     });
   }
+  user.password = undefined;
   const token = jwt.sign(
-    { email: currentUser.email, userId: currentUser._id.toString() },
+    { email: user.email, userId: user._id.toString() },
     process.env.PRIVATE_KEY,
     { expiresIn: '1h' }
   );
+
   res
     .cookie('Authorization', token, {
       httpOnly: true,
       maxAge: 1000 * 60 * 60,
+      secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
     })
     .status(200)
     .json({
       message: 'success',
-      token: token,
+      user: user,
     });
 });
 
@@ -111,3 +113,52 @@ export function logOut(
       message: 'Logged out',
     });
 }
+export function refreshToken(
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction
+) {
+  User.find().then((user: any) => {
+    res.status(200).json({
+      status: 'success',
+      results: user.length,
+      user: user,
+    });
+  });
+}
+export const isAuth = (...userTypes: String[]) =>
+  catchError(
+    async (
+      req: express.Request,
+      res: express.Response,
+      next: express.NextFunction
+    ) => {
+      const authHeader = req.cookies.Authorization;
+      if (!authHeader) {
+        const error: Error = new Error('Not authorizated.');
+        error.statusCode = 401;
+        throw error;
+      }
+      const token = authHeader.trim();
+      let userId;
+      try {
+        const decodedToken = jwt.verify(token, process.env.PRIVATE_KEY);
+        userId = decodedToken.userId;
+      } catch (err: any) {
+        err.statusCode = 401;
+        err.message = 'Invalid Token';
+        throw err;
+      }
+      const currentUser = await User.findById(userId);
+      if (!currentUser) {
+        const error: Error = new Error("User dosen't exists");
+        error.statusCode = 401;
+      }
+      if (!userTypes.includes(currentUser.userType)) {
+        const error: Error = new Error('You do not have permission');
+        error.statusCode = 401;
+        return next(error);
+      }
+      next();
+    }
+  );
