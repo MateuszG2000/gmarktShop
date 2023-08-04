@@ -1,12 +1,39 @@
 const Product = require('../models/productModel');
 const catchError = require('../utils/catchError');
+const multer = require('multer');
+import { RequestUser } from '../custom';
 import filter from '../utils/filteringMethods';
 import { Request, Response, NextFunction } from 'express';
+
+const multerStorage = multer.diskStorage({
+  destination: (req: Request, file: any, cb: Function) => {
+    cb(null, 'public/img/products');
+  },
+  filename: (req: RequestUser, file: any, cb: Function) => {
+    const ext = file.mimetype.split('/')[1];
+    cb(null, `product-${Date.now()}.${ext}`);
+  },
+});
+const multerFilter = (req: Request, file: any, cb: Function) => {
+  if (file.mimetype.startsWith('image')) {
+    cb(null, true);
+  } else {
+    cb(Error('This is not an image'), false);
+  }
+};
+const upload = multer({
+  storage: multerStorage,
+  fileFilter: multerFilter,
+});
+
+export const uploadPhoto = upload.single('photo');
+
 export const createProduct = catchError(async function (
   req: Request,
   res: Response,
   next: NextFunction
 ) {
+  console.log(req.body);
   const newProduct = await Product.create(req.body);
   res.status(201).json({
     status: 'success',

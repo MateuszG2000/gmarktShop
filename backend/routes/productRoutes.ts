@@ -8,6 +8,6 @@ router
   .patch(product.updateProduct)
   .delete(product.deleteProduct);
 router.get('/', product.getProducts);
-router.post('/', product.createProduct);
+router.post('/', product.uploadPhoto, product.createProduct);
 
 export default router;

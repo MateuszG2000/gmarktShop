@@ -4,7 +4,7 @@ const catchError = require('../utils/catchError');
 import express from 'express';
 const User = require('../models/userModel');
 const jwt = require('jsonwebtoken');
-
+import { RequestUser } from '../custom';
 export function signup(
   req: express.Request,
   res: express.Response,
@@ -129,7 +129,7 @@ export function refreshToken(
 export const isAuth = (...userTypes: String[]) =>
   catchError(
     async (
-      req: express.Request,
+      req: RequestUser,
       res: express.Response,
       next: express.NextFunction
     ) => {
@@ -154,6 +154,8 @@ export const isAuth = (...userTypes: String[]) =>
         const error: Error = new Error("User dosen't exists");
         error.statusCode = 401;
       }
+
+      req.user = currentUser;
       if (!userTypes.includes(currentUser.userType)) {
         const error: Error = new Error('You do not have permission');
         error.statusCode = 401;

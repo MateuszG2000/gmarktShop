@@ -28,3 +28,6 @@ interface ExpressProps {
   res: express.Response;
   next: express.NextFunction;
 }
+interface UserRequest extends express.Request {
+  user?: object;
+}

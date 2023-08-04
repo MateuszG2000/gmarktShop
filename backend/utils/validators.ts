@@ -8,8 +8,8 @@ export const validateEmail = [
     .withMessage('Not Valid e-mail')
     .custom((value) => {
       return User.findOne({ email: value }).then(
-        (userDoc: Promise<void> | null) => {
-          if (userDoc) {
+        (user: Promise<void> | null) => {
+          if (user) {
             return Promise.reject('E-Mail address already exists!');
           }
         }
