@@ -13,7 +13,10 @@ const multerStorage = multer.diskStorage({
   },
   filename: (req: RequestUser, file: any, cb: Function) => {
     const ext = file.mimetype.split('/')[1];
-    cb(null, `product-${file.originalname}-${Date.now()}.${ext}`);
+    const filename = file.originalname
+      .replace(`.${ext}`, '')
+      .replace('jpg', '');
+    cb(null, `product-${filename}-${Date.now()}.${ext}`);
   },
 });
 const multerFilter = (req: Request, file: any, cb: Function) => {
@@ -36,16 +39,18 @@ export const createProduct = async function (
   next: NextFunction
 ) {
   try {
+    req.body.image = req.file?.filename;
     const newProduct = await Product.create(req.body);
     res.status(201).json({
       status: 'success',
       data: newProduct,
     });
-  } catch (err: any) {
+  } catch (err) {
     const file = req.file!.filename;
     const filePath = req.file!.destination;
     const filePathFull = path.join(__dirname, '..', '..', filePath, file);
     fs.unlink(filePathFull, (err: Error) => {
+      if (!err) return;
       const error = new Error('Img path - something wrong');
       return next(error);
     });
