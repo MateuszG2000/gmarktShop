@@ -12,7 +12,6 @@ const cors = require('cors');
 
 dotenv.config({ path: './config.env' });
 app.use(bodyParser.json());
-1;
 app.use(cookieParser());
 
 app.use(
@@ -21,7 +20,6 @@ app.use(
     credentials: true,
   })
 );
-
 //routes
 app.use('/api/auth', authRoutes);
 app.use('/api/order', orderRoutes);

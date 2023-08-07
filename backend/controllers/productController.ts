@@ -1,7 +1,9 @@
 const Product = require('../models/productModel');
 const catchError = require('../utils/catchError');
+const path = require('path');
 const multer = require('multer');
-import { RequestUser } from '../custom';
+const fs = require('fs');
+import { RequestUser, fileRequest } from '../custom';
 import filter from '../utils/filteringMethods';
 import { Request, Response, NextFunction } from 'express';
 
@@ -11,7 +13,7 @@ const multerStorage = multer.diskStorage({
   },
   filename: (req: RequestUser, file: any, cb: Function) => {
     const ext = file.mimetype.split('/')[1];
-    cb(null, `product-${Date.now()}.${ext}`);
+    cb(null, `product-${file.originalname}-${Date.now()}.${ext}`);
   },
 });
 const multerFilter = (req: Request, file: any, cb: Function) => {
@@ -28,18 +30,32 @@ const upload = multer({
 
 export const uploadPhoto = upload.single('photo');
 
-export const createProduct = catchError(async function (
-  req: Request,
+export const createProduct = async function (
+  req: fileRequest,
   res: Response,
   next: NextFunction
 ) {
-  console.log(req.body);
-  const newProduct = await Product.create(req.body);
-  res.status(201).json({
-    status: 'success',
-    data: newProduct,
-  });
-});
+  try {
+    const newProduct = await Product.create(req.body);
+    res.status(201).json({
+      status: 'success',
+      data: newProduct,
+    });
+  } catch (err: any) {
+    const file = req.file!.filename;
+    const filePath = req.file!.destination;
+    const filePathFull = path.join(__dirname, '..', '..', filePath, file);
+    fs.unlink(filePathFull, (err: Error) => {
+      const error = new Error('Img path - something wrong');
+      return next(error);
+    });
+    const error = new Error(
+      'Product with given name is already exists, image was deleted'
+    );
+    error.statusCode = 404;
+    return next(error);
+  }
+};
 export const getProduct = catchError(async function (
   req: Request,
   res: Response,
