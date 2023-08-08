@@ -6,9 +6,9 @@ import Input from "./Input";
 import useInput from "../../utils/use-input";
 import jwt from "jwt-decode";
 import ErrorComponent from "./ErrorComponent";
-import { redirect } from "react-router-dom";
 function Login() {
   const [error, setError] = useState(false);
+  const [spinner, setSpinner] = useState(false);
 
   const {
     value: enteredEmail,
@@ -26,10 +26,11 @@ function Login() {
     inputBlurHandler: passwordBlurHandler,
     reset: resetPasswordInput,
   } = useInput((value: string) => validator.required(value));
-  const onLogIn = (event: BaseSyntheticEvent) => {
+  const loginHandler = (event: BaseSyntheticEvent) => {
     event.preventDefault();
     const login = event.target[0].value;
     const password = event.target[1].value;
+    setSpinner(true);
     fetch("http://localhost:9000/api/auth/login", {
       method: "POST",
       credentials: "include",
@@ -59,20 +60,20 @@ function Login() {
           exp: number;
         } = jwt(res.token);
         console.log(decodedToken);
-        setError(false);
+        setSpinner(false);
       })
       .catch((err) => {
         setError(true);
         emailBlurHandler();
         passwordBlurHandler();
+        setSpinner(false);
       });
-
     resetEmailInput();
     resetPasswordInput();
   };
   return (
-    <div className={css.loginPanel} onSubmit={onLogIn}>
-      <form onSubmit={onLogIn} className={css.loginForm}>
+    <div className={css.loginPanel}>
+      <form onSubmit={loginHandler} className={css.loginForm}>
         <Input
           id="email-input"
           type="email"
@@ -100,6 +101,7 @@ function Login() {
         {error && <ErrorComponent>Niepoprawny login lub hasło</ErrorComponent>}
         <ButtonComponent
           disabled={!(enteredEmailIsValid && enteredPasswordIsValid)}
+          spinner={spinner}
         >
           Zaloguj
         </ButtonComponent>
