@@ -2,12 +2,17 @@
 $primaryColor: #0d76ff;
 $primaryColorLight: #bad8ff;
 $primaryColorDark: #0950ac;
+$footerBackgroundColor: rgb(120, 120, 126);
+$footerTitleColor: white;
+$footerFontColor: black;
 $font: "Nunito", sans-serif;
 $font2: "Roboto", sans-serif;
+
 body {
-  margin: 1rem;
   font-family: "Nunito", sans-serif;
   font-size: 16px;
+  margin: 0;
+  padding: 0;
 }
 a {
   text-decoration: none;

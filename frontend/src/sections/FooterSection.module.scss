@@ -11,14 +11,16 @@
   display: flex;
   gap: 4rem;
   justify-content: space-between;
-  margin: 0 2rem;
+  padding: 2rem 2rem;
+  background-color: index.$footerBackgroundColor;
+  color: index.$footerFontColor;
+  font-weight: 600;
+  top: 100vh;
 }
 
 .list {
   list-style-type: none;
   padding: 0;
-  color: black;
-  background-color: white;
   min-width: 1rem;
 }
 

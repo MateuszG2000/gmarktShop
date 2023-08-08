@@ -1,3 +1,4 @@
+@use "../../index.scss" as index;
 .FooterComponent {
   display: flex;
   flex-direction: column;
@@ -9,4 +10,6 @@
 
 .title {
   font-size: 2rem;
+  color: index.$footerTitleColor;
+  font-weight: 600;
 }

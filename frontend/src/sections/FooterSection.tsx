@@ -72,14 +72,6 @@ function FooterSection() {
           </li>
         </ul>
       </FooterComponent>
-      <FooterComponent title="Płatności">
-        <div className={css.payments}>
-          <PiPaypalLogoBold />
-          <BiLogoVisa />
-          <FaCcMastercard />
-          <FaGooglePay />
-        </div>
-      </FooterComponent>
     </div>
   );
 }
