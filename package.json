@@ -1,5 +1,7 @@
 {
   "dependencies": {
-    "jwt-decode": "^3.1.2"
+    "@types/react": "^18.2.0",
+    "jwt-decode": "^3.1.2",
+    "react-error-boundary": "^4.0.10"
   }
 }

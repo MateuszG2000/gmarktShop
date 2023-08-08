@@ -14,9 +14,6 @@ import {
   BsArrowReturnLeft,
   BsWallet2,
 } from "react-icons/bs";
-import { PiPaypalLogoBold } from "react-icons/pi";
-import { BiLogoVisa } from "react-icons/bi";
-import { FaCcMastercard, FaGooglePay } from "react-icons/fa";
 import css from "./FooterSection.module.scss";
 function FooterSection() {
   return (

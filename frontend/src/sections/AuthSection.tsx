@@ -10,7 +10,7 @@ function AuthSection() {
     e ? setPageOption(true) : setPageOption(false);
   };
   const onClick = () => {
-    fetch("http://localhost:9000/auth/", {
+    fetch("http://localhost:9000/api/auth/", {
       method: "GET",
       credentials: "include",
       headers: {
@@ -25,7 +25,7 @@ function AuthSection() {
       });
   };
   const onLogOut = () => {
-    fetch("http://localhost:9000/auth/logout", {
+    fetch("http://localhost:9000/api/auth/logout", {
       method: "GET",
       credentials: "include",
       headers: {
@@ -33,6 +33,7 @@ function AuthSection() {
       },
     });
   };
+
   return (
     <div className={css.auth}>
       <div className={css.authButtons}>

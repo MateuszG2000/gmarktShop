@@ -1,11 +1,15 @@
-import React, { BaseSyntheticEvent } from "react";
+import React, { BaseSyntheticEvent, useState } from "react";
 import * as validator from "../../utils/validators";
 import css from "./Login.module.scss";
 import ButtonComponent from "../CommonComponents/ButtonComponent";
 import Input from "./Input";
 import useInput from "../../utils/use-input";
 import jwt from "jwt-decode";
+import ErrorComponent from "./ErrorComponent";
+import { redirect } from "react-router-dom";
 function Login() {
+  const [error, setError] = useState(false);
+
   const {
     value: enteredEmail,
     isValid: enteredEmailIsValid,
@@ -26,7 +30,7 @@ function Login() {
     event.preventDefault();
     const login = event.target[0].value;
     const password = event.target[1].value;
-    fetch("http://localhost:9000/auth/login", {
+    fetch("http://localhost:9000/api/auth/login", {
       method: "POST",
       credentials: "include",
       headers: {
@@ -40,10 +44,9 @@ function Login() {
       .then((res) => {
         if (res.status === 422) {
           console.log("Validation Falied");
-          return;
         } else if (res.status === 401) {
-          console.log("Wrong credentials");
-          return;
+          const err = new Error("Wrong credentials");
+          throw err;
         } else if (res.status === 200 || res.status === 201) {
           return res.json();
         }
@@ -56,6 +59,12 @@ function Login() {
           exp: number;
         } = jwt(res.token);
         console.log(decodedToken);
+        setError(false);
+      })
+      .catch((err) => {
+        setError(true);
+        emailBlurHandler();
+        passwordBlurHandler();
       });
 
     resetEmailInput();
@@ -88,7 +97,7 @@ function Login() {
           onBlur={passwordBlurHandler}
           onChange={passwordChangeHandler}
         ></Input>
-
+        {error && <ErrorComponent>Niepoprawny login lub hasło</ErrorComponent>}
         <ButtonComponent
           disabled={!(enteredEmailIsValid && enteredPasswordIsValid)}
         >

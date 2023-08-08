@@ -9,7 +9,7 @@ const useInput = (validateValue: Function) => {
   const valueChangeHandler = (event: BaseSyntheticEvent) => {
     setEnteredValue(event.target.value);
   };
-  const inputBlurHandler = (event: BaseSyntheticEvent) => {
+  const inputBlurHandler = () => {
     setIsTouched(true);
   };
   const reset = () => {
