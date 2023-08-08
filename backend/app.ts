@@ -5,6 +5,7 @@ import authRoutes from './routes/userRoutes';
 import dotenv from 'dotenv';
 import orderRoutes from './routes/orderRoutes';
 import productRoutes from './routes/productRoutes';
+import path from 'path';
 
 const app = express();
 const cookieParser = require('cookie-parser');
@@ -20,7 +21,14 @@ app.use(
     credentials: true,
   })
 );
+
 //routes
+
+app.use(
+  '/images',
+  express.static(path.join(__dirname, '..', 'public', 'img', 'products'))
+);
+
 app.use('/api/auth', authRoutes);
 app.use('/api/order', orderRoutes);
 app.use('/api/product', productRoutes);

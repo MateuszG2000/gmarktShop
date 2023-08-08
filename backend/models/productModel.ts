@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 
 const productSchema = new mongoose.Schema(
   {
@@ -26,9 +26,17 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    category: {
+      type: String,
+      enum: {
+        values: ['pcs', 'monitors', 'laptops'],
+        message: 'Category must be: pcs, monitors or laptops',
+      },
+      required: true,
+    },
   },
   { timestamps: true }
 );
 
-const Product = mongoose.model("product", productSchema);
+const Product = mongoose.model('product', productSchema);
 module.exports = Product;

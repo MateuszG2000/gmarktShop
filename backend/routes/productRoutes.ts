@@ -2,7 +2,6 @@ import Router from 'express';
 const router = Router();
 import * as product from '../controllers/productController';
 import * as user from '../controllers/userController';
-const multer = require('multer');
 
 router
   .route('/:id')

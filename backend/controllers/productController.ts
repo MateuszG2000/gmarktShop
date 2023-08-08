@@ -54,11 +54,9 @@ export const createProduct = async function (
       const error = new Error('Img path - something wrong');
       return next(error);
     });
-    const error = new Error(
-      'Product with given name is already exists, image was deleted'
-    );
-    error.statusCode = 404;
-    return next(error);
+    console.log(err);
+
+    return next(err);
   }
 };
 export const getProduct = catchError(async function (
