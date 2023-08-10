@@ -32,6 +32,7 @@ function AuthSection() {
         "Content-Type": "application/json",
       },
     });
+    sessionStorage.removeItem("user");
   };
 
   return (

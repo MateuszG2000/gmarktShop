@@ -55,13 +55,14 @@ function Login() {
         }
       })
       .then((res) => {
-        const decodedToken: {
+        const userData: {
           email: string;
           userId: string;
-          iat: number;
           exp: number;
+          token: String;
         } = jwt(res.token);
-        console.log(decodedToken);
+        sessionStorage.setItem("user", JSON.stringify(userData));
+        console.log("Logged in", userData);
         setSpinner(false);
         setError(false);
         navigate("/");

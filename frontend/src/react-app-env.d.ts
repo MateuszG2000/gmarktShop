@@ -10,6 +10,3 @@ interface Product {
   inStock?: Number;
   updatedAt?: String;
 }
-interface prodArr {
-  data: String;
-}

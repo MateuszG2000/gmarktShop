@@ -112,7 +112,7 @@ export const deleteProduct = catchError(async function (
   res: Response,
   next: NextFunction
 ) {
-  const product = await Product.findByIdAndUpdate(req.params.id);
+  const product = await Product.findByIdAndDelete(req.params.id);
   if (!product) {
     const error = new Error('There is no product with given ID');
     error.statusCode = 404;

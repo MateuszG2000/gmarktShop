@@ -145,19 +145,21 @@ export const isAuth = (...userTypes: String[]) =>
         const decodedToken = jwt.verify(token, process.env.PRIVATE_KEY);
         userId = decodedToken.userId;
       } catch (err: any) {
-        err.statusCode = 401;
+        err.statusCode = 400;
         err.message = 'Invalid Token';
         throw err;
       }
       const currentUser = await User.findById(userId);
       if (!currentUser) {
         const error: Error = new Error("User dosen't exists");
-        error.statusCode = 401;
+        error.statusCode = 400;
       }
 
       req.user = currentUser;
       if (!userTypes.includes(currentUser.userType)) {
-        const error: Error = new Error('You do not have permission');
+        const error: Error = new Error(
+          `You do not have permission. Your account is ${currentUser.userType} type.`
+        );
         error.statusCode = 401;
         return next(error);
       }

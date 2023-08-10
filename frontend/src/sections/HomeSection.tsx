@@ -8,7 +8,7 @@ function HomeSection() {
     (async () => {
       try {
         const response = await fetch(
-          "http://localhost:9000/api/product/?limit=8"
+          "http://localhost:9000/api/product/?limit=11"
         );
         const resData = await response.json();
         setProducts(resData.data);

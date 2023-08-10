@@ -4,7 +4,7 @@
   text-align: center;
   width: 14rem;
   position: relative;
-  padding: 1rem;
+  padding: 0.8rem;
 }
 .image {
   max-width: 12rem;
@@ -50,7 +50,6 @@
   opacity: 1;
 }
 .addToCart {
-  padding: 1rem;
   opacity: 0;
   font-size: 1.5rem;
 }
@@ -64,11 +63,15 @@
 .title {
   font-weight: 600;
   text-align: left;
+  margin-top: 0;
   font-size: 1.1rem;
-  height: 2.2rem;
+  height: 4rem;
+  overflow-wrap: break-word;
 }
 .cartPrice {
   display: flex;
+  padding-right: 1rem;
+  padding-bottom: 0.6rem;
   justify-content: space-between;
   align-items: center;
 }
