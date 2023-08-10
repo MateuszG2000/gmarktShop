@@ -25,7 +25,7 @@ app.use(
 //routes
 
 app.use(
-  '/images',
+  '/api/images',
   express.static(path.join(__dirname, '..', 'public', 'img', 'products'))
 );
 

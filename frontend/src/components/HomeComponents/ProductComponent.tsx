@@ -1,16 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import css from "./ProductComponent.module.scss";
 import { BsCartPlusFill } from "react-icons/bs";
-import monitor from "../../Photos/i-xiaomi-mi-curved-gaming-34-bhr4269gl.jpg.webp";
-function ProductComponent() {
+
+function ProductComponent({ product }: { product: Product }) {
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  const img = `http://localhost:9000/api/images/${product.image}`;
+
   return (
     <div className={css.product}>
-      <div className={css.imgBox}>
-        <img className={css.image} src={monitor} alt="produkt" />
+      <div className={`${css.imgBox}`}>
+        <img
+          loading="lazy"
+          className={`${css.image} ${imageLoaded ? css.imgLoaded : ""}`}
+          src={img}
+          alt="produkt"
+          onLoad={() => setImageLoaded(true)}
+        />
+        <span
+          className={`${css.loader} ${imageLoaded ? css.loaded : css.loading}`}
+        ></span>
       </div>
-      <p className={css.title}> Oto produkt numer 1 Oto produkt numer 1</p>
+      <p className={css.title}>{product.name}</p>
       <div className={css.cartPrice}>
-        <span className={css.price}>200,00 zł</span>
+        <span className={css.price}>{product.price?.toFixed(2)} zł</span>
         <span className={css.addToCart}>
           <BsCartPlusFill />
         </span>

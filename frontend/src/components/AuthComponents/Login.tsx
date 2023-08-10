@@ -6,9 +6,11 @@ import Input from "./Input";
 import useInput from "../../utils/use-input";
 import jwt from "jwt-decode";
 import ErrorComponent from "./ErrorComponent";
+import { useNavigate } from "react-router-dom";
 function Login() {
   const [error, setError] = useState(false);
   const [spinner, setSpinner] = useState(false);
+  const navigate = useNavigate();
 
   const {
     value: enteredEmail,
@@ -61,6 +63,8 @@ function Login() {
         } = jwt(res.token);
         console.log(decodedToken);
         setSpinner(false);
+        setError(false);
+        navigate("/");
       })
       .catch((err) => {
         setError(true);
