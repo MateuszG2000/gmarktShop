@@ -10,3 +10,16 @@ interface Product {
   inStock?: Number;
   updatedAt?: String;
 }
+
+interface ItemState {
+  items: Product[];
+  totalQuantity: Number;
+  changed: boolean;
+}
+interface ICartProduct {
+  _id: key;
+  name: String;
+  price?: Number;
+  image?: String;
+  inStock?: Number;
+}

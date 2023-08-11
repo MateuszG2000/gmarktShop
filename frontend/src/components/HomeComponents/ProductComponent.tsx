@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import css from "./ProductComponent.module.scss";
 import { BsCartPlusFill } from "react-icons/bs";
+import { useDispatch } from "react-redux";
+import { cartActions } from "../../store/cart";
 
 function ProductComponent({ product }: { product: Product }) {
   const [imageLoaded, setImageLoaded] = useState(false);
+  const dispatch = useDispatch();
+
+  const addToCartHandler = (product: Product) => {
+    dispatch(cartActions.addItem(product));
+  };
 
   const img = `http://localhost:9000/api/images/${product.image}`;
-
   return (
     <div className={css.product}>
       <div className={`${css.imgBox}`}>
@@ -24,9 +30,14 @@ function ProductComponent({ product }: { product: Product }) {
       <p className={css.title}>{product.name}</p>
       <div className={css.cartPrice}>
         <span className={css.price}>{product.price?.toFixed(2)} zł</span>
-        <span className={css.addToCart}>
+        <button
+          className={css.addToCart}
+          onClick={() => {
+            addToCartHandler(product);
+          }}
+        >
           <BsCartPlusFill />
-        </span>
+        </button>
       </div>
     </div>
   );
