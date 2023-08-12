@@ -18,7 +18,7 @@ function ProductComponent() {
             <div className={css.price}>1699,00 zł</div>
             <div className={css.priceButtonContainer}>
               <div className={css.amount}>
-                <AmountComponent />
+                <AmountComponent quantity={1} />
               </div>
               <div>
                 <ButtonComponent disabled={false} onClick={addToCartHandler}>

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import css from "./AmountComponent.module.scss";
-function AmountComponent() {
-  const [amount, setAmount] = useState(1);
+function AmountComponent({ quantity }: { quantity: number }) {
+  const [amount, setAmount] = useState(quantity);
   function decrementHandler() {
     if (amount === 1) return;
     setAmount(amount - 1);

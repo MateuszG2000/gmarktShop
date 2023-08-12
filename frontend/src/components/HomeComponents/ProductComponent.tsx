@@ -3,11 +3,9 @@ import css from "./ProductComponent.module.scss";
 import { BsCartPlusFill } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../../store/cart";
-
 function ProductComponent({ product }: { product: Product }) {
   const [imageLoaded, setImageLoaded] = useState(false);
   const dispatch = useDispatch();
-
   const addToCartHandler = (product: Product) => {
     dispatch(cartActions.addItem(product));
   };

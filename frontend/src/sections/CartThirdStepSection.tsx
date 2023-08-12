@@ -8,7 +8,7 @@ function CartThirdStepSection() {
   return (
     <div className={css.cart}>
       <StatusComponent step={3} />
-      <ProductListComponent moreData={false} />
+      {/* <ProductListComponent moreData={false} /> */}
       <div className={css.deliverySummary}>
         <DeliveryDataComponent />
         <SummaryComponent buttonText={<>Zapłać</>} buttonPath="/cart/summary" />

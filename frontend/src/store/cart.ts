@@ -12,10 +12,16 @@ const cartSlice = createSlice({
       const newItem = action.payload;
       const inCart = state.items.find((item) => item._id === newItem._id);
       if (!inCart) {
-        state.items.push(newItem);
-        console.log(state.items);
+        state.items.push({
+          _id: newItem._id,
+          name: newItem.name,
+          image: newItem.image,
+          inStock: newItem.inStock,
+          quantity: 1,
+          price: newItem.price,
+        });
       } else {
-        console.log(state.items);
+        inCart.quantity++;
       }
     },
   },

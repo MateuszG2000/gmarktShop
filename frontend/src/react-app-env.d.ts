@@ -2,24 +2,28 @@
 interface Product {
   _id: key;
   name: String;
-  price?: Number;
-  image?: String;
+  price: number;
+  image: String;
   category?: String;
   createdAt?: String;
   description?: String;
-  inStock?: Number;
+  inStock: number;
   updatedAt?: String;
 }
 
 interface ItemState {
-  items: Product[];
-  totalQuantity: Number;
+  items: ICartProduct[];
+  totalQuantity: number;
   changed: boolean;
 }
 interface ICartProduct {
   _id: key;
   name: String;
-  price?: Number;
-  image?: String;
-  inStock?: Number;
+  price: number;
+  image: String;
+  inStock: number;
+  quantity: number;
+}
+interface RootState {
+  cart: ItemState;
 }
