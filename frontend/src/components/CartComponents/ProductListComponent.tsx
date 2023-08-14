@@ -22,6 +22,9 @@ function ProductListComponent({
       cartActions.updateQuantity({ quantity: quantity, id: product._id })
     );
   }, 400);
+  const handleRemove = () => {
+    dispatch(cartActions.removeItem({ id: product._id }));
+  };
   const img = `http://localhost:9000/api/images/${product.image}`;
   return (
     <div className={css.productListComponent}>
@@ -32,13 +35,14 @@ function ProductListComponent({
         <QuantityComponent
           quantityProp={product.quantity}
           onChange={handleQuantity}
+          onRemove={handleRemove}
         />
       )}
       <span className={css.price}>{endPrice.toFixed(2)} zł</span>
       {moreData && (
-        <span className={css.trash}>
+        <button onClick={handleRemove} className={css.trash}>
           <BsFillTrash3Fill />
-        </span>
+        </button>
       )}
     </div>
   );

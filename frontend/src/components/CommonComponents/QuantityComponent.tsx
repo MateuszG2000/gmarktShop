@@ -4,13 +4,15 @@ import css from "./QuantityComponent.module.scss";
 function QuantityComponent({
   quantityProp,
   onChange,
+  onRemove,
 }: {
   quantityProp: number;
   onChange: Function;
+  onRemove: Function;
 }) {
   const [quantity, setQuantity] = useState(quantityProp);
   function decrementHandler() {
-    if (quantity === 1) return;
+    if (quantity === 1) onRemove();
     setQuantity(quantity - 1);
     onChange(quantity - 1);
   }
@@ -33,10 +35,6 @@ function QuantityComponent({
       </button>
     </div>
   );
-}
-{
-  /* <div className={css.quantityLeft}>Z 10 sztuk</div>
-</div> */
 }
 
 export default QuantityComponent;

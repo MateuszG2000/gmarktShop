@@ -34,6 +34,15 @@ const cartSlice = createSlice({
         console.log("something goes wrong");
       }
     },
+    removeItem(state, action) {
+      const ItemToDeleteId = action.payload.id;
+      const indexToDelete = state.items.findIndex(
+        (item) => item._id === ItemToDeleteId
+      );
+      if (indexToDelete !== -1) {
+        state.items.splice(indexToDelete, 1);
+      }
+    },
   },
 });
 export const cartActions = cartSlice.actions;
