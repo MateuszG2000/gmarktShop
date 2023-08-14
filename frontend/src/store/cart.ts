@@ -24,6 +24,16 @@ const cartSlice = createSlice({
         inCart.quantity++;
       }
     },
+    updateQuantity(state, action) {
+      const newItemId = action.payload.id;
+      const newQuantity = action.payload.quantity;
+      const inCart = state.items.find((item) => item._id === newItemId);
+      if (inCart) {
+        inCart.quantity = newQuantity;
+      } else {
+        console.log("something goes wrong");
+      }
+    },
   },
 });
 export const cartActions = cartSlice.actions;

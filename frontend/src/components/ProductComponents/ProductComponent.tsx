@@ -1,9 +1,10 @@
 import React from "react";
 import css from "./ProductComponent.module.scss";
 import monitor from "../../Photos/i-xiaomi-mi-curved-gaming-34-bhr4269gl.jpg.webp";
-import AmountComponent from "../CommonComponents/AmountComponent";
+import QuantityComponent from "../CommonComponents/QuantityComponent";
 import ButtonComponent from "../CommonComponents/ButtonComponent";
 import { LiaCartArrowDownSolid } from "react-icons/lia";
+
 function ProductComponent() {
   function addToCartHandler() {
     console.log("Dodaje do koszyka");
@@ -17,8 +18,8 @@ function ProductComponent() {
             <p className={css.title}>Xiaomi Mi Curved Gaming s</p>
             <div className={css.price}>1699,00 zł</div>
             <div className={css.priceButtonContainer}>
-              <div className={css.amount}>
-                <AmountComponent quantity={1} />
+              <div className={css.quantity}>
+                <QuantityComponent quantityProp={1} onChange={() => {}} />
               </div>
               <div>
                 <ButtonComponent disabled={false} onClick={addToCartHandler}>

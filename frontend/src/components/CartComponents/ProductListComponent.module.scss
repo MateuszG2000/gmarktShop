@@ -5,6 +5,7 @@
   border-bottom: 1px solid rgb(125, 125, 125);
   gap: 2rem;
   align-items: center;
+  padding: 0 2rem 0 0.5rem;
 }
 .image {
   max-width: 5rem;
@@ -14,11 +15,15 @@
   flex-grow: 1;
   min-width: 10rem;
 }
+
 .trash {
-  margin: 0 2rem;
   font-size: 1.2rem;
   cursor: pointer;
 }
 .trash:hover {
   color: rgb(198, 0, 0);
+}
+.price {
+  width: 8rem;
+  text-align: right;
 }

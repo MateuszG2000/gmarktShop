@@ -1,6 +1,6 @@
 @use "../../index.scss" as index;
 
-.amount {
+.quantity {
   font-size: 1.6rem;
   display: flex;
   border: 1px solid black;
@@ -19,7 +19,7 @@
 .btn:hover {
   color: index.$primaryColor;
 }
-.amount span {
+.quantity span {
   width: 5rem;
   text-align: center;
 }
@@ -29,10 +29,10 @@
 .btn:last-of-type {
   border-left: 1px solid black;
 }
-.amountInfo {
+.quantityInfo {
   line-height: 2rem;
 }
-.amountLeft {
+.quantityLeft {
   text-align: right;
   line-height: 2rem;
 }
