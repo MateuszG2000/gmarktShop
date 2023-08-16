@@ -7,8 +7,9 @@ import { AiOutlineShoppingCart, AiOutlineUser } from "react-icons/ai";
 import css from "./HeaderSection.module.scss";
 import ContactFromIconComponent from "../components/HeaderComponents/ContactFromIconComponent";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 function HeaderSection() {
-  let quantity = 1;
+  const quantity = useSelector((state: RootState) => state.cart.totalQuantity);
   return (
     <div className={css.header}>
       <Link to="/">
@@ -28,7 +29,7 @@ function HeaderSection() {
       </Link>
       <Link to="/cart">
         <IconComponent text="Koszyk">
-          {quantity === 0 ? "" : <p className={css.circle}>{quantity}</p>}
+          {quantity <= 0 ? "" : <p className={css.circle}>{quantity}</p>}
           <AiOutlineShoppingCart />
         </IconComponent>
       </Link>

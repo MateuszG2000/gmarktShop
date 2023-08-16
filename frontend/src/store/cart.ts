@@ -11,6 +11,7 @@ const cartSlice = createSlice({
     addItem(state, action: PayloadAction<Product>) {
       const newItem = action.payload;
       const inCart = state.items.find((item) => item._id === newItem._id);
+      state.totalQuantity++;
       if (!inCart) {
         state.items.push({
           _id: newItem._id,
@@ -29,9 +30,12 @@ const cartSlice = createSlice({
       const newQuantity = action.payload.quantity;
       const inCart = state.items.find((item) => item._id === newItemId);
       if (inCart) {
+        state.totalQuantity += newQuantity - inCart.quantity;
         inCart.quantity = newQuantity;
+        console.log(inCart.quantity);
+        console.log(newQuantity - inCart.quantity);
       } else {
-        console.log("something goes wrong");
+        console.log("something went wrong");
       }
     },
     removeItem(state, action) {
@@ -40,8 +44,9 @@ const cartSlice = createSlice({
         (item) => item._id === ItemToDeleteId
       );
       if (indexToDelete !== -1) {
+        state.totalQuantity -= state.items[indexToDelete].quantity;
         state.items.splice(indexToDelete, 1);
-      }
+      } else console.log("something went wrong");
     },
   },
 });
