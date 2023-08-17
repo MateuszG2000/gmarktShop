@@ -1,76 +1,67 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import css from "./DeliveryMethodComponent.module.scss";
+import { useDispatch, useSelector } from "react-redux";
+const shippingMethods: IShipping[] = [
+  { id: "dpdG", name: "Kuier DPD", price: 16.99, cashOnDelivery: false },
+  { id: "dhdG", name: "Kuier DHL", price: 17.99, cashOnDelivery: false },
+  { id: "inpostG", name: "Kuier Inpost", price: 15.99, cashOnDelivery: false },
+  { id: "dpdP", name: "Kuier DPD", price: 21.99, cashOnDelivery: true },
+  { id: "dhlP", name: "Kurier DHL", price: 22.99, cashOnDelivery: true },
+  { id: "inpostP", name: "Kurier Inpost", price: 20.5, cashOnDelivery: true },
+];
 function DeliveryMethodComponent() {
+  const dispatch = useDispatch();
+  const shippingHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    console.log("x");
+    console.log(event.target);
+    const shipping: IShipping = {
+      id: event.target.id,
+      name: event.target.value,
+      price: 12,
+      cashOnDelivery: true,
+    };
+  };
   return (
     <form className={css.deliveryMethodContainer}>
       <p className={css.title}>Płatność z góry</p>
-      <p>
-        <input
-          type="radio"
-          name="deliveryMethod"
-          value="dpdG"
-          id="dpdG"
-        ></input>
-        <label htmlFor="dpdG">Kurier DPD</label>
-      </p>
-      <p className={css.col_2}>15,99 zł</p>
-      <p>
-        <input
-          type="radio"
-          name="deliveryMethod"
-          value="inpostG"
-          id="inpostG"
-        ></input>
-        <label htmlFor="inpostG">Kurier Inpost</label>
-      </p>
-      <p className={css.col_2}>14,99 zł</p>
-
-      <p className={css.parent}>
-        <input
-          type="radio"
-          name="deliveryMethod"
-          value="dhlG"
-          id="dhlG"
-        ></input>
-        <label className={css.label} htmlFor="dhlG">
-          Kurier DHL
-        </label>
-      </p>
-      <p className={css.col_2}>16,50 zł</p>
+      {shippingMethods.map((item) =>
+        item.cashOnDelivery ? (
+          <React.Fragment key={item.id}>
+            <p>
+              <input
+                type="radio"
+                name="deliveryMethod"
+                id={item.id}
+                onChange={shippingHandler}
+              ></input>
+              <label htmlFor={item.id}>{item.name}</label>
+            </p>
+            <p className={css.col_2}>{item.price.toFixed(2)} zł</p>
+          </React.Fragment>
+        ) : (
+          ""
+        )
+      )}
 
       <p className={css.title}>Płatność za pobraniem</p>
-      <p>
-        <input
-          type="radio"
-          name="deliveryMethod"
-          value="dpdP"
-          id="dpdP"
-        ></input>
-        <label htmlFor="dpdP">Kurier DPD</label>
-      </p>
-      <p className={css.col_2}>20,99 zł</p>
-
-      <p>
-        <input
-          type="radio"
-          name="deliveryMethod"
-          value="inpostP"
-          id="inpostP"
-        ></input>
-        <label htmlFor="inpostP">Kurier Inpost</label>
-      </p>
-      <p className={css.col_2}>19,99 zł</p>
-
-      <p>
-        <input
-          type="radio"
-          name="deliveryMethod"
-          value="dhlP"
-          id="dhlP"
-        ></input>
-        <label htmlFor="dhlP">Kurier DHL</label>
-      </p>
-      <p className={css.col_2}>21,50 zł</p>
+      {shippingMethods.map((item) =>
+        !item.cashOnDelivery ? (
+          <React.Fragment key={item.id}>
+            <p>
+              <input
+                type="radio"
+                name="deliveryMethod"
+                id={item.id}
+                onChange={shippingHandler}
+              ></input>
+              <label htmlFor={item.id}>{item.name}</label>
+            </p>
+            <p className={css.col_2}>{item.price.toFixed(2)} zł</p>
+          </React.Fragment>
+        ) : (
+          ""
+        )
+      )}
     </form>
   );
 }

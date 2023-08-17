@@ -5,8 +5,14 @@ const cartSlice = createSlice({
   initialState: {
     items: [],
     totalQuantity: 0,
-    changed: false,
-  } as ItemState,
+    shipping: {
+      id: 0,
+      name: "",
+      price: 0,
+      cashOnDelivery: false,
+    },
+    totalPrice: 0,
+  } as CartState,
   reducers: {
     addItem(state, action: PayloadAction<Product>) {
       const newItem = action.payload;
@@ -47,6 +53,14 @@ const cartSlice = createSlice({
         state.totalQuantity -= state.items[indexToDelete].quantity;
         state.items.splice(indexToDelete, 1);
       } else console.log("something went wrong");
+    },
+    calcTotalPrice(state, action) {},
+    setShipping(state, action) {
+      const newShipping: IShipping = action.payload;
+      console.log(newShipping);
+      console.log(state.shipping);
+
+      state.shipping = newShipping;
     },
   },
 });

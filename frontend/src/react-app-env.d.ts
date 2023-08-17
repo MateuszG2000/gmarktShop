@@ -11,10 +11,17 @@ interface Product {
   updatedAt?: String;
 }
 
-interface ItemState {
+interface CartState {
   items: ICartProduct[];
   totalQuantity: number;
-  changed: boolean;
+  shipping: IShipping;
+  totalPrice: 0;
+}
+interface IShipping {
+  id: key;
+  name: string;
+  price: number;
+  cashOnDelivery: boolean;
 }
 interface ICartProduct {
   _id: key;
@@ -25,5 +32,5 @@ interface ICartProduct {
   quantity: number;
 }
 interface RootState {
-  cart: ItemState;
+  cart: CartState;
 }
