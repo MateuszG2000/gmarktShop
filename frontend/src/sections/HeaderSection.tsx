@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import LogoComponent from "../components/HeaderComponents/LogoComponent";
 import SearchComponent from "../components/HeaderComponents/SearchComponent";
 import IconComponent from "../components/HeaderComponents/IconComponent";
@@ -9,7 +9,21 @@ import ContactFromIconComponent from "../components/HeaderComponents/ContactFrom
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 function HeaderSection() {
+  const [animation, setAnimation] = useState(false);
+  const [prevQuantity, setPrevQuantity] = useState(0);
+
   const quantity = useSelector((state: RootState) => state.cart.totalQuantity);
+
+  useEffect(() => {
+    if (Number(quantity) !== Number(prevQuantity)) {
+      setAnimation(true);
+      setPrevQuantity(quantity);
+      setTimeout(() => {
+        setAnimation(false);
+      }, 350);
+    }
+  }, [quantity, prevQuantity]);
+
   return (
     <div className={css.header}>
       <Link to="/">
@@ -29,7 +43,13 @@ function HeaderSection() {
       </Link>
       <Link to="/cart">
         <IconComponent text="Koszyk">
-          {quantity <= 0 ? "" : <p className={css.circle}>{quantity}</p>}
+          {quantity <= 0 ? (
+            ""
+          ) : (
+            <p className={`${css.circle} ${animation ? css.animate : ""}`}>
+              {quantity}
+            </p>
+          )}
           <AiOutlineShoppingCart />
         </IconComponent>
       </Link>
