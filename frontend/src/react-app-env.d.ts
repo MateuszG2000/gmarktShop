@@ -14,14 +14,17 @@ interface Product {
 interface CartState {
   items: ICartProduct[];
   totalQuantity: number;
-  shipping: IShipping;
-  totalPrice: 0;
+  shipping: IShippingCart;
+  totalPrice: number;
 }
 interface IShipping {
   id: key;
   name: string;
   price: number;
   cashOnDelivery: boolean;
+}
+interface IShippingCart extends IShipping {
+  price: number | string;
 }
 interface ICartProduct {
   _id: key;

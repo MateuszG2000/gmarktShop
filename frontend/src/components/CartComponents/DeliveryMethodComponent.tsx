@@ -1,6 +1,7 @@
 import React, { ChangeEvent } from "react";
 import css from "./DeliveryMethodComponent.module.scss";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { cartActions } from "../../store/cart";
 const shippingMethods: IShipping[] = [
   { id: "dpdG", name: "Kuier DPD", price: 16.99, cashOnDelivery: false },
   { id: "dhdG", name: "Kuier DHL", price: 17.99, cashOnDelivery: false },
@@ -12,26 +13,28 @@ const shippingMethods: IShipping[] = [
 function DeliveryMethodComponent() {
   const dispatch = useDispatch();
   const shippingHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    console.log("x");
-    console.log(event.target);
     const shipping: IShipping = {
       id: event.target.id,
-      name: event.target.value,
-      price: 12,
-      cashOnDelivery: true,
+      name: String(event.target.dataset.name),
+      price: Number(event.target.dataset.price),
+      cashOnDelivery: event.target.dataset.cash === "false" ? false : true,
     };
+    dispatch(cartActions.setShipping(shipping));
   };
   return (
     <form className={css.deliveryMethodContainer}>
       <p className={css.title}>Płatność z góry</p>
       {shippingMethods.map((item) =>
-        item.cashOnDelivery ? (
+        !item.cashOnDelivery ? (
           <React.Fragment key={item.id}>
             <p>
               <input
                 type="radio"
                 name="deliveryMethod"
                 id={item.id}
+                data-price={item.price}
+                data-name={item.name}
+                data-cash={item.cashOnDelivery}
                 onChange={shippingHandler}
               ></input>
               <label htmlFor={item.id}>{item.name}</label>
@@ -45,7 +48,7 @@ function DeliveryMethodComponent() {
 
       <p className={css.title}>Płatność za pobraniem</p>
       {shippingMethods.map((item) =>
-        !item.cashOnDelivery ? (
+        item.cashOnDelivery ? (
           <React.Fragment key={item.id}>
             <p>
               <input
@@ -53,6 +56,9 @@ function DeliveryMethodComponent() {
                 name="deliveryMethod"
                 id={item.id}
                 onChange={shippingHandler}
+                data-price={item.price}
+                data-name={item.name}
+                data-cash={item.cashOnDelivery}
               ></input>
               <label htmlFor={item.id}>{item.name}</label>
             </p>

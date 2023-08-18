@@ -1,18 +1,19 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-
+import { REHYDRATE } from "redux-persist";
+const initialState: CartState = {
+  items: [],
+  totalQuantity: 0,
+  totalPrice: 120,
+  shipping: {
+    id: 0,
+    name: "------",
+    price: "------",
+    cashOnDelivery: false,
+  },
+};
 const cartSlice = createSlice({
   name: "cart",
-  initialState: {
-    items: [],
-    totalQuantity: 0,
-    shipping: {
-      id: 0,
-      name: "",
-      price: 0,
-      cashOnDelivery: false,
-    },
-    totalPrice: 0,
-  } as CartState,
+  initialState: initialState,
   reducers: {
     addItem(state, action: PayloadAction<Product>) {
       const newItem = action.payload;
@@ -57,11 +58,32 @@ const cartSlice = createSlice({
     calcTotalPrice(state, action) {},
     setShipping(state, action) {
       const newShipping: IShipping = action.payload;
-      console.log(newShipping);
-      console.log(state.shipping);
-
       state.shipping = newShipping;
     },
+    getTotalQuantity(state) {
+      const quantity = state.items.reduce((acc, cur) => {
+        return acc + cur.quantity;
+      }, 0);
+      state.totalQuantity = quantity;
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(REHYDRATE, (state, action: any) => {
+      let ret;
+      if (action.payload?.cart) {
+        cartSlice.caseReducers.getTotalQuantity(action.payload?.cart);
+        ret = {
+          ...action.payload?.cart,
+          shipping: initialState.shipping,
+        };
+      } else {
+        ret = {
+          ...initialState,
+        };
+      }
+
+      return ret;
+    });
   },
 });
 export const cartActions = cartSlice.actions;
