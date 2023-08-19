@@ -5,7 +5,6 @@ import storage from "redux-persist/lib/storage";
 import { createBlacklistFilter } from "redux-persist-transform-filter";
 
 const saveSubsetFilter = createBlacklistFilter("cart", [
-  "shipping",
   "totalPrice",
   "totalQuantity",
 ]);

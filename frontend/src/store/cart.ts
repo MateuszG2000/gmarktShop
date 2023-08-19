@@ -31,6 +31,7 @@ const cartSlice = createSlice({
       } else {
         inCart.quantity++;
       }
+      cartSlice.caseReducers.calcTotalPrice(state);
     },
     updateQuantity(state, action) {
       const newItemId = action.payload.id;
@@ -39,8 +40,7 @@ const cartSlice = createSlice({
       if (inCart) {
         state.totalQuantity += newQuantity - inCart.quantity;
         inCart.quantity = newQuantity;
-        console.log(inCart.quantity);
-        console.log(newQuantity - inCart.quantity);
+        cartSlice.caseReducers.calcTotalPrice(state);
       } else {
         console.log("something went wrong");
       }
@@ -54,8 +54,14 @@ const cartSlice = createSlice({
         state.totalQuantity -= state.items[indexToDelete].quantity;
         state.items.splice(indexToDelete, 1);
       } else console.log("something went wrong");
+      cartSlice.caseReducers.calcTotalPrice(state);
     },
-    calcTotalPrice(state, action) {},
+    calcTotalPrice(state) {
+      const price = state.items.reduce((acc, cur) => {
+        return acc + cur.price * cur.quantity;
+      }, 0);
+      state.totalPrice = price;
+    },
     setShipping(state, action) {
       const newShipping: IShipping = action.payload;
       state.shipping = newShipping;
@@ -72,9 +78,9 @@ const cartSlice = createSlice({
       let ret;
       if (action.payload?.cart) {
         cartSlice.caseReducers.getTotalQuantity(action.payload?.cart);
+        cartSlice.caseReducers.calcTotalPrice(action.payload?.cart);
         ret = {
           ...action.payload?.cart,
-          shipping: initialState.shipping,
         };
       } else {
         ret = {
