@@ -18,12 +18,14 @@ function SummaryComponent({
         Podsumowanie zamówienia
       </span>
 
-      <span className={css.col_1}>Suma zamówienia</span>
+      <span className={css.col_1}>Suma zamówienia brutto</span>
       <span className={css.col_2}>{cartData.totalPrice.toFixed(2)} zl</span>
 
       <span className={css.col_1}>W tym VAT</span>
       <span className={css.col_2}>
-        {Math.round((cartData.totalPrice / 1.23) * 100) / 100} zl
+        {Math.round((-cartData.totalPrice / 1.23 + cartData.totalPrice) * 100) /
+          100}{" "}
+        zl
       </span>
 
       <span className={css.col_1}>Koszt dostawy</span>
