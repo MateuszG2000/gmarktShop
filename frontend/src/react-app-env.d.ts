@@ -16,6 +16,7 @@ interface CartState {
   totalQuantity: number;
   shipping: IShippingCart;
   totalPrice: number;
+  addressId: number;
 }
 interface IShipping {
   id: key;
@@ -36,4 +37,14 @@ interface ICartProduct {
 }
 interface RootState {
   cart: CartState;
+}
+interface Address {
+  id: number;
+  name: string;
+  lastName: string;
+  street: string;
+  code: string;
+  city: string;
+  tel: string;
+  mail: string;
 }

@@ -7,9 +7,11 @@ import { useSelector } from "react-redux";
 function SummaryComponent({
   buttonPath,
   buttonText,
+  buttonFunction,
 }: {
   buttonPath: string;
   buttonText: React.ReactNode;
+  buttonFunction?: React.MouseEventHandler<HTMLButtonElement>;
 }) {
   const cartData = useSelector((state: RootState) => state.cart);
   return (
@@ -43,7 +45,9 @@ function SummaryComponent({
       </span>
       <div className={css.btn}>
         <Link to={buttonPath}>
-          <ButtonComponent disabled={false}>{buttonText}</ButtonComponent>
+          <ButtonComponent onClick={buttonFunction} disabled={false}>
+            {buttonText}
+          </ButtonComponent>
         </Link>
       </div>
     </div>

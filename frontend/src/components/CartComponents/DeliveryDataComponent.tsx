@@ -1,11 +1,11 @@
 import React, { ChangeEvent, useState } from "react";
 import css from "./DeliveryDataComponent.module.scss";
-function DeliveryDataComponent() {
-  const AddressData = [
+function DeliveryDataComponent({ formHandler }: { formHandler: Function }) {
+  const AddressData: Address[] = [
     {
       id: 1,
       name: "Mateusz",
-      LastName: "G",
+      lastName: "G",
       street: "Akacjowa 18",
       code: "85-489",
       city: "Łaziska",
@@ -14,8 +14,8 @@ function DeliveryDataComponent() {
     },
     {
       id: 2,
-      name: "Jacek",
-      LastName: "S",
+      name: "Zbigniew",
+      lastName: "S",
       street: "Kasztanowa 12",
       code: "85-123",
       city: "Opole",
@@ -26,6 +26,7 @@ function DeliveryDataComponent() {
   const [Address, setAddress] = useState(0);
   const clickHandler = (event: ChangeEvent<HTMLInputElement>) => {
     setAddress(Number(event.target.id));
+    formHandler(event.target.id);
   };
   return (
     <div className={css.deliveryData}>
@@ -33,19 +34,19 @@ function DeliveryDataComponent() {
       {AddressData.map((data, index) => {
         return (
           <React.Fragment key={data.id}>
-            <label htmlFor={`${index}`}>
+            <label htmlFor={`${index + 1}`}>
               <div className={css.label}>
                 <input
                   type="radio"
                   name="adress"
-                  id={`${index}`}
-                  checked={Address === index}
+                  id={`${index + 1}`}
+                  checked={Address === index + 1}
                   onChange={clickHandler}
                 ></input>
                 <div className={css.address}>
                   {" "}
                   <p>
-                    {data.name} {data.LastName}
+                    {data.name} {data.lastName}
                   </p>
                   <p>ul. {data.street}</p>
                   <p>

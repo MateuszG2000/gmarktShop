@@ -14,7 +14,7 @@ function CartThirdStepSection() {
         <ProductListComponent key={item._id} product={item} moreData={false} />
       ))}
       <div className={css.deliverySummary}>
-        <DeliveryDataComponent />
+        {/* <DeliveryDataComponent /> */}
         <SummaryComponent buttonText={<>Zapłać</>} buttonPath="/cart/summary" />
       </div>
     </div>

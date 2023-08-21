@@ -10,6 +10,7 @@ const initialState: CartState = {
     price: "------",
     cashOnDelivery: false,
   },
+  addressId: 0,
 };
 const cartSlice = createSlice({
   name: "cart",
@@ -66,18 +67,22 @@ const cartSlice = createSlice({
       const newShipping: IShipping = action.payload;
       state.shipping = newShipping;
     },
-    getTotalQuantity(state) {
+    setTotalQuantity(state) {
       const quantity = state.items.reduce((acc, cur) => {
         return acc + cur.quantity;
       }, 0);
       state.totalQuantity = quantity;
+    },
+    setaddressId(state, action) {
+      state.addressId = action.payload.id;
+      console.log(state.addressId);
     },
   },
   extraReducers: (builder) => {
     builder.addCase(REHYDRATE, (state, action: any) => {
       let ret;
       if (action.payload?.cart) {
-        cartSlice.caseReducers.getTotalQuantity(action.payload?.cart);
+        cartSlice.caseReducers.setTotalQuantity(action.payload?.cart);
         cartSlice.caseReducers.calcTotalPrice(action.payload?.cart);
         ret = {
           ...action.payload?.cart,
