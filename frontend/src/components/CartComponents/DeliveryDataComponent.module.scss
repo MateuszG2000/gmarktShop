@@ -21,3 +21,17 @@
   line-height: 0.6rem;
   font-weight: 400;
 }
+.label {
+  display: flex;
+  gap: 2rem;
+  max-width: 85%;
+}
+
+.address {
+  flex-grow: 1;
+}
+
+.label input:checked ~ .address p,
+.label input:checked ~ .contact p {
+  font-weight: 500;
+}
