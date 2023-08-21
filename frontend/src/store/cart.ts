@@ -10,7 +10,6 @@ const initialState: CartState = {
     price: "------",
     cashOnDelivery: false,
   },
-  addressId: 0,
 };
 const cartSlice = createSlice({
   name: "cart",
@@ -73,9 +72,9 @@ const cartSlice = createSlice({
       }, 0);
       state.totalQuantity = quantity;
     },
-    setaddressId(state, action) {
-      state.addressId = action.payload.id;
-      console.log(state.addressId);
+    setAddress(state, action) {
+      state.address = action.payload.address;
+      console.log(action.payload.address);
     },
   },
   extraReducers: (builder) => {

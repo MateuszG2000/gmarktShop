@@ -1,7 +1,7 @@
 import React from "react";
 import css from "./CartThirdStepSection.module.scss";
 import StatusComponent from "../components/CartComponents/StatusComponent";
-import DeliveryDataComponent from "../components/CartComponents/DeliveryDataComponent";
+import DeliveryEndDataComponent from "../components/CartComponents/DeliveryEndDataComponent";
 import SummaryComponent from "../components/CartComponents/SummaryComponent";
 import ProductListComponent from "../components/CartComponents/ProductListComponent";
 import { useSelector } from "react-redux";
@@ -14,7 +14,7 @@ function CartThirdStepSection() {
         <ProductListComponent key={item._id} product={item} moreData={false} />
       ))}
       <div className={css.deliverySummary}>
-        {/* <DeliveryDataComponent /> */}
+        <DeliveryEndDataComponent />
         <SummaryComponent buttonText={<>Zapłać</>} buttonPath="/cart/summary" />
       </div>
     </div>

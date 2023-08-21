@@ -1,5 +1,6 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import css from "./DeliveryDataComponent.module.scss";
+import { useLocation } from "react-router-dom";
 function DeliveryDataComponent({ formHandler }: { formHandler: Function }) {
   const AddressData: Address[] = [
     {
@@ -23,10 +24,24 @@ function DeliveryDataComponent({ formHandler }: { formHandler: Function }) {
       mail: "bca@onet.pl",
     },
   ];
-  const [Address, setAddress] = useState(0);
-  const clickHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    setAddress(Number(event.target.id));
-    formHandler(event.target.id);
+  const location = useLocation();
+  const [initialAddressSet, setInitialAddressSet] = useState(false);
+  const [address, setAddress] = useState<Address>(AddressData[0]);
+
+  useEffect(() => {
+    if (initialAddressSet || address === AddressData[0]) {
+      formHandler(address);
+    }
+  }, [location, initialAddressSet]);
+
+  const clickHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedAddress = AddressData.find(
+      (item) => item.id === Number(event.target.id)
+    );
+    if (selectedAddress) {
+      setAddress(selectedAddress);
+      setInitialAddressSet(true);
+    }
   };
   return (
     <div className={css.deliveryData}>
@@ -40,7 +55,7 @@ function DeliveryDataComponent({ formHandler }: { formHandler: Function }) {
                   type="radio"
                   name="adress"
                   id={`${index + 1}`}
-                  checked={Address === index + 1}
+                  checked={address.id === index + 1}
                   onChange={clickHandler}
                 ></input>
                 <div className={css.address}>

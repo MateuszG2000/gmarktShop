@@ -10,13 +10,12 @@ import { cartActions } from "../store/cart";
 function CartSecondStepSection() {
   const dispatch = useDispatch();
   const cartItems = useSelector((state: RootState) => state.cart.items);
-  const [deliveryId, setDeliveryId] = useState(0);
-  const formHandler = (prop: Address["id"]) => {
-    setDeliveryId(prop);
+  const [address, setAddress] = useState<Address>();
+  const formHandler = (prop: Address) => {
+    setAddress(prop);
   };
   const submitFormHandler = () => {
-    console.log(deliveryId + "from second");
-    dispatch(cartActions.setaddressId({ id: deliveryId }));
+    dispatch(cartActions.setAddress({ address }));
   };
   return (
     <div className={css.cart}>
