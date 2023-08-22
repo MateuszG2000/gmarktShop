@@ -5,8 +5,16 @@ import DeliveryEndDataComponent from "../components/CartComponents/DeliveryEndDa
 import SummaryComponent from "../components/CartComponents/SummaryComponent";
 import ProductListComponent from "../components/CartComponents/ProductListComponent";
 import { useSelector } from "react-redux";
+import { sendCartData } from "../store/cartActions";
+import { useAppDispatch, useAppSelector } from "../store/appHooks";
+import { Root } from "react-dom/client";
 function CartThirdStepSection() {
   const cartItems = useSelector((state: RootState) => state.cart.items);
+  const dispatch = useAppDispatch();
+  const cart = useAppSelector((state: RootState) => state.cart);
+  const handleSendData = () => {
+    dispatch(sendCartData(cart));
+  };
   return (
     <div className={css.cart}>
       <StatusComponent step={3} />
@@ -15,7 +23,11 @@ function CartThirdStepSection() {
       ))}
       <div className={css.deliverySummary}>
         <DeliveryEndDataComponent />
-        <SummaryComponent buttonText={<>Zapłać</>} buttonPath="/cart/summary" />
+        <SummaryComponent
+          buttonText={<>Zapłać</>}
+          buttonPath="/cart/summary"
+          buttonFunction={handleSendData}
+        />
       </div>
     </div>
   );

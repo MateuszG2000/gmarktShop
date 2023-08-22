@@ -6,7 +6,22 @@ function DeliveryEndDataComponent() {
   return (
     <div className={css.deliveryData}>
       <p className={css.title}>Adres dostawy:</p>
-      {address?.city}
+      <div className={css.address}>
+        {" "}
+        <p>
+          {address.name} {address.lastName}
+        </p>
+        <p>ul. {address.street}</p>
+        <p>
+          {address.code} {address.city}
+        </p>
+      </div>
+      <br></br>
+      <div className={css.contact}>
+        {" "}
+        <p>tel. {address.tel}</p>
+        <p>e-mail: {address.mail}</p>
+      </div>
     </div>
   );
 }

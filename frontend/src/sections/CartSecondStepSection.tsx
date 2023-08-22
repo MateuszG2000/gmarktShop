@@ -5,18 +5,10 @@ import StatusComponent from "../components/CartComponents/StatusComponent";
 import DeliveryDataComponent from "../components/CartComponents/DeliveryDataComponent";
 import { MdArrowForwardIos } from "react-icons/md";
 import ProductListComponent from "../components/CartComponents/ProductListComponent";
-import { useDispatch, useSelector } from "react-redux";
-import { cartActions } from "../store/cart";
+import { useSelector } from "react-redux";
 function CartSecondStepSection() {
-  const dispatch = useDispatch();
   const cartItems = useSelector((state: RootState) => state.cart.items);
-  const [address, setAddress] = useState<Address>();
-  const formHandler = (prop: Address) => {
-    setAddress(prop);
-  };
-  const submitFormHandler = () => {
-    dispatch(cartActions.setAddress({ address }));
-  };
+
   return (
     <div className={css.cart}>
       <StatusComponent step={2} />
@@ -24,7 +16,7 @@ function CartSecondStepSection() {
         <ProductListComponent key={item._id} product={item} moreData={false} />
       ))}
       <div className={css.deliverySummary}>
-        <DeliveryDataComponent formHandler={formHandler} />
+        <DeliveryDataComponent />
         <SummaryComponent
           buttonText={
             <>
@@ -32,7 +24,6 @@ function CartSecondStepSection() {
             </>
           }
           buttonPath="/cart/summary"
-          buttonFunction={submitFormHandler}
         />
       </div>
     </div>

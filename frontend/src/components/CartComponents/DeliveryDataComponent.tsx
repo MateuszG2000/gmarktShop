@@ -1,7 +1,9 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
 import css from "./DeliveryDataComponent.module.scss";
 import { useLocation } from "react-router-dom";
-function DeliveryDataComponent({ formHandler }: { formHandler: Function }) {
+import { useAppDispatch } from "../../store/appHooks";
+import { cartActions } from "../../store/cart";
+function DeliveryDataComponent() {
   const AddressData: Address[] = [
     {
       id: 1,
@@ -24,13 +26,14 @@ function DeliveryDataComponent({ formHandler }: { formHandler: Function }) {
       mail: "bca@onet.pl",
     },
   ];
+  const dispatch = useAppDispatch();
   const location = useLocation();
   const [initialAddressSet, setInitialAddressSet] = useState(false);
   const [address, setAddress] = useState<Address>(AddressData[0]);
 
   useEffect(() => {
     if (initialAddressSet || address === AddressData[0]) {
-      formHandler(address);
+      dispatch(cartActions.setAddress({ address }));
     }
   }, [location, initialAddressSet]);
 

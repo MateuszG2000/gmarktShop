@@ -1,7 +1,8 @@
-import React, { ChangeEvent, ReactNode } from "react";
+import React, { ChangeEvent, ReactNode, useEffect } from "react";
 import css from "./DeliveryMethodComponent.module.scss";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { cartActions } from "../../store/cart";
+import { useAppDispatch } from "../../store/appHooks";
 const shippingMethods: IShipping[] = [
   { id: "dpdG", name: "Kuier DPD", price: 16.99, cashOnDelivery: false },
   { id: "dhdG", name: "Kuier DHL", price: 17.99, cashOnDelivery: false },
@@ -12,7 +13,11 @@ const shippingMethods: IShipping[] = [
 ];
 function DeliveryMethodComponent() {
   const shipping = useSelector((state: RootState) => state.cart.shipping);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(cartActions.setShipping(shippingMethods[0]));
+  }, []);
   const shippingHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const shipping: IShipping = {
       id: event.target.id,
