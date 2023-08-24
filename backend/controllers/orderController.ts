@@ -7,7 +7,12 @@ export const createOrder = catchError(async function (
   res: Response,
   next: NextFunction
 ) {
-  const newOrder = await Order.create(req.body);
+  const currentDate = new Date();
+  const timestamp = currentDate.getTime();
+  const orderNumber = `${req.body.user}-${timestamp}`;
+  const newBody = { ...req.body, orderNumber };
+  const newOrder = await Order.create(newBody);
+
   res.status(201).json({
     status: 'success',
     data: newOrder,

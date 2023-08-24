@@ -41,6 +41,16 @@ app.use(
     res: express.Response,
     next: express.NextFunction
   ) => {
+    if (error.code === 11000) {
+      error.message = 'Duplicate` fields, correct your request';
+      error.statusCode = 400;
+    }
+    if (error.name === 'ValidationError') {
+      const errors = Object.values(error.errors).map((el: any) => el.message);
+
+      error.message = `Invalid input data. ${errors.join('. ')}`;
+      error.statusCode = 400;
+    }
     const message = error.message || 'Unknown error';
     const status = error.statusCode || 500;
     const data = error.data || '';

@@ -7,7 +7,10 @@ import useInput from "../../utils/use-input";
 import jwt from "jwt-decode";
 import ErrorComponent from "./ErrorComponent";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../store/appHooks";
+import { userActions } from "../../store/user";
 function Login() {
+  const dispatch = useAppDispatch();
   const [error, setError] = useState(false);
   const [spinner, setSpinner] = useState(false);
   const navigate = useNavigate();
@@ -61,8 +64,8 @@ function Login() {
           exp: number;
           token: String;
         } = jwt(res.token);
-        sessionStorage.setItem("user", JSON.stringify(userData));
         console.log("Logged in", userData);
+        dispatch(userActions.logIn(userData));
         setSpinner(false);
         setError(false);
         navigate("/");

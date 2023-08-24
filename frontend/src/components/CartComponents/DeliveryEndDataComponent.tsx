@@ -11,7 +11,9 @@ function DeliveryEndDataComponent() {
         <p>
           {address.name} {address.lastName}
         </p>
-        <p>ul. {address.street}</p>
+        <p>
+          ul. {address.street} {address.houseNumber}
+        </p>
         <p>
           {address.code} {address.city}
         </p>
@@ -20,7 +22,7 @@ function DeliveryEndDataComponent() {
       <div className={css.contact}>
         {" "}
         <p>tel. {address.tel}</p>
-        <p>e-mail: {address.mail}</p>
+        <p>e-mail: {address.email}</p>
       </div>
     </div>
   );

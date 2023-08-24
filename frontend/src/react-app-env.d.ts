@@ -37,14 +37,22 @@ interface ICartProduct {
 }
 interface RootState {
   cart: CartState;
+  user: UserState;
 }
 interface Address {
   id: number;
   name: string;
   lastName: string;
   street: string;
+  houseNumber: string;
   code: string;
   city: string;
   tel: string;
-  mail: string;
+  email: string;
+}
+interface UserState {
+  email: string;
+  userId: string;
+  exp: number;
+  loggedIn: Boolean;
 }

@@ -15,10 +15,11 @@ const initialState: CartState = {
     name: "",
     lastName: "",
     street: "",
+    houseNumber: "",
     code: "",
     city: "",
     tel: "",
-    mail: "",
+    email: "",
   },
 };
 const cartSlice = createSlice({

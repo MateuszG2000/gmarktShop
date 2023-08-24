@@ -9,21 +9,23 @@ function DeliveryDataComponent() {
       id: 1,
       name: "Mateusz",
       lastName: "G",
-      street: "Akacjowa 18",
+      street: "Akacjowa",
+      houseNumber: "18",
       code: "85-489",
       city: "Łaziska",
       tel: "731912912",
-      mail: "abc@wp.pl",
+      email: "abc@wp.pl",
     },
     {
       id: 2,
       name: "Zbigniew",
       lastName: "S",
-      street: "Kasztanowa 12",
+      street: "Kasztanowa ",
+      houseNumber: "12",
       code: "85-123",
       city: "Opole",
       tel: "123123123",
-      mail: "bca@onet.pl",
+      email: "bca@onet.pl",
     },
   ];
   const dispatch = useAppDispatch();
@@ -66,7 +68,9 @@ function DeliveryDataComponent() {
                   <p>
                     {data.name} {data.lastName}
                   </p>
-                  <p>ul. {data.street}</p>
+                  <p>
+                    ul. {data.street} {data.houseNumber}
+                  </p>
                   <p>
                     {data.code} {data.city}
                   </p>
@@ -74,7 +78,7 @@ function DeliveryDataComponent() {
                 <div className={css.contact}>
                   {" "}
                   <p>tel. {data.tel}</p>
-                  <p>e-mail: {data.mail}</p>
+                  <p>e-mail: {data.email}</p>
                 </div>
               </div>
             </label>

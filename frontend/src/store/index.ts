@@ -3,6 +3,7 @@ import cartSlice from "./cart";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { createBlacklistFilter } from "redux-persist-transform-filter";
+import userSlice from "./user";
 
 const saveSubsetFilter = createBlacklistFilter("cart", [
   "totalPrice",
@@ -14,7 +15,10 @@ const persistConfig = {
   transforms: [saveSubsetFilter],
 };
 
-const rootReducer = combineReducers({ cart: cartSlice.reducer });
+const rootReducer = combineReducers({
+  cart: cartSlice.reducer,
+  user: userSlice.reducer,
+});
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 const store = configureStore({
