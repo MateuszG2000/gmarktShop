@@ -1,7 +1,6 @@
 .productListComponent {
   display: flex;
   height: 5rem;
-  min-width: fit-content;
   border-bottom: 1px solid rgb(125, 125, 125);
   gap: 2rem;
   align-items: center;
@@ -13,7 +12,8 @@
 }
 .title {
   flex-grow: 1;
-  min-width: 10rem;
+  min-width: 12rem;
+  word-wrap: break-word;
 }
 
 .trash {
@@ -26,6 +26,25 @@
   color: rgb(198, 0, 0);
 }
 .price {
-  width: 8rem;
+  min-width: 6rem;
   text-align: right;
+  word-wrap: break-word;
+}
+@media only screen and (max-width: 1350px) {
+  .productListComponent {
+    gap: 1rem;
+  }
+}
+@media only screen and (max-width: 900px) {
+  .price {
+    min-width: 5rem;
+  }
+  .productListComponent {
+    gap: 0.5rem;
+    padding: 0;
+    font-size: 0.9rem;
+  }
+  .title {
+    min-width: 4rem;
+  }
 }

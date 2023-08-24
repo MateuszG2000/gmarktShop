@@ -30,7 +30,9 @@ function ProductListComponent({
     <div className={css.productListComponent}>
       <img className={css.image} src={img} alt="prod"></img>
       <span className={css.title}>{product.name}</span>
-      {moreData && <span>{product.price?.toFixed(2)} zł</span>}
+      {moreData && (
+        <span className={css.price}>{product.price?.toFixed(2)} zł</span>
+      )}
       {moreData && (
         <QuantityComponent
           quantityProp={product.quantity}
