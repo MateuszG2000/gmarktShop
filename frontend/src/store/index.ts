@@ -4,6 +4,7 @@ import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { createBlacklistFilter } from "redux-persist-transform-filter";
 import userSlice from "./user";
+import isAuth from "./isAuth";
 
 const saveSubsetFilter = createBlacklistFilter("cart", [
   "totalPrice",
@@ -24,9 +25,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 const store = configureStore({
   reducer: persistedReducer,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: false,
-    }),
+    getDefaultMiddleware({ serializableCheck: false }).concat(isAuth),
 });
 export const persistor = persistStore(store);
 export default store;
