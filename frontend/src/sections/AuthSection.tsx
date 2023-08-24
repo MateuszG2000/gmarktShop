@@ -4,7 +4,12 @@ import css from "./AuthSection.module.scss";
 import { useState } from "react";
 import Zalogowano from "../components/AuthComponents/zalogowano";
 import LogOut from "../components/AuthComponents/LogOut";
+import { useCookies } from "react-cookie";
+import { useAppDispatch } from "../store/appHooks";
+import { userActions } from "../store/user";
 function AuthSection() {
+  const [cookie, setCookie, removeCookie] = useCookies(["AuthConfirm"]);
+  const dispatch = useAppDispatch();
   const [pageOption, setPageOption] = useState(false);
   const buttonHanlder = (e: boolean) => {
     e ? setPageOption(true) : setPageOption(false);
@@ -21,18 +26,26 @@ function AuthSection() {
         return res.json();
       })
       .then((res) => {
-        console.log(res);
+        console.log(res); ////login action
       });
   };
-  const onLogOut = () => {
-    fetch("http://localhost:9000/api/auth/logout", {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    sessionStorage.removeItem("user");
+  const onLogOut = async () => {
+    removeCookie("AuthConfirm");
+    dispatch(userActions.logOut());
+    try {
+      const res = await (
+        await fetch("http://localhost:9000/api/auth/logout", {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+      ).json();
+      console.log(res.message); ///////logout action
+    } catch (err: any) {
+      console.log(err.message);
+    }
   };
 
   return (

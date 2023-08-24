@@ -28,6 +28,6 @@ export const sendCartData = (cart: CartState, user: UserState) => {
       })
     ).json();
     console.log(response);
-    dispatch(cartActions.sendData({ id: "abc" }));
+    dispatch(cartActions.sendData());
   };
 };

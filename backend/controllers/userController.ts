@@ -77,6 +77,10 @@ export const login = catchError(async function (
       maxAge: 1000 * 60 * 60,
       secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
     })
+    .cookie('AuthConfirm', token, {
+      maxAge: 1000 * 60 * 60,
+      secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
+    })
     .status(200)
     .json({
       message: 'success',
@@ -104,6 +108,10 @@ export function logOut(
 ) {
   res
     .cookie('Authorization', '', {
+      httpOnly: true,
+      maxAge: 1000,
+    })
+    .cookie('AuthConfirm', '', {
       httpOnly: true,
       maxAge: 1000,
     })

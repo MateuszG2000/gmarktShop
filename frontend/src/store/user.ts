@@ -17,6 +17,9 @@ const userSlice = createSlice({
       state.exp = action.payload.exp;
       state.loggedIn = true;
     },
+    logOut(state) {
+      return initialState;
+    },
   },
 });
 export const userActions = userSlice.actions;

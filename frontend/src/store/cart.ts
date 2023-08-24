@@ -87,9 +87,8 @@ const cartSlice = createSlice({
       console.log(state);
       state.address = action.payload.address;
     },
-    sendData(state, action) {
-      console.log("Wysłano");
-      console.log(action.payload.id);
+    sendData(state) {
+      return initialState;
     },
   },
   extraReducers: (builder) => {
