@@ -12,7 +12,7 @@ function WarningComponent({ text, flag }: { text: string; flag: string }) {
       setAnimation(false);
       dispatch(UIActions.hideWarning());
     }, 5000);
-  }, []);
+  }, [dispatch]);
 
   const flagClassMap: { [key: string]: string } = {
     red: "flag-red",

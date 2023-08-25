@@ -84,7 +84,7 @@ export const login = catchError(async function (
     .status(200)
     .json({
       message: 'success',
-      user: user,
+      token: token,
     });
 });
 

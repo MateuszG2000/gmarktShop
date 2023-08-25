@@ -64,16 +64,17 @@ function Login() {
           email: string;
           userId: string;
           exp: number;
-          token: String;
         } = jwt(res.token);
         console.log("Logged in", userData);
         dispatch(userActions.logIn(userData));
         dispatch(UIActions.showWarning({ flag: "green", text: "Zalogowano" }));
+        console.log(jwt(res.token));
         setSpinner(false);
         setError(false);
         navigate("/");
       })
       .catch((err) => {
+        console.log(err);
         dispatch(
           UIActions.showWarning({
             flag: "red",

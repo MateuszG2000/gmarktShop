@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import css from "./CartSecondStepSection.module.scss";
 import SummaryComponent from "../components/CartComponents/SummaryComponent";
 import StatusComponent from "../components/CartComponents/StatusComponent";
