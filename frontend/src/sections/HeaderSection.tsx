@@ -8,12 +8,15 @@ import css from "./HeaderSection.module.scss";
 import ContactFromIconComponent from "../components/HeaderComponents/ContactFromIconComponent";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useAppSelector } from "../store/appHooks";
 function HeaderSection() {
   const [animation, setAnimation] = useState(false);
   const [prevQuantity, setPrevQuantity] = useState(0);
 
   const quantity = useSelector((state: RootState) => state.cart.totalQuantity);
-
+  const userLoggedIn = useAppSelector(
+    (state: RootState) => state.user.loggedIn
+  );
   useEffect(() => {
     if (Number(quantity) !== Number(prevQuantity)) {
       setAnimation(true);
@@ -37,7 +40,7 @@ function HeaderSection() {
         <ContactFromIconComponent />
       </div>
       <Link to="/login">
-        <IconComponent text="Zaloguj">
+        <IconComponent text={!userLoggedIn ? "Zaloguj się" : "Moje konto"}>
           <AiOutlineUser />
         </IconComponent>
       </Link>

@@ -6,10 +6,12 @@ import { useSelector } from "react-redux";
 
 function SummaryComponent({
   buttonPath,
+  disable,
   buttonText,
   buttonFunction,
 }: {
   buttonPath: string;
+  disable?: boolean;
   buttonText: React.ReactNode;
   buttonFunction?: React.MouseEventHandler<HTMLButtonElement>;
 }) {
@@ -45,7 +47,10 @@ function SummaryComponent({
       </span>
       <div className={css.btn}>
         <Link to={buttonPath}>
-          <ButtonComponent onClick={buttonFunction} disabled={false}>
+          <ButtonComponent
+            onClick={buttonFunction}
+            disabled={disable ? true : false}
+          >
             {buttonText}
           </ButtonComponent>
         </Link>

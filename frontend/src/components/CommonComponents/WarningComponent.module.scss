@@ -1,0 +1,51 @@
+@use "../../index.scss" as index;
+.warningContainer {
+  position: fixed;
+  width: 15%;
+  height: 3rem;
+  bottom: 4%;
+  left: 2%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-left: 1%;
+  z-index: 1;
+  background-color: white;
+  @include index.boxShadow;
+  border-radius: 0.6rem;
+  min-width: 8rem;
+  font-weight: 600;
+  font-size: 1.1rem;
+  opacity: 0;
+}
+.flag {
+  height: 90%;
+  width: 5px;
+}
+.title {
+  text-align: center;
+}
+.animate {
+  animation: show 0.3s;
+  opacity: 1 !important;
+}
+@keyframes show {
+  0% {
+    transform: translateX(-20%);
+  }
+  50% {
+    transform: translateX(10%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+.flag-red {
+  background-color: red;
+}
+.flag-green {
+  background-color: green;
+}
+.flag-yellow {
+  background-color: yellow;
+}

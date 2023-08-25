@@ -54,5 +54,5 @@ interface UserState {
   email: string;
   userId: string;
   exp: number;
-  loggedIn: Boolean;
+  loggedIn: boolean;
 }

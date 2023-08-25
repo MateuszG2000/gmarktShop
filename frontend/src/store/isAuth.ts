@@ -9,10 +9,8 @@ const isAuth: Middleware = (store) => (next) => (action) => {
     action.type !== "user/logOut"
   ) {
     store.dispatch(userActions.logOut());
-    console.log("Niezalogowany");
-  } else {
+    console.log("Wylogowanie");
   }
-
   next(action);
 };
 

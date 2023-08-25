@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import ProductComponent from "../components/HomeComponents/ProductComponent";
 import css from "./HomeSection.module.scss";
 import SliderComponent from "../components/HomeComponents/SliderComponent";
+import WarningComponent from "../components/CommonComponents/WarningComponent";
 function HomeSection() {
   const [products, setProducts] = useState<Product[]>([]);
   useEffect(() => {

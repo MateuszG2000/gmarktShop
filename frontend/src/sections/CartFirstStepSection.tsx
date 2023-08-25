@@ -9,9 +9,14 @@ import { useSelector } from "react-redux";
 import ButtonComponent from "../components/CommonComponents/ButtonComponent";
 import { BsCartX } from "react-icons/bs";
 import { Link } from "react-router-dom";
+import { useAppSelector } from "../store/appHooks";
 
 function CartFirstStepSection() {
   const cartItems = useSelector((state: RootState) => state.cart.items);
+  const userIsLogged = useAppSelector(
+    (state: RootState) => state.user.loggedIn
+  );
+  console.log(userIsLogged);
   return (
     <div className={css.cart}>
       {cartItems.length === 0 && (
@@ -46,6 +51,7 @@ function CartFirstStepSection() {
           <div className={css.summaryDeliveryContainer}>
             <DeliveryMethodComponent />
             <SummaryComponent
+              disable={!userIsLogged}
               buttonText={
                 <>
                   Dalej <MdArrowForwardIos />
