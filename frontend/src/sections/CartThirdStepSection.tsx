@@ -12,6 +12,9 @@ function CartThirdStepSection() {
   const dispatch = useAppDispatch();
   const cart = useAppSelector((state: RootState) => state.cart);
   const user = useAppSelector((state: RootState) => state.user);
+  const userIsLogged = useAppSelector(
+    (state: RootState) => state.user.loggedIn
+  );
   const handleSendData = () => {
     dispatch(sendCartData(cart, user));
   };
@@ -24,6 +27,7 @@ function CartThirdStepSection() {
       <div className={css.deliverySummary}>
         <DeliveryEndDataComponent />
         <SummaryComponent
+          disable={!userIsLogged}
           buttonText={<>Zapłać</>}
           buttonPath="/cart/summary"
           buttonFunction={handleSendData}

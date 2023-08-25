@@ -38,6 +38,7 @@ interface ICartProduct {
 interface RootState {
   cart: CartState;
   user: UserState;
+  UI: UIState;
 }
 interface Address {
   id: number;
@@ -55,4 +56,12 @@ interface UserState {
   userId: string;
   exp: number;
   loggedIn: boolean;
+}
+interface UIState {
+  warning;
+}
+interface IWarning {
+  text: string;
+  visible: boolean;
+  flag: string;
 }

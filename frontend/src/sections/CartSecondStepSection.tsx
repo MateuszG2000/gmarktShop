@@ -6,9 +6,12 @@ import DeliveryDataComponent from "../components/CartComponents/DeliveryDataComp
 import { MdArrowForwardIos } from "react-icons/md";
 import ProductListComponent from "../components/CartComponents/ProductListComponent";
 import { useSelector } from "react-redux";
+import { useAppSelector } from "../store/appHooks";
 function CartSecondStepSection() {
   const cartItems = useSelector((state: RootState) => state.cart.items);
-
+  const userIsLogged = useAppSelector(
+    (state: RootState) => state.user.loggedIn
+  );
   return (
     <div className={css.cart}>
       <StatusComponent step={2} />
@@ -18,6 +21,7 @@ function CartSecondStepSection() {
       <div className={css.deliverySummary}>
         <DeliveryDataComponent />
         <SummaryComponent
+          disable={!userIsLogged}
           buttonText={
             <>
               Podusmowanie <MdArrowForwardIos />

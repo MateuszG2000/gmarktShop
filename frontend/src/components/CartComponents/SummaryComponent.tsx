@@ -3,6 +3,8 @@ import css from "./SummaryComponent.module.scss";
 import ButtonComponent from "../CommonComponents/ButtonComponent";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../store/appHooks";
+import { UIActions } from "../../store/UI";
 
 function SummaryComponent({
   buttonPath,
@@ -15,6 +17,16 @@ function SummaryComponent({
   buttonText: React.ReactNode;
   buttonFunction?: React.MouseEventHandler<HTMLButtonElement>;
 }) {
+  const dispatch = useAppDispatch();
+  const userIsLogged = useAppSelector(
+    (state: RootState) => state.user.loggedIn
+  );
+  const clickHandler = () => {
+    if (!userIsLogged)
+      dispatch(
+        UIActions.showWarning({ text: "Nie jesteś zalogowany", flag: "red" })
+      );
+  };
   const cartData = useSelector((state: RootState) => state.cart);
   return (
     <div className={css.summary}>
@@ -54,6 +66,9 @@ function SummaryComponent({
             {buttonText}
           </ButtonComponent>
         </Link>
+        {!userIsLogged && (
+          <div className={css.helperBtn} onClick={clickHandler}></div>
+        )}
       </div>
     </div>
   );

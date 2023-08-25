@@ -9,6 +9,7 @@ import ErrorComponent from "./ErrorComponent";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../store/appHooks";
 import { userActions } from "../../store/user";
+import { UIActions } from "../../store/UI";
 
 function Login() {
   const dispatch = useAppDispatch();
@@ -67,11 +68,18 @@ function Login() {
         } = jwt(res.token);
         console.log("Logged in", userData);
         dispatch(userActions.logIn(userData));
+        dispatch(UIActions.showWarning({ flag: "green", text: "Zalogowano" }));
         setSpinner(false);
         setError(false);
         navigate("/");
       })
       .catch((err) => {
+        dispatch(
+          UIActions.showWarning({
+            flag: "red",
+            text: "Niepoprawne dane logowania",
+          })
+        );
         setError(true);
         emailBlurHandler();
         passwordBlurHandler();

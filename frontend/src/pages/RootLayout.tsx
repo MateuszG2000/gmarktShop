@@ -4,8 +4,11 @@ import HeaderSection from "../sections/HeaderSection";
 import FooterSection from "../sections/FooterSection";
 import css from "./RootLayout.module.scss";
 import NavbarComponent from "../components/HeaderComponents/NavbarComponent";
+import { useAppSelector } from "../store/appHooks";
+import WarningComponent from "../components/CommonComponents/WarningComponent";
 function RootLayout() {
   // const navigation = useNavigation();
+  const warning = useAppSelector((state: RootState) => state.UI.warning);
 
   return (
     <>
@@ -18,6 +21,9 @@ function RootLayout() {
         </main>
       </div>
       <FooterSection />
+      {warning.visible && (
+        <WarningComponent text={warning.text} flag={warning.flag} />
+      )}
     </>
   );
 }

@@ -4,6 +4,7 @@ import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { createBlacklistFilter } from "redux-persist-transform-filter";
 import userSlice from "./user";
+import UISlice from "./UI";
 import isAuth from "./isAuth";
 
 const saveSubsetFilter = createBlacklistFilter("cart", [
@@ -14,11 +15,13 @@ const persistConfig = {
   key: "root",
   storage: storage,
   transforms: [saveSubsetFilter],
+  blacklist: ["UISlice"],
 };
 
 const rootReducer = combineReducers({
   cart: cartSlice.reducer,
   user: userSlice.reducer,
+  UI: UISlice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

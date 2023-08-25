@@ -1,7 +1,7 @@
 @use "../../index.scss" as index;
 .warningContainer {
   position: fixed;
-  width: 15%;
+  width: fit-content;
   height: 3rem;
   bottom: 4%;
   left: 2%;
@@ -24,6 +24,7 @@
 }
 .title {
   text-align: center;
+  margin: 0 2rem 0 0;
 }
 .animate {
   animation: show 0.3s;
