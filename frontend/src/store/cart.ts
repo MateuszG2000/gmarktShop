@@ -3,7 +3,7 @@ import { REHYDRATE } from "redux-persist";
 const initialState: CartState = {
   items: [],
   totalQuantity: 0,
-  totalPrice: 120,
+  totalPrice: 0,
   shipping: {
     id: 0,
     name: "------",

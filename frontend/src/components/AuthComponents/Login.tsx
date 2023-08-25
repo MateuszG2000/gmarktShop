@@ -9,7 +9,6 @@ import ErrorComponent from "./ErrorComponent";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../store/appHooks";
 import { userActions } from "../../store/user";
-import { useCookies } from "react-cookie";
 
 function Login() {
   const dispatch = useAppDispatch();
