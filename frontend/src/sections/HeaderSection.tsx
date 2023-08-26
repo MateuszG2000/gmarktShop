@@ -8,16 +8,21 @@ import css from "./HeaderSection.module.scss";
 import ContactFromIconComponent from "../components/HeaderComponents/ContactFromIconComponent";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useAppSelector } from "../store/appHooks";
-import ExtendedInfoComponent from "../components/CommonComponents/ExtendedInfoComponent";
+import { useAppDispatch, useAppSelector } from "../store/appHooks";
+import ExtendedInfoComponent from "../components/HeaderComponents/ExtendedInfoComponent";
+import { UIActions } from "../store/UI";
 function HeaderSection() {
   const [animation, setAnimation] = useState(false);
   const [prevQuantity, setPrevQuantity] = useState(0);
-
+  const dispatch = useAppDispatch();
+  const accountExtendedInfoVisible = useAppSelector(
+    (state: RootState) => state.UI.accountExtendedInfo.visible
+  );
   const quantity = useSelector((state: RootState) => state.cart.totalQuantity);
   const userLoggedIn = useAppSelector(
     (state: RootState) => state.user.loggedIn
   );
+
   useEffect(() => {
     if (Number(quantity) !== Number(prevQuantity)) {
       setAnimation(true);
@@ -40,12 +45,25 @@ function HeaderSection() {
         </IconComponent>
         <ContactFromIconComponent />
       </div>
-      <Link to="/login">
-        <IconComponent text={!userLoggedIn ? "Zaloguj się" : "Moje konto"}>
+      {!userLoggedIn && (
+        <Link to="/login">
+          <IconComponent text="Zaloguj się">
+            <AiOutlineUser />
+          </IconComponent>
+        </Link>
+      )}
+      {userLoggedIn && (
+        <IconComponent
+          onClick={() => {
+            dispatch(UIActions.toggleAccountExtendedInfo());
+          }}
+          text="Moje konto"
+        >
           <AiOutlineUser />
         </IconComponent>
-      </Link>
-      <ExtendedInfoComponent />
+      )}
+
+      {accountExtendedInfoVisible && <ExtendedInfoComponent />}
       <Link to="/cart">
         <IconComponent text="Koszyk">
           {quantity <= 0 ? (

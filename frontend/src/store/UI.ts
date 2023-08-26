@@ -1,10 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState: UIState = {
+const initialState = {
   warning: {
     flag: "green",
     visible: false,
     text: "Komunikat",
+  },
+  accountExtendedInfo: {
+    visible: false,
   },
 };
 
@@ -17,8 +20,14 @@ const UISlice = createSlice({
       state.warning.flag = action.payload.flag;
       state.warning.text = action.payload.text;
     },
-    hideWarning() {
-      return initialState;
+    hideWarning(state) {
+      state.warning.visible = false;
+    },
+    toggleAccountExtendedInfo(state) {
+      if (state.accountExtendedInfo.visible)
+        state.accountExtendedInfo.visible = false;
+      else if (!state.accountExtendedInfo.visible)
+        state.accountExtendedInfo.visible = true;
     },
   },
 });

@@ -58,10 +58,14 @@ interface UserState {
   loggedIn: boolean;
 }
 interface UIState {
-  warning;
+  warning: IWarning;
+  accountExtendedInfo: IAccounExtendedInfo;
 }
 interface IWarning {
   text: string;
   visible: boolean;
   flag: string;
+}
+interface IAccounExtendedInfo {
+  visible: boolean;
 }
