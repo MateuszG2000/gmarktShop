@@ -9,6 +9,7 @@ import ContactFromIconComponent from "../components/HeaderComponents/ContactFrom
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useAppSelector } from "../store/appHooks";
+import ExtendedInfoComponent from "../components/CommonComponents/ExtendedInfoComponent";
 function HeaderSection() {
   const [animation, setAnimation] = useState(false);
   const [prevQuantity, setPrevQuantity] = useState(0);
@@ -44,6 +45,7 @@ function HeaderSection() {
           <AiOutlineUser />
         </IconComponent>
       </Link>
+      <ExtendedInfoComponent />
       <Link to="/cart">
         <IconComponent text="Koszyk">
           {quantity <= 0 ? (

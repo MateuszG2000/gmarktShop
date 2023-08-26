@@ -33,6 +33,7 @@ function Login() {
     inputBlurHandler: passwordBlurHandler,
     reset: resetPasswordInput,
   } = useInput((value: string) => validator.required(value));
+
   const loginHandler = (event: BaseSyntheticEvent) => {
     event.preventDefault();
     const login = event.target[0].value;
@@ -68,7 +69,6 @@ function Login() {
         console.log("Logged in", userData);
         dispatch(userActions.logIn(userData));
         dispatch(UIActions.showWarning({ flag: "green", text: "Zalogowano" }));
-        console.log(jwt(res.token));
         setSpinner(false);
         setError(false);
         navigate("/");
