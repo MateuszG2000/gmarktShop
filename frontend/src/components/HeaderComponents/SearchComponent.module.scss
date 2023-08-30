@@ -47,10 +47,10 @@
   color: index.$primaryColor;
 }
 .last {
-  border-radius: 0 0 1rem 1rem;
+  border-radius: 0 0 2rem 2rem;
 }
 .first {
-  border-radius: 1rem 1rem 0 0;
+  border-radius: 2rem 2rem 0 0;
 }
 .default {
   border-radius: 2rem;
@@ -59,4 +59,12 @@
   position: absolute;
   width: 100%;
   z-index: 3;
+}
+.image {
+  max-width: 3rem;
+  max-height: 3rem;
+}
+.title {
+  font-size: 1rem;
+  margin-left: 1rem;
 }

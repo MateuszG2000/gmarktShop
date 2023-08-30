@@ -1,6 +1,6 @@
 @use "../../index.scss" as index;
 .infoContainer {
-  position: fixed;
+  position: absolute;
   display: flex;
   flex-direction: column;
   background-color: white;
