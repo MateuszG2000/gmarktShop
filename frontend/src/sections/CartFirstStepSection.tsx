@@ -16,7 +16,6 @@ function CartFirstStepSection() {
   const userIsLogged = useAppSelector(
     (state: RootState) => state.user.loggedIn
   );
-  console.log(userIsLogged);
   return (
     <div className={css.cart}>
       {cartItems.length === 0 && (

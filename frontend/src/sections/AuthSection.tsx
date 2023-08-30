@@ -2,27 +2,26 @@ import Login from "../components/AuthComponents/Login";
 import SignUp from "../components/AuthComponents/SignUp";
 import css from "./AuthSection.module.scss";
 import { useState } from "react";
-import Zalogowano from "../components/AuthComponents/zalogowano";
 function AuthSection() {
   const [pageOption, setPageOption] = useState(false);
   const buttonHanlder = (e: boolean) => {
     e ? setPageOption(true) : setPageOption(false);
   };
-  const onClick = () => {
-    fetch("http://localhost:9000/api/auth/", {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((res) => {
-        console.log(res); ////login action
-      });
-  };
+  // const onClick = () => {
+  //   fetch("http://localhost:9000/api/auth/", {
+  //     method: "GET",
+  //     credentials: "include",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   })
+  //     .then((res) => {
+  //       return res.json();
+  //     })
+  //     .then((res) => {
+  //       console.log(res); ////login action
+  //     });
+  // };
   return (
     <div className={css.auth}>
       <div className={css.authButtons}>
@@ -54,7 +53,6 @@ function AuthSection() {
 
       {!pageOption && <Login></Login>}
       {pageOption && <SignUp></SignUp>}
-      <Zalogowano btn={onClick}></Zalogowano>
     </div>
   );
 }

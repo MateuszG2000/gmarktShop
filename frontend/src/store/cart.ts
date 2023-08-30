@@ -84,7 +84,6 @@ const cartSlice = createSlice({
       state.totalQuantity = quantity;
     },
     setAddress(state, action) {
-      console.log(state);
       state.address = action.payload.address;
     },
     sendData(state) {

@@ -7,6 +7,7 @@ import ProductListComponent from "../components/CartComponents/ProductListCompon
 import { useSelector } from "react-redux";
 import { sendCartData } from "../store/cartAsync";
 import { useAppDispatch, useAppSelector } from "../store/appHooks";
+import { UIActions } from "../store/UI";
 function CartThirdStepSection() {
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const dispatch = useAppDispatch();
@@ -17,6 +18,13 @@ function CartThirdStepSection() {
   );
   const handleSendData = () => {
     dispatch(sendCartData(cart, user));
+    dispatch(
+      UIActions.showWarning({
+        flag: "green",
+        text: "Zamówienie zostało wysłane",
+      })
+    );
+    window.history.pushState(null, "", window.location.href);
   };
   return (
     <div className={css.cart}>
@@ -29,7 +37,7 @@ function CartThirdStepSection() {
         <SummaryComponent
           disable={!userIsLogged}
           buttonText={<>Zapłać</>}
-          buttonPath="/cart/summary"
+          buttonPath="/"
           buttonFunction={handleSendData}
         />
       </div>
