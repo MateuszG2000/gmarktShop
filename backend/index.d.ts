@@ -6,7 +6,6 @@ interface Error {
 interface User {
   _id: string;
   email: string;
-  name?: string;
   password?: string;
   save(): Promise;
 }

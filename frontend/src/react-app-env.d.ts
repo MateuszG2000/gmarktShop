@@ -53,19 +53,22 @@ interface Address {
 }
 interface UserState {
   email: string;
+  name: string;
   userId: string;
   exp: number;
   loggedIn: boolean;
 }
 interface UIState {
   warning: IWarning;
-  accountExtendedInfo: IAccounExtendedInfo;
+  headerExtendedInfo: IHeaderExtendedInfo;
 }
 interface IWarning {
   text: string;
   visible: boolean;
   flag: string;
 }
-interface IAccounExtendedInfo {
-  visible: boolean;
+interface IHeaderExtendedInfo {
+  windowVisible: boolean;
+  cartInfoVisible: boolean;
+  accountInfoVisible: boolean;
 }

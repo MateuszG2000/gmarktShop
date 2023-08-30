@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { useAppDispatch } from "../store/appHooks";
-import { UIActions } from "../store/UI";
 
 export default function useOutsideClick(ref: any, disp: Function) {
   const dispatch = useAppDispatch();

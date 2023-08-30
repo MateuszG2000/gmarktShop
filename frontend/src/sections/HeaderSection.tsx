@@ -15,8 +15,8 @@ function HeaderSection() {
   const [animation, setAnimation] = useState(false);
   const [prevQuantity, setPrevQuantity] = useState(0);
   const dispatch = useAppDispatch();
-  const accountExtendedInfoVisible = useAppSelector(
-    (state: RootState) => state.UI.accountExtendedInfo.visible
+  const ExtendedInfoVisible = useAppSelector(
+    (state: RootState) => state.UI.headerExtendedInfo.windowVisible
   );
   const quantity = useSelector((state: RootState) => state.cart.totalQuantity);
   const userLoggedIn = useAppSelector(
@@ -63,19 +63,22 @@ function HeaderSection() {
         </IconComponent>
       )}
 
-      {accountExtendedInfoVisible && <ExtendedInfoComponent />}
-      <Link to="/cart">
-        <IconComponent text="Koszyk">
-          {quantity <= 0 ? (
-            ""
-          ) : (
-            <p className={`${css.circle} ${animation ? css.animate : ""}`}>
-              {quantity}
-            </p>
-          )}
-          <AiOutlineShoppingCart />
-        </IconComponent>
-      </Link>
+      <IconComponent
+        onClick={() => {
+          dispatch(UIActions.toggleCartExtendedInfo());
+        }}
+        text="Koszyk"
+      >
+        {quantity <= 0 ? (
+          ""
+        ) : (
+          <p className={`${css.circle} ${animation ? css.animate : ""}`}>
+            {quantity}
+          </p>
+        )}
+        <AiOutlineShoppingCart />
+      </IconComponent>
+      {ExtendedInfoVisible && <ExtendedInfoComponent />}
     </div>
   );
 }

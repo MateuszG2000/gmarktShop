@@ -3,7 +3,6 @@
   position: fixed;
   display: flex;
   flex-direction: column;
-  width: 15rem;
   background-color: white;
   padding: 1rem;
   @include index.boxShadow;
@@ -14,7 +13,39 @@
   gap: 1rem;
   font-size: 1.2rem;
   font-weight: 500;
+  min-width: 15rem;
+  max-height: 20rem;
+  overflow: scroll;
+  padding: 1rem;
 }
 .btnLink {
   width: 100%;
+}
+.productEl {
+  width: 20rem;
+
+  display: flex;
+  height: 3rem;
+  border-bottom: 1px solid rgb(125, 125, 125);
+  gap: 1rem;
+  align-items: center;
+}
+.image {
+  max-width: 3rem;
+  max-height: 3rem;
+}
+.title {
+  font-size: 0.9rem;
+}
+.endPrice {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.endPriceTitle {
+  color: gray;
+  text-transform: capitalize;
+}
+.price {
+  font-size: 1.5rem;
 }
