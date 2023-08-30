@@ -6,10 +6,8 @@ import SummaryComponent from "../components/CartComponents/SummaryComponent";
 import css from "./CartFirstStepSection.module.scss";
 import { MdArrowForwardIos } from "react-icons/md";
 import { useSelector } from "react-redux";
-import ButtonComponent from "../components/CommonComponents/ButtonComponent";
-import { BsCartX } from "react-icons/bs";
-import { Link } from "react-router-dom";
 import { useAppSelector } from "../store/appHooks";
+import CartEmptyInfoComponent from "../components/CartComponents/CartEmptyInfoComponent";
 
 function CartFirstStepSection() {
   const cartItems = useSelector((state: RootState) => state.cart.items);
@@ -18,23 +16,7 @@ function CartFirstStepSection() {
   );
   return (
     <div className={css.cart}>
-      {cartItems.length === 0 && (
-        <div className={css.empty}>
-          <span className={css.emptyCartText}>
-            Twój koszyk jest pusty
-            <span className={css.icon}>
-              <BsCartX />
-            </span>
-          </span>
-          <div>
-            <Link to="/">
-              <ButtonComponent disabled={false}>
-                Wróć na strone główną
-              </ButtonComponent>
-            </Link>
-          </div>
-        </div>
-      )}
+      <CartEmptyInfoComponent />
 
       {cartItems.length > 0 && (
         <>

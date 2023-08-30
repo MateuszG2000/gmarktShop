@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import { sendCartData } from "../store/cartAsync";
 import { useAppDispatch, useAppSelector } from "../store/appHooks";
 import { UIActions } from "../store/UI";
+import CartEmptyInfoComponent from "../components/CartComponents/CartEmptyInfoComponent";
 function CartThirdStepSection() {
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const dispatch = useAppDispatch();
@@ -24,23 +25,31 @@ function CartThirdStepSection() {
         text: "Zamówienie zostało wysłane",
       })
     );
-    window.history.pushState(null, "", window.location.href);
   };
   return (
     <div className={css.cart}>
-      <StatusComponent step={3} />
-      {cartItems.map((item) => (
-        <ProductListComponent key={item._id} product={item} moreData={false} />
-      ))}
-      <div className={css.deliverySummary}>
-        <DeliveryEndDataComponent />
-        <SummaryComponent
-          disable={!userIsLogged}
-          buttonText={<>Zapłać</>}
-          buttonPath="/"
-          buttonFunction={handleSendData}
-        />
-      </div>
+      <CartEmptyInfoComponent />
+      {cartItems.length > 0 && (
+        <>
+          <StatusComponent step={3} />
+          {cartItems.map((item) => (
+            <ProductListComponent
+              key={item._id}
+              product={item}
+              moreData={false}
+            />
+          ))}
+          <div className={css.deliverySummary}>
+            <DeliveryEndDataComponent />
+            <SummaryComponent
+              disable={!userIsLogged}
+              buttonText={<>Zapłać</>}
+              buttonPath="/"
+              buttonFunction={handleSendData}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 }
