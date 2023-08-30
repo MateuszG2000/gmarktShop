@@ -14,7 +14,7 @@ function ExtendedInfoComponent() {
   };
 
   const wrapperRef = useRef(null);
-  useOutsideClick(wrapperRef);
+  useOutsideClick(wrapperRef, UIActions.toggleAccountExtendedInfo);
   return (
     <div ref={wrapperRef} className={`${css.infoContainer} `}>
       <p className={css.title}>Witaj Mateusz</p>
