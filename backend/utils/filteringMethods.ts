@@ -3,7 +3,7 @@ const filter: any = (queryParam: any, queryStringParam: any) => {
   let queryString = queryStringParam;
 
   const queryObj = { ...queryString };
-  const excludedFields = ['page', 'sort', 'limit', 'fields'];
+  const excludedFields = ['page', 'sort', 'limit', 'fields', 'name'];
   excludedFields.forEach((el) => delete queryObj[el]);
   //filtering
   let queryStr = JSON.stringify(queryObj);
@@ -23,6 +23,10 @@ const filter: any = (queryParam: any, queryStringParam: any) => {
     query = query.select(fields);
   } else {
     query = query.select('-__v');
+  }
+  if (queryString.name) {
+    const regex = new RegExp(queryString.name, 'i');
+    query = query.find({ name: regex });
   }
   //pagination
   const page = Number(queryString.page) || 1;

@@ -41,21 +41,23 @@ function SearchComponent() {
       </form>
       {isSearching && (
         <div className={css.resultContainer}>
-          {products.map((item, index) => (
-            <div
-              key={item._id}
-              className={`${css.result} ${css.inside} ${
-                index + 1 === products.length ? css.last : ""
-              }`}
-            >
-              <img
-                className={css.image}
-                src={`http://localhost:9000/api/images/${item.image}`}
-                alt={String(item.name)}
-              ></img>
-              <span className={css.title}>{item.name}</span>
-            </div>
-          ))}
+          {products.slice(0, 5).map((item, index) => {
+            return (
+              <div
+                key={item._id}
+                className={`${css.result} ${css.inside} ${
+                  index + 1 === products.length || index === 4 ? css.last : ""
+                }`}
+              >
+                <img
+                  className={css.image}
+                  src={`http://localhost:9000/api/images/${item.image}`}
+                  alt={String(item.name)}
+                ></img>
+                <span className={css.title}>{item.name}</span>
+              </div>
+            );
+          })}
         </div>
       )}
       {isLoading && (
