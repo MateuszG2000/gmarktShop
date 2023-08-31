@@ -5,12 +5,19 @@ import * as validator from "../../utils/validators";
 import useInput from "../../utils/use-input";
 import Input from "./Input";
 import ErrorComponent from "./ErrorComponent";
+import { useAppDispatch } from "../../store/appHooks";
+import { UIActions } from "../../store/UI";
+
+import { useNavigate } from "react-router-dom";
 function SignUp() {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const radioHandler = function (e: React.ChangeEvent<HTMLInputElement>) {
     if (e.target.checked) {
       setChecked(true);
     } else setChecked(false);
   };
+  const [initial, setinitial] = useState(false);
   const [checked, setChecked] = useState(false);
   const {
     value: enteredEmail,
@@ -37,6 +44,45 @@ function SignUp() {
     reset: resetPasswordConfirmInput,
   } = useInput((value: string) => validator.isSame(value, enteredPassword));
 
+  const signupHandler = async function (event: any) {
+    event.preventDefault();
+    if (!checked) {
+      setinitial(true);
+      return;
+    }
+    const response = await fetch("http://localhost:9000/api/auth/signup", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: enteredEmail,
+        password: enteredPassword,
+        passwordConfirm: enteredPasswordConfirm,
+      }),
+    });
+
+    if (response.ok) {
+      dispatch(
+        UIActions.showWarning({
+          flag: "green",
+          text: "Uzytkownik został utworzony",
+        })
+      );
+      navigate("/");
+    }
+    if (response.status === 422) {
+      dispatch(
+        UIActions.showWarning({
+          flag: "red",
+          text: "Uzytkownik o podanym adresie e-mail juz istnieje",
+        })
+      );
+      resetPasswordConfirmInput();
+      resetPasswordInput();
+    }
+  };
   return (
     <div className={css.loginPanel}>
       <form className={css.loginForm}>
@@ -95,17 +141,17 @@ function SignUp() {
           {passwordConfirmInputHasError && !enteredPasswordConfirmIsValid && (
             <p>Hasła się nie zgadzają</p>
           )}
-          {!checked && <p>Akceptacja regulaminu jest wymagana</p>}
+          {!checked && initial && <p>Akceptacja regulaminu jest wymagana</p>}
         </ErrorComponent>
         <ButtonComponent
           disabled={
             !(
               enteredEmailIsValid &&
               enteredPasswordIsValid &&
-              enteredPasswordConfirmIsValid &&
-              checked
+              enteredPasswordConfirmIsValid
             )
           }
+          onClick={signupHandler}
         >
           Zarejestruj się
         </ButtonComponent>

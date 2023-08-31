@@ -19,6 +19,7 @@ export function signup(
   }
 
   const { password, passwordConfirm, ...userData } = req.body;
+  userData.userType = 'user';
   bcrypt
     .hash(password, 12)
     .then((hashedPassword: string) => {
