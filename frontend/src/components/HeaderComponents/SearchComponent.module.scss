@@ -5,13 +5,15 @@
   text-align: center;
   position: relative;
 }
-.search form input[type="text"],
-.result {
+.search form input[type="text"] {
+  width: calc(50% - 32px);
   margin-left: auto;
   margin-right: auto;
+}
+.search form input[type="text"],
+.result {
   height: 1.5rem;
   padding: 1rem;
-  width: 50%;
   border: none;
   font-size: 1.4rem;
   -webkit-box-shadow: 1px 1px 7px -1px rgba(66, 68, 90, 1);
@@ -31,7 +33,6 @@
 }
 .result {
   display: flex;
-  width: 50%;
   cursor: pointer;
   background-color: white;
 }
@@ -67,4 +68,12 @@
 .title {
   font-size: 1rem;
   margin-left: 1rem;
+}
+.centerBox {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+
+  padding: 0;
 }

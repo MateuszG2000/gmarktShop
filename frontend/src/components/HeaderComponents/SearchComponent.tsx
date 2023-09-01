@@ -51,25 +51,29 @@ function SearchComponent() {
         />
       </form>
       {searchVisible && (
-        <div className={css.resultContainer} ref={wrapperRef}>
-          {products.slice(0, 5).map((item, index) => {
-            return (
-              <Link key={item._id} to={`product/${item._id}`}>
-                <div
-                  className={`${css.result} ${css.inside} ${
-                    index + 1 === products.length || index === 4 ? css.last : ""
-                  }`}
-                >
-                  <img
-                    className={css.image}
-                    src={`http://localhost:9000/api/images/${item.image}`}
-                    alt={String(item.name)}
-                  ></img>
-                  <span className={css.title}>{item.name}</span>
-                </div>
-              </Link>
-            );
-          })}
+        <div className={css.resultContainer}>
+          <div className={css.centerBox} ref={wrapperRef}>
+            {products.slice(0, 5).map((item, index) => {
+              return (
+                <Link key={item._id} to={`product/${item._id}`}>
+                  <div
+                    className={`${css.result} ${css.inside} ${
+                      index + 1 === products.length || index === 4
+                        ? css.last
+                        : ""
+                    }`}
+                  >
+                    <img
+                      className={css.image}
+                      src={`http://localhost:9000/api/images/${item.image}`}
+                      alt={String(item.name)}
+                    ></img>
+                    <span className={css.title}>{item.name}</span>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
         </div>
       )}
       {isLoading && (
