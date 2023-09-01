@@ -15,7 +15,7 @@ const persistConfig = {
   key: "root",
   storage: storage,
   transforms: [saveSubsetFilter],
-  blacklist: ["UISlice"],
+  blacklist: ["UI"],
 };
 
 const rootReducer = combineReducers({

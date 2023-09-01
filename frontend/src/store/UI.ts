@@ -11,12 +11,18 @@ const initialState = {
     cartInfoVisible: false,
     accountInfoVisible: false,
   },
+  searchVisible: false,
 };
 
 const UISlice = createSlice({
   name: "UI",
   initialState: initialState,
   reducers: {
+    toggleSearch(state, action) {
+      if (action.payload) state.searchVisible = true;
+      if (!action.payload) state.searchVisible = false;
+      console.log(action.payload);
+    },
     showWarning(state, action) {
       state.warning.visible = true;
       state.warning.flag = action.payload.flag;

@@ -1,19 +1,33 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import css from "./SearchComponent.module.scss";
+import { Link } from "react-router-dom";
+import { useAppSelector } from "../../store/appHooks";
+import { useDispatch } from "react-redux";
+import { UIActions } from "../../store/UI";
+import useOutsideClick from "../../utils/useOutsideClick";
 const debounce = require("lodash.debounce");
 
 function SearchComponent() {
+  const searchVisible = useAppSelector(
+    (state: RootState) => state.UI.searchVisible
+  );
+  const dispatch = useDispatch();
+  const searchref: any = useRef(null);
   const [products, setProducts] = useState<Product[]>([]);
   const [isSearching, setIsSearching] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const wrapperRef = useRef(null);
+  useOutsideClick(wrapperRef, UIActions.toggleSearch);
   const searchHandler = debounce(
     async (e: React.ChangeEvent<HTMLInputElement>) => {
       if (e.target.value == "") {
         setIsSearching(false);
         setIsLoading(false);
+        dispatch(UIActions.toggleSearch(false));
       } else {
         setIsLoading(true);
         setIsSearching(true);
+        dispatch(UIActions.toggleSearch(true));
       }
 
       const response = await (
@@ -30,32 +44,30 @@ function SearchComponent() {
     <div className={css.search}>
       <form action="#">
         <input
-          className={`${isSearching ? css.first : css.default}`}
+          className={`${searchVisible ? css.first : css.default}`}
           type="text"
           placeholder="Wyszukaj..."
           onChange={searchHandler}
-          onBlur={() => {
-            setIsSearching(false);
-          }}
         />
       </form>
-      {isSearching && (
-        <div className={css.resultContainer}>
+      {searchVisible && (
+        <div className={css.resultContainer} ref={wrapperRef}>
           {products.slice(0, 5).map((item, index) => {
             return (
-              <div
-                key={item._id}
-                className={`${css.result} ${css.inside} ${
-                  index + 1 === products.length || index === 4 ? css.last : ""
-                }`}
-              >
-                <img
-                  className={css.image}
-                  src={`http://localhost:9000/api/images/${item.image}`}
-                  alt={String(item.name)}
-                ></img>
-                <span className={css.title}>{item.name}</span>
-              </div>
+              <Link key={item._id} to={`product/${item._id}`}>
+                <div
+                  className={`${css.result} ${css.inside} ${
+                    index + 1 === products.length || index === 4 ? css.last : ""
+                  }`}
+                >
+                  <img
+                    className={css.image}
+                    src={`http://localhost:9000/api/images/${item.image}`}
+                    alt={String(item.name)}
+                  ></img>
+                  <span className={css.title}>{item.name}</span>
+                </div>
+              </Link>
             );
           })}
         </div>
@@ -67,7 +79,7 @@ function SearchComponent() {
           </div>
         </div>
       )}
-      {products.length === 0 && isSearching && (
+      {products.length === 0 && searchVisible && (
         <div className={css.resultContainer}>
           <div className={`${css.result} ${css.inside} ${css.last}`}>
             <span className={css.title}>Brak produktu</span>

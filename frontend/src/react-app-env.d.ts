@@ -1,14 +1,19 @@
 /// <reference types="react-scripts" />
+interface RootState {
+  cart: CartState;
+  user: UserState;
+  UI: UIState;
+}
 interface Product {
   _id: key;
-  name: String;
+  name: string;
   price: number;
-  image: String;
-  category?: String;
-  createdAt?: String;
-  description?: String;
+  image: string;
+  category?: string;
+  createdAt?: string;
+  description?: string;
   inStock: number;
-  updatedAt?: String;
+  updatedAt?: string;
 }
 
 interface CartState {
@@ -35,11 +40,7 @@ interface ICartProduct {
   inStock: number;
   quantity: number;
 }
-interface RootState {
-  cart: CartState;
-  user: UserState;
-  UI: UIState;
-}
+
 interface Address {
   id: number;
   name: string;
@@ -61,6 +62,7 @@ interface UserState {
 interface UIState {
   warning: IWarning;
   headerExtendedInfo: IHeaderExtendedInfo;
+  searchVisible: boolean;
 }
 interface IWarning {
   text: string;

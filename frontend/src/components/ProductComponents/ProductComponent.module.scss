@@ -10,6 +10,7 @@
 .productImage {
   margin-top: 2rem;
   width: fit-content;
+  max-height: 25rem;
 }
 .title {
   font-size: 1.8rem;
@@ -55,6 +56,9 @@
 .btnIcon {
   font-size: 1.2rem;
   margin-right: 0.5rem;
+}
+.btnContainer {
+  min-width: 20rem;
 }
 @media screen and (max-width: 1080px) {
   .productContainer {
