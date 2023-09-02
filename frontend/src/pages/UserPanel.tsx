@@ -29,6 +29,7 @@ function UserPanel() {
         </main>
       </div>
       <FooterSection />
+      <div className={css.background}></div>
       {warning.visible && (
         <WarningComponent text={warning.text} flag={warning.flag} />
       )}

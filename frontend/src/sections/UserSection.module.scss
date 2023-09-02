@@ -1,0 +1,42 @@
+@use "../index.scss" as index;
+.panelContainer {
+  width: 80%;
+  height: 30rem;
+  display: flex;
+  margin: 2rem auto 0 auto;
+  @include index.boxShadow;
+  overflow: hidden;
+}
+.nav {
+  width: 25%;
+  background-color: rgb(144, 144, 144);
+  height: 30rem;
+}
+.navEl {
+  list-style-type: none;
+  border-bottom: 1px solid black;
+  text-align: center;
+  padding: 1.3rem 0;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  padding-left: 2rem;
+  font-size: 1.1rem;
+}
+.contentContainer {
+  width: 75%;
+  background-color: white;
+  height: 30rem;
+}
+.navEl:hover {
+  background-color: rgb(110, 110, 110);
+}
+.navEl:active {
+  color: white;
+}
+.icon {
+  font-size: 2rem;
+  line-height: 1rem;
+  vertical-align: center;
+  margin-right: 1.5rem;
+}
