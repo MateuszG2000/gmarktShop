@@ -16,7 +16,6 @@ function RootLayout() {
         <HeaderSection />
         <NavbarComponent />
         <main>
-          {/* {navigation.state === 'loading' && <p>Loading...</p>} */}
           <Outlet />
         </main>
       </div>

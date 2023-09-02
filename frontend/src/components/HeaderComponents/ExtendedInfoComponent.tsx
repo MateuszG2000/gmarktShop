@@ -28,7 +28,7 @@ function ExtendedInfoComponent() {
       {AccountVisible && (
         <>
           <p>Witaj {user}</p>
-          <Link to="/" className={css.btnLink}>
+          <Link to="/user" className={css.btnLink}>
             <ButtonComponent color={1}>Moje konto</ButtonComponent>
           </Link>
           <Link to="/" className={css.btnLink}>

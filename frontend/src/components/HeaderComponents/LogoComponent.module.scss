@@ -3,7 +3,8 @@
   cursor: pointer;
   color: black;
   letter-spacing: 0.3rem;
-  line-height: 1rem;
+  line-height: 1.2rem;
+  margin-top: 1rem;
   &:hover {
     @include index.hover;
   }
@@ -14,9 +15,7 @@
     text-shadow: 1px -1px 4px rgba(13, 118, 255, 1);
   }
 }
-.flexcenter {
-  @include index.flexCenter("row");
-}
+
 .logoNavbar {
   @include logo;
   font-size: 2rem;

@@ -8,6 +8,8 @@ import CartThirdStepSection from "./sections/CartThirdStepSection";
 import CategorySection from "./sections/CategorySection";
 import RootLayout from "./pages/RootLayout";
 import ErrorPage from "./pages/ErrorPage";
+import UserSection from "./sections/UserSection";
+import UserPanel from "./pages/UserPanel";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -40,6 +42,12 @@ const router = createBrowserRouter([
         element: <CategorySection />,
       },
     ],
+  },
+  {
+    path: "user",
+    element: <UserPanel />,
+    errorElement: <ErrorPage />,
+    children: [{ index: true, element: <UserSection /> }],
   },
 ]);
 
