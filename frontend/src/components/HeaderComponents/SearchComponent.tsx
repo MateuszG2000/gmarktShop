@@ -12,21 +12,17 @@ function SearchComponent() {
     (state: RootState) => state.UI.searchVisible
   );
   const dispatch = useDispatch();
-  const searchref: any = useRef(null);
   const [products, setProducts] = useState<Product[]>([]);
-  const [isSearching, setIsSearching] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const wrapperRef = useRef(null);
   useOutsideClick(wrapperRef, UIActions.toggleSearch);
   const searchHandler = debounce(
     async (e: React.ChangeEvent<HTMLInputElement>) => {
       if (e.target.value == "") {
-        setIsSearching(false);
         setIsLoading(false);
         dispatch(UIActions.toggleSearch(false));
       } else {
         setIsLoading(true);
-        setIsSearching(true);
         dispatch(UIActions.toggleSearch(true));
       }
 
@@ -78,15 +74,19 @@ function SearchComponent() {
       )}
       {isLoading && (
         <div className={css.resultContainer}>
-          <div className={`${css.result} ${css.inside} ${css.last}`}>
-            <span className={css.title}>Szukam...</span>
+          <div className={css.centerBox}>
+            <div className={`${css.result} ${css.inside} ${css.last}`}>
+              <span className={css.title}>Szukam...</span>
+            </div>
           </div>
         </div>
       )}
       {products.length === 0 && searchVisible && (
         <div className={css.resultContainer}>
-          <div className={`${css.result} ${css.inside} ${css.last}`}>
-            <span className={css.title}>Brak produktu</span>
+          <div className={css.centerBox}>
+            <div className={`${css.result} ${css.inside} ${css.last}`}>
+              <span className={css.title}>Brak produktu</span>
+            </div>
           </div>
         </div>
       )}

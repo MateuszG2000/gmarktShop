@@ -12,13 +12,14 @@ function QuantityComponent({
 }) {
   const [quantity, setQuantity] = useState(quantityProp);
   function decrementHandler() {
-    if (quantity === 1) onRemove();
+    if (quantity === 1) {
+      onRemove();
+      return;
+    }
     setQuantity(quantity - 1);
     onChange(quantity - 1);
   }
   return (
-    // <div className={css.QuantityComponent}>
-    //   <span className={css.quantityInfo}>Liczba sztuk:</span>
     <div className={css.quantity}>
       <button className={css.btn} onClick={decrementHandler}>
         <AiOutlineMinus />

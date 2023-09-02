@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
 import css from "./ProductComponent.module.scss";
-import monitor from "../../Photos/i-xiaomi-mi-curved-gaming-34-bhr4269gl.jpg.webp";
 import QuantityComponent from "../CommonComponents/QuantityComponent";
 import ButtonComponent from "../CommonComponents/ButtonComponent";
 import { LiaCartArrowDownSolid } from "react-icons/lia";
 import { useParams } from "react-router-dom";
-import { useAppSelector } from "../../store/appHooks";
-import { Root } from "react-dom/client";
+import { useAppDispatch } from "../../store/appHooks";
+import { UIActions } from "../../store/UI";
+import { cartActions } from "../../store/cart";
 
 function ProductComponent() {
+  const dispatch = useAppDispatch();
   const [product, setProduct] = useState<Product | null>(null);
   const { productId } = useParams();
+  const [quantity, setQuantity] = useState(1);
   useEffect(() => {
     (async () => {
       try {
@@ -20,13 +22,22 @@ function ProductComponent() {
         const resData = await response.json();
         setProduct(resData.data[0]);
       } catch (err) {
-        console.log(err);
+        dispatch(
+          UIActions.showWarning({
+            flag: "red",
+            text: "Brak połączenia z serwerem",
+          })
+        );
       }
     })();
-  }, [productId]);
-  console.log(product);
+  }, [productId, dispatch]);
   function addToCartHandler() {
-    console.log("Dodaje do koszyka");
+    if (product) {
+      product.quantity = quantity;
+      dispatch(cartActions.addItem(product));
+    }
+    console.log(product);
+    console.log(quantity);
   }
   return (
     <>
@@ -43,8 +54,8 @@ function ProductComponent() {
             <div className={css.priceButtonContainer}>
               <div className={css.quantity}>
                 <QuantityComponent
-                  quantityProp={1}
-                  onChange={() => {}}
+                  quantityProp={quantity}
+                  onChange={setQuantity}
                   onRemove={() => {}}
                 />
               </div>

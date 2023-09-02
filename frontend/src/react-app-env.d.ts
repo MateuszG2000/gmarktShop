@@ -14,6 +14,7 @@ interface Product {
   description?: string;
   inStock: number;
   updatedAt?: string;
+  quantity?: number;
 }
 
 interface CartState {

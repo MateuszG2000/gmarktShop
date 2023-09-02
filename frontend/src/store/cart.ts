@@ -27,20 +27,25 @@ const cartSlice = createSlice({
   initialState: initialState,
   reducers: {
     addItem(state, action: PayloadAction<Product>) {
+      let quantity;
       const newItem = action.payload;
       const inCart = state.items.find((item) => item._id === newItem._id);
-      state.totalQuantity++;
+      if (newItem.quantity) quantity = newItem.quantity;
+      else quantity = 1;
+      console.log(quantity);
+      state.totalQuantity += quantity;
+
       if (!inCart) {
         state.items.push({
           _id: newItem._id,
           name: newItem.name,
           image: newItem.image,
           inStock: newItem.inStock,
-          quantity: 1,
+          quantity: quantity,
           price: newItem.price,
         });
       } else {
-        inCart.quantity++;
+        inCart.quantity += quantity;
       }
       cartSlice.caseReducers.calcTotalPrice(state);
     },
