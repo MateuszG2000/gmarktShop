@@ -9,7 +9,7 @@ import CategorySection from "./sections/CategorySection";
 import RootLayout from "./pages/RootLayout";
 import ErrorPage from "./pages/ErrorPage";
 import UserSection from "./sections/UserSection";
-import UserPanel from "./pages/UserPanel";
+import UserPage from "./pages/UserPage";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -45,7 +45,7 @@ const router = createBrowserRouter([
   },
   {
     path: "user",
-    element: <UserPanel />,
+    element: <UserPage />,
     errorElement: <ErrorPage />,
     children: [{ index: true, element: <UserSection /> }],
   },

@@ -4,7 +4,7 @@ import { Link, Outlet } from "react-router-dom";
 import FooterSection from "../sections/FooterSection";
 import WarningComponent from "../components/CommonComponents/WarningComponent";
 import { useAppSelector } from "../store/appHooks";
-import css from "./UserPanel.module.scss";
+import css from "./UserPage.module.scss";
 import { ImExit } from "react-icons/im";
 import IconComponent from "../components/HeaderComponents/IconComponent";
 function UserPanel() {

@@ -31,9 +31,11 @@
 .navEl:hover {
   background-color: rgb(110, 110, 110);
 }
-.navEl:active {
+.navEl:active,
+.active {
   color: white;
 }
+
 .icon {
   font-size: 2rem;
   line-height: 1rem;
