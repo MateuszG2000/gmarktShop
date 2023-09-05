@@ -8,8 +8,11 @@ import CartThirdStepSection from "./sections/CartThirdStepSection";
 import CategorySection from "./sections/CategorySection";
 import RootLayout from "./pages/RootLayout";
 import ErrorPage from "./pages/ErrorPage";
-import UserSection from "./sections/UserSection";
 import UserPage from "./pages/UserPage";
+import ProfileInfoComponent from "./components/UserPanelComponents/ProfileInfoComponent";
+import EditProfileComponent from "./components/UserPanelComponents/EditProfileComponent";
+import SettingsComponent from "./components/UserPanelComponents/SettingsComponent";
+import OrderComponent from "./components/UserPanelComponents/OrderComponent";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -47,7 +50,12 @@ const router = createBrowserRouter([
     path: "user",
     element: <UserPage />,
     errorElement: <ErrorPage />,
-    children: [{ index: true, element: <UserSection /> }],
+    children: [
+      { path: "orders", element: <OrderComponent /> },
+      { path: "profile", element: <ProfileInfoComponent /> },
+      { path: "edit", element: <EditProfileComponent /> },
+      { path: "settings", element: <SettingsComponent /> },
+    ],
   },
 ]);
 

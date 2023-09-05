@@ -75,3 +75,27 @@ interface IHeaderExtendedInfo {
   cartInfoVisible: boolean;
   accountInfoVisible: boolean;
 }
+interface IUser {
+  _id: key;
+  email: string;
+  userType: string;
+  status: string;
+}
+interface IOrderProduct {
+  product: Product;
+  quantity: number;
+  _id: string;
+  price: number;
+}
+interface IOrder {
+  address: Address;
+  shipping: IShipping;
+  _id: key;
+  orderNumber: string;
+  orderProducts: [IOrderProduct];
+  user: IUser;
+  paid: boolean;
+  totalPriceWithoutShipping: number;
+  createdAt: string;
+  updatedAt: Date;
+}

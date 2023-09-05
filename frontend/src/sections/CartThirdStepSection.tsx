@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from "../store/appHooks";
 import { UIActions } from "../store/UI";
 import CartEmptyInfoComponent from "../components/CartComponents/CartEmptyInfoComponent";
 function CartThirdStepSection() {
+  const address = useSelector((state: RootState) => state.cart.address);
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const dispatch = useAppDispatch();
   const cart = useAppSelector((state: RootState) => state.cart);
@@ -40,7 +41,7 @@ function CartThirdStepSection() {
             />
           ))}
           <div className={css.deliverySummary}>
-            <DeliveryEndDataComponent />
+            <DeliveryEndDataComponent address={address} />
             <SummaryComponent
               disable={!userIsLogged}
               buttonText={<>Zapłać</>}

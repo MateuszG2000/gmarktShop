@@ -1,6 +1,6 @@
 import React from "react";
 import css from "./UserSection.module.scss";
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import { IoMdReorder } from "react-icons/io";
 import { RiProfileLine } from "react-icons/ri";
 import { MdManageAccounts, MdOutlineManageAccounts } from "react-icons/md";
@@ -11,7 +11,7 @@ function UserSection() {
         <ul>
           <NavLink
             className={({ isActive }) => (isActive ? css.active : "")}
-            to="/user"
+            to="/user/orders"
           >
             <li className={css.navEl}>
               <span className={css.icon}>
@@ -22,7 +22,7 @@ function UserSection() {
           </NavLink>
           <NavLink
             className={({ isActive }) => (isActive ? css.active : "")}
-            to="/user/a"
+            to="/user/profile"
           >
             <li className={css.navEl}>
               <span className={css.icon}>
@@ -33,7 +33,7 @@ function UserSection() {
           </NavLink>
           <NavLink
             className={({ isActive }) => (isActive ? css.active : "")}
-            to="/user/a"
+            to="/user/edit"
           >
             <li className={css.navEl}>
               <span className={css.icon}>
@@ -44,7 +44,7 @@ function UserSection() {
           </NavLink>
           <NavLink
             className={({ isActive }) => (isActive ? css.active : "")}
-            to="/user/a"
+            to="/user/settings"
           >
             <li className={css.navEl}>
               <span className={css.icon}>

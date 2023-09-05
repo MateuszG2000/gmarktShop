@@ -1,0 +1,117 @@
+.orderContainer {
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: minmax(12rem, 35%) minmax(10rem, 25%) 10% minmax(
+      15rem,
+      30%
+    );
+  grid-row-gap: 3rem;
+}
+.img {
+  width: 3rem;
+  height: 3rem;
+}
+.prodList {
+  grid-column-start: 1;
+  grid-column-end: 4;
+}
+.orderListEl {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 1px solid black;
+  padding: 0 0.5rem;
+  cursor: pointer;
+}
+.title {
+  max-width: 18rem;
+  white-space: nowrap; /* Zapobiega zawijaniu tekstu */
+  overflow: hidden; /* Ukrywa nadmiar tekstu */
+  text-overflow: ellipsis;
+  flex-grow: 1;
+}
+.price {
+  width: 6rem;
+  text-align: right;
+}
+.quantity {
+  width: 4.5rem;
+}
+
+.orderListEl:hover {
+  color: rgb(0, 148, 254);
+}
+.summary {
+  margin: 0 1rem;
+  display: grid;
+  grid-column: 3/5;
+  height: 8rem;
+}
+.summary > * {
+  height: 1rem;
+}
+.right {
+  text-align: right;
+}
+.total {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+.line {
+  grid-column-start: 1;
+  align-self: center;
+  grid-column-end: 3;
+  height: 2px;
+  background-color: black;
+}
+.deliveryData {
+  grid-column: 1/2;
+  line-height: 1rem;
+}
+.deliveryData > .title,
+.shipping > .title {
+  grid-column: 1/3;
+  font-weight: 500;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+.deliveryData p {
+  line-height: 1.2rem;
+  margin: 0;
+}
+.shipping {
+  grid-column: 2/3;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 3rem 5rem;
+  padding-right: 1rem;
+}
+.miniTitle {
+  opacity: 0.5;
+  font-size: 0.9rem;
+  padding-top: 0.5rem;
+}
+.orderData {
+  padding: 1rem 0 0 2rem;
+}
+.red {
+  color: red;
+  font-weight: 600;
+}
+.green {
+  color: green;
+  font-weight: 600;
+}
+.orderData > p {
+  margin: 0;
+}
+.orderList {
+  display: flex;
+  justify-content: space-between;
+  grid-column: 1/52;
+}
+.icon {
+  font-size: 1.4rem;
+  cursor: pointer;
+}

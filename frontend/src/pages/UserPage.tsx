@@ -7,7 +7,8 @@ import { useAppSelector } from "../store/appHooks";
 import css from "./UserPage.module.scss";
 import { ImExit } from "react-icons/im";
 import IconComponent from "../components/HeaderComponents/IconComponent";
-function UserPanel() {
+import UserSection from "../sections/UserSection";
+function UserPage() {
   const warning = useAppSelector((state: RootState) => state.UI.warning);
   return (
     <>
@@ -25,7 +26,7 @@ function UserPanel() {
           </div>
         </div>
         <main>
-          <Outlet />
+          <UserSection />
         </main>
       </div>
       <FooterSection />
@@ -37,4 +38,4 @@ function UserPanel() {
   );
 }
 
-export default UserPanel;
+export default UserPage;
