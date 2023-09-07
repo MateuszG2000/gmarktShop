@@ -102,6 +102,37 @@ export function getUsers(
     });
   });
 }
+export const getUser = catchError(async function (
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction
+) {
+  const token = req.cookies.Authorization.trim();
+  let userId;
+  try {
+    const decodedToken = jwt.verify(token, process.env.PRIVATE_KEY);
+    userId = decodedToken.userId;
+  } catch (err: any) {
+    err.statusCode = 400;
+    err.message = 'Invalid Token';
+    throw err;
+  }
+  if (userId !== req.query.id) {
+    const error = new Error('You have no permission to read this data');
+    error.statusCode = 404;
+    return next(error);
+  }
+  const user = await User.findById(req.query.id);
+  if (!user) {
+    const error = new Error('There is no user with given ID');
+    error.statusCode = 404;
+    return next(error);
+  }
+  res.status(200).json({
+    status: 'success',
+    data: user,
+  });
+});
 export function logOut(
   req: express.Request,
   res: express.Response,
