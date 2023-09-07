@@ -16,8 +16,8 @@
       30%
     );
   grid-row-gap: 3rem;
-  border-top: 1px solid grey;
-  border-bottom: 1px solid grey;
+  border-top: 1px solid rgba(128, 128, 128, 0.75);
+  border-bottom: 1px solid rgba(128, 128, 128, 0.75);
   margin: 1rem 0 2rem 0;
 }
 .img {
@@ -33,7 +33,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding: 0 0.5rem;
   cursor: pointer;
 }

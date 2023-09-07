@@ -107,9 +107,9 @@ export const getUser = catchError(async function (
   res: express.Response,
   next: express.NextFunction
 ) {
-  const token = req.cookies.Authorization.trim();
   let userId;
   try {
+    const token = req.cookies.Authorization.trim();
     const decodedToken = jwt.verify(token, process.env.PRIVATE_KEY);
     userId = decodedToken.userId;
   } catch (err: any) {

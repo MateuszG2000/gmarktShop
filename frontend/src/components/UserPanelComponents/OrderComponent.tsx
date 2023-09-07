@@ -7,19 +7,16 @@ import { AiOutlineArrowDown, AiOutlineArrowLeft } from "react-icons/ai";
 function OrderComponent() {
   const dispatch = useAppDispatch();
   const [data, setData] = useState<IOrder[]>();
-  const [loading, setLoading] = useState(false);
   const user = useAppSelector((state: RootState) => state.user);
   const [dataVisible, setDataVisible] = useState<number>(-1);
   useEffect(() => {
     (async () => {
       try {
-        setLoading(true);
         const response = await fetch(
           `http://localhost:9000/api/order?user=${user.userId}`
         );
         const resData = await response.json();
         setData(resData.data);
-        setLoading(false);
       } catch (err) {
         dispatch(
           UIActions.showWarning({
