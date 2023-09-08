@@ -13,6 +13,7 @@ import ProfileInfoComponent from "./components/UserPanelComponents/ProfileInfoCo
 import EditProfileComponent from "./components/UserPanelComponents/EditProfileComponent";
 import SettingsComponent from "./components/UserPanelComponents/SettingsComponent";
 import OrderComponent from "./components/UserPanelComponents/OrderComponent";
+import WelcomeComponent from "./components/UserPanelComponents/WelcomeComponent";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -51,6 +52,7 @@ const router = createBrowserRouter([
     element: <UserPage />,
     errorElement: <ErrorPage />,
     children: [
+      { index: true, element: <WelcomeComponent /> },
       { path: "orders", element: <OrderComponent /> },
       { path: "profile", element: <ProfileInfoComponent /> },
       { path: "edit", element: <EditProfileComponent /> },
