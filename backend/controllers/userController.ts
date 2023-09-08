@@ -129,7 +129,7 @@ export const getUser = catchError(async function (
     data: user,
   });
 });
-export const AddAddress = catchError(async function (
+export const updateAddress = catchError(async function (
   req: express.Request,
   res: express.Response,
   next: NextFunction
@@ -147,16 +147,10 @@ export const AddAddress = catchError(async function (
     err.message = 'Invalid Token';
     throw err;
   }
-  const actualAddress = await User.findById(userId, 'userData');
-  if (actualAddress.userData.length >= 3) {
-    const error = new Error('To many addresses');
-    error.statusCode = 400;
-    throw error;
-  }
-  actualAddress.userData.push(address);
+
   const updatedUser = await User.findByIdAndUpdate(
     userId,
-    { $set: { userData: actualAddress.userData } },
+    { $set: { userData: address } },
     { runValidators: true, new: true }
   );
 
