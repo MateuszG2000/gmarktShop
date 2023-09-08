@@ -5,9 +5,9 @@ import { UIActions } from "../../store/UI";
 import { useNavigate } from "react-router-dom";
 import { userActions } from "../../store/user";
 import NotAuthComponent from "../CommonComponents/NotAuthComponent";
+import formatDate from "../../utils/formatDate";
 
 function ProfileInfoComponent() {
-  const userId = useAppSelector((state: RootState) => state.user.userId);
   const navigate = useNavigate();
   const userLoggedIn = useAppSelector(
     (state: RootState) => state.user.loggedIn
@@ -27,6 +27,8 @@ function ProfileInfoComponent() {
           credentials: "include",
         });
         const resData = await response.json();
+        const date = new Date(resData.data.createdAt);
+        resData.data.createdAt = formatDate(date);
         setData(resData.data);
         if (response.status === 400) {
           dispatch(
@@ -48,8 +50,7 @@ function ProfileInfoComponent() {
         );
       }
     })();
-  }, []);
-
+  }, [dispatch, navigate]);
   if (!userLoggedIn) return <NotAuthComponent />;
   return (
     <div className={css.profileContainer}>

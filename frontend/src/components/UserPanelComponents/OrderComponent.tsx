@@ -6,6 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineArrowDown, AiOutlineArrowLeft } from "react-icons/ai";
 import NotAuthComponent from "../CommonComponents/NotAuthComponent";
 import { userActions } from "../../store/user";
+import formatDate from "../../utils/formatDate";
 function OrderComponent() {
   const dispatch = useAppDispatch();
   const [data, setData] = useState<IOrder[]>([]);
@@ -21,6 +22,10 @@ function OrderComponent() {
           credentials: "include",
         });
         const resData = await response.json();
+        resData.data.map((data: any) => {
+          const date = new Date(data.createdAt);
+          data.createdAt = formatDate(date);
+        });
         setData(resData.data);
         if (response.status === 400) {
           dispatch(
@@ -42,7 +47,7 @@ function OrderComponent() {
         );
       }
     })();
-  }, []);
+  }, [dispatch, navigate]);
   if (!user.loggedIn) return <NotAuthComponent />;
   return (
     <div className={css.ordersContainer}>
@@ -52,9 +57,7 @@ function OrderComponent() {
             <span className={css.orderListEl}>
               {order.orderNumber.split("-")[1]}
             </span>
-            <span className={css.orderListEl}>
-              {order.createdAt.slice(0, 16).split("T").join(" ")}
-            </span>
+            <span className={css.orderListEl}>{order.createdAt}</span>
             <span className={order.paid ? css.green : css.red}>
               {order.paid ? "Zapłacone" : "Niezapłacone"}
             </span>
