@@ -4,7 +4,6 @@ import { NavLink, Outlet } from "react-router-dom";
 import { IoMdReorder } from "react-icons/io";
 import { RiProfileLine } from "react-icons/ri";
 import { MdManageAccounts, MdOutlineManageAccounts } from "react-icons/md";
-import WelcomeComponent from "../components/UserPanelComponents/WelcomeComponent";
 function UserSection() {
   return (
     <div className={css.panelContainer}>

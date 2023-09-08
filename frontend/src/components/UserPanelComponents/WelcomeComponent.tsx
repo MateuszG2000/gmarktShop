@@ -1,10 +1,7 @@
-import { title } from "process";
 import React from "react";
-import { useAppSelector } from "../../store/appHooks";
 import LogoComponent from "../HeaderComponents/LogoComponent";
 
 function WelcomeComponent() {
-  const user = useAppSelector((state: RootState) => state.user);
   return (
     <div
       style={{

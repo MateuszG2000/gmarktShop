@@ -1,4 +1,4 @@
-import React, { BaseSyntheticEvent, useState } from "react";
+import React, { BaseSyntheticEvent } from "react";
 import css from "./SettingsComponent.module.scss";
 import Input from "../AuthComponents/Input";
 import ButtonComponent from "../CommonComponents/ButtonComponent";
@@ -83,10 +83,10 @@ function SettingsComponent() {
       <span className={css.title}>Zmiana hasła</span>
       <form onSubmit={changePasswordHandler} className={css.loginForm}>
         <Input
-          id="password-input"
+          id="passwordOld-input"
           type="password"
           className="input"
-          name="password"
+          name="passwordOld"
           title="Aktualne hasło:"
           value={enteredOldPassword}
           valid={enteredOldPasswordIsValid}

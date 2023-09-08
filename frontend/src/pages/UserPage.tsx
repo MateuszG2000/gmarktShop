@@ -1,6 +1,6 @@
 import React from "react";
 import LogoComponent from "../components/HeaderComponents/LogoComponent";
-import { Link, Outlet } from "react-router-dom";
+import { Link } from "react-router-dom";
 import FooterSection from "../sections/FooterSection";
 import WarningComponent from "../components/CommonComponents/WarningComponent";
 import { useAppSelector } from "../store/appHooks";
