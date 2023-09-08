@@ -48,14 +48,14 @@ export const login = catchError(async function (
 
   if (!user) {
     const error = new Error('Incorrect login or password.');
-    error.statusCode = 401;
+    error.statusCode = 400;
     throw error;
   }
   const passwordResult = await bcrypt.compare(password, user.password);
 
   if (!passwordResult) {
     const error = new Error('Incorrect login or password.');
-    error.statusCode = 401;
+    error.statusCode = 400;
     throw error;
   }
 
@@ -223,7 +223,7 @@ export const updatePassword = catchError(async function (
 
   if (!passwordResult) {
     const error = new Error('Wrong user password');
-    error.statusCode = 401;
+    error.statusCode = 400;
     throw error;
   }
   const hashedPassword = await bcrypt.hash(newPassword, 12);
