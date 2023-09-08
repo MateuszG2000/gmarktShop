@@ -5,6 +5,7 @@ import * as validators from '../utils/validators';
 const router = Router();
 router.post('/signup', validators.validateEmail, userController.signup);
 router.post('/login', userController.login);
+router.post('/updatepassword', userController.updatePassword);
 router.get('/', userController.isAuth('admin'), userController.getUsers);
 router.get(
   '/getuser',

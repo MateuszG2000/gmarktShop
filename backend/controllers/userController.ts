@@ -1,7 +1,7 @@
 const { validationResult } = require('express-validator');
 const bcrypt = require('bcrypt');
 const catchError = require('../utils/catchError');
-import express from 'express';
+import express, { NextFunction } from 'express';
 const User = require('../models/userModel');
 const jwt = require('jsonwebtoken');
 import { RequestUser } from '../custom';
@@ -201,3 +201,45 @@ export const isAuth = (...userTypes: String[]) =>
       next();
     }
   );
+export const updatePassword = catchError(async function (
+  req: express.Request,
+  res: express.Response,
+  next: NextFunction
+) {
+  let userId;
+  try {
+    const token = req.cookies.Authorization.trim();
+    const decodedToken = jwt.verify(token, process.env.PRIVATE_KEY);
+    userId = decodedToken.userId;
+  } catch (err: any) {
+    err.statusCode = 400;
+    err.message = 'Invalid Token';
+    throw err;
+  }
+  const password = req.body.password;
+  const newPassword = req.body.newPassword;
+  const userPassword = await User.findById(userId, 'password');
+  const passwordResult = await bcrypt.compare(password, userPassword.password);
+
+  if (!passwordResult) {
+    const error = new Error('Wrong user password');
+    error.statusCode = 401;
+    throw error;
+  }
+  const hashedPassword = await bcrypt.hash(newPassword, 12);
+
+  let user: User = await User.findByIdAndUpdate(
+    userId,
+    { password: hashedPassword },
+    { runValidators: true }
+  ).select('+password');
+
+  if (!user) {
+    const error = new Error('Something went wrong');
+    error.statusCode = 500;
+    throw error;
+  }
+  res.status(200).json({
+    status: 'success',
+  });
+});
