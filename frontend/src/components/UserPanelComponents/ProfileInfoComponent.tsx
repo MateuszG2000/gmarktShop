@@ -23,12 +23,9 @@ function ProfileInfoComponent() {
     (async () => {
       try {
         dispatch(userActions.isAuth());
-        const response = await fetch(
-          `http://localhost:9000/api/auth/getuser/?id=${userId}`,
-          {
-            credentials: "include",
-          }
-        );
+        const response = await fetch(`http://localhost:9000/api/auth/getuser`, {
+          credentials: "include",
+        });
         const resData = await response.json();
         setData(resData.data);
         if (response.status === 400) {

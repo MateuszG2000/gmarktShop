@@ -2,6 +2,8 @@ const Order = require('../models/orderModel');
 const catchError = require('../utils/catchError');
 import filter from '../utils/filteringMethods';
 import { Request, Response, NextFunction } from 'express';
+const jwt = require('jsonwebtoken');
+
 export const createOrder = catchError(async function (
   req: Request,
   res: Response,
@@ -41,6 +43,28 @@ export const getOrders = catchError(async function (
   next: NextFunction
 ) {
   const orders = await filter(Order.find(), req.query);
+  res.status(200).json({
+    status: 'success',
+    results: orders.length,
+    data: orders,
+  });
+});
+export const getOrdersToUser = catchError(async function (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  let userId;
+  try {
+    const token = req.cookies.Authorization.trim();
+    const decodedToken = jwt.verify(token, process.env.PRIVATE_KEY);
+    userId = decodedToken.userId;
+  } catch (err: any) {
+    err.statusCode = 400;
+    err.message = 'Invalid Token';
+    throw err;
+  }
+  const orders = await Order.find({ user: userId });
   res.status(200).json({
     status: 'success',
     results: orders.length,

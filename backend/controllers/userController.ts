@@ -117,12 +117,7 @@ export const getUser = catchError(async function (
     err.message = 'Invalid Token';
     throw err;
   }
-  if (userId !== req.query.id) {
-    const error = new Error('You have no permission to read this data');
-    error.statusCode = 404;
-    return next(error);
-  }
-  const user = await User.findById(req.query.id);
+  const user = await User.findById(userId);
   if (!user) {
     const error = new Error('There is no user with given ID');
     error.statusCode = 404;

@@ -17,7 +17,9 @@ function OrderComponent() {
     (async () => {
       try {
         dispatch(userActions.isAuth());
-        const response = await fetch(`http://localhost:9000/api/order`);
+        const response = await fetch(`http://localhost:9000/api/order`, {
+          credentials: "include",
+        });
         const resData = await response.json();
         setData(resData.data);
         if (response.status === 400) {
