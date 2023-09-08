@@ -1,7 +1,6 @@
 import React from "react";
-
 function EditProfileComponent() {
-  return <div>EditProfileComponent</div>;
+  return <>edit</>;
 }
 
 export default EditProfileComponent;

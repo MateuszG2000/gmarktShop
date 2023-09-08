@@ -24,7 +24,7 @@ function OrderComponent() {
         const resData = await response.json();
         resData.data.map((data: IOrder) => {
           const date = new Date(data.createdAt);
-          data.createdAt = formatDate(date);
+          return (data.createdAt = formatDate(date));
         });
         setData(resData.data);
         if (response.status === 400) {
