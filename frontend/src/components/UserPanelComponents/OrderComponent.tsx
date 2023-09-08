@@ -22,7 +22,7 @@ function OrderComponent() {
           credentials: "include",
         });
         const resData = await response.json();
-        resData.data.map((data: any) => {
+        resData.data.map((data: IOrder) => {
           const date = new Date(data.createdAt);
           data.createdAt = formatDate(date);
         });

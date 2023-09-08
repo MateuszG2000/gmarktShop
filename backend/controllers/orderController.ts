@@ -64,7 +64,8 @@ export const getOrdersToUser = catchError(async function (
     err.message = 'Invalid Token';
     throw err;
   }
-  const orders = await Order.find({ user: userId });
+
+  const orders = await Order.find({ user: userId }).sort({ createdAt: -1 });
   res.status(200).json({
     status: 'success',
     results: orders.length,
