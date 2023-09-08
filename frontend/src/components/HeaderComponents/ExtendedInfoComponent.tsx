@@ -9,6 +9,7 @@ import useOutsideClick from "../../utils/useOutsideClick";
 import { BsCartX } from "react-icons/bs";
 function ExtendedInfoComponent() {
   const dispatch = useAppDispatch();
+
   const handleLogOut = () => {
     dispatch(UIActions.toggleAccountExtendedInfo());
     dispatch(onLogOut());
@@ -29,7 +30,14 @@ function ExtendedInfoComponent() {
         <>
           <p>Witaj {user}</p>
           <Link to="/user" className={css.btnLink}>
-            <ButtonComponent color={1}>Moje konto</ButtonComponent>
+            <ButtonComponent
+              onClick={() => {
+                dispatch(UIActions.toggleAccountExtendedInfo());
+              }}
+              color={1}
+            >
+              Moje konto
+            </ButtonComponent>
           </Link>
           <Link to="/" className={css.btnLink}>
             <ButtonComponent onClick={handleLogOut} color={2}>

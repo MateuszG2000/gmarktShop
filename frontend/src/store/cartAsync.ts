@@ -27,7 +27,6 @@ export const sendCartData = (cart: CartState, user: UserState) => {
         body: JSON.stringify(data),
       })
     ).json();
-    console.log(response);
     dispatch(cartActions.sendData());
   };
 };

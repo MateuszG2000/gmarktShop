@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import Cookies from "js-cookie";
 
 const initialState: UserState = {
   email: "",
@@ -23,6 +22,7 @@ const userSlice = createSlice({
     logOut() {
       return initialState;
     },
+    isAuth() {},
   },
 });
 export const userActions = userSlice.actions;

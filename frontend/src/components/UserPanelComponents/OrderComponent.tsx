@@ -2,37 +2,51 @@ import React, { useEffect, useState } from "react";
 import css from "./OrderComponent.module.scss";
 import { useAppDispatch, useAppSelector } from "../../store/appHooks";
 import { UIActions } from "../../store/UI";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AiOutlineArrowDown, AiOutlineArrowLeft } from "react-icons/ai";
+import NotAuthComponent from "../CommonComponents/NotAuthComponent";
+import { userActions } from "../../store/user";
 function OrderComponent() {
   const dispatch = useAppDispatch();
-  const [data, setData] = useState<IOrder[]>();
+  const [data, setData] = useState<IOrder[]>([]);
   const user = useAppSelector((state: RootState) => state.user);
   const [dataVisible, setDataVisible] = useState<number>(-1);
+  const navigate = useNavigate();
   useEffect(() => {
+    dispatch(userActions.isAuth());
     (async () => {
       try {
-        const response = await fetch(
-          `http://localhost:9000/api/order?user=${user.userId}`
-        );
+        dispatch(userActions.isAuth());
+        const response = await fetch(`http://localhost:9000/api/order`);
         const resData = await response.json();
         setData(resData.data);
+        if (response.status === 400) {
+          dispatch(
+            UIActions.showWarning({
+              flag: "red",
+              text: "Nie jesteś zalogowany",
+            })
+          );
+          setTimeout(() => {
+            navigate("/login");
+          }, 2000);
+        }
       } catch (err) {
         dispatch(
           UIActions.showWarning({
             flag: "red",
-            text: "Brak połączenia z serwerem",
+            text: "Błąd połączenia z serwerem",
           })
         );
       }
     })();
   }, []);
-  if (!data) return <></>;
+  if (!user.loggedIn) return <NotAuthComponent />;
   return (
     <div className={css.ordersContainer}>
       {data.map((order, index) => (
-        <>
-          <div key={order._id} className={css.orderList}>
+        <React.Fragment key={order._id}>
+          <div className={css.orderList}>
             <span className={css.orderListEl}>
               {order.orderNumber.split("-")[1]}
             </span>
@@ -194,7 +208,7 @@ function OrderComponent() {
               </div>
             </div>
           )}
-        </>
+        </React.Fragment>
       ))}
     </div>
   );

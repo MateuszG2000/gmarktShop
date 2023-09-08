@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 import { Middleware } from "redux";
-import { userActions } from "./user";
+import { onLogOut } from "./userAsync";
 
 const isAuth: Middleware = (store) => (next) => (action) => {
   if (
@@ -8,8 +8,7 @@ const isAuth: Middleware = (store) => (next) => (action) => {
     store.getState().user.loggedIn &&
     action.type !== "user/logOut"
   ) {
-    store.dispatch(userActions.logOut());
-    console.log("Wylogowanie");
+    store.dispatch<any>(onLogOut());
   }
   next(action);
 };
