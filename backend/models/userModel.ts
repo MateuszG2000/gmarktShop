@@ -11,15 +11,15 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    userData: {
-      firstName: { type: String },
-      lastName: { type: String },
-      street: { type: String },
-      houseNumber: { type: String },
-      zipCode: { type: Number },
-      city: { type: String },
-      phoneNumber: { type: Number },
-    },
+    userData: Array<{
+      firstName: { type: String };
+      lastName: { type: String };
+      street: { type: String };
+      houseNumber: { type: String };
+      zipCode: { type: Number };
+      city: { type: String };
+      phoneNumber: { type: Number };
+    }>,
     password: {
       type: String,
       require: true,

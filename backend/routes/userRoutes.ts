@@ -6,6 +6,8 @@ const router = Router();
 router.post('/signup', validators.validateEmail, userController.signup);
 router.post('/login', userController.login);
 router.post('/updatepassword', userController.updatePassword);
+router.post('/addaddress', userController.AddAddress);
+
 router.get('/', userController.isAuth('admin'), userController.getUsers);
 router.get(
   '/getuser',

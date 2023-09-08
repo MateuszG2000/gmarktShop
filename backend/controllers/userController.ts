@@ -5,6 +5,7 @@ import express, { NextFunction } from 'express';
 const User = require('../models/userModel');
 const jwt = require('jsonwebtoken');
 import { RequestUser } from '../custom';
+import { Address } from 'cluster';
 export function signup(
   req: express.Request,
   res: express.Response,
@@ -126,6 +127,46 @@ export const getUser = catchError(async function (
   res.status(200).json({
     status: 'success',
     data: user,
+  });
+});
+export const AddAddress = catchError(async function (
+  req: express.Request,
+  res: express.Response,
+  next: NextFunction
+) {
+  const address = {
+    ...req.body,
+  };
+  let userId;
+  try {
+    const token = req.cookies.Authorization.trim();
+    const decodedToken = jwt.verify(token, process.env.PRIVATE_KEY);
+    userId = decodedToken.userId;
+  } catch (err: any) {
+    err.statusCode = 400;
+    err.message = 'Invalid Token';
+    throw err;
+  }
+  const actualAddress = await User.findById(userId, 'userData');
+  if (actualAddress.userData.length >= 3) {
+    const error = new Error('To many addresses');
+    error.statusCode = 400;
+    throw error;
+  }
+  actualAddress.userData.push(address);
+  const updatedUser = await User.findByIdAndUpdate(
+    userId,
+    { $set: { userData: actualAddress.userData } },
+    { runValidators: true, new: true }
+  );
+
+  if (!updatedUser) {
+    const error = new Error('Something went wrong');
+    error.statusCode = 500;
+    throw error;
+  }
+  res.status(200).json({
+    status: 'success',
   });
 });
 export function logOut(
