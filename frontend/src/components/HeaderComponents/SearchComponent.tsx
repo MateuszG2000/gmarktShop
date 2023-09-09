@@ -18,7 +18,7 @@ function SearchComponent() {
   useOutsideClick(wrapperRef, UIActions.toggleSearch);
   const searchHandler = debounce(
     async (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (e.target.value == "") {
+      if (e.target.value === "") {
         setIsLoading(false);
         dispatch(UIActions.toggleSearch(false));
       } else {

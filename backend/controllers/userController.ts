@@ -5,7 +5,8 @@ import express, { NextFunction } from 'express';
 const User = require('../models/userModel');
 const jwt = require('jsonwebtoken');
 import { RequestUser } from '../custom';
-import { Address } from 'cluster';
+import filter from '../utils/filteringMethods';
+
 export function signup(
   req: express.Request,
   res: express.Response,
@@ -118,7 +119,8 @@ export const getUser = catchError(async function (
     err.message = 'Invalid Token';
     throw err;
   }
-  const user = await User.findById(userId);
+  const user = await filter(User.findById(userId), req.query);
+  // const user = await User.findById(userId);
   if (!user) {
     const error = new Error('There is no user with given ID');
     error.statusCode = 404;
@@ -126,7 +128,7 @@ export const getUser = catchError(async function (
   }
   res.status(200).json({
     status: 'success',
-    data: user,
+    data: user[0],
   });
 });
 export const updateAddress = catchError(async function (

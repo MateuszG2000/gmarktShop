@@ -1,4 +1,4 @@
-import React, { BaseSyntheticEvent } from "react";
+import React, { BaseSyntheticEvent, useState } from "react";
 import css from "./SettingsComponent.module.scss";
 import Input from "../AuthComponents/Input";
 import ButtonComponent from "../CommonComponents/ButtonComponent";
@@ -7,9 +7,12 @@ import * as validator from "../../utils/validators";
 import ErrorComponent from "../AuthComponents/ErrorComponent";
 import { UIActions } from "../../store/UI";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function SettingsComponent() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [spinner, setSpinner] = useState(false);
   const {
     value: enteredOldPassword,
     isValid: enteredOldPasswordIsValid,
@@ -38,6 +41,7 @@ function SettingsComponent() {
       validator.isSame(value, enteredPassword) && validator.required(value)
   );
   const changePasswordHandler = async (event: BaseSyntheticEvent) => {
+    setSpinner(true);
     event.preventDefault();
     const response = await fetch(
       "http://localhost:9000/api/auth/updatepassword",
@@ -61,6 +65,7 @@ function SettingsComponent() {
           text: "Hasło zostało zmienione",
         })
       );
+      setSpinner(false);
     }
     if (response.status === 400) {
       dispatch(
@@ -69,14 +74,22 @@ function SettingsComponent() {
           text: "Niepoprawne aktualne hasło",
         })
       );
-
-      resetPasswordConfirmInput();
-      resetPasswordInput();
-      resetOldPasswordInput();
+    }
+    if (response.status === 401) {
+      dispatch(
+        UIActions.showWarning({
+          flag: "red",
+          text: "Nie jesteś zalogowany",
+        })
+      );
+      setTimeout(() => {
+        navigate("/login");
+      }, 2000);
     }
     resetPasswordConfirmInput();
     resetPasswordInput();
     resetOldPasswordInput();
+    setSpinner(false);
   };
   return (
     <div className={css.EditProfileContainer}>
@@ -128,7 +141,7 @@ function SettingsComponent() {
         </ErrorComponent>
         <ButtonComponent
           disabled={!(enteredPasswordIsValid && enteredPasswordConfirmIsValid)}
-          // spinner={spinner}
+          spinner={spinner}
         >
           Zmień hasło
         </ButtonComponent>

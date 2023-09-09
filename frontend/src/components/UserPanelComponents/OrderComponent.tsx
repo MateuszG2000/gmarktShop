@@ -27,7 +27,7 @@ function OrderComponent() {
           return (data.createdAt = formatDate(date));
         });
         setData(resData.data);
-        if (response.status === 400) {
+        if (response.status === 401) {
           dispatch(
             UIActions.showWarning({
               flag: "red",
@@ -146,7 +146,7 @@ function OrderComponent() {
                 <div className={css.address}>
                   {" "}
                   <p>
-                    {data[dataVisible].address.name}{" "}
+                    {data[dataVisible].address.firstName}{" "}
                     {data[dataVisible].address.lastName}
                   </p>
                   <p>
@@ -154,14 +154,14 @@ function OrderComponent() {
                     {data[dataVisible].address.houseNumber}
                   </p>
                   <p>
-                    {data[dataVisible].address.code}{" "}
+                    {data[dataVisible].address.zipCode}{" "}
                     {data[dataVisible].address.city}
                   </p>
                 </div>
                 <br></br>
                 <div className={css.contact}>
                   {" "}
-                  <p>tel. {data[dataVisible].address.tel}</p>
+                  <p>tel. {data[dataVisible].address.phoneNumber}</p>
                   <p>e-mail: {data[dataVisible].address.email}</p>
                 </div>
               </div>

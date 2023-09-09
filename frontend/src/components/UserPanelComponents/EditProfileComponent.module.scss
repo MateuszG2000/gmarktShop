@@ -1,3 +1,12 @@
+@import "../AuthComponents/partialLogin";
+.title {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
 .editContainer {
-  margin: 2rem;
+  padding: 2rem 4rem;
+  max-width: 40%;
+}
+.loginForm {
+  margin-top: 2rem;
 }

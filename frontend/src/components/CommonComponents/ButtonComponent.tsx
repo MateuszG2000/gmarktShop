@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from "react";
+import React, { ReactNode } from "react";
 import css from "./ButtonComponent.module.scss";
 const ButtonComponent: React.FC<{
   disabled?: boolean;

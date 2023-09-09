@@ -43,14 +43,13 @@ interface ICartProduct {
 }
 
 interface Address {
-  id: number;
-  name: string;
+  firstName: string;
   lastName: string;
   street: string;
   houseNumber: string;
-  code: string;
+  zipCode: string;
   city: string;
-  tel: string;
+  phoneNumber: string;
   email: string;
 }
 interface UserState {

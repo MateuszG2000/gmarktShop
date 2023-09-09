@@ -7,19 +7,19 @@ function DeliveryEndDataComponent({ address }: { address: Address }) {
       <div className={css.address}>
         {" "}
         <p>
-          {address.name} {address.lastName}
+          {address.firstName} {address.lastName}
         </p>
         <p>
           ul. {address.street} {address.houseNumber}
         </p>
         <p>
-          {address.code} {address.city}
+          {address.zipCode} {address.city}
         </p>
       </div>
       <br></br>
       <div className={css.contact}>
         {" "}
-        <p>tel. {address.tel}</p>
+        <p>tel. {address.phoneNumber}</p>
         <p>e-mail: {address.email}</p>
       </div>
     </div>

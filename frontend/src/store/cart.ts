@@ -11,14 +11,13 @@ const initialState: CartState = {
     cashOnDelivery: false,
   },
   address: {
-    id: 0,
-    name: "",
+    firstName: "",
     lastName: "",
     street: "",
     houseNumber: "",
-    code: "",
+    zipCode: "",
     city: "",
-    tel: "",
+    phoneNumber: "",
     email: "",
   },
 };

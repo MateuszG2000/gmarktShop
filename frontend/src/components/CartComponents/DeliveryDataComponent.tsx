@@ -6,25 +6,23 @@ import { cartActions } from "../../store/cart";
 function DeliveryDataComponent() {
   const AddressData: Address[] = [
     {
-      id: 1,
-      name: "Mateusz",
+      firstName: "Mateusz",
       lastName: "G",
       street: "Akacjowa",
       houseNumber: "18",
-      code: "85-489",
+      zipCode: "85-489",
       city: "Łaziska",
-      tel: "731912912",
+      phoneNumber: "731912912",
       email: "abc@wp.pl",
     },
     {
-      id: 2,
-      name: "Zbigniew",
+      firstName: "Zbigniew",
       lastName: "S",
       street: "Kasztanowa ",
       houseNumber: "12",
-      code: "85-123",
+      zipCode: "85-123",
       city: "Opole",
-      tel: "123123123",
+      phoneNumber: "123123123",
       email: "bca@onet.pl",
     },
   ];
@@ -39,19 +37,19 @@ function DeliveryDataComponent() {
     }
   }, [location, initialAddressSet]);
 
-  const clickHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedAddress = AddressData.find(
-      (item) => item.id === Number(event.target.id)
-    );
-    if (selectedAddress) {
-      setAddress(selectedAddress);
-      setInitialAddressSet(true);
-    }
-  };
+  // const clickHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const selectedAddress = AddressData.find(
+  //     (item) => item.id === Number(event.target.id)
+  //   );
+  //   if (selectedAddress) {
+  //     setAddress(selectedAddress);
+  //     setInitialAddressSet(true);
+  //   }
+  // };
   return (
     <div className={css.deliveryData}>
       <p className={css.title}>Adres dostawy:</p>
-      {AddressData.map((data, index) => {
+      {/* {AddressData.map((data, index) => {
         return (
           <React.Fragment key={data.id}>
             <label htmlFor={`${index + 1}`}>
@@ -66,25 +64,25 @@ function DeliveryDataComponent() {
                 <div className={css.address}>
                   {" "}
                   <p>
-                    {data.name} {data.lastName}
+                    {data.firstName} {data.lastName}
                   </p>
                   <p>
                     ul. {data.street} {data.houseNumber}
                   </p>
                   <p>
-                    {data.code} {data.city}
+                    {data.zipCode} {data.city}
                   </p>
                 </div>
                 <div className={css.contact}>
                   {" "}
-                  <p>tel. {data.tel}</p>
+                  <p>tel. {data.phoneNumber}</p>
                   <p>e-mail: {data.email}</p>
                 </div>
               </div>
             </label>
           </React.Fragment>
         );
-      })}
+      })} */}
     </div>
   );
 }

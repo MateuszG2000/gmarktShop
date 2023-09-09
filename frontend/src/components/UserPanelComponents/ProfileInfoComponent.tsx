@@ -30,7 +30,7 @@ function ProfileInfoComponent() {
         const date = new Date(resData.data.createdAt);
         resData.data.createdAt = formatDate(date);
         setData(resData.data);
-        if (response.status === 400) {
+        if (response.status === 401) {
           dispatch(
             UIActions.showWarning({
               flag: "red",
