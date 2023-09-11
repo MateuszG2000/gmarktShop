@@ -14,6 +14,9 @@ function ExtendedInfoComponent() {
     dispatch(UIActions.toggleAccountExtendedInfo());
     dispatch(onLogOut());
   };
+  const cartButtonHandler = () => {
+    dispatch(UIActions.hideWindow());
+  };
   const AccountVisible = useAppSelector(
     (state: RootState) => state.UI.headerExtendedInfo.accountInfoVisible
   );
@@ -32,7 +35,7 @@ function ExtendedInfoComponent() {
           <Link to="/user" className={css.btnLink}>
             <ButtonComponent
               onClick={() => {
-                dispatch(UIActions.toggleAccountExtendedInfo());
+                dispatch(UIActions.hideWindow());
               }}
               color={1}
             >
@@ -69,7 +72,9 @@ function ExtendedInfoComponent() {
                 </span>
               </div>
               <Link to="/cart" className={css.btnLink}>
-                <ButtonComponent color={1}>Koszyk</ButtonComponent>
+                <ButtonComponent onClick={cartButtonHandler} color={1}>
+                  Koszyk
+                </ButtonComponent>
               </Link>
             </>
           )}

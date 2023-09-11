@@ -36,8 +36,6 @@ function ProductComponent() {
       product.quantity = quantity;
       dispatch(cartActions.addItem(product));
     }
-    console.log(product);
-    console.log(quantity);
   }
   return (
     <>

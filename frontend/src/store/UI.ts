@@ -16,17 +16,15 @@ const initialState = {
 
 const UISlice = createSlice({
   name: "UI",
-  initialState: initialState,
+  initialState,
   reducers: {
     toggleSearch(state, action) {
-      if (action.payload) state.searchVisible = true;
-      if (!action.payload) state.searchVisible = false;
+      state.searchVisible = action.payload;
       console.log(action.payload);
     },
     showWarning(state, action) {
-      state.warning.visible = true;
-      state.warning.flag = action.payload.flag;
-      state.warning.text = action.payload.text;
+      const { flag, text } = action.payload;
+      state.warning = { visible: true, flag, text };
     },
     hideWarning(state) {
       state.warning.visible = false;
@@ -36,36 +34,34 @@ const UISlice = createSlice({
         !state.headerExtendedInfo.windowVisible;
     },
     hideWindow(state) {
-      return {
-        ...state,
-        headerExtendedInfo: initialState.headerExtendedInfo,
-      };
+      state.headerExtendedInfo = initialState.headerExtendedInfo;
     },
     toggleAccountExtendedInfo(state) {
-      if (
-        state.headerExtendedInfo.windowVisible &&
-        state.headerExtendedInfo.cartInfoVisible
-      ) {
+      const { windowVisible, cartInfoVisible, accountInfoVisible } =
+        state.headerExtendedInfo;
+
+      if (windowVisible && cartInfoVisible) {
         state.headerExtendedInfo.cartInfoVisible = false;
       } else {
         UISlice.caseReducers.toggleWindow(state);
       }
-      state.headerExtendedInfo.accountInfoVisible =
-        !state.headerExtendedInfo.accountInfoVisible;
+
+      state.headerExtendedInfo.accountInfoVisible = !accountInfoVisible;
     },
     toggleCartExtendedInfo(state) {
-      if (
-        state.headerExtendedInfo.windowVisible &&
-        state.headerExtendedInfo.accountInfoVisible
-      ) {
+      const { windowVisible, accountInfoVisible, cartInfoVisible } =
+        state.headerExtendedInfo;
+
+      if (windowVisible && accountInfoVisible) {
         state.headerExtendedInfo.accountInfoVisible = false;
       } else {
         UISlice.caseReducers.toggleWindow(state);
       }
-      state.headerExtendedInfo.cartInfoVisible =
-        !state.headerExtendedInfo.cartInfoVisible;
+
+      state.headerExtendedInfo.cartInfoVisible = !cartInfoVisible;
     },
   },
 });
+
 export const UIActions = UISlice.actions;
 export default UISlice;

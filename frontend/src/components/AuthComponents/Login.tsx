@@ -72,7 +72,7 @@ function Login() {
         setError(false);
         navigate("/");
       })
-      .catch((err) => {
+      .catch(() => {
         dispatch(
           UIActions.showWarning({
             flag: "red",
@@ -87,33 +87,52 @@ function Login() {
     resetEmailInput();
     resetPasswordInput();
   };
+
+  const InputsObj = [
+    {
+      id: "email-input",
+      type: "email",
+      className: "input",
+      name: "email",
+      title: "E-mail:",
+      value: enteredEmail,
+      valid: enteredEmailIsValid,
+      touched: emailInputHasError,
+      onBlur: emailBlurHandler,
+      onChange: emailChangeHandler,
+    },
+    {
+      id: "password-input",
+      type: "password",
+      className: "input",
+      name: "password",
+      title: "Hasło:",
+      value: enteredPassword,
+      valid: enteredPasswordIsValid,
+      touched: passwordInputHasError,
+      onBlur: passwordBlurHandler,
+      onChange: passwordChangeHandler,
+    },
+  ];
+
   return (
     <div className={css.loginPanel}>
       <form onSubmit={loginHandler} className={css.loginForm}>
-        <Input
-          id="email-input"
-          type="email"
-          className="input"
-          name="email"
-          title="E-mail:"
-          value={enteredEmail}
-          valid={enteredEmailIsValid}
-          touched={emailInputHasError}
-          onBlur={emailBlurHandler}
-          onChange={emailChangeHandler}
-        ></Input>
-        <Input
-          id="password-input"
-          type="password"
-          className="input"
-          name="password"
-          title="Hasło:"
-          value={enteredPassword}
-          valid={enteredPasswordIsValid}
-          touched={passwordInputHasError}
-          onBlur={passwordBlurHandler}
-          onChange={passwordChangeHandler}
-        ></Input>
+        {InputsObj.map((input) => (
+          <Input
+            id={input.id}
+            type={input.type}
+            className={input.className}
+            name={input.name}
+            title={input.title}
+            value={input.value}
+            valid={input.valid}
+            touched={input.touched}
+            onBlur={input.onBlur}
+            onChange={input.onChange}
+          ></Input>
+        ))}
+
         {error && <ErrorComponent>Niepoprawny login lub hasło</ErrorComponent>}
         <ButtonComponent
           disabled={!(enteredEmailIsValid && enteredPasswordIsValid)}

@@ -12,7 +12,6 @@ function ProductComponent({ product }: { product: Product }) {
     dispatch(cartActions.addItem(product));
   };
 
-  const img = `http://localhost:9000/api/images/${product.image}`;
   return (
     <div
       onClick={() => {
@@ -24,7 +23,7 @@ function ProductComponent({ product }: { product: Product }) {
         <img
           loading="lazy"
           className={`${css.image} ${imageLoaded ? css.imgLoaded : ""}`}
-          src={img}
+          src={`http://localhost:9000/api/images/${product.image}`}
           alt="produkt"
           onLoad={() => setImageLoaded(true)}
         />

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { AiOutlinePlus, AiOutlineMinus } from "react-icons/ai";
 import css from "./QuantityComponent.module.scss";
+
 function QuantityComponent({
   quantityProp,
   onChange,
@@ -11,27 +12,31 @@ function QuantityComponent({
   onRemove: Function;
 }) {
   const [quantity, setQuantity] = useState(quantityProp);
-  function decrementHandler() {
+
+  const handleQuantityChange = (newQuantity: number) => {
+    setQuantity(newQuantity);
+    onChange(newQuantity);
+  };
+
+  const decrementHandler = () => {
     if (quantity === 1) {
       onRemove();
-      return;
+    } else {
+      handleQuantityChange(quantity - 1);
     }
-    setQuantity(quantity - 1);
-    onChange(quantity - 1);
-  }
+  };
+
+  const incrementHandler = () => {
+    handleQuantityChange(quantity + 1);
+  };
+
   return (
     <div className={css.quantity}>
       <button className={css.btn} onClick={decrementHandler}>
         <AiOutlineMinus />
       </button>
       <span className={css.counter}>{quantity}</span>
-      <button
-        className={css.btn}
-        onClick={() => {
-          setQuantity(quantity + 1);
-          onChange(quantity + 1);
-        }}
-      >
+      <button className={css.btn} onClick={incrementHandler}>
         <AiOutlinePlus />
       </button>
     </div>
