@@ -57,7 +57,6 @@ function SettingsComponent() {
         }),
       }
     );
-    console.log(await response.json());
     if (response.ok) {
       dispatch(
         UIActions.showWarning({

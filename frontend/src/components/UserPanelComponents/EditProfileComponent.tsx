@@ -4,7 +4,9 @@ import Input from "../AuthComponents/Input";
 import ButtonComponent from "../CommonComponents/ButtonComponent";
 import { useDispatch } from "react-redux";
 import { UIActions } from "../../store/UI";
+import { useNavigate } from "react-router-dom";
 function EditProfileComponent() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState<Address>({
     firstName: "",
     lastName: "",
@@ -27,14 +29,33 @@ function EditProfileComponent() {
             }
           )
         ).json();
-        if (response.data.userData) setFormData(response.data.userData);
-      } catch (err) {
-        dispatch(
-          UIActions.showWarning({
-            flag: "red",
-            text: "Brak połączenia z serwerem",
-          })
-        );
+        if (response?.data?.userData) setFormData(response.data.userData);
+        if (!response.ok) {
+          console.log(response);
+          const error: Error = new Error(
+            `Request failed with status ${response.status}`
+          );
+          error.statusCode = response.status;
+          throw error;
+        }
+      } catch (err: any) {
+        if (err.statusCode === 401) {
+          dispatch(
+            UIActions.showWarning({
+              flag: "red",
+              text: "Nie jesteś zalogowany",
+            })
+          );
+          setTimeout(() => {
+            navigate("/login");
+          }, 2000);
+        } else
+          dispatch(
+            UIActions.showWarning({
+              flag: "red",
+              text: "Błąd połączenia z serwerem",
+            })
+          );
       }
     })();
   }, []);

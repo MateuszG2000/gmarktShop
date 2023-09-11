@@ -22,12 +22,20 @@ function OrderComponent() {
           credentials: "include",
         });
         const resData = await response.json();
-        resData.data.map((data: IOrder) => {
+        resData?.data?.map((data: IOrder) => {
           const date = new Date(data.createdAt);
           return (data.createdAt = formatDate(date));
         });
         setData(resData.data);
-        if (response.status === 401) {
+        if (!response.ok) {
+          const error: Error = new Error(
+            `Request failed with status ${response.status}`
+          );
+          error.statusCode = response.status;
+          throw error;
+        }
+      } catch (err: any) {
+        if (err.statusCode === 401) {
           dispatch(
             UIActions.showWarning({
               flag: "red",
@@ -37,14 +45,13 @@ function OrderComponent() {
           setTimeout(() => {
             navigate("/login");
           }, 2000);
-        }
-      } catch (err) {
-        dispatch(
-          UIActions.showWarning({
-            flag: "red",
-            text: "Błąd połączenia z serwerem",
-          })
-        );
+        } else
+          dispatch(
+            UIActions.showWarning({
+              flag: "red",
+              text: "Błąd połączenia z serwerem",
+            })
+          );
       }
     })();
   }, [dispatch, navigate]);

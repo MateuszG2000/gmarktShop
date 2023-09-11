@@ -27,10 +27,21 @@ function ProfileInfoComponent() {
           credentials: "include",
         });
         const resData = await response.json();
-        const date = new Date(resData.data.createdAt);
-        resData.data.createdAt = formatDate(date);
-        setData(resData.data);
-        if (response.status === 401) {
+        if (!response.ok) {
+          console.log(response);
+          const error: Error = new Error(
+            `Request failed with status ${response.status}`
+          );
+          error.statusCode = response.status;
+          throw error;
+        } else {
+          const date = new Date(resData?.data?.createdAt);
+          resData.data.createdAt = formatDate(date);
+          setData(resData.data);
+        }
+      } catch (err: any) {
+        console.log(err);
+        if (err.statusCode === 401) {
           dispatch(
             UIActions.showWarning({
               flag: "red",
@@ -40,14 +51,13 @@ function ProfileInfoComponent() {
           setTimeout(() => {
             navigate("/login");
           }, 2000);
-        }
-      } catch (err) {
-        dispatch(
-          UIActions.showWarning({
-            flag: "red",
-            text: "Brak połączenia z serwerem",
-          })
-        );
+        } else
+          dispatch(
+            UIActions.showWarning({
+              flag: "red",
+              text: "Błąd połączenia z serwerem",
+            })
+          );
       }
     })();
   }, [dispatch, navigate]);

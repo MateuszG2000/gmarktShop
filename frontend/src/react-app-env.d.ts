@@ -4,6 +4,11 @@ interface RootState {
   user: UserState;
   UI: UIState;
 }
+interface Error {
+  statusCode: number;
+  data: string;
+  message?: string;
+}
 interface Product {
   _id: key;
   name: string;
