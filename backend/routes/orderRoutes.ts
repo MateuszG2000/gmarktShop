@@ -3,6 +3,7 @@ const router = Router();
 import * as order from '../controllers/orderController';
 import * as userController from '../controllers/userController';
 
+router.route('/orders').get(userController.isAuth('admin'), order.getOrders);
 router
   .route('/:id')
   .get(userController.isAuth('admin'), order.getOrder)
@@ -12,5 +13,4 @@ router
   .route('/')
   .get(userController.isAuth('user', 'admin'), order.getOrdersToUser)
   .post(order.createOrder);
-router.route('/orders').get(userController.isAuth('admin'), order.getOrders);
 export default router;

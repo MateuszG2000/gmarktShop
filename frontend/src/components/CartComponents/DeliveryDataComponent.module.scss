@@ -4,7 +4,7 @@
   min-width: fit-content;
   row-gap: 0.5rem;
   font-family: index.$font2;
-  font-size: 0.9rem;
+  font-size: 1rem;
   white-space: nowrap;
   padding: 1rem;
   @include index.boxShadow;
@@ -13,26 +13,13 @@
 }
 .title {
   font-size: 1.3rem;
-  margin-bottom: 1rem;
+
+  margin-bottom: 1rem !important;
   font-weight: 500;
-  margin-bottom: 2rem;
+  margin-top: 1rem !important;
 }
 .deliveryData p {
-  line-height: 0.6rem;
   font-weight: 400;
-}
-.label {
-  display: flex;
-  gap: 2rem;
-  max-width: 85%;
-  cursor: pointer;
-}
-
-.address {
-  flex-grow: 1;
-}
-
-.label input:checked ~ .address p,
-.label input:checked ~ .contact p {
-  font-weight: 500;
+  margin: 0;
+  line-height: 1.5rem;
 }

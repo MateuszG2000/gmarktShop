@@ -1,7 +1,6 @@
 import React from "react";
 import css from "./CartThirdStepSection.module.scss";
 import StatusComponent from "../components/CartComponents/StatusComponent";
-import DeliveryEndDataComponent from "../components/CartComponents/DeliveryEndDataComponent";
 import SummaryComponent from "../components/CartComponents/SummaryComponent";
 import ProductListComponent from "../components/CartComponents/ProductListComponent";
 import { useSelector } from "react-redux";
@@ -9,6 +8,7 @@ import { sendCartData } from "../store/cartAsync";
 import { useAppDispatch, useAppSelector } from "../store/appHooks";
 import { UIActions } from "../store/UI";
 import CartEmptyInfoComponent from "../components/CartComponents/CartEmptyInfoComponent";
+import DeliveryDataComponent from "../components/CartComponents/DeliveryDataComponent";
 function CartThirdStepSection() {
   const address = useSelector((state: RootState) => state.cart.address);
   const cartItems = useSelector((state: RootState) => state.cart.items);
@@ -41,7 +41,7 @@ function CartThirdStepSection() {
             />
           ))}
           <div className={css.deliverySummary}>
-            <DeliveryEndDataComponent address={address} />
+            <DeliveryDataComponent />
             <SummaryComponent
               disable={!userIsLogged}
               buttonText={<>Zapłać</>}

@@ -15,12 +15,13 @@ interface IOrder extends Document {
     cashOnDelivery: Boolean;
   };
   address: {
-    name: String;
+    firstName: String;
     lastName: String;
     street: String;
-    code: String;
+    zipCode: String;
+    houseNumber: String;
     city: String;
-    tel: String;
+    phoneNumber: String;
     email: String;
   };
   totalPriceWithoutShipping: String;
@@ -59,12 +60,13 @@ const orderModel = new mongoose.Schema(
       default: false,
     },
     address: {
-      name: { type: String, required: true },
+      firstName: { type: String, required: true },
       lastName: { type: String, required: true },
       street: { type: String, required: true },
-      code: { type: String, required: true },
+      houseNumber: { type: String, required: true },
+      zipCode: { type: String, required: true },
       city: { type: String, required: true },
-      tel: { type: String, required: true },
+      phoneNumber: { type: String, required: true },
       email: { type: String, required: true },
     },
     shipping: {
