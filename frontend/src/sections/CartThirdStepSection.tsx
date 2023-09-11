@@ -10,7 +10,6 @@ import { UIActions } from "../store/UI";
 import CartEmptyInfoComponent from "../components/CartComponents/CartEmptyInfoComponent";
 import DeliveryDataComponent from "../components/CartComponents/DeliveryDataComponent";
 function CartThirdStepSection() {
-  const address = useSelector((state: RootState) => state.cart.address);
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const dispatch = useAppDispatch();
   const cart = useAppSelector((state: RootState) => state.cart);

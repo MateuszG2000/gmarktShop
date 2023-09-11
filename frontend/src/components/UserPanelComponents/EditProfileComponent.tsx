@@ -57,7 +57,7 @@ function EditProfileComponent() {
           );
       }
     })();
-  }, []);
+  }, [dispatch, navigate]);
 
   const onSubmitHandler = async function (e: BaseSyntheticEvent) {
     e.preventDefault();
@@ -96,6 +96,7 @@ function EditProfileComponent() {
       <form onSubmit={onSubmitHandler} className={css.loginForm}>
         <Input
           id="FirstName-input"
+          name="FirstName-input"
           type="text"
           className="input"
           title="Imię:"
@@ -109,6 +110,7 @@ function EditProfileComponent() {
         />
         <Input
           id="LastName-input"
+          name="LastName-input"
           type="text"
           className="input"
           title="Nazwisko:"
@@ -122,6 +124,7 @@ function EditProfileComponent() {
         />
         <Input
           id="street-input"
+          name="street-input"
           type="text"
           className="input"
           title="Ulica:"
@@ -135,6 +138,7 @@ function EditProfileComponent() {
         />
         <Input
           id="hnumb-input"
+          name="hnumb-input"
           type="text"
           className="input"
           title="Numer domu:"
@@ -148,6 +152,7 @@ function EditProfileComponent() {
         />
         <Input
           id="zip-input"
+          name="zip-input"
           type="text"
           className="input"
           title="Kod pocztowy:"
@@ -161,6 +166,7 @@ function EditProfileComponent() {
         />
         <Input
           id="city-input"
+          name="city-input"
           type="text"
           className="input"
           title="Miejscowość:"
@@ -174,6 +180,7 @@ function EditProfileComponent() {
         />
         <Input
           id="phone-input"
+          name="phone-input"
           type="text"
           className="input"
           title="Numer telefonu:"

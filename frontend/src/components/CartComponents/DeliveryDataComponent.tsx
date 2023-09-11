@@ -65,7 +65,7 @@ function DeliveryDataComponent() {
           );
       }
     })();
-  }, []);
+  }, [dispatch, email, navigate]);
   return (
     <div className={css.deliveryData}>
       <p className={css.title}>Adres dostawy:</p>

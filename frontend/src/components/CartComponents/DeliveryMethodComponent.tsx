@@ -17,7 +17,7 @@ function DeliveryMethodComponent() {
 
   useEffect(() => {
     dispatch(cartActions.setShipping(shippingMethods[0]));
-  }, []);
+  }, [dispatch]);
   const shippingHandler = (event: ChangeEvent<HTMLInputElement>) => {
     const shipping: IShipping = {
       id: event.target.id,

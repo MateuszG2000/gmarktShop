@@ -24,7 +24,7 @@ function HomeSection() {
         );
       }
     })();
-  }, []);
+  }, [dispatch]);
   return (
     <div className={css.homeSection}>
       <SliderComponent></SliderComponent>

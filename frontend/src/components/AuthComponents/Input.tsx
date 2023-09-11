@@ -1,6 +1,7 @@
-import React from "react";
+import React, { ChangeEventHandler, FocusEventHandler } from "react";
 import css from "./Input.module.scss";
-function Input(props: any) {
+
+function Input(props: InputProps) {
   return (
     <>
       <label htmlFor={props.name}>{props.title}</label>
@@ -20,3 +21,15 @@ function Input(props: any) {
 }
 
 export default Input;
+type InputProps = {
+  name: string;
+  title: string;
+  className: string;
+  valid?: boolean;
+  touched?: boolean;
+  id: string;
+  type: string;
+  value: string;
+  onBlur?: FocusEventHandler<HTMLInputElement>;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
+};

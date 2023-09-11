@@ -7,21 +7,7 @@ function AuthSection() {
   const buttonHanlder = (e: boolean) => {
     e ? setPageOption(true) : setPageOption(false);
   };
-  // const onClick = () => {
-  //   fetch("http://localhost:9000/api/auth/", {
-  //     method: "GET",
-  //     credentials: "include",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   })
-  //     .then((res) => {
-  //       return res.json();
-  //     })
-  //     .then((res) => {
-  //       console.log(res); ////login action
-  //     });
-  // };
+
   return (
     <div className={css.auth}>
       <div className={css.authButtons}>

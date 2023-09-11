@@ -66,7 +66,6 @@ function Login() {
           userId: string;
           exp: number;
         } = jwt(res.token);
-        console.log("Logged in", userData);
         dispatch(userActions.logIn(userData));
         dispatch(UIActions.showWarning({ flag: "green", text: "Zalogowano" }));
         setSpinner(false);
@@ -74,7 +73,6 @@ function Login() {
         navigate("/");
       })
       .catch((err) => {
-        console.log(err);
         dispatch(
           UIActions.showWarning({
             flag: "red",

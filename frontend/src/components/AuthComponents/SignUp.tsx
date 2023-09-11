@@ -7,7 +7,6 @@ import Input from "./Input";
 import ErrorComponent from "./ErrorComponent";
 import { useAppDispatch } from "../../store/appHooks";
 import { UIActions } from "../../store/UI";
-
 import { useNavigate } from "react-router-dom";
 function SignUp() {
   const dispatch = useAppDispatch();
@@ -81,6 +80,7 @@ function SignUp() {
       );
       resetPasswordConfirmInput();
       resetPasswordInput();
+      resetEmailInput();
     }
   };
   return (

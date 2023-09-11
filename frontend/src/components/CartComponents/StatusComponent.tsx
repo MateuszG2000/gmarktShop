@@ -41,7 +41,7 @@ function StatusComponent({ step }: { step: number }) {
           </div>
         </Link>
       )}
-      {step == 1 && (
+      {step === 1 && (
         <div className={css.step}>
           <div className={`${css["circle"]}`}>
             {step > 2 ? (
