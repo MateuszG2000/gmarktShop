@@ -1,12 +1,18 @@
 import React, { ReactNode } from "react";
 import css from "./ButtonComponent.module.scss";
-const ButtonComponent: React.FC<{
+const ButtonComponent = ({
+  disabled,
+  spinner,
+  children,
+  onClick,
+  color,
+}: {
   disabled?: boolean;
   spinner?: boolean;
   children: string | ReactNode;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   color?: number;
-}> = ({ children, disabled, onClick, spinner, color }) => {
+}) => {
   let colorClass = "";
   if (color) {
     const colors: { [key: string]: string } = {

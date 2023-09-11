@@ -2,7 +2,13 @@ import React, { useEffect, useState } from "react";
 import css from "./WarningComponent.module.scss";
 import { useAppDispatch } from "../../store/appHooks";
 import { UIActions } from "../../store/UI";
-function WarningComponent({ text, flag }: { text: string; flag: string }) {
+function WarningComponent({
+  text,
+  flag,
+}: {
+  text: string;
+  flag: "red" | "green" | "yellow" | string;
+}) {
   const [animation, setAnimation] = useState(false);
   const dispatch = useAppDispatch();
   useEffect(() => {
