@@ -65,10 +65,8 @@ function ProfileInfoComponent() {
   return (
     <div className={css.profileContainer}>
       <div className={css.title}>Profil</div>
-      <div className={css.left}>e-mail</div>
+      <div className={css.left}>E-mail</div>
       <div className={css.right}>{data.email}</div>
-      <div className={css.left}>Imię i nazwisko</div>
-      <div className={css.right}>----</div>
       <div className={css.left}>Typ uzytkownika</div>
       <div className={css.right}>{data.userType}</div>
       <div className={css.left}>Status</div>

@@ -51,8 +51,8 @@ function ExtendedInfoComponent() {
           {cart.totalQuantity !== 0 && (
             <>
               {cart.items.map((product) => (
-                <Link to={`product/${product._id}`}>
-                  <div key={product._id} className={css.productEl}>
+                <Link key={product._id} to={`product/${product._id}`}>
+                  <div className={css.productEl}>
                     <img
                       className={css.image}
                       src={`http://localhost:9000/api/images/${product.image}`}

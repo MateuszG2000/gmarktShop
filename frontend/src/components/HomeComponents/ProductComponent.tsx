@@ -16,7 +16,7 @@ function ProductComponent({ product }: { product: Product }) {
   return (
     <div
       onClick={() => {
-        navigate(`product/${product._id}`);
+        navigate(`../product/${product._id}`);
       }}
       className={css.product}
     >

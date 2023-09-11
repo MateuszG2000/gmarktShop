@@ -21,17 +21,16 @@ function EditProfileComponent() {
   useEffect(() => {
     (async () => {
       try {
-        const response = await (
-          await fetch(
-            `http://localhost:9000/api/auth/getuser?fields=userData`,
-            {
-              credentials: "include",
-            }
-          )
-        ).json();
-        if (response?.data?.userData) setFormData(response.data.userData);
+        const response = await fetch(
+          `http://localhost:9000/api/auth/getuser?fields=userData`,
+          {
+            credentials: "include",
+          }
+        );
+
+        const resData = await response.json();
+        if (resData?.data?.userData) setFormData(resData.data.userData);
         if (!response.ok) {
-          console.log(response);
           const error: Error = new Error(
             `Request failed with status ${response.status}`
           );
