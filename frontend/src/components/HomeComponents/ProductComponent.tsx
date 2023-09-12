@@ -4,6 +4,7 @@ import { BsCartPlusFill } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../../store/cart";
 import { useNavigate } from "react-router-dom";
+import SpinnerComponent from "../CommonComponents/SpinnerComponent";
 function ProductComponent({ product }: { product: Product }) {
   const navigate = useNavigate();
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -27,9 +28,7 @@ function ProductComponent({ product }: { product: Product }) {
           alt="produkt"
           onLoad={() => setImageLoaded(true)}
         />
-        <span
-          className={`${css.loader} ${imageLoaded ? css.loaded : css.loading}`}
-        ></span>
+        <SpinnerComponent size={48} loading={imageLoaded} />
       </div>
       <p className={css.title}>{product.name}</p>
       <div className={css.cartPrice}>

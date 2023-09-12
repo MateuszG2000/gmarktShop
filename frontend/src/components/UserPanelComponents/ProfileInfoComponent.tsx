@@ -6,8 +6,10 @@ import { useNavigate } from "react-router-dom";
 import { userActions } from "../../store/user";
 import NotAuthComponent from "../CommonComponents/NotAuthComponent";
 import formatDate from "../../utils/formatDate";
+import SpinnerComponent from "../CommonComponents/SpinnerComponent";
 
 function ProfileInfoComponent() {
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const userLoggedIn = useAppSelector(
     (state: RootState) => state.user.loggedIn
@@ -38,6 +40,7 @@ function ProfileInfoComponent() {
           const date = new Date(resData?.data?.createdAt);
           resData.data.createdAt = formatDate(date);
           setData(resData.data);
+          setLoading(false);
         }
       } catch (err: any) {
         console.log(err);
@@ -73,6 +76,7 @@ function ProfileInfoComponent() {
       <div className={css.right}>{data.status}</div>
       <div className={css.left}>Data utworzenia</div>
       <div className={css.right}>{data.createdAt}</div>
+      <SpinnerComponent loading={loading} size={48} />
     </div>
   );
 }

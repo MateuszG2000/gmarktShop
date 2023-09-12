@@ -7,7 +7,10 @@ import { AiOutlineArrowDown, AiOutlineArrowLeft } from "react-icons/ai";
 import NotAuthComponent from "../CommonComponents/NotAuthComponent";
 import { userActions } from "../../store/user";
 import formatDate from "../../utils/formatDate";
+import SpinnerComponent from "../CommonComponents/SpinnerComponent";
 function OrderComponent() {
+  const [loading, setLoading] = useState(true);
+
   const dispatch = useAppDispatch();
   const [data, setData] = useState<IOrder[]>([]);
   const user = useAppSelector((state: RootState) => state.user);
@@ -27,6 +30,7 @@ function OrderComponent() {
           return (data.createdAt = formatDate(date));
         });
         setData(resData.data);
+        setLoading(false);
         if (!response.ok) {
           const error: Error = new Error(
             `Request failed with status ${response.status}`
@@ -58,6 +62,8 @@ function OrderComponent() {
   if (!user.loggedIn) return <NotAuthComponent />;
   return (
     <div className={css.ordersContainer}>
+      <SpinnerComponent loading={true} size={48} />
+
       {data.map((order, index) => (
         <React.Fragment key={order._id}>
           <div className={css.orderList}>
@@ -86,6 +92,7 @@ function OrderComponent() {
               )}
             </span>
           </div>
+
           {dataVisible !== -1 && index === dataVisible && (
             <div key={order._id} className={css.orderContainer}>
               <div className={css.prodList}>
