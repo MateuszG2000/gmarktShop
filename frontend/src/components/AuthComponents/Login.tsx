@@ -120,6 +120,7 @@ function Login() {
       <form onSubmit={loginHandler} className={css.loginForm}>
         {InputsObj.map((input) => (
           <Input
+            key={input.id}
             id={input.id}
             type={input.type}
             className={input.className}
