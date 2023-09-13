@@ -1,7 +1,9 @@
 import React from "react";
 import LogoComponent from "../HeaderComponents/LogoComponent";
+import { useAppSelector } from "../../store/appHooks";
 
 function WelcomeComponent() {
+  const userType = useAppSelector((state: RootState) => state.user.type);
   return (
     <div
       style={{
@@ -21,7 +23,7 @@ function WelcomeComponent() {
           letterSpacing: "0.4rem",
         }}
       >
-        Panel użytkownika
+        Panel {userType === "admin" ? "administratora" : "użytkownika"}
       </div>
     </div>
   );
