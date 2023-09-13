@@ -21,10 +21,18 @@ function SummaryComponent({
   const userIsLogged = useAppSelector(
     (state: RootState) => state.user.loggedIn
   );
+  const userType = useAppSelector((state: RootState) => state.user.type);
   const clickHandler = () => {
     if (!userIsLogged)
       dispatch(
         UIActions.showWarning({ text: "Nie jesteś zalogowany", flag: "red" })
+      );
+    else if (userType === "admin")
+      dispatch(
+        UIActions.showWarning({
+          text: "Jesteś zalogowany jako administrator",
+          flag: "red",
+        })
       );
   };
   const cartData = useSelector((state: RootState) => state.cart);
@@ -66,7 +74,7 @@ function SummaryComponent({
             {buttonText}
           </ButtonComponent>
         </Link>
-        {!userIsLogged && (
+        {(!userIsLogged || userType === "admin") && (
           <div className={css.helperBtn} onClick={clickHandler}></div>
         )}
       </div>

@@ -6,7 +6,6 @@ import ProductListComponent from "../components/CartComponents/ProductListCompon
 import { useSelector } from "react-redux";
 import { sendCartData } from "../store/cartAsync";
 import { useAppDispatch, useAppSelector } from "../store/appHooks";
-import { UIActions } from "../store/UI";
 import CartEmptyInfoComponent from "../components/CartComponents/CartEmptyInfoComponent";
 import DeliveryDataComponent from "../components/CartComponents/DeliveryDataComponent";
 function CartThirdStepSection() {
@@ -19,12 +18,6 @@ function CartThirdStepSection() {
   );
   const handleSendData = () => {
     dispatch(sendCartData(cart, user));
-    dispatch(
-      UIActions.showWarning({
-        flag: "green",
-        text: "Zamówienie zostało wysłane",
-      })
-    );
   };
   return (
     <div className={css.cart}>

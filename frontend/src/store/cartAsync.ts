@@ -1,5 +1,6 @@
 import { Dispatch } from "react";
 import { cartActions } from "./cart";
+import { UIActions } from "./UI";
 type CartAction = { type: string };
 
 export const sendCartData = (cart: CartState, user: UserState) => {
@@ -12,7 +13,7 @@ export const sendCartData = (cart: CartState, user: UserState) => {
           price: item.price,
         };
       }),
-      address: cart.address,
+      address: { ...user.address, email: user.email },
       shipping: cart.shipping,
       totalPriceWithoutShipping: cart.totalPrice,
       user: user.userId,
@@ -27,8 +28,23 @@ export const sendCartData = (cart: CartState, user: UserState) => {
         body: JSON.stringify(data),
       })
     ).json();
-    if (response.ok) {
+    console.log(response.status);
+    if (response.status === "success") {
       dispatch(cartActions.sendData());
+      dispatch(
+        UIActions.showWarning({
+          flag: "green",
+          text: "Zamówienie zostało wysłane",
+        })
+      );
+    }
+    if (response.status === 400) {
+      dispatch(
+        UIActions.showWarning({
+          flag: "red",
+          text: "Coś poszło nie tak",
+        })
+      );
     }
   };
 };

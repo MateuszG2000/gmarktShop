@@ -9,6 +9,7 @@ interface User {
   password?: string;
   save(): Promise;
   userType: string;
+  userData: Address;
 }
 interface onSave {
   _id: string;
@@ -27,4 +28,14 @@ interface ExpressProps {
   req: express.Request;
   res: express.Response;
   next: express.NextFunction;
+}
+interface Address {
+  firstName: String;
+  lastName: String;
+  street: String;
+  zipCode: String;
+  houseNumber: String;
+  city: String;
+  phoneNumber: String;
+  email: String;
 }

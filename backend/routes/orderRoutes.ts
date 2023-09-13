@@ -3,7 +3,7 @@ const router = Router();
 import * as order from '../controllers/orderController';
 import * as userController from '../controllers/userController';
 
-router.route('/orders').get(userController.isAuth('admin'), order.getOrders);
+router.route('/all').get(userController.isAuth('admin'), order.getOrders);
 router
   .route('/:id')
   .get(userController.isAuth('admin'), order.getOrder)

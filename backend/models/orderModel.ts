@@ -15,16 +15,7 @@ interface IOrder extends Document {
     price: Number;
     cashOnDelivery: Boolean;
   };
-  address: {
-    firstName: String;
-    lastName: String;
-    street: String;
-    zipCode: String;
-    houseNumber: String;
-    city: String;
-    phoneNumber: String;
-    email: String;
-  };
+  address: Address;
   totalPriceWithoutShipping: String;
 }
 const orderModel = new mongoose.Schema(

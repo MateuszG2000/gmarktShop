@@ -5,6 +5,7 @@ import ButtonComponent from "../CommonComponents/ButtonComponent";
 import { useDispatch } from "react-redux";
 import { UIActions } from "../../store/UI";
 import { useNavigate } from "react-router-dom";
+import { userActions } from "../../store/user";
 function EditProfileComponent() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState<Address>({
@@ -29,7 +30,7 @@ function EditProfileComponent() {
         );
 
         const resData = await response.json();
-        if (resData?.data?.userData) setFormData(resData.data.userData);
+        if (resData?.data?.userData) setFormData({ ...resData.data.userData });
         if (!response.ok) {
           const error: Error = new Error(
             `Request failed with status ${response.status}`
@@ -61,11 +62,6 @@ function EditProfileComponent() {
 
   const onSubmitHandler = async function (e: BaseSyntheticEvent) {
     e.preventDefault();
-    console.log(
-      JSON.stringify({
-        userData: { ...formData },
-      })
-    );
     const response = await fetch(
       "http://localhost:9000/api/auth/updateaddress",
       {
@@ -76,10 +72,14 @@ function EditProfileComponent() {
         },
         body: JSON.stringify({
           ...formData,
+          state: true,
         }),
       }
     );
     if (response.ok) {
+      dispatch(
+        userActions.setAddress({ address: { ...formData }, addressState: true })
+      );
       dispatch(
         UIActions.showWarning({
           flag: "green",
@@ -87,7 +87,6 @@ function EditProfileComponent() {
         })
       );
     }
-    console.log(response);
   };
 
   return (
@@ -192,9 +191,18 @@ function EditProfileComponent() {
             setFormData({ ...formData, phoneNumber: e.target.value })
           }
         />
+
         <ButtonComponent
-        // disabled={!(enteredPasswordIsValid && enteredPasswordConfirmIsValid)}
-        // spinner={spinner}
+          disabled={
+            formData.street === "" ||
+            formData.city === "" ||
+            formData.firstName === "" ||
+            formData.houseNumber === "" ||
+            formData.lastName === "" ||
+            formData.phoneNumber === "" ||
+            formData.zipCode === ""
+          }
+          // spinner={spinner}
         >
           Aktualizuj dane
         </ButtonComponent>

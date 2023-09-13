@@ -6,9 +6,23 @@ import DeliveryDataComponent from "../components/CartComponents/DeliveryDataComp
 import { MdArrowForwardIos } from "react-icons/md";
 import ProductListComponent from "../components/CartComponents/ProductListComponent";
 import { useSelector } from "react-redux";
-import { useAppSelector } from "../store/appHooks";
+import { useAppDispatch, useAppSelector } from "../store/appHooks";
 import CartEmptyInfoComponent from "../components/CartComponents/CartEmptyInfoComponent";
+import { UIActions } from "../store/UI";
 function CartSecondStepSection() {
+  const dispatch = useAppDispatch();
+  const userAddressState = useAppSelector(
+    (state: RootState) => state.user.addressState
+  );
+  const onClick = () => {
+    if (!userAddressState)
+      dispatch(
+        UIActions.showWarning({
+          flag: "red",
+          text: "Uzupełnij dane adresowe",
+        })
+      );
+  };
   const cartItems = useSelector((state: RootState) => state.cart.items);
   const userIsLogged = useAppSelector(
     (state: RootState) => state.user.loggedIn
@@ -35,7 +49,8 @@ function CartSecondStepSection() {
                   Podusmowanie <MdArrowForwardIos />
                 </>
               }
-              buttonPath="/cart/summary"
+              buttonFunction={onClick}
+              buttonPath={userAddressState ? "/cart/summary" : ""}
             />
           </div>
         </>

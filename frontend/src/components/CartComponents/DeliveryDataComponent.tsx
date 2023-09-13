@@ -3,9 +3,12 @@ import css from "./DeliveryDataComponent.module.scss";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../store/appHooks";
 import { UIActions } from "../../store/UI";
-import { cartActions } from "../../store/cart";
 function DeliveryDataComponent() {
   const navigate = useNavigate();
+  const [error, setError] = useState(false);
+  const addressState = useAppSelector(
+    (state: RootState) => state.user.addressState
+  );
   const [formData, setFormData] = useState<Address>({
     firstName: "",
     lastName: "",
@@ -29,15 +32,12 @@ function DeliveryDataComponent() {
         );
 
         const resData = await response.json();
-        if (resData?.data?.userData) {
-          setFormData(resData.data.userData);
-          dispatch(
-            cartActions.setAddress({
-              address: { ...resData.data.userData, email: email },
-            })
-          );
+        if (!addressState) {
+          setError(true);
+        } else if (resData?.data?.userData) {
+          setError(false);
+          setFormData({ ...resData.data.userData });
         }
-        console.log({ ...resData.data.userData, email: email });
         if (!response.ok) {
           const error: Error = new Error(
             `Request failed with status ${response.status}`
@@ -65,7 +65,23 @@ function DeliveryDataComponent() {
           );
       }
     })();
-  }, [dispatch, email, navigate]);
+  }, [dispatch, email, navigate, addressState]);
+  if (error) {
+    return (
+      <div className={css.deliveryData}>
+        <span
+          style={{
+            color: "red",
+            fontSize: "1.2rem",
+            marginTop: "2rem",
+            marginLeft: "2rem",
+          }}
+        >
+          Uzupełnij dane adresowe
+        </span>
+      </div>
+    );
+  }
   return (
     <div className={css.deliveryData}>
       <p className={css.title}>Adres dostawy:</p>

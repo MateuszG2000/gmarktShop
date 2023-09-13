@@ -10,7 +10,9 @@ import formatDate from "../../utils/formatDate";
 import SpinnerComponent from "../CommonComponents/SpinnerComponent";
 function OrderComponent() {
   const [loading, setLoading] = useState(true);
-
+  const userType = useAppSelector((state: RootState) => state.user.type);
+  let url = "http://localhost:9000/api/order";
+  if (userType === "admin") url = "http://localhost:9000/api/order/all";
   const dispatch = useAppDispatch();
   const [data, setData] = useState<IOrder[]>([]);
   const user = useAppSelector((state: RootState) => state.user);
@@ -21,7 +23,7 @@ function OrderComponent() {
     (async () => {
       try {
         dispatch(userActions.isAuth());
-        const response = await fetch(`http://localhost:9000/api/order`, {
+        const response = await fetch(url, {
           credentials: "include",
         });
         const resData = await response.json();
@@ -58,7 +60,8 @@ function OrderComponent() {
           );
       }
     })();
-  }, [dispatch, navigate]);
+  }, [dispatch, navigate, url]);
+
   if (!user.loggedIn) return <NotAuthComponent />;
   return (
     <div className={css.ordersContainer}>
@@ -101,26 +104,26 @@ function OrderComponent() {
                     return (
                       <Link
                         key={orderProd._id}
-                        to={`http://localhost:3000/product/${orderProd.product._id}`}
+                        to={`http://localhost:3000/product/${orderProd?.product?._id}`}
                       >
                         <div className={css.prodListEl}>
                           <img
                             className={css.img}
-                            src={`http://localhost:9000/api/images/${orderProd.product.image}`}
+                            src={`http://localhost:9000/api/images/${orderProd?.product?.image}`}
                             alt="abc"
                           />
                           <span className={css.title}>
-                            {orderProd.product.name}
+                            {orderProd?.product?.name}
                           </span>
                           <span className={css.price}>
-                            {orderProd.price.toFixed(2)} zł
+                            {orderProd?.price.toFixed(2)} zł
                           </span>
                           <span className={css.quantity}>
-                            {orderProd.quantity}{" "}
-                            {orderProd.quantity === 1
+                            {orderProd?.quantity}{" "}
+                            {orderProd?.quantity === 1
                               ? "sztuka"
-                              : orderProd.quantity >= 2 &&
-                                orderProd.quantity <= 4
+                              : orderProd?.quantity >= 2 &&
+                                orderProd?.quantity <= 4
                               ? "sztuki"
                               : "sztuk"}
                           </span>

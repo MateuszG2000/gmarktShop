@@ -27,7 +27,6 @@ interface CartState {
   totalQuantity: number;
   shipping: IShippingCart;
   totalPrice: number;
-  address: Address;
 }
 interface IShipping {
   id: key;
@@ -64,6 +63,8 @@ interface UserState {
   exp: number;
   loggedIn: boolean;
   type: string;
+  addressState?: boolean;
+  address: Address;
 }
 interface UIState {
   warning: IWarning;

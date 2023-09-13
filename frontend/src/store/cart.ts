@@ -10,16 +10,6 @@ const initialState: CartState = {
     price: "------",
     cashOnDelivery: false,
   },
-  address: {
-    firstName: "",
-    lastName: "",
-    street: "",
-    houseNumber: "",
-    zipCode: "",
-    city: "",
-    phoneNumber: "",
-    email: "",
-  },
 };
 const cartSlice = createSlice({
   name: "cart",
@@ -87,9 +77,7 @@ const cartSlice = createSlice({
       }, 0);
       state.totalQuantity = quantity;
     },
-    setAddress(state, action) {
-      state.address = action.payload.address;
-    },
+
     sendData(state) {
       return initialState;
     },

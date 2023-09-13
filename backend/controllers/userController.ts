@@ -89,6 +89,7 @@ export const login = catchError(async function (
       message: 'success',
       token: token,
       type: user.userType,
+      address: user.userData,
     });
 });
 

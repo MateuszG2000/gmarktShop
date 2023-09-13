@@ -14,6 +14,9 @@ function CartFirstStepSection() {
   const userIsLogged = useAppSelector(
     (state: RootState) => state.user.loggedIn
   );
+
+  const user = useAppSelector((state: RootState) => state.user);
+
   return (
     <div className={css.cart}>
       <CartEmptyInfoComponent />
@@ -32,7 +35,7 @@ function CartFirstStepSection() {
           <div className={css.summaryDeliveryContainer}>
             <DeliveryMethodComponent />
             <SummaryComponent
-              disable={!userIsLogged}
+              disable={!userIsLogged || user.type === "admin"}
               buttonText={
                 <>
                   Dalej <MdArrowForwardIos />
