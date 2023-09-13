@@ -6,6 +6,7 @@ const initialState: UserState = {
   userId: "",
   exp: 0,
   loggedIn: false,
+  type: "user",
 };
 
 const userSlice = createSlice({
@@ -17,6 +18,7 @@ const userSlice = createSlice({
       state.email = action.payload.email;
       state.exp = action.payload.exp;
       state.name = action.payload.name;
+      state.type = action.payload.type;
       state.loggedIn = true;
     },
     logOut() {

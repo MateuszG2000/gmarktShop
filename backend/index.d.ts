@@ -8,6 +8,7 @@ interface User {
   email: string;
   password?: string;
   save(): Promise;
+  userType: string;
 }
 interface onSave {
   _id: string;

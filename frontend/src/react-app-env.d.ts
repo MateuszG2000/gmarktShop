@@ -63,6 +63,7 @@ interface UserState {
   userId: string;
   exp: number;
   loggedIn: boolean;
+  type: string;
 }
 interface UIState {
   warning: IWarning;

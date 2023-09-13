@@ -65,6 +65,7 @@ function Login() {
           email: string;
           userId: string;
           exp: number;
+          type: string;
         } = jwt(res.token);
         dispatch(userActions.logIn(userData));
         dispatch(UIActions.showWarning({ flag: "green", text: "Zalogowano" }));
