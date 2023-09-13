@@ -8,6 +8,7 @@ interface IOrder extends Document {
   }>;
   userId: mongoose.Types.ObjectId;
   paid: boolean;
+  completed: boolean;
   shipping: {
     id: string;
     name: string;
@@ -33,6 +34,18 @@ const orderModel = new mongoose.Schema(
       unique: true,
       required: true,
     },
+    paid: {
+      type: Boolean,
+      default: false,
+    },
+    completed: {
+      type: Boolean,
+      default: false,
+    },
+    totalPriceWithoutShipping: {
+      type: Number,
+      required: true,
+    },
     orderProducts: [
       {
         product: {
@@ -55,10 +68,7 @@ const orderModel = new mongoose.Schema(
       ref: 'User',
       required: [true, 'Order must have a client'],
     },
-    paid: {
-      type: Boolean,
-      default: false,
-    },
+
     address: {
       firstName: { type: String, required: true },
       lastName: { type: String, required: true },
@@ -86,10 +96,6 @@ const orderModel = new mongoose.Schema(
         type: Boolean,
         required: true,
       },
-    },
-    totalPriceWithoutShipping: {
-      type: Number,
-      required: true,
     },
   },
 
