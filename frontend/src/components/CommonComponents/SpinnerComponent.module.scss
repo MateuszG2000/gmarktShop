@@ -1,3 +1,11 @@
+.loaderContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  justify-self: center;
+  position: absolute;
+  box-sizing: border-box;
+}
 .loader {
   border: solid black;
   border-bottom-color: transparent;
@@ -6,11 +14,6 @@
   position: absolute;
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
-  display: flex;
-  justify-self: center;
-  align-items: center;
-  margin-left: auto;
-  margin-right: auto;
 }
 @keyframes rotation {
   0% {

@@ -62,7 +62,7 @@ function OrderComponent() {
   if (!user.loggedIn) return <NotAuthComponent />;
   return (
     <div className={css.ordersContainer}>
-      <SpinnerComponent loading={true} size={48} />
+      <SpinnerComponent loading={loading} size={48} />
 
       {data.map((order, index) => (
         <React.Fragment key={order._id}>

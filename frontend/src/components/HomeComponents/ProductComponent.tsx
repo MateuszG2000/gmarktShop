@@ -28,7 +28,7 @@ function ProductComponent({ product }: { product: Product }) {
           alt="produkt"
           onLoad={() => setImageLoaded(true)}
         />
-        <SpinnerComponent size={48} loading={imageLoaded} />
+        <SpinnerComponent size={48} loading={!imageLoaded} />
       </div>
       <p className={css.title}>{product.name}</p>
       <div className={css.cartPrice}>
