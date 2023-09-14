@@ -16,9 +16,9 @@ function ShowUsersComponent() {
       } catch (err) {}
     })();
   }, []);
-  if (loading) return <SpinnerComponent size={48} loading={loading} />;
   return (
     <div className={css.usersContainer}>
+      <SpinnerComponent size={48} loading={loading} />
       {userData?.map((user) => (
         <div className={css.user} key={user._id}>
           <span className={css.id}>{user._id}</span>

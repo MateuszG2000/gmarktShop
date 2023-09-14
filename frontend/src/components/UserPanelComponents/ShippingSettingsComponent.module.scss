@@ -1,0 +1,63 @@
+@use "../../index.scss" as p;
+
+.settingsContainer {
+  display: grid;
+  grid-template-columns: 25% 20% 31% 20% 4%;
+  grid-auto-rows: 2rem;
+  grid-row-gap: 1.4rem;
+  margin: 3rem;
+}
+.form {
+  grid-column: 1/6;
+  display: grid;
+  grid-template-columns: 22% 22% 30% 22% 4%;
+  grid-auto-rows: 2rem;
+  grid-row-gap: 1.4rem;
+  height: 4rem;
+  margin-top: 1rem;
+}
+.form > * {
+  max-width: 7rem;
+  height: 1rem;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.cashOnDelivery {
+  max-width: 10rem;
+  height: 2rem;
+  color: grey;
+  border: 2px solid rgb(186, 186, 186);
+  border-radius: 0.3rem;
+
+  &:focus {
+    outline: none;
+    border: 2px solid p.$primaryColorLight;
+  }
+}
+.left {
+  color: grey;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.right {
+  font-weight: 500;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.title {
+  font-weight: 600;
+  font-size: 1.2rem;
+  grid-column: 1/6;
+  margin-bottom: 1rem;
+}
+.btn {
+  all: unset;
+  cursor: pointer;
+  font-size: 1.4rem;
+}
+
+.btn:hover {
+  color: red;
+}

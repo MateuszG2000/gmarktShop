@@ -2,6 +2,7 @@ import React, { ReactNode, useEffect, useState } from "react";
 import css from "./DeliveryMethodComponent.module.scss";
 import { cartActions } from "../../store/cart";
 import { useDispatch } from "react-redux";
+import { UIActions } from "../../store/UI";
 function DeliveryMethodComponent() {
   const [data, setData] = useState<IShipping[]>();
   const [selected, setSelected] = useState("");
@@ -21,7 +22,12 @@ function DeliveryMethodComponent() {
         dispatch(cartActions.setShipping(resData.data.shipping[0]));
         setSelected(resData.data.shipping[0]._id);
       } catch (err) {
-        console.log(err);
+        dispatch(
+          UIActions.showWarning({
+            flag: "red",
+            text: "Coś poszło nie tak",
+          })
+        );
       }
     })();
   }, [dispatch]);

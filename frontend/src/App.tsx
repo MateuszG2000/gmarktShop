@@ -15,6 +15,7 @@ import SettingsComponent from "./components/UserPanelComponents/SettingsComponen
 import OrderComponent from "./components/UserPanelComponents/OrderComponent";
 import WelcomeComponent from "./components/UserPanelComponents/WelcomeComponent";
 import ShowUsersComponent from "./components/UserPanelComponents/ShowUsersComponent";
+import ShippingSettingsComponent from "./components/UserPanelComponents/ShippingSettingsComponent";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -59,6 +60,7 @@ const router = createBrowserRouter([
       { path: "edit", element: <EditProfileComponent /> },
       { path: "settings", element: <SettingsComponent /> },
       { path: "users", element: <ShowUsersComponent /> },
+      { path: "shippingsettings", element: <ShippingSettingsComponent /> },
     ],
   },
 ]);

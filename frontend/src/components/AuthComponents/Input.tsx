@@ -4,7 +4,9 @@ import css from "./Input.module.scss";
 function Input(props: InputProps) {
   return (
     <>
-      <label htmlFor={props.name}>{props.title}</label>
+      {props.title !== undefined && (
+        <label htmlFor={props.name}>{props.title}</label>
+      )}
       <input
         id={props.id}
         className={`${css[props.className]} ${
@@ -15,6 +17,8 @@ function Input(props: InputProps) {
         value={props.value}
         onBlur={props.onBlur}
         onChange={props.onChange}
+        placeholder={props.placeholder}
+        step={props?.step}
       ></input>
     </>
   );
@@ -23,13 +27,15 @@ function Input(props: InputProps) {
 export default Input;
 type InputProps = {
   name: string;
-  title: string;
+  title?: string;
   className: string;
   valid?: boolean;
   touched?: boolean;
   id: string;
   type: string;
   value: string;
+  placeholder?: string;
+  step?: number;
   onBlur?: FocusEventHandler<HTMLInputElement>;
   onChange?: ChangeEventHandler<HTMLInputElement>;
 };

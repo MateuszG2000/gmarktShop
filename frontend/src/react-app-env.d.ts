@@ -29,7 +29,7 @@ interface CartState {
   totalPrice: number;
 }
 interface IShipping {
-  _id: key;
+  _id?: key;
   name: string;
   price: number;
   company: string;
