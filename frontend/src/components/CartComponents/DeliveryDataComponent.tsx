@@ -20,7 +20,6 @@ function DeliveryDataComponent() {
     email: "",
   });
   const dispatch = useAppDispatch();
-  const email = useAppSelector((state: RootState) => state.user.email);
   useEffect(() => {
     (async () => {
       try {
@@ -65,7 +64,7 @@ function DeliveryDataComponent() {
           );
       }
     })();
-  }, [dispatch, email, navigate, addressState]);
+  }, [dispatch, navigate, addressState]);
   if (error) {
     return (
       <div className={css.deliveryData}>
@@ -101,7 +100,7 @@ function DeliveryDataComponent() {
       <div className={css.contact}>
         {" "}
         <p>tel. {formData.phoneNumber}</p>
-        <p>e-mail: {email}</p>
+        <p>e-mail: {formData.email}</p>
       </div>
     </div>
   );

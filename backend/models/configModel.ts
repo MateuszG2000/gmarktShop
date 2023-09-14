@@ -15,8 +15,8 @@ const configModel = new mongoose.Schema({
         type: Number,
         required: true,
       },
-      extraCost: {
-        type: Number,
+      cashOnDelivery: {
+        type: Boolean,
       },
     },
   ],

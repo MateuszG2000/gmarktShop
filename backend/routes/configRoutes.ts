@@ -11,5 +11,5 @@ router
   .route('/shipping')
   .put(userController.isAuth('admin'), config.createShipping);
 
-router.route('/').get(userController.isAuth('admin'), config.getConfig);
+router.route('/').get(userController.isAuth('user', 'admin'), config.getConfig);
 export default router;

@@ -7,7 +7,7 @@ router.post('/signup', validators.validateEmail, userController.signup);
 router.post('/login', userController.login);
 router.post(
   '/updatepassword',
-  userController.isAuth('user', 'admin'),
+  userController.isAuth('user'),
   userController.updatePassword
 );
 router.post(

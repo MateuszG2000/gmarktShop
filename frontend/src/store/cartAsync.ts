@@ -13,11 +13,12 @@ export const sendCartData = (cart: CartState, user: UserState) => {
           price: item.price,
         };
       }),
-      address: { ...user.address, email: user.email },
+      address: user.address,
       shipping: cart.shipping,
       totalPriceWithoutShipping: cart.totalPrice,
       user: user.userId,
     };
+    console.log(data);
     const response = await (
       await fetch("http://localhost:9000/api/order", {
         method: "POST",
@@ -28,7 +29,6 @@ export const sendCartData = (cart: CartState, user: UserState) => {
         body: JSON.stringify(data),
       })
     ).json();
-    console.log(response.status);
     if (response.status === "success") {
       dispatch(cartActions.sendData());
       dispatch(

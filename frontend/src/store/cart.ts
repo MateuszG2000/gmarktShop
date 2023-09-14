@@ -5,9 +5,10 @@ const initialState: CartState = {
   totalQuantity: 0,
   totalPrice: 0,
   shipping: {
-    id: 0,
+    _id: 0,
     name: "------",
     price: "------",
+    company: "------",
     cashOnDelivery: false,
   },
 };

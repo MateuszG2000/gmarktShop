@@ -71,7 +71,7 @@ const orderModel = new mongoose.Schema(
       email: { type: String, required: true },
     },
     shipping: {
-      id: {
+      _id: {
         type: String,
         required: true,
       },
@@ -81,6 +81,10 @@ const orderModel = new mongoose.Schema(
       },
       price: {
         type: Number,
+        required: true,
+      },
+      company: {
+        type: String,
         required: true,
       },
       cashOnDelivery: {

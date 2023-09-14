@@ -29,9 +29,10 @@ interface CartState {
   totalPrice: number;
 }
 interface IShipping {
-  id: key;
+  _id: key;
   name: string;
   price: number;
+  company: string;
   cashOnDelivery: boolean;
 }
 interface IShippingCart extends IShipping {

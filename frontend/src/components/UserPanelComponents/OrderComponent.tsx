@@ -61,7 +61,7 @@ function OrderComponent() {
       }
     })();
   }, [dispatch, navigate, url]);
-
+  console.log(data);
   if (!user.loggedIn) return <NotAuthComponent />;
   return (
     <div className={css.ordersContainer}>
@@ -187,7 +187,8 @@ function OrderComponent() {
                   Sposób dostawy:
                 </span>
                 <span className={css.left}>
-                  {data[dataVisible].shipping.name}
+                  {data[dataVisible].shipping.name}{" "}
+                  {data[dataVisible].shipping.company}
                 </span>
                 <span className={css.right}>
                   {data[dataVisible].shipping.price.toFixed(2)} zł

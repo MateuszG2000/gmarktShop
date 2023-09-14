@@ -72,14 +72,11 @@ function EditProfileComponent() {
         },
         body: JSON.stringify({
           ...formData,
-          state: true,
         }),
       }
     );
     if (response.ok) {
-      dispatch(
-        userActions.setAddress({ address: { ...formData }, addressState: true })
-      );
+      dispatch(userActions.setAddress({ ...formData }));
       dispatch(
         UIActions.showWarning({
           flag: "green",
@@ -191,6 +188,20 @@ function EditProfileComponent() {
             setFormData({ ...formData, phoneNumber: e.target.value })
           }
         />
+        <Input
+          id="email-input"
+          name="email-input"
+          type="text"
+          className="input"
+          title="E-mail:"
+          value={formData.email}
+          // valid={}
+          // touched={}
+          // onBlur={}
+          onChange={(e: BaseSyntheticEvent) =>
+            setFormData({ ...formData, email: e.target.value })
+          }
+        />
 
         <ButtonComponent
           disabled={
@@ -200,7 +211,8 @@ function EditProfileComponent() {
             formData.houseNumber === "" ||
             formData.lastName === "" ||
             formData.phoneNumber === "" ||
-            formData.zipCode === ""
+            formData.zipCode === "" ||
+            formData.email === ""
           }
           // spinner={spinner}
         >

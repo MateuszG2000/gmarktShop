@@ -1,68 +1,75 @@
-import React, { ChangeEvent, ReactNode, useEffect } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import css from "./DeliveryMethodComponent.module.scss";
-import { useSelector } from "react-redux";
 import { cartActions } from "../../store/cart";
-import { useAppDispatch } from "../../store/appHooks";
-const shippingMethods: IShipping[] = [
-  { id: "dpdG", name: "Kuier DPD", price: 16.99, cashOnDelivery: false },
-  { id: "dhdG", name: "Kuier DHL", price: 17.99, cashOnDelivery: false },
-  { id: "inpostG", name: "Kuier Inpost", price: 15.99, cashOnDelivery: false },
-  { id: "dpdP", name: "Kuier DPD", price: 21.99, cashOnDelivery: true },
-  { id: "dhlP", name: "Kurier DHL", price: 22.99, cashOnDelivery: true },
-  { id: "inpostP", name: "Kurier Inpost", price: 20.5, cashOnDelivery: true },
-];
+import { useDispatch } from "react-redux";
 function DeliveryMethodComponent() {
-  const shipping = useSelector((state: RootState) => state.cart.shipping);
-  const dispatch = useAppDispatch();
-
+  const [data, setData] = useState<IShipping[]>();
+  const [selected, setSelected] = useState("");
+  const dispatch = useDispatch();
+  let check = false;
   useEffect(() => {
-    dispatch(cartActions.setShipping(shippingMethods[0]));
+    (async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:9000/api/config?fields=shipping",
+          {
+            credentials: "include",
+          }
+        );
+        const resData = await response.json();
+        setData(resData.data.shipping);
+        dispatch(cartActions.setShipping(resData.data.shipping[0]));
+        setSelected(resData.data.shipping[0]._id);
+      } catch (err) {
+        console.log(err);
+      }
+    })();
   }, [dispatch]);
-  const shippingHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    const shipping: IShipping = {
-      id: event.target.id,
-      name: String(event.target.dataset.name),
-      price: Number(event.target.dataset.price),
-      cashOnDelivery: event.target.dataset.cash === "false" ? false : true,
-    };
+  const shippingHandler = (id: string) => {
+    setSelected(id);
+    const shipping = data?.find((item) => item._id === id);
     dispatch(cartActions.setShipping(shipping));
   };
-  const markup = (bool: boolean): ReactNode => {
-    return shippingMethods.map((item, index) => {
-      let check = false;
-      if (item.id === shipping.id) check = true;
+  if (!data) return <span></span>;
+  const markup = (cashOnDelivery: boolean): ReactNode => {
+    return data.map((data: any, index) => {
+      if (data._id === selected) check = true;
       else check = false;
-      const isDisplay =
-        bool === true ? item.cashOnDelivery : !item.cashOnDelivery;
-      return isDisplay ? (
-        <React.Fragment key={item.id}>
+      if (data.cashOnDelivery !== cashOnDelivery)
+        return <React.Fragment key={data._id}></React.Fragment>;
+      return (
+        <React.Fragment key={data._id}>
           <p>
             <input
               checked={check}
               type="radio"
               name="deliveryMethod"
-              id={item.id}
-              data-price={item.price}
-              data-name={item.name}
-              data-cash={item.cashOnDelivery}
-              onChange={shippingHandler}
+              id={data._id}
+              data-price={data.price}
+              data-name={data.name}
+              data-cash={data.cashOnDelivery}
+              onChange={() => shippingHandler(data._id)}
             ></input>
-            <label htmlFor={item.id}>{item.name}</label>
+            <label htmlFor={data._id}>
+              {data.name} {data.company}
+            </label>
           </p>
-          <p className={css.col_2}>{item.price.toFixed(2)} zł</p>
+          <p className={css.col_2}>{data.price.toFixed(2)} zł</p>
         </React.Fragment>
-      ) : (
-        ""
       );
     });
   };
 
   return (
     <form className={css.deliveryMethodContainer}>
-      <p className={css.title}>Płatność z góry</p>
-      {markup(false)}
-      <p className={css.title}>Płatność za pobraniem</p>
-      {markup(true)}
+      {data && (
+        <>
+          <p className={css.title}>Płatność z góry</p>
+          {markup(false)}
+          <p className={css.title}>Płatność za pobraniem</p>
+          {markup(true)}
+        </>
+      )}
     </form>
   );
 }

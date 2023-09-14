@@ -13,7 +13,6 @@ export const createShipping = catchError(async function (
     { $push: { shipping: req.body } },
     { upsert: true, new: true }
   );
-  console.log(newConfig);
   res.status(201).json({
     status: 'success',
     data: newConfig,
@@ -27,7 +26,7 @@ export const getConfig = catchError(async function (
   const config = await filter(Config.find(), req.query);
   res.status(200).json({
     status: 'success',
-    data: config,
+    data: config[0],
   });
 });
 export const deleteShipping = catchError(async function (
@@ -36,7 +35,6 @@ export const deleteShipping = catchError(async function (
   next: NextFunction
 ) {
   const exists = await Config.findOne({ 'shipping._id': req.params.id });
-  console.log(exists);
 
   if (!exists) {
     const error = new Error('There is no shipping with given ID');
