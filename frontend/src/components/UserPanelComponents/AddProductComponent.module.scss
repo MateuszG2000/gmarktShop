@@ -1,0 +1,52 @@
+@use "../../index.scss" as p;
+
+.addProductContainer {
+  display: grid;
+  grid-template-columns: 25% 50% 20% 5%;
+  grid-auto-rows: 3rem;
+  grid-row-gap: 2rem;
+  margin: 3rem;
+}
+.prodEl {
+  border-bottom: 1px solid black;
+}
+.title {
+  font-weight: 600;
+  font-size: 1.2rem;
+  grid-column: 1/5;
+  margin-bottom: 2rem;
+  padding-top: 1rem;
+}
+.img {
+  width: 4rem;
+  height: 4rem;
+}
+.form {
+  grid-column: 1/6;
+  display: grid;
+  grid-template-columns: 22% 22% 30% 22% 4%;
+  grid-auto-rows: 2rem;
+  grid-row-gap: 1.4rem;
+  height: 4rem;
+  margin-top: 1rem;
+}
+.form > * {
+  max-width: 7rem;
+  height: 1rem;
+}
+.name {
+  margin-right: 2rem;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.btn {
+  all: unset;
+  cursor: pointer;
+}
+.btn:hover {
+  color: red;
+}

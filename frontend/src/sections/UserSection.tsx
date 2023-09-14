@@ -7,6 +7,7 @@ import { FiUsers } from "react-icons/fi";
 import { MdManageAccounts, MdOutlineManageAccounts } from "react-icons/md";
 import { useAppSelector } from "../store/appHooks";
 import { LiaShippingFastSolid } from "react-icons/lia";
+import { AiOutlineFileAdd } from "react-icons/ai";
 function UserSection() {
   const userType = useAppSelector((state: RootState) => state.user.type);
   return (
@@ -87,6 +88,19 @@ function UserSection() {
                   <LiaShippingFastSolid />
                 </span>
                 <span>Ustawienia dostaw</span>
+              </li>
+            </NavLink>
+          )}
+          {userType === "admin" && (
+            <NavLink
+              className={({ isActive }) => (isActive ? css.active : "")}
+              to="/user/addproduct"
+            >
+              <li className={css.navEl}>
+                <span className={css.icon}>
+                  <AiOutlineFileAdd />
+                </span>
+                <span>Zarządzaj produktami</span>
               </li>
             </NavLink>
           )}

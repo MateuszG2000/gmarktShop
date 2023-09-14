@@ -4,10 +4,14 @@ import SpinnerComponent from "../CommonComponents/SpinnerComponent";
 import { UIActions } from "../../store/UI";
 import { AiFillFileAdd, AiTwotoneDelete } from "react-icons/ai";
 import Input from "../AuthComponents/Input";
-import { useAppDispatch } from "../../store/appHooks";
+import { useAppDispatch, useAppSelector } from "../../store/appHooks";
+import NotAuthComponent from "../CommonComponents/NotAuthComponent";
 
 function ShippingSettingsComponent() {
   const [data, setData] = useState<IShipping[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const user = useAppSelector((state: RootState) => state.user);
   const [formData, setFormData] = useState<IShipping>({
     name: "",
     company: "",
@@ -26,6 +30,7 @@ function ShippingSettingsComponent() {
         );
         const resData = await response.json();
         setData(resData.data.shipping);
+        setLoading(false);
       } catch (err) {
         dispatch(
           UIActions.showWarning({
@@ -116,9 +121,11 @@ function ShippingSettingsComponent() {
       );
     }
   };
+  if (!user.loggedIn) return <NotAuthComponent />;
   return (
     <div className={css.settingsContainer}>
-      <div className={css.title}>Dostępne sposoby dostawy</div>
+      <SpinnerComponent size={48} loading={loading} />
+      <div className={css.title}>Aktualne sposoby dostawy</div>
       {data?.map((shippingMethod, index) => (
         <React.Fragment key={index}>
           <div className={css.left}>{shippingMethod.name}</div>
@@ -143,8 +150,8 @@ function ShippingSettingsComponent() {
 
       <form onSubmit={submitHandler} className={css.form}>
         <Input
-          id="FirstName-input"
-          name="FirstName-input"
+          id="Name-input"
+          name="Name-input"
           type="text"
           className="input"
           value={formData?.name}
@@ -154,8 +161,8 @@ function ShippingSettingsComponent() {
           }
         />
         <Input
-          id="FirstName-input"
-          name="FirstName-input"
+          id="Company-input"
+          name="Company-input"
           type="text"
           className="input"
           placeholder="Firma kurierska"
@@ -175,8 +182,8 @@ function ShippingSettingsComponent() {
           <option value="false">Brak płatności</option>
         </select>
         <Input
-          id="FirstName-input"
-          name="FirstName-input"
+          id="Price-input"
+          name="Price-input"
           type="number"
           step={0.01}
           className="input"
