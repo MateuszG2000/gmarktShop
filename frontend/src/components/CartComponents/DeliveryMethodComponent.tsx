@@ -12,10 +12,7 @@ function DeliveryMethodComponent() {
     (async () => {
       try {
         const response = await fetch(
-          "http://localhost:9000/api/config?fields=shipping",
-          {
-            credentials: "include",
-          }
+          "http://localhost:9000/api/config?fields=shipping"
         );
         const resData = await response.json();
         setData(resData.data.shipping);
