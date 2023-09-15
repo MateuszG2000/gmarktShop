@@ -88,3 +88,12 @@
   justify-content: space-between;
   align-items: center;
 }
+@media (width<=950px) {
+  .addToCart {
+    opacity: 1;
+  }
+  .product {
+    border-radius: none;
+    box-shadow: none;
+  }
+}

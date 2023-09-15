@@ -13,3 +13,9 @@
   color: index.$footerTitleColor;
   font-weight: 600;
 }
+@media (width<800px) {
+  .FooterComponent {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
