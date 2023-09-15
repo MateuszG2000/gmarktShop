@@ -87,6 +87,7 @@
     min-width: 200px;
     order: 3;
     flex-grow: 1;
+    flex-basis: 100%;
   }
   .centerBox {
     width: 90%;
@@ -96,7 +97,4 @@
     margin-left: auto;
     margin-right: auto;
   }
-  // .search {
-  //   border: 1px solid grey;
-  // }
 }
