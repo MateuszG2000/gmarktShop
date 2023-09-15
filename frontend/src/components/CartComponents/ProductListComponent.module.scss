@@ -25,11 +25,13 @@
 .trash:hover {
   color: rgb(198, 0, 0);
 }
-.price {
+.priceFirst,
+.priceEnd {
   min-width: 6rem;
   text-align: right;
   word-wrap: break-word;
 }
+
 @media only screen and (max-width: 1350px) {
   .productListComponent {
     gap: 1rem;
@@ -46,5 +48,8 @@
   }
   .title {
     min-width: 4rem;
+  }
+  .priceFirst {
+    display: none;
   }
 }

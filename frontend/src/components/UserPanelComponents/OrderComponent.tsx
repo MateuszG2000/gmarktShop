@@ -115,7 +115,7 @@ function OrderComponent() {
                           <span className={css.title}>
                             {orderProd?.product?.name}
                           </span>
-                          <span className={css.price}>
+                          <span className={`${css.firstPrice} ${css.price}`}>
                             {orderProd?.price.toFixed(2)} zł
                           </span>
                           <span className={css.quantity}>

@@ -11,3 +11,20 @@
   margin-top: 4rem;
   align-items: end;
 }
+
+@media (1000px<=width<=1300px) {
+  .cart {
+    width: 95%;
+    min-width: 200px;
+  }
+}
+@media (width<1000px) {
+  .summaryDeliveryContainer {
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+  }
+  .summaryDeliveryContainer > * {
+    min-width: 200px;
+  }
+}

@@ -32,7 +32,7 @@ function StatusComponent({ step }: { step: number }) {
                   </span>
                 )}
               </div>
-              <p>{s.text}</p>
+              <p className={css.underText}>{s.text}</p>
             </Link>
           ) : (
             <div className={css.step}>
@@ -42,7 +42,7 @@ function StatusComponent({ step }: { step: number }) {
                   <ImCheckmark />
                 </span>
               )}
-              <p>{s.text}</p>
+              <p className={css.underText}>{s.text}</p>
             </div>
           )}
         </React.Fragment>

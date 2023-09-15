@@ -30,9 +30,9 @@ function CartSecondStepSection() {
   return (
     <div className={css.cart}>
       <CartEmptyInfoComponent />
+      <StatusComponent step={2} />
       {cartItems.length > 0 && (
         <>
-          <StatusComponent step={2} />
           {cartItems.map((item) => (
             <ProductListComponent
               key={item._id}

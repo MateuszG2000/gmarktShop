@@ -8,7 +8,7 @@
   min-height: 30rem;
 }
 .nav {
-  width: 25%;
+  width: 20%;
   background-color: rgb(144, 144, 144);
 }
 .navEl {
@@ -23,7 +23,7 @@
   font-size: 1.1rem;
 }
 .contentContainer {
-  width: 75%;
+  width: 95%;
   background-color: white;
 }
 .navEl:hover {
@@ -39,4 +39,24 @@
   line-height: 1rem;
   vertical-align: center;
   margin-right: 1.5rem;
+}
+@media (width<=1370px) {
+  .panelContainer {
+    width: 95%;
+  }
+}
+@media (width<1160px) {
+  .navEl span:last-child {
+    display: none;
+  }
+  .panelContainer {
+    width: 95%;
+  }
+  .nav {
+    width: 5%;
+    min-width: 3rem;
+  }
+  .navEl {
+    padding: 0.2rem;
+  }
 }

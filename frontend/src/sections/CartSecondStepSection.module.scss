@@ -1,6 +1,7 @@
 .cart {
   width: 70%;
   max-width: 1400px;
+
   margin: 0 auto 5rem auto;
 }
 .deliverySummary {
@@ -8,4 +9,20 @@
   gap: 5rem;
   margin-top: 4rem;
   justify-content: space-between;
+}
+@media (1000px<=width<=1300px) {
+  .cart {
+    width: 95%;
+    min-width: 200px;
+  }
+}
+@media (width<1000px) {
+  .deliverySummary {
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+  }
+  .deliverySummary > * {
+    min-width: 200px;
+  }
 }

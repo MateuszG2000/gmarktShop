@@ -9,3 +9,19 @@
   justify-content: space-between;
   margin-top: 4rem;
 }
+@media (1000px<=width<=1300px) {
+  .cart {
+    width: 95%;
+    min-width: 200px;
+  }
+}
+@media (width<1000px) {
+  .deliverySummary {
+    flex-direction: column;
+    gap: 2rem;
+    align-items: center;
+  }
+  .deliverySummary > * {
+    min-width: 200px;
+  }
+}

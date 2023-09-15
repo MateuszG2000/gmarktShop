@@ -4,6 +4,8 @@ import QuantityComponent from "../CommonComponents/QuantityComponent";
 import { BsFillTrash3Fill } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { cartActions } from "../../store/cart";
+import { useMediaQuery } from "react-responsive";
+
 const debounce = require("lodash.debounce");
 function ProductListComponent({
   moreData,
@@ -13,8 +15,9 @@ function ProductListComponent({
   product: ICartProduct;
 }) {
   const dispatch = useDispatch();
-
+  const isMobile = useMediaQuery({ maxWidth: 767 });
   const [endPrice, setEndPrice] = useState(+product.price * +product.quantity);
+
   const handleQuantity = debounce((quantity: number) => {
     const endPrice = +product.price * quantity;
     setEndPrice(endPrice);
@@ -31,16 +34,31 @@ function ProductListComponent({
       <img className={css.image} src={img} alt="prod"></img>
       <span className={css.title}>{product.name}</span>
       {moreData && (
-        <span className={css.price}>{product.price?.toFixed(2)} zł</span>
+        <span className={css.priceFirst}>{product.price?.toFixed(2)} zł</span>
       )}
-      {moreData && (
+      {moreData && !isMobile && (
         <QuantityComponent
           quantityProp={product.quantity}
           onChange={handleQuantity}
           onRemove={handleRemove}
         />
       )}
-      <span className={css.price}>{endPrice.toFixed(2)} zł</span>
+      {isMobile && (
+        <>
+          <select
+            onChange={(e) => handleQuantity(e.target.value)}
+            defaultValue={product.quantity}
+          >
+            {Array.from({ length: 19 }, (_, i) => (
+              <option key={i} value={i + 1}>
+                {i + 1}
+              </option>
+            ))}
+          </select>
+          sztuk
+        </>
+      )}
+      <span className={css.priceEnd}>{endPrice.toFixed(2)} zł</span>
       {moreData && (
         <button onClick={handleRemove} className={css.trash}>
           <BsFillTrash3Fill />

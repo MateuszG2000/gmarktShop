@@ -1,7 +1,7 @@
 @use "../../index.scss" as p;
 .btn {
   padding: 0.8rem 4rem;
-  height: 3rem;
+  height: auto;
   font-size: 1.2rem;
   font-weight: 600;
   background-color: p.$primaryColorLight;
