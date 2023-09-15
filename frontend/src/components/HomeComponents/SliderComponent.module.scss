@@ -73,3 +73,20 @@
   color: white;
   opacity: 1;
 }
+
+@media (650px<width<= 950px) {
+  .slider {
+    grid-column: 1 / span 3;
+  }
+}
+@media (width<= 650px) {
+  .slider {
+    grid-column: 1 / span 2;
+  }
+}
+
+// @media (max-width: 9px) {
+//   .slider {
+//     grid-column: 1 / span 4;
+//   }
+// }

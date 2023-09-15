@@ -39,8 +39,13 @@ ul {
   border-radius: 0.2rem;
   box-shadow: 3px 3px 13px -4px rgba(66, 68, 90, 1);
 }
-@media (max-width: 600px) {
+@media (width<= 600px) {
   html {
     font-size: 10px;
+  }
+}
+@media (600px<width<750px) {
+  html {
+    font-size: 14px;
   }
 }
