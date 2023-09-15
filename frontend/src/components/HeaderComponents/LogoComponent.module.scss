@@ -3,8 +3,6 @@
   cursor: pointer;
   color: black;
   letter-spacing: 0.3rem;
-  line-height: 1.2rem;
-  margin-top: 1rem;
   &:hover {
     @include index.hover;
   }
@@ -19,14 +17,20 @@
 .logoNavbar {
   @include logo;
   font-size: 2rem;
-}
-.logoNavbar span {
-  font-size: 4.8rem;
+  span {
+    font-size: 4.8rem;
+  }
 }
 .logoSmall {
   @include logo;
   font-size: 1.4rem;
+  span {
+    font-size: 3rem;
+  }
 }
-.logoSmall span {
-  font-size: 3rem;
+
+@media (max-width: 930px) {
+  .logoNavbar {
+    flex-grow: 1;
+  }
 }

@@ -1,12 +1,14 @@
 @use "../../index.scss" as index;
 .search {
   flex-grow: 1;
-  min-width: 250px;
+  min-width: 450px;
   text-align: center;
   position: relative;
 }
 .search form input[type="text"] {
-  width: calc(50% - 32px);
+  width: calc(80% - 2rem);
+  max-width: 700px;
+
   margin-left: auto;
   margin-right: auto;
 }
@@ -70,9 +72,27 @@
   margin-left: 1rem;
 }
 .centerBox {
-  width: 50%;
+  width: 80%;
+  max-width: calc(700px + 2rem);
+
   margin-left: auto;
   margin-right: auto;
   box-sizing: border-box;
   padding: 0;
+}
+
+@media (max-width: 930px) {
+  .search {
+    order: 3;
+    flex-grow: 1;
+    flex-basis: 100%;
+  }
+  .centerBox {
+    width: 100%;
+  }
+  .search form input[type="text"] {
+    width: calc(100% - 2rem);
+    margin-left: auto;
+    margin-right: auto;
+  }
 }

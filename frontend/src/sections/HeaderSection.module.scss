@@ -1,7 +1,8 @@
 .header {
   display: flex;
   flex-direction: row;
-  padding: 1rem;
+  padding: 0 1rem;
+  flex-wrap: wrap;
 }
 .header * {
   align-self: center;

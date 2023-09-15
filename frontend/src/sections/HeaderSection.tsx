@@ -35,9 +35,7 @@ function HeaderSection() {
 
   return (
     <div className={css.header}>
-      <Link to="/">
-        <LogoComponent type="logoNavbar" />
-      </Link>
+      <LogoComponent type="logoNavbar" />
       <SearchComponent />
       <div className={css.contact}>
         <IconComponent text="Kontakt">

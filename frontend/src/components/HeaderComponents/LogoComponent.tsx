@@ -1,11 +1,14 @@
+import { Link } from "react-router-dom";
 import css from "./LogoComponent.module.scss";
 function LogoComponent(props: { type: string }) {
   return (
-    <span
+    <div
       className={props.type === "logoNavbar" ? css.logoNavbar : css.logoSmall}
     >
-      <span>G</span>sklep
-    </span>
+      <Link to="/">
+        <span>G</span>sklep
+      </Link>
+    </div>
   );
 }
 
