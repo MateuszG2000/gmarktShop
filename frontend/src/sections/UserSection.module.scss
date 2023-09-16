@@ -1,6 +1,6 @@
 @use "../index.scss" as index;
 .panelContainer {
-  width: 80%;
+  width: 76%;
   display: flex;
   margin: 2rem auto 0 auto;
   @include index.boxShadow;
@@ -8,13 +8,13 @@
   min-height: 30rem;
 }
 .nav {
-  width: 20%;
+  width: 24%;
   background-color: rgb(144, 144, 144);
 }
 .navEl {
   list-style-type: none;
   border-bottom: 1px solid black;
-  text-align: center;
+  text-align: left;
   padding: 1.3rem 0;
   font-weight: 600;
   display: flex;
