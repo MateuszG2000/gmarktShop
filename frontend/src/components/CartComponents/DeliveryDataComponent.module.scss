@@ -23,3 +23,8 @@
   margin: 0;
   line-height: 1.5rem;
 }
+@media (width<=700px) {
+  .deliveryData {
+    width: 90% !important;
+  }
+}

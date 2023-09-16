@@ -6,6 +6,7 @@
   grid-auto-rows: 2rem;
   grid-row-gap: 1.4rem;
   margin: 3rem;
+  font-size: 1rem;
 }
 .form {
   grid-column: 1/6;
@@ -60,4 +61,8 @@ input::-webkit-inner-spin-button {
 
 .btn:hover {
   color: red;
+}
+@media (width<700px) {
+  .form {
+  }
 }

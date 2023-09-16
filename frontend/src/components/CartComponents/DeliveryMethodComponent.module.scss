@@ -32,3 +32,8 @@
 .deliveryMethodContainer input {
   cursor: pointer;
 }
+@media (width<=700px) {
+  .deliveryMethodContainer {
+    width: 90% !important;
+  }
+}

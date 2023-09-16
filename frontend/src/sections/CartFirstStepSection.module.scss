@@ -1,7 +1,6 @@
 .cart {
   width: 70%;
   max-width: 1400px;
-  min-width: 650px;
   margin: 0 auto 0 auto;
   padding-bottom: 5rem;
 }
@@ -12,7 +11,7 @@
   align-items: end;
 }
 
-@media (1000px<=width<=1300px) {
+@media (width<=1300px) {
   .cart {
     width: 95%;
     min-width: 200px;

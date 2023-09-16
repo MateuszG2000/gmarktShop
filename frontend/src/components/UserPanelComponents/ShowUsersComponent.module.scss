@@ -22,3 +22,14 @@
 .id {
   width: 31%;
 }
+@media (width<800px) {
+  .usersContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0rem;
+    margin: 0.5rem;
+  }
+  .id {
+    display: none;
+  }
+}

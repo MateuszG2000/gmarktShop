@@ -22,9 +22,9 @@ function CartThirdStepSection() {
   return (
     <div className={css.cart}>
       <CartEmptyInfoComponent />
+      <StatusComponent step={3} />
       {cartItems.length > 0 && (
         <>
-          <StatusComponent step={3} />
           {cartItems.map((item) => (
             <ProductListComponent
               key={item._id}
