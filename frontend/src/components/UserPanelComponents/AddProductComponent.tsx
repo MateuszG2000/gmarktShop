@@ -34,7 +34,7 @@ function AddProductComponent() {
     dispatch(
       UIActions.showWarning({
         flag: "red",
-        text: "Ta funkcja nie jest zaimplementowana",
+        text: "Ta funkcja jest niedostępna",
       })
     );
   };
