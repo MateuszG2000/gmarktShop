@@ -3,6 +3,7 @@ const catchError = require('../utils/catchError');
 const path = require('path');
 const multer = require('multer');
 const fs = require('fs');
+import mongoose from 'mongoose';
 import { RequestUser, fileRequest } from '../custom';
 import filter from '../utils/filteringMethods';
 import { Request, Response, NextFunction } from 'express';
@@ -64,10 +65,13 @@ export const getProduct = catchError(async function (
   res: Response,
   next: NextFunction
 ) {
-  const product = await Product.findById(req.params.id);
-
+  const isValidObjectId = mongoose.Types.ObjectId.isValid(req.params.id);
+  let product;
+  if (isValidObjectId) {
+    product = await Product.findById(req.params.id);
+  }
   if (!product) {
-    const error = new Error('There is no product with given ID');
+    const error = new Error('Brak produktu o podanym ID');
     error.statusCode = 404;
     return next(error);
   }

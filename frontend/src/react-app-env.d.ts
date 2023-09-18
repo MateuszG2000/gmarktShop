@@ -106,3 +106,8 @@ interface IOrder {
   createdAt: string;
   updatedAt: Date;
 }
+interface Response {
+  status: string;
+  results: number;
+  data: Array;
+}
