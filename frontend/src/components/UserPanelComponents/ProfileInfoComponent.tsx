@@ -30,7 +30,6 @@ function ProfileInfoComponent() {
         });
         const resData = await response.json();
         if (!response.ok) {
-          console.log(response);
           const error: Error = new Error(
             `Request failed with status ${response.status}`
           );
@@ -43,7 +42,6 @@ function ProfileInfoComponent() {
           setLoading(false);
         }
       } catch (err: any) {
-        console.log(err);
         if (err.statusCode === 401) {
           dispatch(
             UIActions.showWarning({

@@ -1,14 +1,11 @@
 import HomeSection from "./sections/HomeSection";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import ProductComponent from "./components/ProductComponents/ProductComponent";
+// import ProductComponent from "./components/ProductComponents/ProductComponent";
 import AuthSection from "./sections/AuthSection";
-import CartSecondStepSection from "./sections/CartSecondStepSection";
-import CartFirstStepSection from "./sections/CartFirstStepSection";
-import CartThirdStepSection from "./sections/CartThirdStepSection";
-import CategorySection from "./sections/CategorySection";
+// import CartSecondStepSection from "./sections/CartSecondStepSection";
+// import CartFirstStepSection from "./sections/CartFirstStepSection";
+// import CartThirdStepSection from "./sections/CartThirdStepSection";
 import RootLayout from "./pages/RootLayout";
-import ErrorPage from "./pages/ErrorPage";
-import UserPage from "./pages/UserPage";
 import ProfileInfoComponent from "./components/UserPanelComponents/ProfileInfoComponent";
 import EditProfileComponent from "./components/UserPanelComponents/EditProfileComponent";
 import SettingsComponent from "./components/UserPanelComponents/SettingsComponent";
@@ -17,28 +14,65 @@ import WelcomeComponent from "./components/UserPanelComponents/WelcomeComponent"
 import ShowUsersComponent from "./components/UserPanelComponents/ShowUsersComponent";
 import ShippingSettingsComponent from "./components/UserPanelComponents/ShippingSettingsComponent";
 import AddProductComponent from "./components/UserPanelComponents/AddProductComponent";
+import { lazy, Suspense } from "react";
+import SpinnerComponent from "./components/CommonComponents/SpinnerComponent";
+const UserPage = lazy(() => import("./pages/UserPage"));
+const ErrorPage = lazy(() => import("./pages/ErrorPage"));
+const CategorySection = lazy(() => import("./sections/CategorySection"));
+const CartSecondStepSection = lazy(
+  () => import("./sections/CartSecondStepSection")
+);
+const CartFirstStepSection = lazy(
+  () => import("./sections/CartFirstStepSection")
+);
+const CartThirdStepSection = lazy(
+  () => import("./sections/CartThirdStepSection")
+);
+const ProductComponent = lazy(
+  () => import("./components/ProductComponents/ProductComponent")
+);
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
-    errorElement: <ErrorPage />,
+    errorElement: (
+      <Suspense fallback={<SpinnerComponent size={48} loading={true} />}>
+        <ErrorPage />
+      </Suspense>
+    ),
     children: [
       { index: true, element: <HomeSection /> },
       {
         path: "/product/:productId",
-        element: <ProductComponent />,
+        element: (
+          <Suspense fallback={<SpinnerComponent size={48} loading={true} />}>
+            <ProductComponent />
+          </Suspense>
+        ),
       },
       {
         path: "cart",
-        element: <CartFirstStepSection />,
+        element: (
+          <Suspense fallback={<SpinnerComponent size={48} loading={true} />}>
+            <CartFirstStepSection />
+          </Suspense>
+        ),
       },
       {
         path: "cart/data",
-        element: <CartSecondStepSection />,
+        element: (
+          <Suspense fallback={<SpinnerComponent size={48} loading={true} />}>
+            <CartSecondStepSection />
+          </Suspense>
+        ),
       },
       {
         path: "cart/summary",
-        element: <CartThirdStepSection />,
+        element: (
+          <Suspense fallback={<SpinnerComponent size={48} loading={true} />}>
+            <CartThirdStepSection />
+          </Suspense>
+        ),
       },
       {
         path: "login",
@@ -46,14 +80,26 @@ const router = createBrowserRouter([
       },
       {
         path: ":category",
-        element: <CategorySection />,
+        element: (
+          <Suspense fallback={<SpinnerComponent size={48} loading={true} />}>
+            <CategorySection />
+          </Suspense>
+        ),
       },
     ],
   },
   {
     path: "user",
-    element: <UserPage />,
-    errorElement: <ErrorPage />,
+    element: (
+      <Suspense fallback={<SpinnerComponent size={48} loading={true} />}>
+        <UserPage />,
+      </Suspense>
+    ),
+    errorElement: (
+      <Suspense fallback={<SpinnerComponent size={48} loading={true} />}>
+        <ErrorPage />,
+      </Suspense>
+    ),
     children: [
       { index: true, element: <WelcomeComponent /> },
       { path: "orders", element: <OrderComponent /> },

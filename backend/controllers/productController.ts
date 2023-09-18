@@ -55,7 +55,6 @@ export const createProduct = async function (
       const error = new Error('Img path - something wrong');
       return next(error);
     });
-    console.log(err);
 
     return next(err);
   }

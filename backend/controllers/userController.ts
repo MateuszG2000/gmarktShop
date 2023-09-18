@@ -50,14 +50,14 @@ export const login = catchError(async function (
 
   if (!user) {
     const error = new Error('Incorrect login or password.');
-    error.statusCode = 400;
+    error.statusCode = 401;
     throw error;
   }
   const passwordResult = await bcrypt.compare(password, user.password);
 
   if (!passwordResult) {
     const error = new Error('Incorrect login or password.');
-    error.statusCode = 400;
+    error.statusCode = 401;
     throw error;
   }
 
@@ -234,7 +234,7 @@ export const isAuth = (...userTypes: String[]) =>
         const error: Error = new Error(
           `You do not have permission. Your account is ${currentUser.userType} type.`
         );
-        error.statusCode = 401;
+        error.statusCode = 403;
         return next(error);
       }
       next();
@@ -262,7 +262,7 @@ export const updatePassword = catchError(async function (
 
   if (!passwordResult) {
     const error = new Error('Wrong user password');
-    error.statusCode = 400;
+    error.statusCode = 401;
     throw error;
   }
   const hashedPassword = await bcrypt.hash(newPassword, 12);

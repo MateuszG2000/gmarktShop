@@ -1,35 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import css from "./AddProductComponent.module.scss";
 import { AiTwotoneDelete } from "react-icons/ai";
 import { useAppDispatch, useAppSelector } from "../../store/appHooks";
 import NotAuthComponent from "../CommonComponents/NotAuthComponent";
 import { UIActions } from "../../store/UI";
 import SpinnerComponent from "../CommonComponents/SpinnerComponent";
+import ErrorComponent from "../AuthComponents/ErrorComponent";
+import { useFetch } from "../../utils/useFetch";
 function AddProductComponent() {
   const user = useAppSelector((state: RootState) => state.user);
   const dispatch = useAppDispatch();
-  const [data, setData] = useState<Product[]>();
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    (async () => {
-      try {
-        const response = await fetch("http://localhost:9000/api/product", {
-          credentials: "include",
-        });
-        const resData = await response.json();
-        setData(resData.data);
-        setLoading(false);
-      } catch (err) {
-        dispatch(
-          UIActions.showWarning({
-            flag: "red",
-            text: "Coś poszło nie tak",
-          })
-        );
-      }
-    })();
-  }, [dispatch]);
-
   const deleteHandler = (id: string) => {
     dispatch(
       UIActions.showWarning({
@@ -38,12 +18,19 @@ function AddProductComponent() {
       })
     );
   };
+  const { responseData, error } = useFetch<Response>(
+    "http://localhost:9000/api/product/?fields=name,price,_id,image"
+  );
+  const data: Product[] = responseData?.data;
 
   if (!user.loggedIn) return <NotAuthComponent />;
+  if (error)
+    return <>{error && <ErrorComponent>Błąd serwera</ErrorComponent>}</>;
   return (
     <div className={css.addProductContainer}>
-      <SpinnerComponent size={48} loading={loading} />
-      <div className={css.title}>Aktualne produkty w sklepie: </div>
+      <SpinnerComponent size={48} loading={!data} />
+      <div className={css.title}>Aktualne produkty w sklepie:</div>
+
       {data?.map((product, index) => (
         <React.Fragment key={index}>
           <img

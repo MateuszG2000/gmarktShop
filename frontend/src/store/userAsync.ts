@@ -19,10 +19,7 @@ export const onLogOut = () => {
       ).json();
       dispatch(userActions.logOut());
       dispatch(UIActions.showWarning({ flag: "green", text: "Wylogowano" }));
-
-      console.log(res.message); ///////logout action
     } catch (err: any) {
-      console.log(err.message);
       dispatch(
         UIActions.showWarning({ flag: "red", text: "Coś poszło nie tak :(" })
       );

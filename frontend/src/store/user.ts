@@ -26,7 +26,6 @@ const userSlice = createSlice({
   reducers: {
     setAddress(state, action) {
       state.address = action.payload;
-      console.log(action.payload);
       if (
         action.payload.street === "" ||
         action.payload.city === "" ||
@@ -35,12 +34,14 @@ const userSlice = createSlice({
         action.payload.lastName === "" ||
         action.payload.phoneNumber === "" ||
         action.payload.zipCode === "" ||
-        action.payload.email === ""
+        action.payload.email === "" ||
+        Object.entries(action.payload).length === 0
       )
         state.addressState = false;
       else state.addressState = true;
     },
     logIn(state, action) {
+      console.log(action.payload);
       state.userId = action.payload.userId;
       state.email = action.payload.email;
       state.exp = action.payload.exp;

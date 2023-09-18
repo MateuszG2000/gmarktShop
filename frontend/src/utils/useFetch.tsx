@@ -1,6 +1,7 @@
 import { useEffect, useReducer, useRef } from "react";
 import { UIActions } from "../store/UI";
 import store from "../store";
+import { useNavigate } from "react-router-dom";
 
 interface State<T> {
   responseData?: T;
@@ -20,6 +21,7 @@ export function useFetch<T = unknown>(
   options?: RequestInit
 ): State<T> {
   const cache = useRef<Cache<T>>({});
+  const navigate = useNavigate();
   // Used to prevent state update if the component is unmounted
   const cancelRequest = useRef<boolean>(false);
 
@@ -61,6 +63,7 @@ export function useFetch<T = unknown>(
 
       try {
         const response = await fetch(url, options);
+
         if (!response.ok) {
           if (response.status === 500 || response.status === undefined) {
             store.dispatch(
@@ -70,8 +73,17 @@ export function useFetch<T = unknown>(
               })
             );
           }
-          console.log(response);
           const responseData = await response.json();
+          if (response.status === 401) {
+            responseData.message = "Nie jesteś zalogowany";
+            setTimeout(() => {
+              navigate("/login");
+            }, 2000);
+          }
+          if (response.status === 403)
+            responseData.message = "Nie masz uprawnień";
+          if (response.status === 500) responseData.message = "Błąd serwera";
+
           store.dispatch(
             UIActions.showWarning({ flag: "red", text: responseData.message })
           );
@@ -79,7 +91,6 @@ export function useFetch<T = unknown>(
           error.statusCode = response.status;
           throw error;
         }
-
         const responseData = (await response.json()) as T;
         cache.current[url] = responseData;
         if (cancelRequest.current) return;

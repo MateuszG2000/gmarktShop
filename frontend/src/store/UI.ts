@@ -20,7 +20,6 @@ const UISlice = createSlice({
   reducers: {
     toggleSearch(state, action) {
       state.searchVisible = action.payload;
-      console.log(action.payload);
     },
     showWarning(state, action) {
       const { flag, text } = action.payload;

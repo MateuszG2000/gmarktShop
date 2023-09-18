@@ -10,8 +10,7 @@ function HomeSection() {
     "http://localhost:9000/api/product/?fields=name,price,_id,image&limit=11"
   );
   const data: Product[] = responseData?.data;
-  if (error)
-    return <>{error && <ErrorComponent>Błąd serwera</ErrorComponent>}</>;
+  if (error) return <>{<ErrorComponent>Błąd serwera</ErrorComponent>}</>;
   if (!data) return <SpinnerComponent size={48} loading={true} />;
   return (
     <div className={css.homeSection}>

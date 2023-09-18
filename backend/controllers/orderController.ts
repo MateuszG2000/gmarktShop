@@ -14,7 +14,6 @@ export const createOrder = catchError(async function (
   const orderNumber = `${req.body.user}-${timestamp}`;
   const newBody = { ...req.body, orderNumber };
   const newOrder = await Order.create(newBody);
-  console.log(newOrder);
   res.status(201).json({
     status: 'success',
     data: newOrder,

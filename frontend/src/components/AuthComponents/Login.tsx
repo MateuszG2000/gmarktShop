@@ -51,10 +51,9 @@ function Login() {
       }),
     })
       .then((res) => {
-        if (res.status === 422) {
-          console.log("Validation Falied");
-        } else if (res.status === 401) {
-          const err = new Error("Wrong credentials");
+        if (!res.ok) {
+          const err = new Error(res.statusText);
+          err.statusCode = res.status;
           throw err;
         } else if (res.status === 200 || res.status === 201) {
           return res.json();
@@ -76,13 +75,21 @@ function Login() {
         setError(false);
         navigate("/");
       })
-      .catch(() => {
-        dispatch(
-          UIActions.showWarning({
-            flag: "red",
-            text: "Niepoprawne dane logowania",
-          })
-        );
+      .catch((err) => {
+        if (err.statusCode === 401)
+          dispatch(
+            UIActions.showWarning({
+              flag: "red",
+              text: "Niepoprawne dane logowania",
+            })
+          );
+        else
+          dispatch(
+            UIActions.showWarning({
+              flag: "red",
+              text: "Błąd serwera",
+            })
+          );
         setError(true);
         emailBlurHandler();
         passwordBlurHandler();

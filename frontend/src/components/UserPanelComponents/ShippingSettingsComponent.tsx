@@ -87,7 +87,6 @@ function ShippingSettingsComponent() {
   };
   const submitHandler = async (e: BaseSyntheticEvent) => {
     e.preventDefault();
-    console.log(formData);
     try {
       const response = await fetch(
         "http://localhost:9000/api/config/shipping",
@@ -102,9 +101,6 @@ function ShippingSettingsComponent() {
           }),
         }
       );
-      const resData = await response.json();
-      console.log(resData.data);
-      console.log([data]);
       setData((data) => [...data, formData]);
       dispatch(
         UIActions.showWarning({

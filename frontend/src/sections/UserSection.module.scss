@@ -1,6 +1,6 @@
 @use "../index.scss" as index;
 .panelContainer {
-  width: 76%;
+  width: 80%;
   display: flex;
   margin: 2rem auto 0 auto;
   @include index.boxShadow;
@@ -8,7 +8,7 @@
   min-height: 30rem;
 }
 .nav {
-  width: 24%;
+  width: 20%;
   background-color: rgb(144, 144, 144);
 }
 .navEl {
@@ -23,7 +23,7 @@
   font-size: 1.1rem;
 }
 .contentContainer {
-  width: 95%;
+  width: 80%;
   background-color: white;
 }
 .navEl:hover {
@@ -50,13 +50,20 @@
     display: none;
   }
   .panelContainer {
-    width: 92%;
+    width: 98%;
   }
   .nav {
-    width: 8%;
+    width: 4rem;
     min-width: 3rem;
+  }
+  .contentContainer {
+    width: calc(100% - 4rem);
   }
   .navEl {
     padding: 0.2rem;
+  }
+  .icon {
+    margin-left: auto;
+    margin-right: auto;
   }
 }

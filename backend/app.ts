@@ -8,6 +8,7 @@ import productRoutes from './routes/productRoutes';
 import path from 'path';
 import configRoutes from './routes/configRoutes';
 
+const helmet = require('helmet');
 const app = express();
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
@@ -15,11 +16,11 @@ const cors = require('cors');
 dotenv.config({ path: './config.env' });
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(helmet());
 
 app.use(
   cors({
-    // origin: '*',
-    origin: ['http://localhost:3000', 'http://localhost:3001'],
+    origin: ['http://sklep.gjda.pl', 'https://sklep.gjda.pl'],
     credentials: true,
   })
 );
@@ -54,14 +55,18 @@ app.use(
       error.message = `Invalid input data. ${errors.join('. ')}`;
       error.statusCode = 400;
     }
-    const message = error.message || 'Unknown error';
     const status = error.statusCode || 500;
-    const data = error.data || '';
+    const message = error.message || 'Unknown error';
+    // const data = error.data || '';
+    // res.status(status).json({
+    //   status: status,
+    //   error: error,
+    // message: message,
+    //   stack: error.stack,
+    // });
     res.status(status).json({
       status: status,
-      error: error,
       message: message,
-      stack: error.stack,
     });
   }
 );

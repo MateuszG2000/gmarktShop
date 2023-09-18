@@ -18,7 +18,6 @@ export const sendCartData = (cart: CartState, user: UserState) => {
       totalPriceWithoutShipping: cart.totalPrice,
       user: user.userId,
     };
-    console.log(data);
     const response = await (
       await fetch("http://localhost:9000/api/order", {
         method: "POST",

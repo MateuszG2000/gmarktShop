@@ -38,7 +38,7 @@ function SearchComponent() {
   );
   return (
     <div className={css.search}>
-      <form action="#">
+      <form>
         <input
           className={`${searchVisible ? css.first : css.default}`}
           type="text"
@@ -46,12 +46,16 @@ function SearchComponent() {
           onChange={searchHandler}
         />
       </form>
-      {searchVisible && (
+      {!isLoading && searchVisible && (
         <div className={css.resultContainer}>
           <div className={css.centerBox} ref={wrapperRef}>
             {products.slice(0, 5).map((item, index) => {
               return (
-                <Link key={item._id} to={`product/${item._id}`}>
+                <Link
+                  onClick={() => dispatch(UIActions.toggleSearch(false))}
+                  key={item._id}
+                  to={`product/${item._id}`}
+                >
                   <div
                     className={`${css.result} ${css.inside} ${
                       index + 1 === products.length || index === 4
@@ -81,7 +85,7 @@ function SearchComponent() {
           </div>
         </div>
       )}
-      {products.length === 0 && searchVisible && (
+      {!isLoading && products.length === 0 && searchVisible && (
         <div className={css.resultContainer}>
           <div className={css.centerBox}>
             <div className={`${css.result} ${css.inside} ${css.last}`}>

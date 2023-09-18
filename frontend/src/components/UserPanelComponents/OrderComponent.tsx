@@ -61,7 +61,6 @@ function OrderComponent() {
       }
     })();
   }, [dispatch, navigate, url]);
-  console.log(data);
   if (!user.loggedIn) return <NotAuthComponent />;
   return (
     <div className={css.ordersContainer}>
