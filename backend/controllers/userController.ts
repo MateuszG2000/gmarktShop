@@ -78,11 +78,15 @@ export const login = catchError(async function (
     .cookie('Authorization', token, {
       httpOnly: true,
       maxAge: 1000 * 60 * 60,
-      secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
+      sameSite: 'none',
+      secure: true,
+      domain: 'gjda.pl',
     })
     .cookie('AuthConfirm', token, {
       maxAge: 1000 * 60 * 60,
-      secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
+      sameSite: 'none',
+      secure: true,
+      domain: 'gjda.pl',
     })
     .status(200)
     .json({
@@ -176,10 +180,15 @@ export function logOut(
     .cookie('Authorization', '', {
       httpOnly: true,
       maxAge: 1000,
+      sameSite: 'none',
+      secure: true,
+      domain: 'gjda.pl',
     })
     .cookie('AuthConfirm', '', {
-      httpOnly: true,
       maxAge: 1000,
+      sameSite: 'none',
+      secure: true,
+      domain: 'gjda.pl',
     })
     .status(200)
     .json({

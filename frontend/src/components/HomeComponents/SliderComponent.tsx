@@ -35,6 +35,7 @@ function SliderComponent() {
             }`}
             alt="monitor"
             src={image}
+            crossOrigin="anonymous"
           />
         ))}
       </div>

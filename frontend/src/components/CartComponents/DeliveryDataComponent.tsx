@@ -7,7 +7,7 @@ function DeliveryDataComponent() {
     (state: RootState) => state.user.addressState
   );
   let { responseData, error } = useFetch<Response>(
-    "http://localhost:9000/api/auth/getuser?fields=userData",
+    `${process.env.REACT_APP_URL}/api/auth/getuser?fields=userData`,
     {
       credentials: "include",
     }

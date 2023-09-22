@@ -17,7 +17,7 @@ function ProductComponent() {
     (async () => {
       try {
         const response = await fetch(
-          `http://localhost:9000/api/product/?_id=${productId}`
+          `${process.env.REACT_APP_URL}/api/product/?_id=${productId}`
         );
         const resData = await response.json();
         setProduct(resData.data[0]);
@@ -39,40 +39,43 @@ function ProductComponent() {
   }
   return (
     <>
-      <div className={css.product}>
-        <div className={css.productContainer}>
-          <img
-            className={css.productImage}
-            src={`http://localhost:9000/api/images/${product?.image}`}
-            alt={product?.name ?? "Zdjecie produktu"}
-          />
-          <div className={css.productOption}>
-            <p className={css.title}>{product?.name}</p>
-            <div className={css.price}>{product?.price.toFixed(2)} zł</div>
-            <div className={css.priceButtonContainer}>
-              <div className={css.quantity}>
-                <QuantityComponent
-                  quantityProp={quantity}
-                  onChange={setQuantity}
-                  onRemove={() => {}}
-                />
-              </div>
-              <div className={css.btnContainer}>
-                <ButtonComponent disabled={false} onClick={addToCartHandler}>
-                  <span className={css.btnIcon}>
-                    <LiaCartArrowDownSolid />
-                  </span>
-                  <span className={css.btnTitle}>Dodaj do koszyka</span>
-                </ButtonComponent>
+      {product && (
+        <div className={css.product}>
+          <div className={css.productContainer}>
+            <img
+              className={css.productImage}
+              crossOrigin="anonymous"
+              src={`${process.env.REACT_APP_URL}/api/images/${product?.image}`}
+              alt={product?.name ?? "Zdjecie produktu"}
+            />
+            <div className={css.productOption}>
+              <p className={css.title}>{product?.name}</p>
+              <div className={css.price}>{product?.price.toFixed(2)} zł</div>
+              <div className={css.priceButtonContainer}>
+                <div className={css.quantity}>
+                  <QuantityComponent
+                    quantityProp={quantity}
+                    onChange={setQuantity}
+                    onRemove={() => {}}
+                  />
+                </div>
+                <div className={css.btnContainer}>
+                  <ButtonComponent disabled={false} onClick={addToCartHandler}>
+                    <span className={css.btnIcon}>
+                      <LiaCartArrowDownSolid />
+                    </span>
+                    <span className={css.btnTitle}>Dodaj do koszyka</span>
+                  </ButtonComponent>
+                </div>
               </div>
             </div>
           </div>
+          <div className={css.description}>
+            <p className={css.descriptionTitle}>Opis</p>
+            <p>{product?.description}</p>
+          </div>
         </div>
-        <div className={css.description}>
-          <p className={css.descriptionTitle}>Opis</p>
-          <p>{product?.description}</p>
-        </div>
-      </div>
+      )}
     </>
   );
 }

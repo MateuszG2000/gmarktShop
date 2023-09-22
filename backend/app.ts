@@ -1,6 +1,5 @@
 import bodyParser from 'body-parser';
 import express from 'express';
-import mongoose from 'mongoose';
 import authRoutes from './routes/userRoutes';
 import dotenv from 'dotenv';
 import orderRoutes from './routes/orderRoutes';
@@ -20,13 +19,12 @@ app.use(helmet());
 
 app.use(
   cors({
-    origin: ['http://sklep.gjda.pl', 'https://sklep.gjda.pl'],
+    origin: ['https://www.gsklep.gjda.pl', 'https://gsklep.gjda.pl'],
     credentials: true,
   })
 );
 
 //routes
-
 app.use(
   '/api/images',
   express.static(path.join(__dirname, '..', 'public', 'img', 'products'))

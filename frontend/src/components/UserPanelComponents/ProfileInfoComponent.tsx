@@ -25,9 +25,12 @@ function ProfileInfoComponent() {
     (async () => {
       try {
         dispatch(userActions.isAuth());
-        const response = await fetch(`http://localhost:9000/api/auth/getuser`, {
-          credentials: "include",
-        });
+        const response = await fetch(
+          `${process.env.REACT_APP_URL}/api/auth/getuser`,
+          {
+            credentials: "include",
+          }
+        );
         const resData = await response.json();
         if (!response.ok) {
           const error: Error = new Error(

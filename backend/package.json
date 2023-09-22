@@ -2,11 +2,11 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js",
-    "compile": "tsc && node CompilationFiles/server.js",
+    "compile": "tsc && nodemon CompilationFiles/server.js",
     "dev": "./node_modules/nodemon/bin/nodemon.js -e ts  --exec \"npm run compile\""
   },
   "author": "",
@@ -19,6 +19,7 @@
     "dotenv": "^16.3.1",
     "express": "^4.18.2",
     "express-validator": "^7.0.1",
+    "helmet": "^7.0.0",
     "jsonwebtoken": "^9.0.1",
     "mongoose": "^7.4.0",
     "multer": "^1.4.5-lts.1",

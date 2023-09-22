@@ -23,8 +23,9 @@ function ProductComponent({ product }: { product: Product }) {
       <div className={`${css.imgBox}`}>
         <img
           loading="lazy"
+          crossOrigin="anonymous"
           className={`${css.image} ${imageLoaded ? css.imgLoaded : ""}`}
-          src={`http://localhost:9000/api/images/${product.image}`}
+          src={`${process.env.REACT_APP_URL}/api/images/${product.image}`}
           alt="produkt"
           onLoad={() => setImageLoaded(true)}
         />

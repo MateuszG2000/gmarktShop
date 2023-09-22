@@ -10,7 +10,6 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../store/appHooks";
 import { userActions } from "../../store/user";
 import { UIActions } from "../../store/UI";
-
 function Login() {
   const dispatch = useAppDispatch();
   const [error, setError] = useState(false);
@@ -39,7 +38,7 @@ function Login() {
     const login = event.target[0].value;
     const password = event.target[1].value;
     setSpinner(true);
-    fetch("http://localhost:9000/api/auth/login", {
+    fetch(`${process.env.REACT_APP_URL}/api/auth/login`, {
       method: "POST",
       credentials: "include",
       headers: {

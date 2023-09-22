@@ -49,18 +49,21 @@ function SignUp() {
       setinitial(true);
       return;
     }
-    const response = await fetch("http://localhost:9000/api/auth/signup", {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: enteredEmail,
-        password: enteredPassword,
-        passwordConfirm: enteredPasswordConfirm,
-      }),
-    });
+    const response = await fetch(
+      `${process.env.REACT_APP_URL}/api/auth/signup`,
+      {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: enteredEmail,
+          password: enteredPassword,
+          passwordConfirm: enteredPasswordConfirm,
+        }),
+      }
+    );
 
     if (response.ok) {
       dispatch(

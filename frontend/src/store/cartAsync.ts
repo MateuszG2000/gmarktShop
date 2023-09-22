@@ -19,7 +19,7 @@ export const sendCartData = (cart: CartState, user: UserState) => {
       user: user.userId,
     };
     const response = await (
-      await fetch("http://localhost:9000/api/order", {
+      await fetch(`${process.env.REACT_APP_URL}/api/order`, {
         method: "POST",
         credentials: "include",
         headers: {

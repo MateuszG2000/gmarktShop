@@ -11,8 +11,8 @@ import SpinnerComponent from "../CommonComponents/SpinnerComponent";
 function OrderComponent() {
   const [loading, setLoading] = useState(true);
   const userType = useAppSelector((state: RootState) => state.user.type);
-  let url = "http://localhost:9000/api/order";
-  if (userType === "admin") url = "http://localhost:9000/api/order/all";
+  let url = `${process.env.REACT_APP_URL}/api/order`;
+  if (userType === `admin`) url = `${process.env.REACT_APP_URL}/api/order/all`;
   const dispatch = useAppDispatch();
   const [data, setData] = useState<IOrder[]>([]);
   const user = useAppSelector((state: RootState) => state.user);
@@ -108,7 +108,8 @@ function OrderComponent() {
                         <div className={css.prodListEl}>
                           <img
                             className={css.img}
-                            src={`http://localhost:9000/api/images/${orderProd?.product?.image}`}
+                            crossOrigin="anonymous"
+                            src={`${process.env.REACT_APP_URL}/api/images/${orderProd?.product?.image}`}
                             alt="abc"
                           />
                           <span className={css.title}>

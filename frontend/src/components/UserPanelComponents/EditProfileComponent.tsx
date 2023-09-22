@@ -23,7 +23,7 @@ function EditProfileComponent() {
     (async () => {
       try {
         const response = await fetch(
-          `http://localhost:9000/api/auth/getuser?fields=userData`,
+          `${process.env.REACT_APP_URL}/api/auth/getuser?fields=userData`,
           {
             credentials: "include",
           }
@@ -63,7 +63,7 @@ function EditProfileComponent() {
   const onSubmitHandler = async function (e: BaseSyntheticEvent) {
     e.preventDefault();
     const response = await fetch(
-      "http://localhost:9000/api/auth/updateaddress",
+      `${process.env.REACT_APP_URL}/api/auth/updateaddress`,
       {
         method: "POST",
         credentials: "include",

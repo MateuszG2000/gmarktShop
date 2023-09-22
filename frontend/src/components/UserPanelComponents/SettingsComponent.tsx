@@ -44,7 +44,7 @@ function SettingsComponent() {
     setSpinner(true);
     event.preventDefault();
     const response = await fetch(
-      "http://localhost:9000/api/auth/updatepassword",
+      `${process.env.REACT_APP_URL}/api/auth/updatepassword`,
       {
         method: "POST",
         credentials: "include",

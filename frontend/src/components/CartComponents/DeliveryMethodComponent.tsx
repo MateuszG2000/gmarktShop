@@ -12,7 +12,7 @@ function DeliveryMethodComponent() {
     (async () => {
       try {
         const response = await fetch(
-          "http://localhost:9000/api/config?fields=shipping"
+          `${process.env.REACT_APP_URL}/api/config?fields=shipping`
         );
         const resData = await response.json();
         setData(resData.data.shipping);

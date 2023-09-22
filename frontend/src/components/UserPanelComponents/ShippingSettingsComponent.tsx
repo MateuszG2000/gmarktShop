@@ -23,7 +23,7 @@ function ShippingSettingsComponent() {
     (async () => {
       try {
         const response = await fetch(
-          "http://localhost:9000/api/config?fields=shipping",
+          `${process.env.REACT_APP_URL}/api/config?fields=shipping`,
           {
             credentials: "include",
           }
@@ -53,7 +53,7 @@ function ShippingSettingsComponent() {
     }
     try {
       const response = await fetch(
-        `http://localhost:9000/api/config/shipping/${id}`,
+        `${process.env.REACT_APP_URL}/api/config/shipping/${id}`,
         {
           method: "delete",
           credentials: "include",
@@ -89,7 +89,7 @@ function ShippingSettingsComponent() {
     e.preventDefault();
     try {
       const response = await fetch(
-        "http://localhost:9000/api/config/shipping",
+        `${process.env.REACT_APP_URL}/api/config/shipping`,
         {
           method: "put",
           credentials: "include",

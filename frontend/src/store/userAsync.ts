@@ -9,7 +9,7 @@ export const onLogOut = () => {
     Cookies.remove("AuthConfirm");
     try {
       const res = await (
-        await fetch("http://localhost:9000/api/auth/logout", {
+        await fetch(`${process.env.REACT_APP_URL}/api/auth/logout`, {
           method: "GET",
           credentials: "include",
           headers: {

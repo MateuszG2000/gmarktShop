@@ -19,7 +19,7 @@ function AddProductComponent() {
     );
   };
   const { responseData, error } = useFetch<Response>(
-    "http://localhost:9000/api/product/?fields=name,price,_id,image"
+    `${process.env.REACT_APP_URL}/api/product/?fields=name,price,_id,image`
   );
   const data: Product[] = responseData?.data;
 
@@ -35,7 +35,8 @@ function AddProductComponent() {
         <React.Fragment key={index}>
           <img
             className={css.img}
-            src={`http://localhost:9000/api/images/${product.image}`}
+            crossOrigin="anonymous"
+            src={`${process.env.REACT_APP_URL}/api/images/${product.image}`}
             alt={product.name}
           />
           <div className={css.name}>{product.name}</div>

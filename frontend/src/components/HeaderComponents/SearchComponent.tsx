@@ -28,7 +28,7 @@ function SearchComponent() {
 
       const response = await (
         await fetch(
-          `http://localhost:9000/api/product/?name=${e.target.value}&fields=name,_id,image`
+          `${process.env.REACT_APP_URL}/api/product/?name=${e.target.value}&fields=name,_id,image`
         )
       ).json();
       setProducts(response.data);
@@ -65,7 +65,8 @@ function SearchComponent() {
                   >
                     <img
                       className={css.image}
-                      src={`http://localhost:9000/api/images/${item.image}`}
+                      crossOrigin="anonymous"
+                      src={`${process.env.REACT_APP_URL}/api/images/${item.image}`}
                       alt={String(item.name)}
                     ></img>
                     <span className={css.title}>{item.name}</span>

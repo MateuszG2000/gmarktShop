@@ -58,7 +58,8 @@ function ExtendedInfoComponent() {
                   <div className={css.productEl}>
                     <img
                       className={css.image}
-                      src={`http://localhost:9000/api/images/${product.image}`}
+                      crossOrigin="anonymous"
+                      src={`${process.env.REACT_APP_URL}/api/images/${product.image}`}
                       alt={String(product.name)}
                     ></img>
                     <p className={css.title}>{product.name}</p>

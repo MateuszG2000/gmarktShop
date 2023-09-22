@@ -28,10 +28,15 @@ function ProductListComponent({
   const handleRemove = () => {
     dispatch(cartActions.removeItem({ id: product._id }));
   };
-  const img = `http://localhost:9000/api/images/${product.image}`;
+  const img = `${process.env.REACT_APP_URL}/api/images/${product.image}`;
   return (
     <div className={css.productListComponent}>
-      <img className={css.image} src={img} alt="prod"></img>
+      <img
+        className={css.image}
+        crossOrigin="anonymous"
+        src={img}
+        alt="prod"
+      ></img>
       <span className={css.title}>{product.name}</span>
       {moreData && (
         <span className={css.priceFirst}>{product.price?.toFixed(2)} zł</span>

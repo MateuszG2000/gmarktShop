@@ -7,7 +7,7 @@ function ShowUsersComponent() {
   useEffect(() => {
     (async () => {
       try {
-        const response = await fetch("http://localhost:9000/api/auth", {
+        const response = await fetch(`${process.env.REACT_APP_URL}/api/auth`, {
           credentials: "include",
         });
         const resData = await response.json();

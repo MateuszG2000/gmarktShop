@@ -8,7 +8,7 @@ import SpinnerComponent from "../components/CommonComponents/SpinnerComponent";
 function CategorySection() {
   const { category } = useParams();
   const { responseData, error } = useFetch<Response>(
-    `http://localhost:9000/api/product/?category=${category}`
+    `${process.env.REACT_APP_URL}/api/product/?category=${category}`
   );
   const data: Product[] = responseData?.data;
   if (error)
