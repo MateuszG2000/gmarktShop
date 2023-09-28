@@ -11,8 +11,7 @@ function WelcomeComponent() {
         justifyContent: "center",
         flexDirection: "column",
         alignItems: "center",
-        height: "100%",
-        gap: "2rem",
+        marginTop: "1rem",
       }}
     >
       <LogoComponent type="logoNavbar" />
