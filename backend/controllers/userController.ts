@@ -80,13 +80,19 @@ export const login = catchError(async function (
       maxAge: 1000 * 60 * 60,
       sameSite: 'none',
       secure: true,
-      domain: 'gjda.pl',
+      domain:
+        process.env.NODE_ENV === 'production'
+          ? process.env.DOMAIN
+          : process.env.DOMAIN_DEV,
     })
     .cookie('AuthConfirm', token, {
       maxAge: 1000 * 60 * 60,
       sameSite: 'none',
       secure: true,
-      domain: 'gjda.pl',
+      domain:
+        process.env.NODE_ENV === 'production'
+          ? process.env.DOMAIN
+          : process.env.DOMAIN_DEV,
     })
     .status(200)
     .json({
@@ -182,13 +188,19 @@ export function logOut(
       maxAge: 1000,
       sameSite: 'none',
       secure: true,
-      domain: 'gjda.pl',
+      domain:
+        process.env.NODE_ENV === 'production'
+          ? process.env.DOMAIN
+          : process.env.DOMAIN_DEV,
     })
     .cookie('AuthConfirm', '', {
       maxAge: 1000,
       sameSite: 'none',
       secure: true,
-      domain: 'gjda.pl',
+      domain:
+        process.env.NODE_ENV === 'production'
+          ? process.env.DOMAIN
+          : process.env.DOMAIN_DEV,
     })
     .status(200)
     .json({

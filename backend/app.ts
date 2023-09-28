@@ -16,13 +16,20 @@ dotenv.config({ path: './config.env' });
 app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(helmet());
-
-app.use(
-  cors({
-    origin: ['https://www.gsklep.gjda.pl', 'https://gsklep.gjda.pl'],
-    credentials: true,
-  })
-);
+if (process.env.NODE_ENV === 'production')
+  app.use(
+    cors({
+      origin: ['https://www.gsklep.gjda.pl', 'https://gsklep.gjda.pl'],
+      credentials: true,
+    })
+  );
+if (process.env.NODE_ENV === 'development')
+  app.use(
+    cors({
+      origin: ['https://localhost:3000', 'http://localhost:3000'],
+      credentials: true,
+    })
+  );
 
 //routes
 app.use(
@@ -55,17 +62,20 @@ app.use(
     }
     const status = error.statusCode || 500;
     const message = error.message || 'Unknown error';
-    // const data = error.data || '';
-    // res.status(status).json({
-    //   status: status,
-    //   error: error,
-    // message: message,
-    //   stack: error.stack,
-    // });
-    res.status(status).json({
-      status: status,
-      message: message,
-    });
+    if (process.env.NODE_ENV === 'development') {
+      const data = error.data || '';
+      res.status(status).json({
+        status: status,
+        error: error,
+        message: message,
+        stack: error.stack,
+      });
+    } else if (process.env.NODE_ENV === 'production') {
+      res.status(status).json({
+        status: status,
+        message: message,
+      });
+    }
   }
 );
 
