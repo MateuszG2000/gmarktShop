@@ -1,5 +1,5 @@
 # Gsklep
-Website Application with management system for online shopping.
+Web Application with management system for online shopping.
 
 ## Live website
 
