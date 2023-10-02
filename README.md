@@ -11,6 +11,19 @@ login: admin@admin.pl password: admin123
 ###### user
 login: user@user.pl password: user1234
 
+## Technologies
+
+- Typescript
+- SCSS
+- HTML
+- React
+- Redux
+- Node.js
+- Mongoose
+- Express.js
+- MongoDB
+- JWT, Bcrypt, Cookies, React Router, Persist, Multer
+
 ## Features
 
 ##### Online shop
