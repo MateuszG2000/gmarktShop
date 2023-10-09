@@ -3,7 +3,8 @@ Web Application with management system for online shopping.
 
 ## Live website
 
-https://gsklep.gjda.pl
+https://gsklep.mgjda.pl
+API: https://api.mgjda.pl
 
 ###### admin 
 login: admin@admin.pl password: admin123
