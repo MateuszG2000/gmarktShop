@@ -44,7 +44,7 @@ login: user@user.pl password: user1234
 - Changing password
 - Displaying all orders (admin)
 - Displaying all users (admin)
-- Create, delete shopping methods (admin)
+- Create, delete shipping methods (admin)
 - Create, update, display, delete products (admin) - not implemented
 
 
