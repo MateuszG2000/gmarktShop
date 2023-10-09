@@ -19,7 +19,11 @@ app.use(helmet());
 if (process.env.NODE_ENV === 'production')
   app.use(
     cors({
-      origin: ['https://www.gsklep.gjda.pl', 'https://gsklep.gjda.pl'],
+      // origin: ['https://www.gsklep.gjda.pl', 'https://gsklep.gjda.pl'],
+      origin: [
+        `https://www.gsklep.${process.env.DOMAIN}`,
+        `https://gsklep.${process.env.DOMAIN}`,
+      ],
       credentials: true,
     })
   );
