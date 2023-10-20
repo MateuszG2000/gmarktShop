@@ -7,7 +7,7 @@ export const createShipping = catchError(async function (
   req: Request,
   res: Response,
   next: NextFunction
-) {
+):Promise<void> {
   const newConfig = await Config.findOneAndUpdate(
     {},
     { $push: { shipping: req.body } },
