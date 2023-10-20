@@ -41,7 +41,6 @@ const userSlice = createSlice({
       else state.addressState = true;
     },
     logIn(state, action) {
-      console.log(action.payload);
       state.userId = action.payload.userId;
       state.email = action.payload.email;
       state.exp = action.payload.exp;

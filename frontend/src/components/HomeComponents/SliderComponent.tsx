@@ -30,9 +30,7 @@ function SliderComponent() {
         {sliderData.map((image, index) => (
           <img
             key={index}
-            className={`${
-              actualSlide === index ? css["visible"] : css["corouselItem"]
-            }`}
+            className={`${actualSlide === index ? css["visible"] : css["corouselItem"]}`}
             alt="monitor"
             src={image}
             crossOrigin="anonymous"
@@ -40,6 +38,7 @@ function SliderComponent() {
         ))}
       </div>
       <button
+        aria-label="Następny"
         className={css.sliderForwardButton}
         onClick={() => {
           goToSlide(actualSlide + 1);
@@ -48,6 +47,7 @@ function SliderComponent() {
         <BsArrowRightCircle />
       </button>
       <button
+        aria-label="Poprzedni"
         className={css.sliderBackButton}
         onClick={() => {
           goToSlide(actualSlide - 1);
@@ -58,10 +58,9 @@ function SliderComponent() {
       <div className={css.circleBox}>
         {sliderData.map((_, index) => (
           <button
+            aria-label="circle"
             key={index}
-            className={`${css["circle"]} ${
-              actualSlide === index ? css["fill"] : ""
-            }`}
+            className={`${css["circle"]} ${actualSlide === index ? css["fill"] : ""}`}
             onClick={() => {
               setActualSlide(index);
             }}

@@ -32,11 +32,11 @@ function QuantityComponent({
 
   return (
     <div className={css.quantity}>
-      <button className={css.btn} onClick={decrementHandler}>
+      <button aria-label="Zwiększ" className={css.btn} onClick={decrementHandler}>
         <AiOutlineMinus />
       </button>
       <span className={css.counter}>{quantity}</span>
-      <button className={css.btn} onClick={incrementHandler}>
+      <button aria-label="Zmniejsz" className={css.btn} onClick={incrementHandler}>
         <AiOutlinePlus />
       </button>
     </div>

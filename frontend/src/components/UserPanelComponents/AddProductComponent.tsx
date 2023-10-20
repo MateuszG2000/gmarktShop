@@ -24,8 +24,7 @@ function AddProductComponent() {
   const data: Product[] = responseData?.data;
 
   if (!user.loggedIn) return <NotAuthComponent />;
-  if (error)
-    return <>{error && <ErrorComponent>Błąd serwera</ErrorComponent>}</>;
+  if (error) return <>{error && <ErrorComponent>Błąd serwera</ErrorComponent>}</>;
   return (
     <div className={css.addProductContainer}>
       <SpinnerComponent size={48} loading={!data} />
@@ -42,10 +41,7 @@ function AddProductComponent() {
           <div className={css.name}>{product.name}</div>
           <div className={css.right}>{product.price.toFixed(2)} zł</div>
           <div className={css.right}>
-            <button
-              onClick={() => deleteHandler(product?._id)}
-              className={`${css.btn}`}
-            >
+            <button aria-label="Dodaj" onClick={() => deleteHandler(product?._id)} className={`${css.btn}`}>
               <AiTwotoneDelete />
             </button>
           </div>

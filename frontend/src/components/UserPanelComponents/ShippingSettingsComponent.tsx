@@ -22,12 +22,9 @@ function ShippingSettingsComponent() {
   useEffect(() => {
     (async () => {
       try {
-        const response = await fetch(
-          `${process.env.REACT_APP_URL}/api/config?fields=shipping`,
-          {
-            credentials: "include",
-          }
-        );
+        const response = await fetch(`${process.env.REACT_APP_URL}/api/config?fields=shipping`, {
+          credentials: "include",
+        });
         const resData = await response.json();
         setData(resData.data.shipping);
         setLoading(false);
@@ -52,13 +49,10 @@ function ShippingSettingsComponent() {
       return;
     }
     try {
-      const response = await fetch(
-        `${process.env.REACT_APP_URL}/api/config/shipping/${id}`,
-        {
-          method: "delete",
-          credentials: "include",
-        }
-      );
+      const response = await fetch(`${process.env.REACT_APP_URL}/api/config/shipping/${id}`, {
+        method: "delete",
+        credentials: "include",
+      });
       if (!response.ok) {
         dispatch(
           UIActions.showWarning({
@@ -88,19 +82,16 @@ function ShippingSettingsComponent() {
   const submitHandler = async (e: BaseSyntheticEvent) => {
     e.preventDefault();
     try {
-      const response = await fetch(
-        `${process.env.REACT_APP_URL}/api/config/shipping`,
-        {
-          method: "put",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            ...formData,
-          }),
-        }
-      );
+      const response = await fetch(`${process.env.REACT_APP_URL}/api/config/shipping`, {
+        method: "put",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...formData,
+        }),
+      });
       setData((data) => [...data, formData]);
       dispatch(
         UIActions.showWarning({
@@ -126,17 +117,10 @@ function ShippingSettingsComponent() {
         <React.Fragment key={index}>
           <div className={css.left}>{shippingMethod.name}</div>
           <div className={css.left}>{shippingMethod.company}</div>
-          <div className={css.left}>
-            {shippingMethod.cashOnDelivery
-              ? "Płatność przy dostawie"
-              : "Brak płatności"}
-          </div>
+          <div className={css.left}>{shippingMethod.cashOnDelivery ? "Płatność przy dostawie" : "Brak płatności"}</div>
           <div className={css.right}>{shippingMethod.price.toFixed(2)} zł</div>
           <div className={css.right}>
-            <button
-              onClick={() => deleteHandler(shippingMethod?._id)}
-              className={`${css.btn}`}
-            >
+            <button aria-label="Dodaj" onClick={() => deleteHandler(shippingMethod?._id)} className={`${css.btn}`}>
               <AiTwotoneDelete />
             </button>
           </div>
@@ -152,9 +136,7 @@ function ShippingSettingsComponent() {
           className="input"
           value={formData?.name}
           placeholder="Nazwa przesyłki"
-          onChange={(e: BaseSyntheticEvent) =>
-            setFormData({ ...formData, name: e.target.value })
-          }
+          onChange={(e: BaseSyntheticEvent) => setFormData({ ...formData, name: e.target.value })}
         />
         <Input
           id="Company-input"
@@ -163,9 +145,7 @@ function ShippingSettingsComponent() {
           className="input"
           placeholder="Firma kurierska"
           value={formData?.company}
-          onChange={(e: BaseSyntheticEvent) =>
-            setFormData({ ...formData, company: e.target.value })
-          }
+          onChange={(e: BaseSyntheticEvent) => setFormData({ ...formData, company: e.target.value })}
         />
         <select
           className={css.cashOnDelivery}
@@ -185,9 +165,7 @@ function ShippingSettingsComponent() {
           className="input"
           placeholder="Cena"
           value={String(formData?.price)}
-          onChange={(e: BaseSyntheticEvent) =>
-            setFormData({ ...formData, price: Number(e.target.value) })
-          }
+          onChange={(e: BaseSyntheticEvent) => setFormData({ ...formData, price: Number(e.target.value) })}
         />
         <button className={`${css.btn} ${css.btnSave}`}>
           <AiFillFileAdd />

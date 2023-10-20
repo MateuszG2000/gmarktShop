@@ -26,6 +26,7 @@ const ButtonComponent = ({
   return (
     <>
       <button
+        aria-label="Przycisk"
         disabled={disabled}
         className={`${css.btn} ${css[colorClass]}`}
         type="submit"

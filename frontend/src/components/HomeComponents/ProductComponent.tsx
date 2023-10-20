@@ -35,6 +35,7 @@ function ProductComponent({ product }: { product: Product }) {
       <div className={css.cartPrice}>
         <span className={css.price}>{product.price?.toFixed(2)} zł</span>
         <button
+          aria-label="Dodaj do koszyka"
           className={css.addToCart}
           onClick={(e) => {
             e.stopPropagation();
