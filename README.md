@@ -1,6 +1,8 @@
 # Gsklep
 Web Application with management system for online shopping.
 
+![https://github.com/mg300/Gsklep/GIF.gif](https://github.com/mg300/Gsklep/blob/main/GIF.gif)
+
 ## Live website
 
 https://gsklep.mgjda.pl
