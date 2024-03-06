@@ -2,16 +2,13 @@ import React from "react";
 import css from "./DeliveryDataComponent.module.scss";
 import { useAppSelector } from "../../store/appHooks";
 import { useFetch } from "../../utils/useFetch";
-function DeliveryDataComponent() {
-  const addressState = useAppSelector(
-    (state: RootState) => state.user.addressState
-  );
-  let { responseData, error } = useFetch<Response>(
-    `${process.env.REACT_APP_URL}/api/auth/getuser?fields=userData`,
-    {
-      credentials: "include",
-    }
-  );
+import ButtonComponent from "../CommonComponents/ButtonComponent";
+import { Link } from "react-router-dom";
+function DeliveryDataComponent({ step }: { step: number }) {
+  const addressState = useAppSelector((state: RootState) => state.user.addressState);
+  let { responseData, error } = useFetch<Response>(`${process.env.REACT_APP_URL}/api/auth/getuser?fields=userData`, {
+    credentials: "include",
+  });
   if (!addressState) error = new Error("Uzupełnij dane adresowe");
   const data: Address = responseData?.data.userData;
   if (error) {
@@ -52,6 +49,11 @@ function DeliveryDataComponent() {
         <p>tel. {data?.phoneNumber}</p>
         <p>e-mail: {data?.email}</p>
       </div>
+      {step === 2 && (
+        <Link to="http://localhost:3000/user/edit">
+          <ButtonComponent style={{ marginTop: "1rem" }}>Edytuj</ButtonComponent>
+        </Link>
+      )}
     </div>
   );
 }

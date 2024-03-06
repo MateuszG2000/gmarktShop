@@ -11,9 +11,7 @@ import CartEmptyInfoComponent from "../components/CartComponents/CartEmptyInfoCo
 import { UIActions } from "../store/UI";
 function CartSecondStepSection() {
   const dispatch = useAppDispatch();
-  const userAddressState = useAppSelector(
-    (state: RootState) => state.user.addressState
-  );
+  const userAddressState = useAppSelector((state: RootState) => state.user.addressState);
   const onClick = () => {
     if (!userAddressState)
       dispatch(
@@ -24,9 +22,7 @@ function CartSecondStepSection() {
       );
   };
   const cartItems = useSelector((state: RootState) => state.cart.items);
-  const userIsLogged = useAppSelector(
-    (state: RootState) => state.user.loggedIn
-  );
+  const userIsLogged = useAppSelector((state: RootState) => state.user.loggedIn);
   return (
     <div className={css.cart}>
       <CartEmptyInfoComponent />
@@ -34,14 +30,11 @@ function CartSecondStepSection() {
       {cartItems.length > 0 && (
         <>
           {cartItems.map((item) => (
-            <ProductListComponent
-              key={item._id}
-              product={item}
-              moreData={false}
-            />
+            <ProductListComponent key={item._id} product={item} moreData={false} />
           ))}
+
           <div className={css.deliverySummary}>
-            <DeliveryDataComponent />
+            <DeliveryDataComponent step={2} />
             <SummaryComponent
               disable={!userIsLogged}
               buttonText={
