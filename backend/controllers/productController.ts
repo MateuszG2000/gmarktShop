@@ -74,6 +74,12 @@ export const getProduct = catchError(async function (
     error.statusCode = 404;
     return next(error);
   }
+  if (product.inStock < 1) {
+    return res.status(404).json({
+      status: 'error',
+      message: 'Product not available on stock',
+    });
+  }
   res.status(200).json({
     status: 'success',
     data: product,
@@ -84,7 +90,9 @@ export const getProducts = catchError(async function (
   res: Response,
   next: NextFunction
 ) {
-  const products = await filter(Product.find(), req.query);
+  const query = { ...req.query };
+  query.inStock = { gt: '0' };
+  const products = await filter(Product.find(), query);
   res.status(200).json({
     status: 'success',
     results: products.length,
