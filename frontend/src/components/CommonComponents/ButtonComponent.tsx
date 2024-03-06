@@ -6,12 +6,14 @@ const ButtonComponent = ({
   children,
   onClick,
   color,
+  style,
 }: {
   disabled?: boolean;
   spinner?: boolean;
   children: string | ReactNode;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   color?: number;
+  style?: React.CSSProperties;
 }) => {
   let colorClass = "";
   if (color) {
@@ -31,6 +33,7 @@ const ButtonComponent = ({
         className={`${css.btn} ${css[colorClass]}`}
         type="submit"
         onClick={onClick}
+        style={style}
       >
         {!spinner && children}
         {spinner && <span className={css.loader}></span>}
