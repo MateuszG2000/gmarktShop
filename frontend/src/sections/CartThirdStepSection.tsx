@@ -13,9 +13,7 @@ function CartThirdStepSection() {
   const dispatch = useAppDispatch();
   const cart = useAppSelector((state: RootState) => state.cart);
   const user = useAppSelector((state: RootState) => state.user);
-  const userIsLogged = useAppSelector(
-    (state: RootState) => state.user.loggedIn
-  );
+  const userIsLogged = useAppSelector((state: RootState) => state.user.loggedIn);
   const handleSendData = () => {
     dispatch(sendCartData(cart, user));
   };
@@ -26,17 +24,13 @@ function CartThirdStepSection() {
       {cartItems.length > 0 && (
         <>
           {cartItems.map((item) => (
-            <ProductListComponent
-              key={item._id}
-              product={item}
-              moreData={false}
-            />
+            <ProductListComponent key={item._id} product={item} moreData={false} />
           ))}
           <div className={css.deliverySummary}>
-            <DeliveryDataComponent />
+            <DeliveryDataComponent step={3} />
             <SummaryComponent
               disable={!userIsLogged}
-              buttonText={<>Zapłać</>}
+              buttonText={<>Złóż zamówienie</>}
               buttonPath="/"
               buttonFunction={handleSendData}
             />
