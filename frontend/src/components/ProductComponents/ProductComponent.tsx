@@ -16,11 +16,9 @@ function ProductComponent() {
   useEffect(() => {
     (async () => {
       try {
-        const response = await fetch(
-          `${process.env.REACT_APP_URL}/api/product/?_id=${productId}`
-        );
+        const response = await fetch(`${process.env.REACT_APP_URL}/api/product/${productId}`);
         const resData = await response.json();
-        setProduct(resData.data[0]);
+        setProduct(resData.data);
       } catch (err) {
         dispatch(
           UIActions.showWarning({
@@ -53,11 +51,7 @@ function ProductComponent() {
               <div className={css.price}>{product?.price.toFixed(2)} zł</div>
               <div className={css.priceButtonContainer}>
                 <div className={css.quantity}>
-                  <QuantityComponent
-                    quantityProp={quantity}
-                    onChange={setQuantity}
-                    onRemove={() => {}}
-                  />
+                  <QuantityComponent quantityProp={quantity} onChange={setQuantity} onRemove={() => {}} />
                 </div>
                 <div className={css.btnContainer}>
                   <ButtonComponent disabled={false} onClick={addToCartHandler}>
