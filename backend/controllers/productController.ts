@@ -74,12 +74,7 @@ export const getProduct = catchError(async function (
     error.statusCode = 404;
     return next(error);
   }
-  if (product.inStock < 1) {
-    return res.status(404).json({
-      status: 'error',
-      message: 'Product not available on stock',
-    });
-  }
+
   res.status(200).json({
     status: 'success',
     data: product,
@@ -108,6 +103,7 @@ export const updateProduct = catchError(async function (
     new: true,
     runValidators: true,
   });
+
   if (!product) {
     const error = new Error('There is no product with given ID');
     error.statusCode = 404;

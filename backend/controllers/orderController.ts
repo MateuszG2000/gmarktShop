@@ -1,4 +1,5 @@
 const Order = require('../models/orderModel');
+const Product = require('../models/productModel');
 const catchError = require('../utils/catchError');
 import filter from '../utils/filteringMethods';
 import { Request, Response, NextFunction } from 'express';
@@ -12,9 +13,27 @@ export const createOrder = catchError(async function (
   const currentDate = new Date();
   const timestamp = currentDate.getTime();
   const orderNumber = `${req.body.user}-${timestamp}`;
+
+  for (const item of req.body.orderProducts) {
+    const product = await Product.findById(item.product);
+    if (product.inStock <= 0) {
+      return res.status(400).json({ error: 'Product out of stock' });
+    }
+  }
+  for (const item of req.body.orderProducts) {
+    const product = await Product.findById(item.product);
+    if (!product) {
+      const error = new Error('Something went wrong');
+      error.statusCode = 500;
+      next(error);
+    }
+    product.inStock -= item.quantity;
+    console.log(product);
+    await product.save();
+  }
   const newBody = { ...req.body, orderNumber };
   const newOrder = await Order.create(newBody);
-  res.status(201).json({
+  res.status(200).json({
     status: 'success',
     data: newOrder,
   });
