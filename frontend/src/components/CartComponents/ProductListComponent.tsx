@@ -21,13 +21,19 @@ function ProductListComponent({ moreData, product }: { moreData: boolean; produc
     dispatch(cartActions.removeItem({ id: product._id }));
   };
   const img = `${process.env.REACT_APP_URL}/api/images/${product.image}`;
+  if (product.inStock <= 0) return <></>;
   return (
     <div className={css.productListComponent}>
       <img className={css.image} crossOrigin="anonymous" src={img} alt="prod"></img>
       <span className={css.title}>{product.name}</span>
       {moreData && <span className={css.priceFirst}>{product.price?.toFixed(2)} zł</span>}
       {moreData && !isMobile && (
-        <QuantityComponent quantityProp={product.quantity} onChange={handleQuantity} onRemove={handleRemove} />
+        <QuantityComponent
+          quantityProp={product.quantity}
+          onChange={handleQuantity}
+          onRemove={handleRemove}
+          maxQuantity={product.inStock}
+        />
       )}
       {isMobile && (
         <>

@@ -51,7 +51,12 @@ function ProductComponent() {
               <div className={css.price}>{product?.price.toFixed(2)} zł</div>
               <div className={css.priceButtonContainer}>
                 <div className={css.quantity}>
-                  <QuantityComponent quantityProp={quantity} onChange={setQuantity} onRemove={() => {}} />
+                  <QuantityComponent
+                    quantityProp={quantity}
+                    onChange={setQuantity}
+                    onRemove={() => {}}
+                    maxQuantity={product.inStock}
+                  />
                 </div>
                 <div className={css.btnContainer}>
                   <ButtonComponent disabled={false} onClick={addToCartHandler}>

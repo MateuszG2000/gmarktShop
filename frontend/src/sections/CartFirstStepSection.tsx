@@ -11,9 +11,8 @@ import CartEmptyInfoComponent from "../components/CartComponents/CartEmptyInfoCo
 
 function CartFirstStepSection() {
   const cartItems = useSelector((state: RootState) => state.cart.items);
-  const userIsLogged = useAppSelector(
-    (state: RootState) => state.user.loggedIn
-  );
+  const userIsLogged = useAppSelector((state: RootState) => state.user.loggedIn);
+  console.log(cartItems);
 
   const user = useAppSelector((state: RootState) => state.user);
 
@@ -25,11 +24,7 @@ function CartFirstStepSection() {
         <>
           <StatusComponent step={1} />
           {cartItems.map((item) => (
-            <ProductListComponent
-              key={item._id}
-              product={item}
-              moreData={true}
-            />
+            <ProductListComponent key={item._id} product={item} moreData={true} />
           ))}
 
           <div className={css.summaryDeliveryContainer}>

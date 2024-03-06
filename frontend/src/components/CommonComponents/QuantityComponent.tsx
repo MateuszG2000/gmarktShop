@@ -6,10 +6,12 @@ function QuantityComponent({
   quantityProp,
   onChange,
   onRemove,
+  maxQuantity,
 }: {
   quantityProp: number;
   onChange: Function;
   onRemove: Function;
+  maxQuantity: number;
 }) {
   const [quantity, setQuantity] = useState(quantityProp);
 
@@ -27,7 +29,9 @@ function QuantityComponent({
   };
 
   const incrementHandler = () => {
-    handleQuantityChange(quantity + 1);
+    if (quantity < maxQuantity) {
+      handleQuantityChange(quantity + 1);
+    }
   };
 
   return (
