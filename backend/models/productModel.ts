@@ -29,8 +29,16 @@ const productSchema = new mongoose.Schema(
     category: {
       type: String,
       enum: {
-        values: ['pcs', 'monitors', 'laptops'],
-        message: 'Category must be: pcs, monitors or laptops',
+        values: [
+          'pcs',
+          'monitors',
+          'laptops',
+          'headphones',
+          'phones',
+          'accessories',
+        ],
+        message:
+          'Category must be: pcs, monitors, laptops, headphones, phones or accessories',
       },
       required: true,
     },

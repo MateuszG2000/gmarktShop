@@ -19,18 +19,10 @@ import SpinnerComponent from "./components/CommonComponents/SpinnerComponent";
 const UserPage = lazy(() => import("./pages/UserPage"));
 const ErrorPage = lazy(() => import("./pages/ErrorPage"));
 const CategorySection = lazy(() => import("./sections/CategorySection"));
-const CartSecondStepSection = lazy(
-  () => import("./sections/CartSecondStepSection")
-);
-const CartFirstStepSection = lazy(
-  () => import("./sections/CartFirstStepSection")
-);
-const CartThirdStepSection = lazy(
-  () => import("./sections/CartThirdStepSection")
-);
-const ProductComponent = lazy(
-  () => import("./components/ProductComponents/ProductComponent")
-);
+const CartSecondStepSection = lazy(() => import("./sections/CartSecondStepSection"));
+const CartFirstStepSection = lazy(() => import("./sections/CartFirstStepSection"));
+const CartThirdStepSection = lazy(() => import("./sections/CartThirdStepSection"));
+const ProductComponent = lazy(() => import("./components/ProductComponents/ProductComponent"));
 const router = createBrowserRouter([
   {
     path: "/",
