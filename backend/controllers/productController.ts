@@ -40,9 +40,6 @@ export const createProduct = async function (
   next: NextFunction
 ) {
   try {
-    console.log(req.headers);
-    console.log(req.body);
-    console.log(req.body.photo);
     req.body.image = req.file?.filename;
     const newProduct = await Product.create(req.body);
     res.status(201).json({
@@ -116,6 +113,7 @@ export const updateProduct = catchError(async function (
     data: product,
   });
 });
+
 export const deleteProduct = catchError(async function (
   req: Request,
   res: Response,
@@ -125,8 +123,18 @@ export const deleteProduct = catchError(async function (
   if (!product) {
     const error = new Error('There is no product with given ID');
     error.statusCode = 404;
-    next(error);
+    return next(error);
   }
+
+  const imagePath = path.join(
+    process.cwd(),
+    'public',
+    'img',
+    'products',
+    product.image
+  );
+  fs.unlink(imagePath, (err: Error) => {});
+
   res.status(200).json({
     status: 'success',
     data: null,

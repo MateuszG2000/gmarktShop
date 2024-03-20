@@ -9,29 +9,23 @@ import { useAppSelector } from "../store/appHooks";
 import { LiaShippingFastSolid } from "react-icons/lia";
 import { AiOutlineFileAdd } from "react-icons/ai";
 function UserSection() {
-  const userType = useAppSelector((state: RootState) => state.user.type);
+  let userType = useAppSelector((state: RootState) => state.user.type);
+  if (userType === "admin2") {
+    userType = "admin";
+  }
   return (
     <div className={css.panelContainer}>
       <div className={css.nav}>
         <ul>
-          <NavLink
-            className={({ isActive }) => (isActive ? css.active : "")}
-            to="/user/orders"
-          >
+          <NavLink className={({ isActive }) => (isActive ? css.active : "")} to="/user/orders">
             <li className={css.navEl}>
               <span className={css.icon}>
                 <IoMdReorder />
               </span>
-              <span>
-                {" "}
-                {userType === "user" ? "Zamówienia" : "Zamówienia sklepu"}
-              </span>
+              <span> {userType === "user" ? "Zamówienia" : "Zamówienia sklepu"}</span>
             </li>
           </NavLink>
-          <NavLink
-            className={({ isActive }) => (isActive ? css.active : "")}
-            to="/user/profile"
-          >
+          <NavLink className={({ isActive }) => (isActive ? css.active : "")} to="/user/profile">
             <li className={css.navEl}>
               <span className={css.icon}>
                 <RiProfileLine />
@@ -40,10 +34,7 @@ function UserSection() {
             </li>
           </NavLink>
           {userType === "admin" && (
-            <NavLink
-              className={({ isActive }) => (isActive ? css.active : "")}
-              to="/user/users"
-            >
+            <NavLink className={({ isActive }) => (isActive ? css.active : "")} to="/user/users">
               <li className={css.navEl}>
                 <span className={css.icon}>
                   <FiUsers />
@@ -53,10 +44,7 @@ function UserSection() {
             </NavLink>
           )}
           {userType === "user" && (
-            <NavLink
-              className={({ isActive }) => (isActive ? css.active : "")}
-              to="/user/edit"
-            >
+            <NavLink className={({ isActive }) => (isActive ? css.active : "")} to="/user/edit">
               <li className={css.navEl}>
                 <span className={css.icon}>
                   <MdOutlineManageAccounts />
@@ -66,10 +54,7 @@ function UserSection() {
             </NavLink>
           )}
           {userType === "user" && (
-            <NavLink
-              className={({ isActive }) => (isActive ? css.active : "")}
-              to="/user/settings"
-            >
+            <NavLink className={({ isActive }) => (isActive ? css.active : "")} to="/user/settings">
               <li className={css.navEl}>
                 <span className={css.icon}>
                   <MdManageAccounts />
@@ -79,10 +64,7 @@ function UserSection() {
             </NavLink>
           )}
           {userType === "admin" && (
-            <NavLink
-              className={({ isActive }) => (isActive ? css.active : "")}
-              to="/user/shippingsettings"
-            >
+            <NavLink className={({ isActive }) => (isActive ? css.active : "")} to="/user/shippingsettings">
               <li className={css.navEl}>
                 <span className={css.icon}>
                   <LiaShippingFastSolid />
@@ -92,10 +74,7 @@ function UserSection() {
             </NavLink>
           )}
           {userType === "admin" && (
-            <NavLink
-              className={({ isActive }) => (isActive ? css.active : "")}
-              to="/user/addproduct"
-            >
+            <NavLink className={({ isActive }) => (isActive ? css.active : "")} to="/user/addproduct">
               <li className={css.navEl}>
                 <span className={css.icon}>
                   <AiOutlineFileAdd />
