@@ -40,6 +40,9 @@ export const createProduct = async function (
   next: NextFunction
 ) {
   try {
+    console.log(req.headers);
+    console.log(req.body);
+    console.log(req.body.photo);
     req.body.image = req.file?.filename;
     const newProduct = await Product.create(req.body);
     res.status(201).json({
@@ -47,16 +50,15 @@ export const createProduct = async function (
       data: newProduct,
     });
   } catch (err) {
-    const file = req.file!.filename;
-    const filePath = req.file!.destination;
-    const filePathFull = path.join(__dirname, '..', '..', filePath, file);
-    fs.unlink(filePathFull, (err: Error) => {
-      if (!err) return;
-      const error = new Error('Img path - something wrong');
+    if (!req.file) {
+      const error = new Error('No file');
+      error.statusCode = 400;
       return next(error);
-    });
+    }
+    const error = new Error('Wrong input data');
+    error.statusCode = 400;
 
-    return next(err);
+    return next(error);
   }
 };
 export const getProduct = catchError(async function (

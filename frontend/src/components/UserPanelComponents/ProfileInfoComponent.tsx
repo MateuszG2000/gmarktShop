@@ -11,9 +11,7 @@ import SpinnerComponent from "../CommonComponents/SpinnerComponent";
 function ProfileInfoComponent() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-  const userLoggedIn = useAppSelector(
-    (state: RootState) => state.user.loggedIn
-  );
+  const userLoggedIn = useAppSelector((state: RootState) => state.user.loggedIn);
   const dispatch = useAppDispatch();
   const [data, setData] = useState<{
     email: string;
@@ -25,17 +23,12 @@ function ProfileInfoComponent() {
     (async () => {
       try {
         dispatch(userActions.isAuth());
-        const response = await fetch(
-          `${process.env.REACT_APP_URL}/api/auth/getuser`,
-          {
-            credentials: "include",
-          }
-        );
+        const response = await fetch(`${process.env.REACT_APP_URL}/api/auth/user`, {
+          credentials: "include",
+        });
         const resData = await response.json();
         if (!response.ok) {
-          const error: Error = new Error(
-            `Request failed with status ${response.status}`
-          );
+          const error: Error = new Error(`Request failed with status ${response.status}`);
           error.statusCode = response.status;
           throw error;
         } else {

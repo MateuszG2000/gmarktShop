@@ -1,4 +1,5 @@
 # Gsklep
+
 Web Application with management system for online shopping.
 
 ![https://github.com/mg300/Gsklep/GIF.gif](https://github.com/mg300/Gsklep/blob/main/GIF.gif)
@@ -8,10 +9,12 @@ Web Application with management system for online shopping.
 https://gsklep.mgjda.pl
 API: https://api.mgjda.pl
 
-###### admin 
+###### admin
+
 login: admin@admin.pl password: admin123
 
 ###### user
+
 login: user@user.pl password: user1234
 
 ## Technologies
@@ -37,7 +40,6 @@ login: user@user.pl password: user1234
 - Placing an order,
 - Authorization with cookie and JWT (Sign In, Sign Up).
 
-
 ##### Management system
 
 - Displaying orders,
@@ -48,7 +50,6 @@ login: user@user.pl password: user1234
 - Displaying all users (admin)
 - Create, delete shipping methods (admin)
 - Create, update, display, delete products (admin) - not implemented
-
 
 ## Usage
 
@@ -65,12 +66,15 @@ FRONTEND_URL=localhost:3000
 DOMAIN=[your_data]
 DOMAIN_DEV=localhost
 ```
+
 3. Create .env file in frontend/ directory like:
 
 ```
 REACT_APP_URL=http://localhost:9000
 ```
+
 4. Run in terminal with following commands:
+
 ```
 git clone https://github.com/mg300/Gsklep
 cd gsklep
@@ -78,6 +82,7 @@ cd backend
 npm install
 npm run dev
 ```
+
 5. Run second terminal with following commands:
 
 ```
@@ -92,6 +97,7 @@ npm start
 ## API Doc
 
 #### Default link
+
 ```
 https://api.gjda.pl/api
 ```
@@ -99,19 +105,23 @@ https://api.gjda.pl/api
 #### Filtering methods
 
 example:
+
 ```
 https://api.gjda.pl/api/product/?price[gte]=1241&name=Xiaomi&fields=name,_id,image&limit=2&sort=-price
 ```
-Get all products where: 
+
+Get all products where:
+
 - price[gte]=1241 price is greater or equal 1241
 - name=Xiaomi - name is Xiaomi
-- fields=name,_id,image - display only this fields
+- fields=name,\_id,image - display only this fields
 - limit=2 - display only two first results
 - sort=-price - sort by price DESC
 
 #### Products
 
 ###### Create //disabled
+
 ```
 https://api.gjda.pl/api/product
 
@@ -125,17 +135,23 @@ name
 price
 category
 ```
+
 ###### Get all
+
 ```
 https://api.gjda.pl/api/product
 //method:GET
 ```
+
 ###### Get one
+
 ```
 https://api.gjda.pl/api/product/[ID]
 //method:GET
 ```
+
 ###### Update //disabled
+
 ```
 https://api.gjda.pl/api/product/[ID]
 body:{
@@ -143,14 +159,18 @@ field to change: new value
 }
 //method: PATCH
 ```
+
 ###### Delete //disabled
+
 ```
 https://api.gjda.pl/api/product/[ID]
 //method:DELETE
 ```
 
 #### Orders
+
 ###### Create
+
 ```
 https://api.gjda.pl/api/order
 body{
@@ -183,16 +203,21 @@ body{
 ```
 
 ###### Get all
+
 ```
 https://api.gjda.pl/api/order/all
 //method: GET
 ```
+
 ###### Get one
+
 ```
 https://api.gjda.pl/api/order/[id]
 //method: GET
 ```
+
 ###### Update
+
 ```
 https://api.gjda.pl/api/order/[ID]
 body{
@@ -201,7 +226,9 @@ field: newValue
 //method: PATCH
 
 ```
+
 ###### Delete
+
 ```
 https://api.gjda.pl/api/order/[ID]
 //method:DELETE
@@ -210,6 +237,7 @@ https://api.gjda.pl/api/order/[ID]
 #### Users
 
 ###### Login
+
 ```
 https://api.gjda.pl/api/auth/login
 body{
@@ -218,12 +246,16 @@ body{
 }
 //method:POST
 ```
+
 ###### Logout
+
 ```
 https://api.gjda.pl/api/auth/logout
 //method: GET
 ```
+
 ###### Create
+
 ```
 https://api.gjda.pl/api/auth/signup
 body
@@ -244,22 +276,27 @@ body
 }
 //method: POST
 ```
+
 ###### Get all users
+
 ```
 https://api.gjda.pl/api/auth
 //method GET
 ```
 
 ###### Get current user
+
 ```
-https://api.gjda.pl/api/auth/getuser
+https://api.gjda.pl/api/auth/user
 //method GET
 credentials: include
 ```
+
 ###### Update password
+
 ```
-https://api.gjda.pl/api/auth/updatepassword
-body {  
+https://api.gjda.pl/api/auth/password
+body {
     "password":"1234567899",
     "newPassword":"123456789"
 }
@@ -271,8 +308,8 @@ credentials: include
 ###### Update / add user address
 
 ```
-https://api.gjda.pl/api/auth/updateaddress
-body {  
+https://api.gjda.pl/api/auth/address
+body {
 "firstName": "Jan",
 "lastName": "G",
 "street": "Akacjowa",
@@ -289,16 +326,19 @@ credentials: include
 #### Shop config
 
 ###### Shipping get
+
 ```
 https://api.gjda.pl/api/config?fields=shipping
 method: GET
 
 ```
+
 ###### Shipping add
+
 ```
 https://api.gjda.pl/api/config/shipping
 body
-{  
+{
     "name":"Kurier",
     "price":"22",
     "company":"DHL",
@@ -307,11 +347,11 @@ body
 method: PUT
 
 ```
+
 ###### Shipping delete
+
 ```
 https://api.gjda.pl/api/config/shipping/[ID]
 method: DELETE
 
 ```
-
-

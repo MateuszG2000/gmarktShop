@@ -6,7 +6,7 @@ import ButtonComponent from "../CommonComponents/ButtonComponent";
 import { Link } from "react-router-dom";
 function DeliveryDataComponent({ step }: { step: number }) {
   const addressState = useAppSelector((state: RootState) => state.user.addressState);
-  let { responseData, error } = useFetch<Response>(`${process.env.REACT_APP_URL}/api/auth/getuser?fields=userData`, {
+  let { responseData, error } = useFetch<Response>(`${process.env.REACT_APP_URL}/api/auth/user?fields=userData`, {
     credentials: "include",
   });
   if (!addressState) error = new Error("Uzupełnij dane adresowe");

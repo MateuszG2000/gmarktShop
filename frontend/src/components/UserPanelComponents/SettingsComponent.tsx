@@ -36,27 +36,21 @@ function SettingsComponent() {
     valueChangeHandler: passwordConfirmChangeHandler,
     inputBlurHandler: passwordConfirmBlurHandler,
     reset: resetPasswordConfirmInput,
-  } = useInput(
-    (value: string) =>
-      validator.isSame(value, enteredPassword) && validator.required(value)
-  );
+  } = useInput((value: string) => validator.isSame(value, enteredPassword) && validator.required(value));
   const changePasswordHandler = async (event: BaseSyntheticEvent) => {
     setSpinner(true);
     event.preventDefault();
-    const response = await fetch(
-      `${process.env.REACT_APP_URL}/api/auth/updatepassword`,
-      {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          password: enteredOldPassword,
-          newPassword: enteredPassword,
-        }),
-      }
-    );
+    const response = await fetch(`${process.env.REACT_APP_URL}/api/auth/password`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        password: enteredOldPassword,
+        newPassword: enteredPassword,
+      }),
+    });
     if (response.ok) {
       dispatch(
         UIActions.showWarning({
@@ -131,17 +125,10 @@ function SettingsComponent() {
           onChange={passwordConfirmChangeHandler}
         />
         <ErrorComponent>
-          {passwordInputHasError && !enteredPasswordIsValid && (
-            <p>Hasło musi zawierać od 8 do 20 znaków</p>
-          )}
-          {passwordConfirmInputHasError && !enteredPasswordConfirmIsValid && (
-            <p>Hasła się nie zgadzają</p>
-          )}
+          {passwordInputHasError && !enteredPasswordIsValid && <p>Hasło musi zawierać od 8 do 20 znaków</p>}
+          {passwordConfirmInputHasError && !enteredPasswordConfirmIsValid && <p>Hasła się nie zgadzają</p>}
         </ErrorComponent>
-        <ButtonComponent
-          disabled={!(enteredPasswordIsValid && enteredPasswordConfirmIsValid)}
-          spinner={spinner}
-        >
+        <ButtonComponent disabled={!(enteredPasswordIsValid && enteredPasswordConfirmIsValid)} spinner={spinner}>
           Zmień hasło
         </ButtonComponent>
       </form>

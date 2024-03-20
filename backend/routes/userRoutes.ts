@@ -6,19 +6,19 @@ const router = Router();
 router.post('/signup', validators.validateEmail, userController.signup);
 router.post('/login', userController.login);
 router.post(
-  '/updatepassword',
+  '/password',
   userController.isAuth('user'),
   userController.updatePassword
 );
 router.post(
-  '/updateaddress',
+  '/address',
   userController.isAuth('user'),
   userController.updateAddress
 );
 
 router.get('/', userController.isAuth('admin'), userController.getUsers);
 router.get(
-  '/getuser',
+  '/user',
   userController.isAuth('user', 'admin'),
   userController.getUser
 );

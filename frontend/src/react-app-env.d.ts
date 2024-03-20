@@ -57,6 +57,14 @@ interface Address {
   phoneNumber: string;
   email: string;
 }
+interface ProductToAdd {
+  name: string;
+  description: string;
+  inStock: number;
+  price: number;
+  category: string;
+  photo: File | null;
+}
 interface UserState {
   email: string;
   name: string;

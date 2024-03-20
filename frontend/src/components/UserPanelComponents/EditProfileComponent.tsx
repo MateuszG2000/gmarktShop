@@ -22,19 +22,14 @@ function EditProfileComponent() {
   useEffect(() => {
     (async () => {
       try {
-        const response = await fetch(
-          `${process.env.REACT_APP_URL}/api/auth/getuser?fields=userData`,
-          {
-            credentials: "include",
-          }
-        );
+        const response = await fetch(`${process.env.REACT_APP_URL}/api/auth/user?fields=userData`, {
+          credentials: "include",
+        });
 
         const resData = await response.json();
         if (resData?.data?.userData) setFormData({ ...resData.data.userData });
         if (!response.ok) {
-          const error: Error = new Error(
-            `Request failed with status ${response.status}`
-          );
+          const error: Error = new Error(`Request failed with status ${response.status}`);
           error.statusCode = response.status;
           throw error;
         }
@@ -62,19 +57,16 @@ function EditProfileComponent() {
 
   const onSubmitHandler = async function (e: BaseSyntheticEvent) {
     e.preventDefault();
-    const response = await fetch(
-      `${process.env.REACT_APP_URL}/api/auth/updateaddress`,
-      {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ...formData,
-        }),
-      }
-    );
+    const response = await fetch(`${process.env.REACT_APP_URL}/api/auth/address`, {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        ...formData,
+      }),
+    });
     if (response.ok) {
       dispatch(userActions.setAddress({ ...formData }));
       dispatch(
@@ -89,7 +81,7 @@ function EditProfileComponent() {
   return (
     <div className={css.editContainer}>
       <span className={css.title}>Twój adres dostawy </span>
-      <form onSubmit={onSubmitHandler} className={css.loginForm}>
+      <form onSubmit={onSubmitHandler} className={css.form}>
         <Input
           id="FirstName-input"
           name="FirstName-input"
@@ -97,12 +89,7 @@ function EditProfileComponent() {
           className="input"
           title="Imię:"
           value={formData.firstName}
-          // valid={}
-          // touched={}
-          // onBlur={}
-          onChange={(e: BaseSyntheticEvent) =>
-            setFormData({ ...formData, firstName: e.target.value })
-          }
+          onChange={(e: BaseSyntheticEvent) => setFormData({ ...formData, firstName: e.target.value })}
         />
         <Input
           id="LastName-input"
@@ -111,12 +98,7 @@ function EditProfileComponent() {
           className="input"
           title="Nazwisko:"
           value={formData.lastName}
-          // valid={}
-          // touched={}
-          // onBlur={}
-          onChange={(e: BaseSyntheticEvent) =>
-            setFormData({ ...formData, lastName: e.target.value })
-          }
+          onChange={(e: BaseSyntheticEvent) => setFormData({ ...formData, lastName: e.target.value })}
         />
         <Input
           id="street-input"
@@ -125,12 +107,7 @@ function EditProfileComponent() {
           className="input"
           title="Ulica:"
           value={formData.street}
-          // valid={}
-          // touched={}
-          // onBlur={}
-          onChange={(e: BaseSyntheticEvent) =>
-            setFormData({ ...formData, street: e.target.value })
-          }
+          onChange={(e: BaseSyntheticEvent) => setFormData({ ...formData, street: e.target.value })}
         />
         <Input
           id="hnumb-input"
@@ -139,12 +116,7 @@ function EditProfileComponent() {
           className="input"
           title="Numer domu:"
           value={formData.houseNumber}
-          // valid={}
-          // touched={}
-          // onBlur={}
-          onChange={(e: BaseSyntheticEvent) =>
-            setFormData({ ...formData, houseNumber: e.target.value })
-          }
+          onChange={(e: BaseSyntheticEvent) => setFormData({ ...formData, houseNumber: e.target.value })}
         />
         <Input
           id="zip-input"
@@ -153,12 +125,7 @@ function EditProfileComponent() {
           className="input"
           title="Kod pocztowy:"
           value={formData.zipCode}
-          // valid={}
-          // touched={}
-          // onBlur={}
-          onChange={(e: BaseSyntheticEvent) =>
-            setFormData({ ...formData, zipCode: e.target.value })
-          }
+          onChange={(e: BaseSyntheticEvent) => setFormData({ ...formData, zipCode: e.target.value })}
         />
         <Input
           id="city-input"
@@ -167,12 +134,7 @@ function EditProfileComponent() {
           className="input"
           title="Miejscowość:"
           value={formData.city}
-          // valid={}
-          // touched={}
-          // onBlur={}
-          onChange={(e: BaseSyntheticEvent) =>
-            setFormData({ ...formData, city: e.target.value })
-          }
+          onChange={(e: BaseSyntheticEvent) => setFormData({ ...formData, city: e.target.value })}
         />
         <Input
           id="phone-input"
@@ -181,12 +143,7 @@ function EditProfileComponent() {
           className="input"
           title="Numer telefonu:"
           value={formData.phoneNumber}
-          // valid={}
-          // touched={}
-          // onBlur={}
-          onChange={(e: BaseSyntheticEvent) =>
-            setFormData({ ...formData, phoneNumber: e.target.value })
-          }
+          onChange={(e: BaseSyntheticEvent) => setFormData({ ...formData, phoneNumber: e.target.value })}
         />
         <Input
           id="email-input"
@@ -195,12 +152,7 @@ function EditProfileComponent() {
           className="input"
           title="E-mail:"
           value={formData.email}
-          // valid={}
-          // touched={}
-          // onBlur={}
-          onChange={(e: BaseSyntheticEvent) =>
-            setFormData({ ...formData, email: e.target.value })
-          }
+          onChange={(e: BaseSyntheticEvent) => setFormData({ ...formData, email: e.target.value })}
         />
 
         <ButtonComponent
@@ -214,7 +166,6 @@ function EditProfileComponent() {
             formData.zipCode === "" ||
             formData.email === ""
           }
-          // spinner={spinner}
         >
           Aktualizuj dane
         </ButtonComponent>
