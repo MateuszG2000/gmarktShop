@@ -1,0 +1,41 @@
+@use "../../index.scss" as p;
+
+.panel {
+  margin: 3rem;
+  font-size: 1rem;
+}
+.title {
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  padding-top: 1rem;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.btn {
+  all: unset;
+  cursor: pointer;
+}
+.btn:hover {
+  color: red;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+}
+select {
+  padding: 0.4rem;
+  width: 16rem;
+  border-radius: 0.3rem;
+  border: 2px solid rgb(186, 186, 186);
+  margin-bottom: 1rem;
+  &:focus {
+    outline: none;
+    border: 2px solid p.$primaryColorLight;
+  }
+}

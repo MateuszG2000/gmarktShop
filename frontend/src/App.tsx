@@ -1,10 +1,6 @@
 import HomeSection from "./sections/HomeSection";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-// import ProductComponent from "./components/ProductComponents/ProductComponent";
 import AuthSection from "./sections/AuthSection";
-// import CartSecondStepSection from "./sections/CartSecondStepSection";
-// import CartFirstStepSection from "./sections/CartFirstStepSection";
-// import CartThirdStepSection from "./sections/CartThirdStepSection";
 import RootLayout from "./pages/RootLayout";
 import ProfileInfoComponent from "./components/UserPanelComponents/ProfileInfoComponent";
 import EditProfileComponent from "./components/UserPanelComponents/EditProfileComponent";
@@ -16,6 +12,7 @@ import ShippingSettingsComponent from "./components/UserPanelComponents/Shipping
 import AddProductComponent from "./components/UserPanelComponents/AddProductComponent";
 import { lazy, Suspense } from "react";
 import SpinnerComponent from "./components/CommonComponents/SpinnerComponent";
+import ProductsMatching from "./components/UserPanelComponents/ProductsMatching";
 const UserPage = lazy(() => import("./pages/UserPage"));
 const ErrorPage = lazy(() => import("./pages/ErrorPage"));
 const CategorySection = lazy(() => import("./sections/CategorySection"));
@@ -101,6 +98,7 @@ const router = createBrowserRouter([
       { path: "users", element: <ShowUsersComponent /> },
       { path: "shippingsettings", element: <ShippingSettingsComponent /> },
       { path: "addproduct", element: <AddProductComponent /> },
+      { path: "matching", element: <ProductsMatching /> },
     ],
   },
 ]);

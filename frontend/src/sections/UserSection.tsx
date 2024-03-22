@@ -8,6 +8,7 @@ import { MdManageAccounts, MdOutlineManageAccounts } from "react-icons/md";
 import { useAppSelector } from "../store/appHooks";
 import { LiaShippingFastSolid } from "react-icons/lia";
 import { AiOutlineFileAdd } from "react-icons/ai";
+import { HiOutlineArrowsPointingIn } from "react-icons/hi2";
 function UserSection() {
   let userType = useAppSelector((state: RootState) => state.user.type);
   if (userType === "admin2") {
@@ -80,6 +81,16 @@ function UserSection() {
                   <AiOutlineFileAdd />
                 </span>
                 <span>Zarządzaj produktami</span>
+              </li>
+            </NavLink>
+          )}
+          {userType === "admin" && (
+            <NavLink className={({ isActive }) => (isActive ? css.active : "")} to="/user/matching">
+              <li className={css.navEl}>
+                <span className={css.icon}>
+                  <HiOutlineArrowsPointingIn />
+                </span>
+                <span>Dopasowanie produktów</span>
               </li>
             </NavLink>
           )}
