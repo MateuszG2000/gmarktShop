@@ -15,6 +15,8 @@ function Input(props: InputProps) {
         onChange={props.onChange}
         placeholder={props.placeholder}
         step={props?.step}
+        min={props?.min}
+        max={props?.max}
       ></input>
     </>
   );
@@ -34,4 +36,6 @@ type InputProps = {
   step?: number;
   onBlur?: FocusEventHandler<HTMLInputElement>;
   onChange?: ChangeEventHandler<HTMLInputElement>;
+  min?: number;
+  max?: number;
 };
