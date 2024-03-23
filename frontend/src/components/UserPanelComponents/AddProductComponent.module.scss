@@ -42,14 +42,3 @@ input::-webkit-inner-spin-button {
   display: flex;
   flex-direction: column;
 }
-select {
-  padding: 0.4rem;
-  width: 16rem;
-  border-radius: 0.3rem;
-  border: 2px solid rgb(186, 186, 186);
-  margin-bottom: 1rem;
-  &:focus {
-    outline: none;
-    border: 2px solid p.$primaryColorLight;
-  }
-}
