@@ -1,19 +1,17 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import cartSlice from "./cart";
 import { persistReducer, persistStore } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+import { CookieStorage } from "redux-persist-cookie-storage";
 import { createBlacklistFilter } from "redux-persist-transform-filter";
 import userSlice from "./user";
 import UISlice from "./UI";
 import isAuth from "./isAuth";
+import Cookies from "cookies-js";
 
-const saveSubsetFilter = createBlacklistFilter("cart", [
-  "totalPrice",
-  "totalQuantity",
-]);
+const saveSubsetFilter = createBlacklistFilter("cart", ["totalPrice", "totalQuantity"]);
 const persistConfig = {
   key: "root",
-  storage: storage,
+  storage: new CookieStorage(Cookies),
   transforms: [saveSubsetFilter],
   blacklist: ["UI"],
 };
@@ -27,8 +25,7 @@ const rootReducer = combineReducers({
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 const store = configureStore({
   reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({ serializableCheck: false }).concat(isAuth),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({ serializableCheck: false }).concat(isAuth),
 });
 export const persistor = persistStore(store);
 export default store;
