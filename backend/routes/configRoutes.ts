@@ -10,6 +10,9 @@ router
 router
   .route('/shipping')
   .put(userController.isAuth('admin'), config.createShipping);
-
+router
+  .route('/matching')
+  .get(config.getMatchingOptions)
+  .post(userController.isAuth('admin'), config.updateMatchingOptions);
 router.route('/').get(config.getConfig);
 export default router;

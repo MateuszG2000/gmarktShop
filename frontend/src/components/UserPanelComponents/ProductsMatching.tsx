@@ -4,7 +4,6 @@ import Input from "../AuthComponents/Input";
 import css from "./ProductsMatching.module.scss";
 import ButtonComponent from "../CommonComponents/ButtonComponent";
 import { UIActions } from "../../store/UI";
-import { userActions } from "../../store/user";
 import { useNavigate } from "react-router-dom";
 const initialFormData = {
   maleOptions: {

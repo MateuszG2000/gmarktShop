@@ -7,7 +7,7 @@ export const createShipping = catchError(async function (
   req: Request,
   res: Response,
   next: NextFunction
-):Promise<void> {
+): Promise<void> {
   const newConfig = await Config.findOneAndUpdate(
     {},
     { $push: { shipping: req.body } },
@@ -51,4 +51,60 @@ export const deleteShipping = catchError(async function (
       data: config,
     });
   }
+});
+
+export const updateMatchingOptions = catchError(async function (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
+  const matchingOptions = req.body;
+
+  for (const key in matchingOptions) {
+    if (matchingOptions.hasOwnProperty(key)) {
+      const option = matchingOptions[key];
+
+      if (
+        typeof option === 'object' &&
+        option.hasOwnProperty('isOn') &&
+        !option.isOn
+      ) {
+        for (const field in option) {
+          if (field !== 'isOn') {
+            matchingOptions[key][field] = '';
+          }
+        }
+      }
+    }
+  }
+
+  const config = await Config.findOneAndUpdate(
+    {},
+    { matching: matchingOptions },
+    { upsert: true, new: true }
+  );
+
+  res.status(200).json({
+    status: 'success',
+    data: config,
+  });
+});
+
+export const getMatchingOptions = catchError(async function (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> {
+  const config = await Config.findOne();
+  if (!config || !config.matching) {
+    res.status(404).json({
+      status: 'error',
+      message: 'Matching options not found',
+    });
+    return;
+  }
+  res.status(200).json({
+    status: 'success',
+    data: config.matching,
+  });
 });

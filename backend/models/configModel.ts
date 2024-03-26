@@ -25,108 +25,138 @@ const configModel = new mongoose.Schema({
       isOn: {
         type: Boolean,
         required: true,
+        default: false,
       },
       quantity: {
         type: String,
         required: true,
+        default: null,
       },
       category: {
         type: String,
         required: true,
+        default: null,
       },
       weight: {
         type: String,
         required: true,
+        default: null,
       },
     },
     femaleOptions: {
       isOn: {
         type: Boolean,
         required: true,
+        default: false,
       },
       quantity: {
         type: String,
         required: true,
+        default: null,
       },
       category: {
         type: String,
         required: true,
+        default: null,
       },
       weight: {
         type: String,
         required: true,
-      },
-    },
-    cityOptions: {
-      cityAdd: {
-        type: String,
-        required: true,
-      },
-      weight: {
-        type: String,
-        required: true,
+        default: null,
       },
     },
     basketCategoryOptions: {
       isOn: {
         type: Boolean,
         required: true,
+        default: false,
       },
       quantity: {
         type: String,
         required: true,
+        default: null,
       },
       weight: {
         type: String,
         required: true,
+        default: null,
       },
     },
     basketPriceOptions: {
       isOn: {
         type: Boolean,
         required: true,
+        default: false,
       },
       quantity: {
         type: String,
         required: true,
+        default: null,
       },
       weight: {
         type: String,
         required: true,
+        default: null,
       },
     },
     historyCategoryOptions: {
       isOn: {
         type: Boolean,
         required: true,
+        default: false,
       },
       quantity: {
         type: String,
         required: true,
+        default: null,
       },
       weight: {
         type: String,
         required: true,
+        default: null,
       },
     },
     historyPriceOptions: {
       isOn: {
         type: Boolean,
         required: true,
+        default: false,
       },
       quantity: {
         type: String,
         required: true,
+        default: null,
       },
       weight: {
         type: String,
         required: true,
+        default: null,
       },
     },
-    cities: {
-      type: Array,
-      required: true,
-    },
+    cities: [
+      {
+        name: {
+          type: String,
+          required: true,
+          default: null,
+        },
+        weight: {
+          type: String,
+          required: true,
+          default: null,
+        },
+        quantity: {
+          type: String,
+          required: true,
+          default: null,
+        },
+        category: {
+          type: String,
+          required: true,
+          default: null,
+        },
+      },
+    ],
   },
 });
 
