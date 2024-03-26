@@ -7,7 +7,8 @@ import ErrorComponent from "../components/AuthComponents/ErrorComponent";
 import SpinnerComponent from "../components/CommonComponents/SpinnerComponent";
 function HomeSection() {
   const { responseData, error } = useFetch<Response>(
-    `${process.env.REACT_APP_URL}/api/product/?fields=name,price,_id,image&limit=16`
+    `${process.env.REACT_APP_URL}/api/product/?fields=name,price,_id,image,category&limit=16`,
+    { credentials: "include" }
   );
   const data: Product[] = responseData?.data;
   if (error) return <>{<ErrorComponent>Błąd serwera</ErrorComponent>}</>;

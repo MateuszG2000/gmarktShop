@@ -23,7 +23,6 @@ const cartSlice = createSlice({
       if (newItem.quantity) quantity = newItem.quantity;
       else quantity = 1;
       state.totalQuantity += quantity;
-
       if (!inCart) {
         state.items.push({
           _id: newItem._id,
@@ -32,6 +31,7 @@ const cartSlice = createSlice({
           inStock: newItem.inStock,
           quantity: quantity,
           price: newItem.price,
+          category: newItem.category,
         });
       } else {
         inCart.quantity += quantity;
@@ -52,9 +52,7 @@ const cartSlice = createSlice({
     },
     removeItem(state, action) {
       const ItemToDeleteId = action.payload.id;
-      const indexToDelete = state.items.findIndex(
-        (item) => item._id === ItemToDeleteId
-      );
+      const indexToDelete = state.items.findIndex((item) => item._id === ItemToDeleteId);
       if (indexToDelete !== -1) {
         state.totalQuantity -= state.items[indexToDelete].quantity;
         state.items.splice(indexToDelete, 1);

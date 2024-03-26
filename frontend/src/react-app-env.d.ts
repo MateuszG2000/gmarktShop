@@ -14,7 +14,7 @@ interface Product {
   name: string;
   price: number;
   image: string;
-  category?: string;
+  category: string;
   createdAt?: string;
   description?: string;
   inStock: number;
@@ -45,6 +45,7 @@ interface ICartProduct {
   image: String;
   inStock: number;
   quantity: number;
+  category: String;
 }
 
 interface Address {

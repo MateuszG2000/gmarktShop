@@ -1,4 +1,6 @@
 const Product = require('../models/productModel');
+const Order = require('../models/orderModel');
+
 const catchError = require('../utils/catchError');
 const path = require('path');
 const multer = require('multer');
@@ -6,7 +8,11 @@ const fs = require('fs');
 import mongoose from 'mongoose';
 import { RequestUser, fileRequest } from '../custom';
 import filter from '../utils/filteringMethods';
+import mostFrequentCategory from '../utils/mostFrequentCategory';
+import checkGender from '../utils/checkGender';
+import calculateAverage from '../utils/calculateAverage';
 import { Request, Response, NextFunction } from 'express';
+import calculateCategoriesWeights from '../utils/calculateCategoriesWeights';
 
 const multerStorage = multer.diskStorage({
   destination: (req: Request, file: any, cb: Function) => {
@@ -84,6 +90,32 @@ export const getProducts = catchError(async function (
   res: Response,
   next: NextFunction
 ) {
+  const decodedCookieValue = decodeURIComponent(req.cookies['persist%3Aroot']);
+  let data = JSON.parse(decodedCookieValue);
+  const user = JSON.parse(data.user);
+  const orders = await Order.find({ user: user.userId }).sort({
+    createdAt: -1,
+  });
+  let historyProducts = orders.flatMap(
+    (order: { orderProducts: any }) => order.orderProducts
+  );
+  historyProducts = historyProducts.map(
+    (item: { product: any; quantity: string }) => {
+      const { _id, name, price, inStock, image, category } = item.product;
+      return {
+        _id,
+        name,
+        price,
+        inStock,
+        image,
+        category,
+        quantity: item.quantity,
+      };
+    }
+  );
+
+  data = { cart: data.cart, user: data.user, historyProducts: historyProducts };
+  calculateCategoriesWeights(data);
   const query = { ...req.query };
   query.inStock = { gt: '0' };
   const products = await filter(Product.find(), query);

@@ -228,7 +228,6 @@ export const isAuth = (...userTypes: String[]) =>
       res: express.Response,
       next: express.NextFunction
     ) => {
-      console.log(req.cookies);
       const authHeader = req.cookies.Authorization;
       if (!authHeader) {
         const error: Error = new Error('Not authorizated.');
