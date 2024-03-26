@@ -7,7 +7,7 @@
 .title {
   font-weight: 600;
   font-size: 1.2rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   padding-top: 1rem;
 }
 
@@ -33,7 +33,6 @@ select {
   width: 7rem;
   border-radius: 0.3rem;
   border: 2px solid rgb(186, 186, 186);
-  margin-bottom: 1rem;
   &:focus {
     outline: none;
     border: 2px solid p.$primaryColorLight;
@@ -41,7 +40,18 @@ select {
 }
 .option {
   display: flex;
+  align-items: center;
+  margin-bottom: 3rem;
 }
 .option > * {
   margin-right: 1rem;
+}
+
+.option > h4 {
+  width: 7rem;
+}
+.city {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1%;
 }

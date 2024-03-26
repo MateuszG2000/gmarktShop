@@ -21,6 +21,7 @@ const ButtonComponent = ({
       1: "color-1",
       2: "color-2",
       3: "color-3",
+      4: "color-4",
     };
     colorClass = colors[color];
   }
