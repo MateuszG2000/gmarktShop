@@ -12,6 +12,7 @@ function Input(props: InputProps) {
         type={props.type}
         name={props.name}
         value={props.value}
+        checked={props.checked}
         onBlur={props.onBlur}
         onChange={props.onChange}
         placeholder={props.placeholder}
@@ -70,7 +71,7 @@ function Input(props: InputProps) {
 
   const switchBtn = (
     <label className={css.switch}>
-      <input name={props.name} value={props.value} onChange={props.onChange} type="checkbox" />
+      <input name={props.name} checked={props.checked} onChange={props.onChange} type="checkbox" />
       <span className={`${css.slider} ${css.round}`}></span>
     </label>
   );
@@ -94,6 +95,7 @@ type InputProps = {
   id: string;
   type?: string;
   value?: string;
+  checked?: boolean;
   placeholder?: string;
   step?: number;
   onBlur?: FocusEventHandler<HTMLInputElement | HTMLSelectElement>;

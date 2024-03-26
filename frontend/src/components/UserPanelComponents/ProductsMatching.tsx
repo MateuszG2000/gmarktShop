@@ -1,243 +1,352 @@
-import React, { BaseSyntheticEvent, useState } from "react";
+import React, { BaseSyntheticEvent, useEffect, useState } from "react";
 import { useAppDispatch } from "../../store/appHooks";
 import Input from "../AuthComponents/Input";
 import css from "./ProductsMatching.module.scss";
 import ButtonComponent from "../CommonComponents/ButtonComponent";
+import { UIActions } from "../../store/UI";
+const initialFormData = {
+  maleOptions: {
+    isOn: false,
+    quantity: "",
+    category: "",
+    weight: "",
+  },
+  femaleOptions: {
+    isOn: false,
+    quantity: "",
+    category: "",
+    weight: "",
+  },
+  cityOptions: {
+    cityAdd: "",
+    weight: "",
+  },
+  basketCategoryOptions: {
+    isOn: false,
+    quantity: "",
+    weight: "",
+  },
+  basketPriceOptions: {
+    isOn: false,
+    quantity: "",
+    weight: "",
+  },
+  historyCategoryOptions: {
+    isOn: false,
+    quantity: "",
+    weight: "",
+  },
+  historyPriceOptions: {
+    isOn: false,
+    quantity: "",
+    weight: "",
+  },
+  cities: [],
+};
 
 function ProductsMatching() {
-  const [formData, setFormData] = useState<any>({});
   const dispatch = useAppDispatch();
-
+  const [formData, setFormData] = useState<FormData>(initialFormData);
   const handleChange = (e: BaseSyntheticEvent) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-    console.log(formData);
-  };
+    const { name, value, checked, type } = e.target;
 
-  const onSubmitHandler = async function (e: BaseSyntheticEvent) {};
+    if (type === "checkbox") {
+      setFormData((prevFormData: any) => {
+        const [category, fieldName] = name.split("_");
+
+        return {
+          ...prevFormData,
+          [category]: {
+            ...prevFormData[category],
+            [fieldName]: checked,
+          },
+        };
+      });
+    } else {
+      setFormData((prevFormData: any) => {
+        const [category, fieldName] = name.split("_");
+        return {
+          ...prevFormData,
+          [category]: {
+            ...prevFormData[category],
+            [fieldName]: value,
+          },
+        };
+      });
+    }
+  };
+  useEffect(() => {
+    console.log(formData);
+  }, [formData]);
+
+  const onCityAdd = async function (e: BaseSyntheticEvent) {
+    e.preventDefault();
+    const cityName = e.target.elements.city.value;
+    const weightValue = e.target.elements.weight.value;
+    if (cityName.length === 0 || weightValue.length === 0) {
+      dispatch(
+        UIActions.showWarning({
+          flag: "red",
+          text: `Brak danych w formularzu.`,
+        })
+      );
+      return;
+    }
+    setFormData((prevFormData: FormData) => {
+      const isCityExists = prevFormData.cities.some((city) => city.name === cityName);
+      if (isCityExists) {
+        dispatch(
+          UIActions.showWarning({
+            flag: "red",
+            text: `Miasto ${cityName} już istnieje w liście.`,
+          })
+        );
+        return prevFormData;
+      }
+
+      const newCitiesList = [...prevFormData.cities, { name: cityName, weight: weightValue }];
+
+      return {
+        ...prevFormData,
+        cities: newCitiesList,
+      };
+    });
+  };
+  const onCityDelete = async function (e: BaseSyntheticEvent) {
+    e.preventDefault();
+    const cityName = e.target.elements.city.value;
+    setFormData((prevFormData: FormData) => {
+      const newCitiesList = prevFormData.cities.filter((city) => city.name !== cityName);
+      return {
+        ...prevFormData,
+        cities: newCitiesList,
+      };
+    });
+  };
 
   return (
     <div className={css.panel}>
       <h1 style={{ textAlign: "center" }}>Opcje dostosowania treści</h1>
-      <form onSubmit={onSubmitHandler} className={css.form}>
-        <div className={css.title}>Ilość wyświetlanych produktów według płci:</div>
+      <div className={css.title}>Ilość wyświetlanych produktów według płci:</div>
+      <form>
         <div className={css.option}>
           <h4>Mężczyźni:</h4>
           <Input
             customType="switchBtn"
-            name="maleGender"
-            value={formData.maleGender}
+            name="maleOptions_isOn"
+            checked={formData.maleOptions.isOn}
             onChange={handleChange}
             className="input"
             id="male-gender-input"
           />
           <Input
             customType="selectQuantity"
-            name="maleQuantity"
-            value={formData.maleQuantity}
+            name="maleOptions_quantity"
+            value={formData.maleOptions.quantity}
             onChange={handleChange}
             className="input"
             id="male-quantity-input"
           />
           <Input
             customType="selectCategory"
-            name="maleCategory"
-            value={formData.maleCategory}
+            name="maleOptions_category"
+            value={formData.maleOptions.category}
             onChange={handleChange}
             className="input"
             id="male-category-input"
           />
           <Input
             customType="selectWeight"
-            name="maleWeight"
-            value={formData.maleWeight}
+            name="maleOptions_weight"
+            value={formData.maleOptions.weight}
             onChange={handleChange}
             className="input"
             id="male-weight-input"
           />
         </div>
+      </form>
+      <form>
         <div className={css.option}>
           <h4>Kobiety:</h4>
 
           <Input
             customType="switchBtn"
-            name="femaleGender"
-            value={formData.femaleGender}
+            name="femaleOptions_isOn"
+            checked={formData.femaleOptions.isOn}
             onChange={handleChange}
             className="input"
             id="female-gender-input"
           />
           <Input
             customType="selectQuantity"
-            name="femaleQuantity"
-            value={formData.femaleQuantity}
+            name="femaleOptions_quantity"
+            value={formData.femaleOptions.quantity}
             onChange={handleChange}
             className="input"
             id="female-quantity-input"
           />
           <Input
             customType="selectCategory"
-            name="femaleCategory"
-            value={formData.femaleCategory}
+            name="femaleOptions_category"
+            value={formData.femaleOptions.category}
             onChange={handleChange}
             className="input"
             id="female-category-input"
           />
           <Input
             customType="selectWeight"
-            name="femaleWeight"
-            value={formData.femaleWeight}
+            name="femaleOptions_weight"
+            value={formData.femaleOptions.weight}
             onChange={handleChange}
             className="input"
             id="female-weight-input"
           />
         </div>
-        <div className={css.title}>Ilość wyświetlanych produktów według miasta:</div>
+      </form>
+
+      <div className={css.title}>Ilość wyświetlanych produktów według miasta: </div>
+      {formData.cities.length > 0 && (
         <p>
-          Aktualnie zastosowane dopasowania dla miast:<span> Bytom (5)</span>
+          Aktualnie zastosowane dopasowania dla miast:
+          {formData.cities.map((city: City) => (
+            <span key={city.name}>
+              {city.name}({city.weight}),{" "}
+            </span>
+          ))}
         </p>
+      )}
+      <form onSubmit={onCityAdd}>
         <div className={css.city}>
-          <Input
-            type="text"
-            name="cityAdd"
-            value={formData.cityAdd}
-            onChange={handleChange}
-            className="input"
-            id="cityAdd-input"
-            placeholder="Nazwa miasta"
-          />
-          <Input
-            customType="selectWeight"
-            name="cityWeight"
-            value={formData.cityWeight}
-            onChange={handleChange}
-            className="input"
-            id="city-weight-input"
-          />
+          <Input type="text" name="city" className="input" id="city-input" placeholder="Nazwa miasta" />
+          <Input customType="selectWeight" name="weight" className="input" id="city-weight-input" />
           <div style={{ width: "200px" }}>
             <ButtonComponent>Dodaj</ButtonComponent>
           </div>
         </div>
+      </form>
+
+      <form onSubmit={onCityDelete}>
         <div className={css.city}>
-          <Input
-            type="text"
-            name="cityAdd"
-            value={formData.cityAdd}
-            onChange={handleChange}
-            className="input"
-            id="cityAdd-input"
-            placeholder="Nazwa miasta"
-          />
+          <Input type="text" name="city" className="input" id="city-input" placeholder="Nazwa miasta" />
           <div style={{ width: "200px" }}>
             <ButtonComponent color={4}>Usuń</ButtonComponent>
           </div>
         </div>
+      </form>
 
-        <div className={css.title}>Wyświetlanie podobnych kategorii produktów według koszyka:</div>
+      <div className={css.title}>Wyświetlanie podobnych kategorii produktów według koszyka:</div>
+      <form>
         <div className={css.option}>
           <Input
             customType="switchBtn"
-            name="basketCategoryGender"
-            value={formData.basketCategoryGender}
+            name="basketCategoryOptions_isOn"
+            checked={formData.basketCategoryOptions.isOn}
             onChange={handleChange}
             className="input"
             id="basket-category-gender-input"
           />
           <Input
             customType="selectQuantity"
-            name="basketCategoryQuantity"
-            value={formData.basketCategoryQuantity}
+            name="basketCategoryOptions_quantity"
+            value={formData.basketCategoryOptions.quantity}
             onChange={handleChange}
             className="input"
             id="basket-category-quantity-input"
           />
           <Input
             customType="selectWeight"
-            name="basketCategoryWeight"
-            value={formData.basketCategoryWeight}
+            name="basketCategoryOptions_weight"
+            value={formData.basketCategoryOptions.weight}
             onChange={handleChange}
             className="input"
             id="basket-category-weight-input"
           />
         </div>
+      </form>
 
-        <div className={css.title}>Wyświetlanie produktów o podobnych cenach według koszyka:</div>
+      <div className={css.title}>Wyświetlanie produktów o podobnych cenach według koszyka:</div>
+      <form>
         <div className={css.option}>
           <Input
             customType="switchBtn"
-            name="basketPriceGender"
-            value={formData.basketPriceGender}
+            name="basketPriceOptions_isOn"
+            checked={formData.basketPriceOptions.isOn}
             onChange={handleChange}
             className="input"
             id="basket-price-gender-input"
           />
           <Input
             customType="selectQuantity"
-            name="basketPriceQuantity"
-            value={formData.basketPriceQuantity}
+            name="basketPriceOptions_quantity"
+            value={formData.basketPriceOptions.quantity}
             onChange={handleChange}
             className="input"
             id="basket-price-quantity-input"
           />
           <Input
             customType="selectWeight"
-            name="basketPriceWeight"
-            value={formData.basketPriceWeight}
+            name="basketPriceOptions_weight"
+            value={formData.basketPriceOptions.weight}
             onChange={handleChange}
             className="input"
             id="basket-price-weight-input"
           />
         </div>
+      </form>
 
-        <div className={css.title}>Wyświetlanie podobnych kategorii produktów według historii zakupów:</div>
+      <div className={css.title}>Wyświetlanie podobnych kategorii produktów według historii zakupów:</div>
+      <form>
         <div className={css.option}>
           <Input
             customType="switchBtn"
-            name="historyCategoryGender"
-            value={formData.historyCategoryGender}
+            name="historyCategoryOptions_isOn"
+            checked={formData.historyCategoryOptions.isOn}
             onChange={handleChange}
             className="input"
             id="history-category-gender-input"
           />
           <Input
             customType="selectQuantity"
-            name="historyCategoryQuantity"
-            value={formData.historyCategoryQuantity}
+            name="historyCategoryOptions_quantity"
+            value={formData.historyCategoryOptions.quantity}
             onChange={handleChange}
             className="input"
             id="history-category-quantity-input"
           />
           <Input
             customType="selectWeight"
-            name="historyCategoryWeight"
-            value={formData.historyCategoryWeight}
+            name="historyCategoryOptions_weight"
+            value={formData.historyCategoryOptions.weight}
             onChange={handleChange}
             className="input"
             id="history-category-weight-input"
           />
         </div>
+      </form>
 
-        <div className={css.title}>Wyświetlanie produktów o podobnych cenach według historii zakupów:</div>
+      <div className={css.title}>Wyświetlanie produktów o podobnych cenach według historii zakupów:</div>
+      <form>
         <div className={css.option}>
           <Input
             customType="switchBtn"
-            name="historyPriceGender"
-            value={formData.historyPriceGender}
+            name="historyPriceOptions_isOn"
+            checked={formData.historyPriceOptions.isOn}
             onChange={handleChange}
             className="input"
             id="history-price-gender-input"
           />
           <Input
             customType="selectQuantity"
-            name="historyPriceQuantity"
-            value={formData.historyPriceQuantity}
+            name="historyPriceOptions_quantity"
+            value={formData.historyPriceOptions.quantity}
             onChange={handleChange}
             className="input"
             id="history-price-quantity-input"
           />
           <Input
             customType="selectWeight"
-            name="historyPriceWeight"
-            value={formData.historyPriceWeight}
+            name="historyPriceOptions_weight"
+            value={formData.historyPriceOptions.weight}
             onChange={handleChange}
             className="input"
             id="history-price-weight-input"
@@ -249,3 +358,46 @@ function ProductsMatching() {
 }
 
 export default ProductsMatching;
+type City = {
+  name: string;
+  weight: string;
+};
+type FormData = {
+  maleOptions: {
+    isOn: boolean;
+    quantity: string;
+    category: string;
+    weight: string;
+  };
+  femaleOptions: {
+    isOn: boolean;
+    quantity: string;
+    category: string;
+    weight: string;
+  };
+  cityOptions: {
+    cityAdd: string;
+    weight: string;
+  };
+  basketCategoryOptions: {
+    isOn: boolean;
+    quantity: string;
+    weight: string;
+  };
+  basketPriceOptions: {
+    isOn: boolean;
+    quantity: string;
+    weight: string;
+  };
+  historyCategoryOptions: {
+    isOn: boolean;
+    quantity: string;
+    weight: string;
+  };
+  historyPriceOptions: {
+    isOn: boolean;
+    quantity: string;
+    weight: string;
+  };
+  cities: City[];
+};
