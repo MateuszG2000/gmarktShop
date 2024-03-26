@@ -4,6 +4,8 @@ import Input from "../AuthComponents/Input";
 import css from "./ProductsMatching.module.scss";
 import ButtonComponent from "../CommonComponents/ButtonComponent";
 import { UIActions } from "../../store/UI";
+import { userActions } from "../../store/user";
+import { useNavigate } from "react-router-dom";
 const initialFormData = {
   maleOptions: {
     isOn: false,
@@ -45,6 +47,7 @@ const initialFormData = {
 };
 
 function ProductsMatching() {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [formData, setFormData] = useState<FormData>(initialFormData);
   const handleChange = (e: BaseSyntheticEvent) => {
@@ -74,16 +77,73 @@ function ProductsMatching() {
         };
       });
     }
+    console.log(formData);
   };
   useEffect(() => {
-    console.log(formData);
+    (async () => {
+      const response = await fetch(`${process.env.REACT_APP_URL}/api/config/matching`, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...formData,
+        }),
+      });
+      if (response.ok) {
+        dispatch(
+          UIActions.showWarning({
+            flag: "green",
+            text: "Dane zostały zaaktualizowane",
+          })
+        );
+      }
+    })();
   }, [formData]);
+  useEffect(() => {
+    (async () => {
+      try {
+        const response = await fetch(`${process.env.REACT_APP_URL}/api/config/matching`, {
+          credentials: "include",
+        });
 
+        const resData = await response.json();
+        if (resData) setFormData({ ...resData.data });
+        console.log(resData.data);
+        if (!response.ok) {
+          const error: Error = new Error(`Request failed with status ${response.status}`);
+          error.statusCode = response.status;
+          throw error;
+        }
+      } catch (err: any) {
+        if (err.statusCode === 401) {
+          dispatch(
+            UIActions.showWarning({
+              flag: "red",
+              text: "Nie jesteś zalogowany",
+            })
+          );
+          setTimeout(() => {
+            navigate("/login");
+          }, 2000);
+        } else
+          dispatch(
+            UIActions.showWarning({
+              flag: "red",
+              text: "Błąd połączenia z serwerem",
+            })
+          );
+      }
+    })();
+  }, []);
   const onCityAdd = async function (e: BaseSyntheticEvent) {
     e.preventDefault();
     const cityName = e.target.elements.city.value;
-    const weightValue = e.target.elements.weight.value;
-    if (cityName.length === 0 || weightValue.length === 0) {
+    const weight = e.target.elements.weight.value;
+    const category = e.target.elements.category.value;
+    const quantity = e.target.elements.quantity.value;
+    if (cityName.length === 0 || weight.length === 0 || category.length === 0 || quantity.length === 0) {
       dispatch(
         UIActions.showWarning({
           flag: "red",
@@ -104,7 +164,10 @@ function ProductsMatching() {
         return prevFormData;
       }
 
-      const newCitiesList = [...prevFormData.cities, { name: cityName, weight: weightValue }];
+      const newCitiesList = [
+        ...prevFormData.cities,
+        { name: cityName, weight: weight, quantity: quantity, category: category },
+      ];
 
       return {
         ...prevFormData,
@@ -126,11 +189,11 @@ function ProductsMatching() {
 
   return (
     <div className={css.panel}>
-      <h1 style={{ textAlign: "center" }}>Opcje dostosowania treści</h1>
+      <h1 style={{ textAlign: "center" }}>Opcje dopasowania treści</h1>
       <div className={css.title}>Ilość wyświetlanych produktów według płci:</div>
       <form>
+        <h4>Mężczyźni:</h4>
         <div className={css.option}>
-          <h4>Mężczyźni:</h4>
           <Input
             customType="switchBtn"
             name="maleOptions_isOn"
@@ -139,6 +202,7 @@ function ProductsMatching() {
             className="input"
             id="male-gender-input"
           />
+
           <Input
             customType="selectQuantity"
             name="maleOptions_quantity"
@@ -166,9 +230,8 @@ function ProductsMatching() {
         </div>
       </form>
       <form>
+        <h4>Kobiety:</h4>
         <div className={css.option}>
-          <h4>Kobiety:</h4>
-
           <Input
             customType="switchBtn"
             name="femaleOptions_isOn"
@@ -204,12 +267,12 @@ function ProductsMatching() {
         </div>
       </form>
 
-      <div className={css.title}>Ilość wyświetlanych produktów według miasta: </div>
+      <div className={css.title}>Ilość wyświetlanych ketegorii produktów według miasta: </div>
       {formData.cities.length > 0 && (
         <p>
-          Aktualnie zastosowane dopasowania dla miast:
+          Aktualnie zastosowane dopasowania dla miast:{" "}
           {formData.cities.map((city: City) => (
-            <span key={city.name}>
+            <span key={city.name} style={{ fontWeight: "bold" }}>
               {city.name}({city.weight}),{" "}
             </span>
           ))}
@@ -219,6 +282,8 @@ function ProductsMatching() {
         <div className={css.city}>
           <Input type="text" name="city" className="input" id="city-input" placeholder="Nazwa miasta" />
           <Input customType="selectWeight" name="weight" className="input" id="city-weight-input" />
+          <Input customType="selectQuantity" name="quantity" className="input" id="city-quantity-input" />
+          <Input customType="selectCategory" name="category" className="input" id="city-category-input" />
           <div style={{ width: "200px" }}>
             <ButtonComponent>Dodaj</ButtonComponent>
           </div>
