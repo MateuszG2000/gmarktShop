@@ -1,4 +1,4 @@
-import React, { BaseSyntheticEvent, ChangeEvent, useEffect, useState } from "react";
+import React, { BaseSyntheticEvent, ChangeEvent, useState } from "react";
 import css from "./AddProductComponent.module.scss";
 import { AiTwotoneDelete } from "react-icons/ai";
 import { useAppDispatch, useAppSelector } from "../../store/appHooks";
