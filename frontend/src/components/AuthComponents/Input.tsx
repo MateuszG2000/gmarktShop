@@ -4,7 +4,7 @@ import css from "./Input.module.scss";
 function Input(props: InputProps) {
   let markup;
   const normalInput = (
-    <>
+    <div className={css.wraper}>
       {props.title !== undefined && <label htmlFor={props.name}>{props.title}</label>}
       <input
         id={props.id}
@@ -20,7 +20,7 @@ function Input(props: InputProps) {
         min={props?.min}
         max={props?.max}
       ></input>
-    </>
+    </div>
   );
   const selectCategory = (
     <select
