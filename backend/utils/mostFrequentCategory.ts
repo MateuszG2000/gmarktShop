@@ -5,12 +5,11 @@ interface Item {
   quantity: number;
 }
 
-export default function mostFrequentCategory(cart: Item[]): string {
+export default function mostFrequentCategory(cart: Item[]): string | null {
   if (!cart || cart.length === 0) {
-    return '';
+    return null;
   }
   const categoryCount: { [category: string]: number } = {};
-
   cart.forEach((item: Item) => {
     if (item.category && item.category.trim() !== '') {
       if (categoryCount[item.category]) {
@@ -31,6 +30,5 @@ export default function mostFrequentCategory(cart: Item[]): string {
       }
     }
   }
-
   return mostFrequent;
 }

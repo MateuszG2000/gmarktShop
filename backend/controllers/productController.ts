@@ -1,5 +1,6 @@
 const Product = require('../models/productModel');
 const Order = require('../models/orderModel');
+const Config = require('../models/configModel');
 
 const catchError = require('../utils/catchError');
 const path = require('path');
@@ -12,7 +13,8 @@ import mostFrequentCategory from '../utils/mostFrequentCategory';
 import checkGender from '../utils/checkGender';
 import calculateAverage from '../utils/calculateAverage';
 import { Request, Response, NextFunction } from 'express';
-import calculateCategoriesWeights from '../utils/calculateCategoriesWeights';
+import getUserMatchingData from '../utils/getUserMatchingData';
+import calculateWeights from '../utils/calculateWeights';
 
 const multerStorage = multer.diskStorage({
   destination: (req: Request, file: any, cb: Function) => {
@@ -93,29 +95,37 @@ export const getProducts = catchError(async function (
   const decodedCookieValue = decodeURIComponent(req.cookies['persist%3Aroot']);
   let data = JSON.parse(decodedCookieValue);
   const user = JSON.parse(data.user);
-  const orders = await Order.find({ user: user.userId }).sort({
-    createdAt: -1,
-  });
-  let historyProducts = orders.flatMap(
-    (order: { orderProducts: any }) => order.orderProducts
-  );
-  historyProducts = historyProducts.map(
-    (item: { product: any; quantity: string }) => {
-      const { _id, name, price, inStock, image, category } = item.product;
-      return {
-        _id,
-        name,
-        price,
-        inStock,
-        image,
-        category,
-        quantity: item.quantity,
-      };
-    }
-  );
-
-  data = { cart: data.cart, user: data.user, historyProducts: historyProducts };
-  calculateCategoriesWeights(data);
+  if (user && user.userId) {
+    const orders = await Order.find({ user: user.userId }).sort({
+      createdAt: -1,
+    });
+    let historyProducts = orders.flatMap(
+      (order: { orderProducts: any }) => order.orderProducts
+    );
+    historyProducts = historyProducts.map(
+      (item: { product: any; quantity: string }) => {
+        const { _id, name, price, inStock, image, category } = item.product;
+        return {
+          _id,
+          name,
+          price,
+          inStock,
+          image,
+          category,
+          quantity: item.quantity,
+        };
+      }
+    );
+    data = {
+      cart: data.cart,
+      user: data.user,
+      historyProducts: historyProducts,
+    };
+  }
+  const userMatchingData = getUserMatchingData(data);
+  const config = (await Config.findOne()).matching;
+  // console.log(userMatchingData, config);
+  calculateWeights(userMatchingData, config);
   const query = { ...req.query };
   query.inStock = { gt: '0' };
   const products = await filter(Product.find(), query);

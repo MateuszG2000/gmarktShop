@@ -38,7 +38,7 @@ const configModel = new mongoose.Schema({
         default: null,
       },
       weight: {
-        type: String,
+        type: Number,
         required: true,
         default: null,
       },
@@ -60,7 +60,7 @@ const configModel = new mongoose.Schema({
         default: null,
       },
       weight: {
-        type: String,
+        type: Number,
         required: true,
         default: null,
       },
@@ -77,7 +77,7 @@ const configModel = new mongoose.Schema({
         default: null,
       },
       weight: {
-        type: String,
+        type: Number,
         required: true,
         default: null,
       },
@@ -94,7 +94,7 @@ const configModel = new mongoose.Schema({
         default: null,
       },
       weight: {
-        type: String,
+        type: Number,
         required: true,
         default: null,
       },
@@ -111,7 +111,7 @@ const configModel = new mongoose.Schema({
         default: null,
       },
       weight: {
-        type: String,
+        type: Number,
         required: true,
         default: null,
       },
@@ -128,7 +128,7 @@ const configModel = new mongoose.Schema({
         default: null,
       },
       weight: {
-        type: String,
+        type: Number,
         required: true,
         default: null,
       },

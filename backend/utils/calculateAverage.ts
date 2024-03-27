@@ -1,24 +1,20 @@
-interface CartItem {
+interface item {
   _id: string;
   name: string;
   price: number;
 }
 
-interface Cart {
-  items: CartItem[];
-}
-
-export default function calculateAverage(cart: Cart): number {
-  if (!cart || !cart.items || cart.items.length === 0) {
-    return 0;
+export default function calculateAverage(items: item[]): number | null {
+  if (!items || !items || items.length === 0) {
+    return null;
   }
 
-  const totalPrices: number = cart.items.reduce(
-    (acc: number, item: CartItem) => acc + item.price,
+  const totalPrices: number = items.reduce(
+    (acc: number, item: item) => acc + item.price,
     0
   );
 
-  const averagePrice: number = totalPrices / cart.items.length;
+  const averagePrice: number = totalPrices / items.length;
 
   return averagePrice;
 }

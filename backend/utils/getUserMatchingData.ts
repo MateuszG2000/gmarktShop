@@ -38,16 +38,27 @@ interface Data {
   historyProducts: Item[];
 }
 
-export default function calculateCategoriesWeights(data: Data) {
+export default function getUserMatchingData(data: Data) {
   const cart: Cart = JSON.parse(data.cart);
-  const Items = cart.items;
+  const cartItems = cart.items;
   const user: UserData = JSON.parse(data.user);
-  const averagePriceInCart = calculateAverage(cart);
-  const mostFrequentCategoryInCart = mostFrequentCategory(Items);
-  const mostFrequentCategoryInHistory = mostFrequentCategory(
-    data.historyProducts
-  );
+  const productsInHistory = data.historyProducts;
+  //gender
   const gender = checkGender(user.address.firstName);
-  console.log(mostFrequentCategoryInCart, mostFrequentCategoryInHistory);
-  return;
+  //cart category
+  const mostFrequentCategoryInCart = mostFrequentCategory(cartItems);
+  //cart price
+  const averagePriceInCart = calculateAverage(cartItems);
+  //history category
+  const mostFrequentCategoryInHistory = mostFrequentCategory(productsInHistory);
+  //history price
+  const averagePriceInHistory = calculateAverage(productsInHistory);
+
+  return {
+    gender,
+    cartCategory: mostFrequentCategoryInCart,
+    averagePriceInCart,
+    historyCategory: mostFrequentCategoryInHistory,
+    averagePriceInHistory,
+  };
 }
