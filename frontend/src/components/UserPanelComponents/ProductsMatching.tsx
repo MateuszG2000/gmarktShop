@@ -76,7 +76,6 @@ function ProductsMatching() {
         };
       });
     }
-    console.log(formData);
   };
   useEffect(() => {
     (async () => {
@@ -109,7 +108,6 @@ function ProductsMatching() {
 
         const resData = await response.json();
         if (resData) setFormData({ ...resData.data });
-        console.log(resData.data);
         if (!response.ok) {
           const error: Error = new Error(`Request failed with status ${response.status}`);
           error.statusCode = response.status;
@@ -165,7 +163,7 @@ function ProductsMatching() {
 
       const newCitiesList = [
         ...prevFormData.cities,
-        { name: cityName, weight: weight, quantity: quantity, category: category },
+        { name: cityName, weight: parseInt(weight), quantity: quantity, category: category },
       ];
 
       return {
@@ -424,7 +422,7 @@ function ProductsMatching() {
 export default ProductsMatching;
 type City = {
   name: string;
-  weight: string;
+  weight: number;
 };
 type FormData = {
   maleOptions: {

@@ -60,5 +60,6 @@ export default function getUserMatchingData(data: Data) {
     averagePriceInCart,
     historyCategory: mostFrequentCategoryInHistory,
     averagePriceInHistory,
+    userCity: user.address.city,
   };
 }

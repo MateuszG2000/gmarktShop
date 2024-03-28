@@ -9,10 +9,7 @@ export default function calculateAverage(items: item[]): number | null {
     return null;
   }
 
-  const totalPrices: number = items.reduce(
-    (acc: number, item: item) => acc + item.price,
-    0
-  );
+  const totalPrices: number = items.reduce((acc: number, item: item) => acc + item.price, 0);
 
   const averagePrice: number = totalPrices / items.length;
 
