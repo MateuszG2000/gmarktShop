@@ -124,10 +124,11 @@ export const getProducts = catchError(async function (
   }
   const userMatchingData = getUserMatchingData(data);
   const config = (await Config.findOne()).matching;
-  // console.log(userMatchingData, config);
   calculateWeights(userMatchingData, config);
+
   const query = { ...req.query };
   query.inStock = { gt: '0' };
+
   const products = await filter(Product.find(), query);
   res.status(200).json({
     status: 'success',

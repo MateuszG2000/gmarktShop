@@ -157,6 +157,10 @@ const configModel = new mongoose.Schema({
         },
       },
     ],
+    priceDeviation: {
+      type: Number,
+      default: 500,
+    },
   },
 });
 
