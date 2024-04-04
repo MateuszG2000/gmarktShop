@@ -10,19 +10,11 @@ interface State<T> {
 
 type Cache<T> = { [url: string]: T };
 
-// discriminated union type
-type Action<T> =
-  | { type: "loading" }
-  | { type: "fetched"; payload: T }
-  | { type: "error"; payload: Error };
+type Action<T> = { type: "loading" } | { type: "fetched"; payload: T } | { type: "error"; payload: Error };
 
-export function useFetch<T = unknown>(
-  url?: string,
-  options?: RequestInit
-): State<T> {
+export function useFetch<T = unknown>(url?: string, options?: RequestInit): State<T> {
   const cache = useRef<Cache<T>>({});
   const navigate = useNavigate();
-  // Used to prevent state update if the component is unmounted
   const cancelRequest = useRef<boolean>(false);
 
   const initialState: State<T> = {
@@ -30,7 +22,6 @@ export function useFetch<T = unknown>(
     responseData: undefined,
   };
 
-  // Keep state logic separated
   const fetchReducer = (state: State<T>, action: Action<T>): State<T> => {
     switch (action.type) {
       case "loading":
@@ -47,15 +38,11 @@ export function useFetch<T = unknown>(
   const [state, dispatch] = useReducer(fetchReducer, initialState);
 
   useEffect(() => {
-    // Do nothing if the url is not given
     if (!url) return;
 
     cancelRequest.current = false;
-
     const fetchData = async () => {
       dispatch({ type: "loading" });
-
-      // If a cache exists for this url, return it
       if (cache.current[url]) {
         dispatch({ type: "fetched", payload: cache.current[url] });
         return;
@@ -80,13 +67,10 @@ export function useFetch<T = unknown>(
               navigate("/login");
             }, 2000);
           }
-          if (response.status === 403)
-            responseData.message = "Nie masz uprawnień";
+          if (response.status === 403) responseData.message = "Nie masz uprawnień";
           if (response.status === 500) responseData.message = "Błąd serwera";
 
-          store.dispatch(
-            UIActions.showWarning({ flag: "red", text: responseData.message })
-          );
+          store.dispatch(UIActions.showWarning({ flag: "red", text: responseData.message }));
           const error = new Error(responseData.message);
           error.statusCode = response.status;
           throw error;

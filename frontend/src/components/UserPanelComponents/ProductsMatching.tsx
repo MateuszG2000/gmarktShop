@@ -264,14 +264,25 @@ function ProductsMatching() {
         </div>
       </form>
 
-      <div className={css.title}>Ilość wyświetlanych ketegorii produktów według miasta: </div>
+      <div className={css.title}>Ilość wyświetlanych kategorii produktów według miasta: </div>
       {formData.cities.length > 0 && (
         <p>
           Aktualnie zastosowane dopasowania dla miast:{" "}
           {formData.cities.map((city: City) => (
-            <span key={city.name} style={{ fontWeight: "bold" }}>
-              {city.name}({city.weight}),{" "}
-            </span>
+            <p>
+              <span key={city.name} style={{ fontWeight: "bold" }}>
+                {city.name}:
+              </span>
+              <span>
+                {" "}
+                {city.weight} - {city.category === "pcs" && "Komputery stacjonarne"}
+                {city.category === "monitors" && "Monitory"}
+                {city.category === "laptops" && "Laptopy"}
+                {city.category === "headphones" && "Słuchawki"}
+                {city.category === "phones" && "Smartfony"}
+                {city.category === "accessories" && "Akcesoria"} - {city.quantity === "more" ? "więcej" : "mniej"}
+              </span>
+            </p>
           ))}
         </p>
       )}
@@ -423,6 +434,8 @@ export default ProductsMatching;
 type City = {
   name: string;
   weight: number;
+  quantity?: string;
+  category?: string;
 };
 type FormData = {
   maleOptions: {
