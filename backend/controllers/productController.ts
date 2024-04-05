@@ -1,7 +1,6 @@
 const Product = require('../models/productModel');
 const Order = require('../models/orderModel');
 const Config = require('../models/configModel');
-
 const catchError = require('../utils/catchError');
 const path = require('path');
 const multer = require('multer');
@@ -9,9 +8,6 @@ const fs = require('fs');
 import mongoose from 'mongoose';
 import { RequestUser, fileRequest } from '../custom';
 import filter from '../utils/filteringMethods';
-import mostFrequentCategory from '../utils/mostFrequentCategory';
-import checkGender from '../utils/checkGender';
-import calculateAverage from '../utils/calculateAverage';
 import { Request, Response, NextFunction } from 'express';
 import getUserMatchingData from '../utils/getUserMatchingData';
 import calculateWeights from '../utils/calculateWeights';

@@ -20,10 +20,7 @@ if (process.env.NODE_ENV === 'production')
   app.use(
     cors({
       // origin: ['https://www.gsklep.gjda.pl', 'https://gsklep.gjda.pl'],
-      origin: [
-        `https://www.gsklep.${process.env.DOMAIN}`,
-        `https://gsklep.${process.env.DOMAIN}`,
-      ],
+      origin: [`https://www.gsklep.${process.env.DOMAIN}`, `https://gsklep.${process.env.DOMAIN}`],
       credentials: true,
     })
   );
@@ -36,10 +33,7 @@ if (process.env.NODE_ENV === 'development')
   );
 
 //routes
-app.use(
-  '/api/images',
-  express.static(path.join(__dirname, '..', 'public', 'img', 'products'))
-);
+app.use('/api/images', express.static(path.join(__dirname, '..', 'public', 'img', 'products')));
 
 app.use('/api/auth', authRoutes);
 app.use('/api/order', orderRoutes);
@@ -48,12 +42,7 @@ app.use('/api/config', configRoutes);
 
 app.use(
   //Error handling
-  (
-    error: any,
-    req: express.Request,
-    res: express.Response,
-    next: express.NextFunction
-  ) => {
+  (error: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
     if (error.code === 11000) {
       error.message = 'Duplicate` fields, correct your request';
       error.statusCode = 400;
@@ -82,5 +71,11 @@ app.use(
     }
   }
 );
+app.all('*', (req: express.Request, res: express.Response, next: express.NextFunction) => {
+  res.status(404).json({
+    status: 'fail',
+    message: `Can not find ${req.originalUrl} on this server`,
+  });
+});
 
 module.exports = app;
