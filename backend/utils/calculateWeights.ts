@@ -44,23 +44,6 @@ interface ICategories {
 }
 
 export default function calculateWeights(userMatchingData: IuserData, config: IConfig, categories: ICategories[]): ICategories[] {
-  // config.basketCategoryOptions.category = userMatchingData.cartCategory;
-  // config.historyCategoryOptions.category = userMatchingData.historyCategory;
-  // const options = Object.values(config);
-  // for (const option of options) {
-  //   if (option.isOn && option.category) {
-  //     let points = option.weight;
-  //     if (option.quantity === 'less') {
-  //       points = -points;
-  //     }
-  //     const element = categories.find((el) => el.name === option.category);
-  //     if (element) {
-  //       element.weight += points;
-  //     } else {
-  //       categories.push({ name: option.category, weight: points });
-  //     }
-  //   }
-  // }
   if (userMatchingData.cartCategory && config.basketCategoryOptions.isOn) {
     let points = config.basketCategoryOptions.weight;
     if (config.basketCategoryOptions.quantity === 'less') {
@@ -118,6 +101,5 @@ export default function calculateWeights(userMatchingData: IuserData, config: IC
       element.weight += points;
     }
   }
-  console.log(categories);
   return categories;
 }

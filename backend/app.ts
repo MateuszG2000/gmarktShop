@@ -57,6 +57,7 @@ app.use(
     const message = error.message || 'Unknown error';
     if (process.env.NODE_ENV === 'development') {
       const data = error.data || '';
+      console.log(error);
       res.status(status).json({
         status: status,
         error: error,

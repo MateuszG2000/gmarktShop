@@ -139,6 +139,7 @@ export const getProductsMatch = catchError(async function (req: Request, res: Re
   const query = { ...req.query };
   query.inStock = { gt: '0' };
   let products: any = [];
+  //
   if (config.basketPriceOptions.isOn && userMatchingData.averagePriceInCart) {
     if (config.basketPriceOptions.quantity == 'more') {
       const randomRecords = await filter(Product.find(), {
@@ -195,7 +196,10 @@ export const getProductsMatch = catchError(async function (req: Request, res: Re
       products.push(...randomRecords);
     }
   }
+
   products = [...new Set(products)];
+  let finalProducts: any = [];
+
   while (query.limit && products.length < query.limit) {
     const randomCategory = getRandomCategory(weights);
     const randomRecord = await Product.aggregate([{ $match: { category: randomCategory } }, { $sample: { size: 1 } }]);
@@ -203,14 +207,21 @@ export const getProductsMatch = catchError(async function (req: Request, res: Re
     if (!existsInProducts) {
       products.push(...randomRecord);
     }
+    finalProducts = products;
   }
   if (query.limit && products.length > query.limit) {
-    products = products.slice(0, query.limit);
+    while (finalProducts.length < query.limit) {
+      const randomCategory = getRandomCategory(weights);
+      const objectToRemove = [...products].find((product) => product.category === randomCategory);
+      console.log(products.length);
+      products = products.filter((product: any) => product.name !== objectToRemove.name);
+      finalProducts.push(objectToRemove);
+    }
   }
   res.status(200).json({
     status: 'success',
-    results: products.length,
-    data: products,
+    results: finalProducts.length,
+    data: finalProducts,
   });
 });
 export const getProducts = catchError(async function (req: Request, res: Response, next: NextFunction) {
