@@ -43,40 +43,81 @@ interface ICategories {
   weight: number;
 }
 
-export default function calculateWeights(
-  userMatchingData: IuserData,
-  config: IConfig,
-  categories: ICategories[]
-): ICategories[] {
-  config.basketCategoryOptions.category = userMatchingData.cartCategory;
-  config.historyCategoryOptions.category = userMatchingData.historyCategory;
-  const options = Object.values(config);
-  for (const option of options) {
-    if (option.isOn && option.category) {
-      let points = option.weight;
-      if (option.quantity === 'less') {
-        points = -points;
-      }
-      const element = categories.find((el) => el.name === option.category);
-      if (element) {
-        element.weight += points;
-      } else {
-        categories.push({ name: option.category, weight: points });
-      }
+export default function calculateWeights(userMatchingData: IuserData, config: IConfig, categories: ICategories[]): ICategories[] {
+  // config.basketCategoryOptions.category = userMatchingData.cartCategory;
+  // config.historyCategoryOptions.category = userMatchingData.historyCategory;
+  // const options = Object.values(config);
+  // for (const option of options) {
+  //   if (option.isOn && option.category) {
+  //     let points = option.weight;
+  //     if (option.quantity === 'less') {
+  //       points = -points;
+  //     }
+  //     const element = categories.find((el) => el.name === option.category);
+  //     if (element) {
+  //       element.weight += points;
+  //     } else {
+  //       categories.push({ name: option.category, weight: points });
+  //     }
+  //   }
+  // }
+  if (userMatchingData.cartCategory && config.basketCategoryOptions.isOn) {
+    let points = config.basketCategoryOptions.weight;
+    if (config.basketCategoryOptions.quantity === 'less') {
+      points = -points;
+    }
+    const element = categories.find((el) => el.name === userMatchingData.cartCategory);
+    if (element) {
+      element.weight += points;
+    } else {
+      categories.push({ name: userMatchingData.cartCategory, weight: points });
     }
   }
-  const city: City | undefined = config.cities.find(
-    (city: City) => city.name === userMatchingData.userCity
-  );
+  if (userMatchingData.historyCategory && config.historyCategoryOptions.isOn) {
+    let points = config.historyCategoryOptions.weight;
+    if (config.historyCategoryOptions.quantity === 'less') {
+      points = -points;
+    }
+    const element = categories.find((el) => el.name === userMatchingData.historyCategory);
+    if (element) {
+      element.weight += points;
+    } else {
+      categories.push({ name: userMatchingData.historyCategory, weight: points });
+    }
+  }
+  if (userMatchingData.gender == 'men' && config.maleOptions.isOn && config.maleOptions.category) {
+    let points = config.maleOptions.weight;
+    if (config.maleOptions.quantity === 'less') {
+      points = -points;
+    }
+    const element = categories.find((el) => el.name === config.maleOptions.category);
+    if (element) {
+      element.weight += points;
+    } else {
+      categories.push({ name: config.maleOptions.category, weight: points });
+    }
+  }
+  if (userMatchingData.gender == 'women' && config.femaleOptions.isOn && config.femaleOptions.category) {
+    let points = config.femaleOptions.weight;
+    if (config.femaleOptions.quantity === 'less') {
+      points = -points;
+    }
+    const element = categories.find((el) => el.name === config.femaleOptions.category);
+    if (element) {
+      element.weight += points;
+    } else {
+      categories.push({ name: config.femaleOptions.category, weight: points });
+    }
+  }
+  const city: City | undefined = config.cities.find((city: City) => city.name === userMatchingData.userCity);
   if (city && city.category != undefined) {
-    const element = categories.find(
-      (el: ICategories) => el.name === city.category
-    );
+    const element = categories.find((el: ICategories) => el.name === city.category);
     if (element) {
       let points = city.weight;
       if (city.quantity === 'less') points = -points;
       element.weight += points;
     }
   }
+  console.log(categories);
   return categories;
 }
